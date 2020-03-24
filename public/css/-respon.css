@@ -1,0 +1,1626 @@
+@charset "utf-8";
+/* CSS Document */
+
+#rs-body {
+	margin:0;
+	padding:0;
+	font-family: Arial, "微軟正黑體";
+	background-color:#fff;
+}
+/*div {
+	padding:10px;
+	margin:10px 0px;
+	overflow: hidden;
+	background-color:#ccc;
+}*/
+a,a:hover {
+	color:#555;
+	text-decoration:none;
+}
+
+/* Container of all content */
+.rs-container {
+	margin:0;
+}
+
+/*
+#mainwrapper { /* Container of all content */
+	/*position: relative;
+}*/
+
+#rs-maintop {
+	overflow:hidden;
+	/*background-color:#fa0;*/
+	background-color:#fff100;
+}
+.rs-maintop-box {
+	width:1000px;
+	height:120px;
+	margin:0 auto;
+	text-align: center;
+}
+.rs-logo a {
+	display:block;
+	width:250px;
+	height:110px;
+	background:url(../img/logo.png) no-repeat top left;
+	background-size:250px;
+	padding:0;
+	margin:20px 0;
+}
+
+.rs-login-box {
+	float:right;
+	padding:15px 26px;
+	margin:0;
+	color:#fff;
+	position:fixed;
+	background-color:#113;
+}
+.rs-login-box a {
+	color:#aaa;
+	text-decoration: none;
+	margin-right:16px;
+}
+.rs-login-box a:hover {
+	color:#fff;
+	text-decoration: none;
+	margin-right:16px;
+}
+
+#rs-topnav {
+	overflow:hidden;
+	background-color:#113;
+}
+#rs-topnav ul {
+	width:980px;
+	margin:0 auto;
+	padding:0;
+}
+#rs-topnav li {
+	list-style:none;
+	float:left;
+}
+#rs-topnav li a {
+	color:#aaa;
+	padding:14px 26px;
+	display:block;
+}
+#rs-topnav li a:hover {
+	background-color:#234;
+	color:#fff;
+}
+
+/*** CONTENT ***/
+#rs-main-content {
+	overflow:hidden;
+	width:1000px;
+	margin:16px auto;
+	padding:0;
+}
+#rs-content-left {
+	float:left;
+	width:680px;
+	margin-right:15px;
+	padding:0;
+	background-color:#ddd;
+	
+}
+#rs-content-left-box {
+	overflow:hidden;
+	background-color:#fff;
+	padding:8px 0;
+	margin-bottom:1px;
+}
+
+/* PR-BOX 開始 */
+
+#rs-pr-con {
+	width:680px;
+	margin:15px auto;
+	padding:0;
+	background-color:#ddd;
+}
+
+.rs-pr-close a {
+	width:60px;
+	height:60px;
+	background:url(../img/Close_Box_Red.png) no-repeat top center;
+	background-size:60px;
+	float:left;
+	margin-top:0px;
+}
+#rs-pr-box {
+	overflow:hidden;
+	background-color:#fff;
+	padding:8px 0;
+	margin-bottom:1px;
+}
+.rs-pr {
+	width:620px;
+	height:210px;
+	margin:0 auto;
+	padding:10px;
+	overflow:hidden;
+}
+.rs-pr-app a {
+	width:180px;
+	height:180px;
+	background:url(../img/pr-icon.jpg) no-repeat top center;
+	background-size:180px;	
+	float:left;
+	overflow:hidden;
+	border-radius:36px;
+	margin:10px 10px 10px 20px;
+}
+.rs-pr-info {
+	width:358px;
+	height:170px;
+	float:left;
+	overflow:hidden;
+	margin:20px;
+}
+.rs-pr-title {
+	font-size:140%;
+	font-weight:bold;
+	margin:3px 0;
+}
+.rs-pr-words {
+	font-weight:600;
+	color:#999;
+	margin:6px 0;
+}
+.rs-pr-btn a {
+	border-radius:8px;
+	background-color:#0873D7;
+	color:#fff;
+	width:210px;
+	text-align:center;
+	letter-spacing:3px;
+	padding:10px 16px;
+	margin:14px 0 0 0;
+	float:left;
+}
+
+.rs-item-hot {
+	float:left;
+	position:absolute;
+	margin:10px 0 0 90px;
+	font-size:9px;
+	padding:1px 3px;
+	color:#f00;
+	border:1px solid #f00;
+	border-radius:3px;
+}
+.rs-item-hot1 {
+	float:left;
+	position:absolute;
+	margin:45px 0 0 90px;
+	font-size:9px;
+	padding:1px 3px;
+	color:#f00;
+	border:1px solid #f00;
+	border-radius:3px;
+}
+.rs-item-hot2 {
+	float:left;
+	position:absolute;
+	margin:10px 0 0 90px;
+	font-size:9px;
+	padding:1px 3px;
+	color:#f00;
+	border:1px solid #f00;
+	border-radius:3px;
+}
+
+.rs-contentpics {
+	width:70px;
+	height:70px;
+	border-radius:65px;
+	overflow:hidden;
+	margin:10px 10px 10px 10px;
+	float:left;
+	background:url(../img/headpics/001.jpg) no-repeat top center;
+	background-size:70px;
+}
+.rs-contentname {
+	float:left;
+	font-size:92%;
+	color:#555;
+	margin-top:28px;
+}
+.rs-contentword {
+	padding:10px 0;
+	width:95%;
+	margin:0 auto;
+	overflow: hidden;
+	line-height:20px;
+}
+
+.rs-picss img {
+	width:210px;
+	float:left;
+	margin:2px;
+}
+
+.rs-contentword h2 a {
+	padding:0;
+	margin:0;
+	color:#800;
+	font-size:17px;
+}
+.rs-contentword h2 a:hover {
+	color:#a00;
+	text-decoration: none;
+}
+
+#rs-digg-box1 {
+	float:right;
+	margin:10px 20px 0 0;
+	padding:3px;
+	width:120px;
+	height:26px;
+}
+#rs-digg-box2 {
+	width:100%;
+	height:40px;
+	margin:0 0 20px 0;
+	padding:5px;
+	overflow:hidden;
+	float:right;
+}
+
+.rs-digg { /** 讚,噓,分享icon **/
+	cursor:pointer;
+	font-size:90%;
+	float:left;
+	color:#aaa;
+	border:1px solid #ccc;
+	padding:4px 7px;
+	margin-right:6px;
+	border-radius:4px;
+}
+
+.rs-digg-left {
+	overflow:hidden;
+	margin:0;
+	padding:0;
+}
+.rs-digg-fb a {
+	width:20px;
+	height:20px;
+	border-radius:5px;
+	overflow:hidden;
+	margin:0 5px 10px 0;
+	float:left;
+	background:url(../img/social/icon-fb.png) no-repeat top center;
+	background-size:26px;
+	background-position: center;
+}
+.rs-digg-tt a {
+	width:20px;
+	height:20px;
+	border-radius:5px;
+	overflow:hidden;
+	margin:0 5px 10px 0;
+	float:left;
+	background:url(../img/social/icon-tt.png) no-repeat top center;
+	background-size:22px;
+	background-position: center;
+}
+.rs-digg-gg a {
+	width:20px;
+	height:20px;
+	border-radius:5px;
+	overflow:hidden;
+	margin:0 5px 10px 0;
+	float:left;
+	background:url(../img/social/icon-gg.png) no-repeat top center;
+	background-size:24px;
+	background-position: center;
+}
+.rs-digg-ig a {
+	width:20px;
+	height:20px;
+	border-radius:5px;
+	overflow:hidden;
+	margin:0 5px 10px 0;
+	float:left;
+	background:url(../img/social/icon-ig.png) no-repeat top center;
+	background-size:20px;
+	background-position:center;
+}
+
+.rs-digg-right {
+	float:right;
+	padding:0;
+	margin:0 14px 0 0;
+	overflow:hidden;
+}
+
+/* 404page */
+.rs-xx-box {
+	width:1000px;
+	margin:0;
+	padding:0;
+	overflow:hidden;
+}
+.rs-xx-box1 {
+	width:800px;
+	margin:0 auto;
+	padding:0;
+	overflow:hidden;
+}
+.rs-xx-left {
+	margin:0;
+	padding:20px;
+	float:left;
+	overflow:hidden;
+}
+.rs-xx-right {
+	margin:0;
+	padding:240px 0 0 40px;
+	width:55%;
+	float:left;
+	overflow:hidden;
+
+}
+.rs-x-btnss {
+	margin:0 auto;
+	padding:0;
+}
+.rs-x-btns a {
+	padding:10px 26px;
+	margin-right:16px;
+	background-color:#F47824;
+	color:#fff;
+	float:left;
+	font-size:21px;
+	width:180px;
+	text-align: center;
+	text-decoration: none;
+}
+
+.rs-x-box {
+	width:700px;
+	margin:0 auto;
+	padding:0px;
+	background-color:#fff;
+}
+.rs-x-box-2 {
+	width:490px;
+	height:430px;
+	float:left;
+	overflow:hidden;
+	font-size:19px;
+	padding-left:50px;
+}
+.rs-x-box-2 p {
+	margin-top:240px;
+}
+.rs-x-box-3 {
+	width:700px;
+	border-bottom:1px solid #ccc;
+	float:left;
+	overflow:hidden;
+	margin-bottom:10px;
+}
+.rs-x-box-4 {
+	padding:10px 20px;
+	background-color:#2192EF;
+	color:#fff;
+	float:left;
+	overflow: hidden;
+}
+.rs-x-box-5 {
+	width:700px;
+	height:120px;
+	border-bottom:1px solid #dedede;
+	overflow: hidden;
+}
+.rs-x-box-5a img {
+	width:80px;
+	height:80px;
+}
+.rs-x-box-5a a {
+	width:80px;
+	height:80px;
+	margin:16px 0 0 12px;
+	float:left;
+	background-color:#777;
+	text-decoration: none;
+}
+.rs-x-box-5b a {
+	width:580px;
+	height:50px;
+	float:left;margin:29px 0px 0px 12px;
+	overflow:hidden;
+	color:#333;
+	
+	
+}
+
+
+/* Form */
+
+	form {
+		display: -moz-flex;
+		display: -webkit-flex;
+		display: -ms-flex;
+		display: flex;
+		-moz-flex-wrap: wrap;
+		-webkit-flex-wrap: wrap;
+		-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
+		width: calc(100% + 3rem);
+		margin: -1.5rem 0 2rem -1.5rem;
+	}
+
+		form > .field {
+			-moz-flex-grow: 0;
+			-webkit-flex-grow: 0;
+			-ms-flex-grow: 0;
+			flex-grow: 0;
+			-moz-flex-shrink: 0;
+			-webkit-flex-shrink: 0;
+			-ms-flex-shrink: 0;
+			flex-shrink: 0;
+			padding: 1.5rem 0 0 1.5rem;
+			width: calc(100% - 1.5rem);
+			overflow:hidden;
+		}
+
+			form > .field.half {
+				width: calc(50% - 0.75rem);
+			}
+
+			form > .field.third {
+				width: calc(100%/3 - 0.5rem);
+			}
+
+			form > .field.quarter {
+				width: calc(25% - 0.375rem);
+			}
+
+		form .actions {
+			-moz-flex-grow: 0;
+			-webkit-flex-grow: 0;
+			-ms-flex-grow: 0;
+			flex-grow: 0;
+			-moz-flex-shrink: 1;
+			-webkit-flex-shrink: 1;
+			-ms-flex-shrink: 1;
+			flex-shrink: 1;
+			/*margin: 1.875rem 0 0 1.5rem !important;*/
+			margin: 1.875rem 0 0 1.5rem !important;
+			width: calc(100% - 3rem);
+		}
+
+		form.alt {
+			display: block;
+			width: 100%;
+			margin: 0 0 2rem 0;
+		}
+
+			form.alt > .actions {
+				margin: 0 0 2rem 0;
+				width: 100%;
+			}
+
+
+
+#rs-right-box {
+	float:left;
+	width:265px;
+	padding:10px;
+	background-color:#fff;
+	}
+.rs-appicon a {
+	display:block;
+	margin:10px auto;
+	width:130px;
+	height:130px;
+	background:url(../img/app_icon.png) top center no-repeat;
+	background-size:130px;
+}
+.rs-appinfo {
+	display:block;
+	margin:10px auto;
+	width:210px;
+}
+
+.rs-dl-os1 {
+	width:130px;
+	border:1px solid #ddd;
+	float:left;
+	text-align:center;
+	padding:5px 10px;
+	font-size:15px;
+	margin-left:12px;
+}
+.rs-dl-os1 a {
+	color:#0B8FEF;
+}
+.rs-dl-os1 a {
+	text-decoration: none;
+	color:#0B8FEF;
+}
+.rs-dl-os2 {
+	width:120px;
+	border-top:1px solid #ddd;
+	border-right:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+	float:left;
+	text-align:center;
+	padding:5px 10px;
+	font-size:15px;
+}
+.rs-dl-os2 a {
+	color:#36C15B;
+}
+.rs-dl-os2 a {
+	text-decoration: none;
+	color:#36C15B;
+}
+
+
+/*** 登入頁 開始 ***/
+.rs-post-box {
+	width:626px;
+	overflow:hidden;
+	margin:10px auto;
+	background-color:#fff;
+	padding:20px 40px 20px 40px;
+	border-radius:6px;
+}
+.rs-fastlogin {
+	width:290px;
+	height:400px;
+	margin:0 auto;
+	overflow: hidden;
+}
+.rs-login-btn-fb a {
+	float:left;
+	width:120px;
+	height:120px;
+	margin:12px;
+	background:url(../img/social/icon-fb.png) top left no-repeat;
+	background-size:120px;
+}
+.rs-login-btn-tt a {
+	float:left;
+	width:120px;
+	height:120px;
+	margin:12px;
+	background:url(../img/social/icon-tt.png) top left no-repeat;
+	background-size:120px;
+}
+.rs-login-btn-gg a {
+	float:left;
+	width:120px;
+	height:120px;
+	margin:12px;
+	background:url(../img/social/icon-gg.png) top left no-repeat;
+	background-size:120px;
+}
+.rs-login-btn-ig a {
+	float:left;
+	width:120px;
+	height:120px;
+	margin:12px;
+	background:url(../img/social/icon-ig.png) top left no-repeat;
+	background-size:120px;
+}
+/*** 登入頁 結束 ***/
+
+.rs-contentbox1 {
+	width:100%;
+	background-color:#fff;
+	overflow: hidden;
+	margin-top:1px;
+	padding:10px 0 0 0;
+	text-align:center;
+}
+
+.rs-contentpics1 {
+	width:55px;
+	height:55px;
+	border-radius:65px;
+	overflow:hidden;
+	margin:10px 10px 10px 30px;
+	float:left;
+	background:url(../img/headpics/001.jpg) no-repeat top center;
+	background-size:55px;
+}
+.rs-comm-box1 {
+	width:500px;
+	margin:10px 0 10px 8px;
+	text-align:left;
+	font-size:14px;
+	float:left;
+}
+
+.rs-comm-box form {
+	width:540px;
+	height:90px;
+	margin:0 0 0 10px;
+}
+.rs-comm-box textarea {
+	padding:5px;
+	margin:0;
+	width:100%;
+	float:left;
+	resize: none;
+	border-radius:4px;
+}
+.rs-contentword-l-s {
+	width:200px;
+	font-size:14px;
+	text-align:left;
+	margin:10px 0 0 90px;
+}
+.rs-wwss {
+	width:199px;
+	float:left;
+	margin:0 0 0 130px;
+}
+.rs-icon-comm a {
+	background-color:#f88;
+	color:#fff;
+	padding:5px 20px;
+	margin:0;
+	float:left;
+	border-radius:4px;
+}
+.rs-icon-comm a:hover {
+	text-decoration: none;
+	color:#fff;
+}
+
+/*** 上傳介面 開始 ***/
+.post-box {
+	width:626px;
+	overflow:hidden;
+	margin:10px auto;
+	background-color:#fff;
+	padding:20px 40px 60px 40px;
+	border-radius:6px;
+}
+.tab {
+    overflow: hidden;
+    border: 0px solid #ccc;
+    background-color: #fff;
+	width:415px;
+	padding:0;
+	margin:auto;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    /*background-color: inherit;*/
+	background:#fff;
+	margin:12px 12px 0 0;
+    float: left;
+    border:1px solid #ccc;;
+	border-radius: 7px;
+    outline: none;
+    cursor: pointer;
+    padding: 20px 45px;
+    transition: 0.3s;
+    font-size: 17px;
+	color:#333;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #fa0;
+	border:1px solid #eee;
+	color:#fff;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #fa0;
+	border:1px solid #eee;
+	color:#fff;
+	font-weight:bold;
+	margin-bottom:6px;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 0px solid #ccc;
+    border-top: none;
+	background-color:#fff;
+	overflow:hidden;
+}
+
+input[type=text],[type=password], select {
+	width:99%;
+	padding:12px 20px;
+	margin:8px 0;
+	display:inline-block;
+	border:1px solid #ccc;
+	border-radius:4px;
+	box-sizing:border-box;
+}
+input[type=submit] {
+	width:140px;
+	background-color:#F5a00A;
+	color:white;
+	padding:14px 20px;
+	margin:16px 0 20px 200px;
+	border:none;
+	border-radius:4px;
+	cursor:pointer;
+	font-size:17px;
+}
+label {
+   padding: 12px 3px 12px 12px;
+   display: inline-block;
+}
+
+.form-text {
+	width:99%;
+	height:150px;
+	margin:6px 0;
+	border-radius:4px;
+	border:1px solid #ccc;
+}
+.form-upload {
+	width:99%;
+	height:50px;
+	border:1px solid #ccc;
+	padding:8px;
+	border-radius:4px;
+	overflow: hidden;
+}
+.loading-bar {
+	width:99%;
+	height:6px;
+	background-color:#fc0;
+}
+/*** 上傳介面 結束 ***/
+
+
+
+/*** 分頁 開始 ***/
+ul.pagination {
+    display: inline-block;
+    padding: 12px 0;
+    margin: 0;
+}
+
+ul.pagination li {display: inline;}
+
+ul.pagination li a {
+    color: black;
+    float: left;
+    padding: 4px 8px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    margin: 0 4px;
+	font-size:13px;
+}
+
+ul.pagination li a.active {
+    background-color:#F8730C;
+    color:#fff;
+    border: 1px solid #F8730C;
+}
+
+ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+/*** 分頁 結尾 ***/
+
+
+/*** rs-footer ***/
+#rs-footer {
+	width:100%;
+	padding:30px 0;
+	bottom:0px;
+	position:relative;
+	overflow:hidden;
+	text-align:center;
+	margin:40px 0 0 0;
+	background-color: #fff;
+}
+
+#rs-footer a {
+	color: #333;
+}
+
+
+/* Tablet view */
+@media screen and (max-width:769px) {
+	#rs-maintop {
+		width:100%;
+		margin:0 auto;
+	}
+	
+	.rs-maintop-box {
+		width:100%;
+		height:115px;
+		overflow:hidden;
+	}
+	
+	.rs-logo a {
+		width:250px;
+		height:110px;
+		background:url(../img/logo.png) no-repeat top center;
+		background-size:250px;
+		margin:0;
+		padding:0;
+	}
+	
+	#rs-topnav {
+		background-color:#113;
+		margin:0 auto;
+	}
+	#rs-topnav ul {		
+		padding:0;
+	}
+	#rs-topnav li {
+		list-style:none;
+	}
+	#rs-topnav li a {
+		color:#aaa;
+		padding:14px 26px;
+		display:block;
+	}
+	#rs-topnav li a:hover {
+		background-color:#234;
+		color:#fff;
+	}
+	
+	/*** CONTENT ***/
+	#rs-main-content {
+		width:95%;
+		padding:0px;
+		overflow: hidden;
+	}
+	#rs-content-left {
+		width:100%;
+		padding:0;
+		margin-bottom:1px;
+	}
+	
+	/*** CONTENT ***/
+	.rs-contentpics {
+		width:55px;
+		height:55px;
+		border-radius:65px;
+		overflow:hidden;
+		margin:10px 10px 10px 10px;
+		float:left;
+		background:url(../img/headpics/001.jpg) no-repeat top center;
+		background-size:55px;
+	}
+	.rs-contentname {
+		float:left;
+		font-size:92%;
+		color:#555;
+		margin-top:20px;
+	}
+	.rs-contentword {
+		margin:5px auto;
+		margin-bottom:1px;
+		padding:5px 0 0 0;
+		background-color:#fff;
+		display:block;
+		font-size:14px;
+	}
+	
+	.rs-picss img {
+	width:215px;
+	float:left;
+	margin:2px;
+	}
+	
+	.rs-contentpics1 {
+	width:55px;
+	height:55px;
+	border-radius:65px;
+	overflow:hidden;
+	margin:12px 10px 10px 30px;
+	float:left;
+	background:url(../img/headpics/001.jpg) no-repeat top center;
+	background-size:55px;
+}
+	
+		/* 404page */
+	.rs-xx-box {
+		width:100%;
+		margin:0;
+		padding:0;
+		overflow:hidden;
+	}
+	.rs-xx-box1 {
+		width:98%;
+		margin:0 auto;
+		padding:0;
+		overflow:hidden;
+		text-align: center;
+	}
+	.rs-xx-left {
+		width:100%;
+		margin:0 auto;
+		padding:0;
+		overflow:hidden;
+		text-align:center;
+	}
+	.rs-xx-left img {
+		width:50%;
+	}
+	.rs-xx-right {
+		width:100%;
+		margin:0 auto;
+		padding:0 0 25px 0;
+		overflow:hidden;
+	}
+	.rs-xx-right p {
+		font-size:85%;
+	}
+	.rs-x-btnss {
+		margin:0 auto;
+		padding:0;
+		overflow:hidden;
+		width:280px;
+	}
+	.rs-x-btns a {
+		padding:10px 20px;
+		margin:8px;
+		background-color:#F47824;
+		color:#fff;
+		float:left;
+		font-size:17px;
+		overflow: hidden;
+		width:120px;
+	}
+	/* 精彩推薦 */
+	.rs-x-box {
+		width:90%;
+		margin:0 auto;
+		padding:0px;
+		background-color:#fff;
+		overflow: hidden;
+	}
+	.rs-x-box-2 {
+	width:490px;
+	height:430px;
+	float:left;
+	overflow:hidden;
+	font-size:19px;
+	padding-left:50px;
+}
+.rs-x-box-2 p {
+	margin-top:240px;
+}
+.rs-x-box-3 {
+	width:700px;
+	border-bottom:1px solid #ccc;
+	float:left;
+	overflow:hidden;
+	margin-bottom:10px;
+}
+.rs-x-box-4 {
+	padding:10px 20px;
+	background-color:#2192EF;
+	color:#fff;
+	float:left;
+	overflow: hidden;
+}
+.rs-x-box-5 {
+	width:100%;
+	height:97px;
+	border-bottom:1px solid #dedede;
+	overflow: hidden;
+	padding:0;
+}
+.rs-x-box-5a img {
+	width:70px;
+	height:70px;
+}
+.rs-x-box-5a a {
+	width:70px;
+	height:70px;
+	margin:16px 0 0 12px;
+	float:left;
+	background-color:#777;
+}
+.rs-x-box-5b a {
+	width:82.5%;
+	height:62px;
+	float:left;
+	margin:18px 0px 0px 12px;
+	overflow:hidden;
+	font-size:91.5%;
+	word-break: break-all;
+	padding:0;
+	color:#333;
+}
+	
+	/*** 分頁 開始 ***/
+	.rs-contentbox1 {
+		width:100%;
+		background-color:#fff;
+		overflow: hidden;
+		margin-top:1px;
+		padding:10px 0;
+		text-align:center;
+	}
+
+	ul.pagination {
+		display: inline-block;
+		padding: 12px 0;
+		margin: 0;
+	}
+
+	ul.pagination li {display: inline;}
+	
+	ul.pagination li a {
+		color: black;
+		float: left;
+		padding: 8px 12px;
+		text-decoration: none;
+		transition: background-color .3s;
+		border: 1px solid #ddd;
+		margin: 0 4px;
+		font-size:13px;
+	}
+	
+	ul.pagination li a.active {
+		background-color:#F8730C;
+		color:#fff;
+		border: 1px solid #F8730C;
+	}
+	
+	ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+	/*** 分頁 結尾 ***/
+	
+	
+	
+	#rs-right-box {
+		display:none;
+	}
+	.rs-dl-os1 {
+		display: none;
+	}
+	.rs-dl-os2 {
+		display:none;
+	}
+}
+
+/* Mobile view */
+@media screen and (max-width:480px) {
+	
+	#rs-maintop {
+		width:100%;
+		margin:0 auto;
+	}
+	
+	.rs-maintop-box {
+		width:100%;
+		height:120px;
+		overflow:hidden;
+	}
+	
+	.rs-logo a {
+		width:250px;
+		height:110px;
+		background:url(../img/logo.png) no-repeat top center;
+		background-size:250px;
+		margin:7px auto;
+		padding:0;
+	}
+	
+	#rs-topnav {
+		background-color:#113;
+		margin:0 auto;
+	}
+	#rs-topnav ul {		
+		padding:0;
+		background-color: #111;
+	}
+	#rs-topnav li {
+		list-style:none;
+	}
+	#rs-topnav li a {
+		color:#aaa;
+		padding:14px 26px;
+		display:block;
+	}
+	#rs-topnav li a:hover {
+		background-color:#234;
+		color:#fff;
+	}
+	
+	/*** CONTENT ***/
+	#rs-main-content {
+		width:95%;
+		padding:0px;
+		overflow: hidden;
+	}
+	#rs-content-left {
+		width:100%;
+		padding:0;
+		margin-bottom:1px;
+		overflow: hidden;
+	}	
+	
+	.rs-contentword img {
+		width:100%;
+	}
+	
+	.rs-picss img {
+	width:116px;
+	float:left;
+	margin:2px;
+	}
+	
+	.rs-comm-box form {
+	width:270px;
+	height:90px;
+	margin:0 0 0 10px;
+}
+.rs-comm-box textarea {
+	padding:5px;
+	margin:0;
+	width:100%;
+	float:left;
+	resize: none;
+	border-radius:4px;
+}
+.rs-contentword-l-s {
+	width:160px;
+	font-size:12px;
+	text-align:left;
+	margin:12px 0 0 30px;
+	float:left;
+	}
+.rs-wwss {
+	width:120px;
+	font-size:12px;
+	margin:12px 0 0 20px;
+}
+.rs-icon-comm a {
+	background-color:#f88;
+	color:#fff;
+	padding:5px 20px;
+	margin:10px 0 0 80px;
+	border-radius:4px;
+}
+	
+	.rs-item-hot {
+	float:left;
+	position:absolute;
+	margin:10px 0 0 76px;
+	font-size:9px;
+	padding:1px 3px;
+	color:#f00;
+	border:1px solid #f00;
+	border-radius:3px;
+}
+	.rs-item-hot1 {
+	float:left;
+	position:absolute;
+	margin:65px 0 0 76px;
+	font-size:9px;
+	padding:1px 3px;
+	color:#f00;
+	border:1px solid #f00;
+	border-radius:3px;
+}
+	
+	.rs-contentpics1 {
+	width:45px;
+	height:45px;
+	border-radius:65px;
+	overflow:hidden;
+	margin:5px 10px 10px 30px;
+	float:left;
+	background:url(../img/headpics/001.jpg) no-repeat top center;
+	background-size:45px;
+}
+	.rs-comm-box1 {
+	width:240px;
+	margin:0 0 10px 8px;
+	text-align:left;
+	font-size:14px;
+	float:left;
+}
+	
+	#rs-digg-box2 {
+	width:360px;
+	height:40px;
+	margin:0 0 10px 0;
+	padding:5px;
+	float:left;
+	}
+	
+	.rs-digg { /** 讚,噓,分享icon**/
+		cursor:pointer;
+		font-size:90%;
+		float:left;
+		color:#aaa;
+		border:1px solid #ccc;
+		padding:2px 5px;
+		margin:0 4px 15px 0;
+		border-radius:3px;
+	}
+	.rs-digg-left {
+		padding:0;
+		overflow:hidden;
+		margin:0 auto;
+	}
+	.rs-digg-fb a {
+		width:20px;
+		height:20px;
+		border-radius:5px;
+		overflow:hidden;
+		margin:0 5px 10px 0;
+		float:left;
+		background:url(../img/social/icon-fb.png) no-repeat top center;
+		background-size:26px;
+		background-position: center;
+	}
+	.rs-digg-tt a {
+		width:20px;
+		height:20px;
+		border-radius:5px;
+		overflow:hidden;
+		margin:0 5px 10px 0;
+		float:left;
+		background:url(../img/social/icon-tt.png) no-repeat top center;
+		background-size:22px;
+		background-position: center;
+	}
+	.rs-digg-gg a {
+		width:20px;
+		height:20px;
+		border-radius:5px;
+		overflow:hidden;
+		margin:0 5px 10px 0;
+		float:left;
+		background:url(../img/social/icon-gg.png) no-repeat top center;
+		background-size:24px;
+		background-position: center;
+	}
+	.rs-digg-ig a {
+		width:20px;
+		height:20px;
+		border-radius:5px;
+		overflow:hidden;
+		margin:0 5px 10px 0;
+		float:left;
+		background:url(../img/social/icon-ig.png) no-repeat top center;
+		background-size:20px;
+		background-position:center;
+	}
+	
+	.rs-digg-right {
+		overflow:hidden;
+		margin:0 auto;
+		padding:3px 20px;
+	}
+	
+	/* 404page */
+	.rs-xx-box {
+		width:100%;
+		margin:0;
+		padding:0;
+		overflow:hidden;
+	}
+	.rs-xx-box1 {
+		width:98%;
+		margin:0 auto;
+		padding:0;
+		overflow:hidden;
+		text-align: center;
+	}
+	.rs-xx-left {
+		width:100%;
+		margin:0 auto;
+		padding:0;
+		overflow:hidden;
+		text-align:center;
+	}
+	.rs-xx-left img {
+		width:60%;
+	}
+	.rs-xx-right {
+		width:100%;
+		margin:0 auto;
+		padding:0 0 25px 0;
+		overflow:hidden;
+	}
+	.rs-xx-right p {
+		font-size:85%;
+	}
+	.rs-x-btnss {
+		margin:0 auto;
+		padding:0;
+		overflow:hidden;
+		width:280px;
+	}
+	.rs-x-btns a {
+		padding:10px 20px;
+		margin:8px;
+		background-color:#F47824;
+		color:#fff;
+		float:left;
+		font-size:17px;
+		overflow: hidden;
+		width:120px;
+	}
+	/* 精彩推薦 */
+	.rs-x-box {
+		width:90%;
+		margin:0 auto;
+		padding:0px;
+		background-color:#fff;
+		overflow: hidden;
+	}
+	.rs-x-box-2 {
+	width:490px;
+	height:430px;
+	float:left;
+	overflow:hidden;
+	font-size:19px;
+	padding-left:50px;
+}
+.rs-x-box-2 p {
+	margin-top:240px;
+}
+.rs-x-box-3 {
+	width:700px;
+	border-bottom:1px solid #ccc;
+	float:left;
+	overflow:hidden;
+	margin-bottom:10px;
+}
+.rs-x-box-4 {
+	padding:10px 20px;
+	background-color:#2192EF;
+	color:#fff;
+	float:left;
+	overflow: hidden;
+}
+.rs-x-box-5 {
+	width:600px;
+	height:92px;
+	border-bottom:1px solid #dedede;
+	overflow: hidden;
+}
+.rs-x-box-5a img {
+	width:60px;
+	height:60px;
+}
+.rs-x-box-5a a {
+	width:60px;
+	height:60px;
+	margin:16px 0 0 12px;
+	float:left;
+	background-color:#777;
+}
+.rs-x-box-5b a {
+	width:57.5%;
+	height:62px;
+	float:left;
+	margin:12px 0px 0px 12px;
+	overflow:hidden;
+	font-size:91.5%;
+	word-break: break-all;
+	padding:0;
+	color:#333;
+}
+	
+	/*** 登入頁 開始 ***/
+.rs-post-box {
+	width:96%;
+	overflow:hidden;
+	margin:10px auto;
+	background-color:#fff;
+	padding:20px;
+	border-radius:6px;
+}
+.rs-fastlogin {
+	width:290px;
+	height:400px;
+	margin:0 auto;
+	overflow: hidden;
+}
+.rs-login-btn-fb a {
+	float:left;
+	width:120px;
+	height:120px;
+	margin:12px;
+	background:url(../img/social/icon-fb.png) top left no-repeat;
+	background-size:120px;
+}
+.rs-login-btn-tt a {
+	float:left;
+	width:120px;
+	height:120px;
+	margin:12px;
+	background:url(../img/social/icon-tt.png) top left no-repeat;
+	background-size:120px;
+}
+.rs-login-btn-gg a {
+	float:left;
+	width:120px;
+	height:120px;
+	margin:12px;
+	background:url(../img/social/icon-gg.png) top left no-repeat;
+	background-size:120px;
+}
+.rs-login-btn-ig a {
+	float:left;
+	width:120px;
+	height:120px;
+	margin:12px;
+	background:url(../img/social/icon-ig.png) top left no-repeat;
+	background-size:120px;
+}
+/*** 登入頁 結束 ***/
+	
+/*** 上傳介面 開始 ***/
+.post-box {
+	width:98%;
+	overflow:hidden;
+	margin:10px auto;
+	background-color:#fff;
+	padding:20px 40px 60px 40px;
+	border-radius:6px;
+}
+.tab {
+    overflow: hidden;
+    border: 0px solid #ccc;
+    background-color: #fff;
+	width:99.8%;
+	padding:0;
+	margin:auto;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    /*background-color: inherit;*/
+	background:#fff;
+	margin:12px 9px 0 0;
+    float: left;
+    border:1px solid #ccc;;
+	border-radius: 7px;
+    outline: none;
+    cursor: pointer;
+    padding: 12px 35px;
+    transition: 0.3s;
+    font-size: 15px;
+	color:#333;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #fa0;
+	border:1px solid #eee;
+	color:#fff;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #fa0;
+	border:1px solid #eee;
+	color:#fff;
+	font-weight:bold;
+	margin-bottom:6px;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 0px solid #ccc;
+    border-top: none;
+	background-color:#fff;
+	overflow:hidden;
+}
+
+input[type=text],[type=password], select {
+	width:99.5%;
+	padding:12px 0 5px 5px;
+	margin:8px 0;
+	display:inline-block;
+	border:1px solid #ccc;
+	border-radius:4px;
+	box-sizing:border-box;
+}
+input[type=submit] {
+	width:140px;
+	background-color:#F5a00A;
+	color:white;
+	padding:14px 20px;
+	margin:16px 0 20px 80px;
+	border:none;
+	border-radius:4px;
+	cursor:pointer;
+	font-size:17px;
+}
+label {
+   padding: 12px 3px 12px 12px;
+   display: inline-block;
+}
+
+.form-text {
+	width:99%;
+	height:150px;
+	margin:6px 0;
+	border-radius:4px;
+	border:1px solid #ccc;
+}
+.form-upload {
+	width:99%;
+	height:50px;
+	border:1px solid #ccc;
+	padding:8px;
+	border-radius:4px;
+	overflow: hidden;
+}
+.loading-bar {
+	width:99%;
+	height:6px;
+	background-color:#fc0;
+}
+/*** 上傳介面 結束 ***/
+	
+	
+	/*** 分頁 開始 ***/
+	.rs-contentbox1 {
+		width:100%;
+		background-color:#fff;
+		overflow: hidden;
+		margin-top:1px;
+		padding:10px 0;
+		text-align:center;
+	}
+
+	ul.pagination {
+		display: inline-block;
+		padding: 12px 0;
+		margin: 0;
+	}
+
+	ul.pagination li {display: inline;}
+	
+	ul.pagination li a {
+		color: black;
+		float: left;
+		padding: 4px 8px;
+		text-decoration: none;
+		transition: background-color .3s;
+		border: 1px solid #ddd;
+		margin: 0 2px;
+		font-size:13px;
+	}
+	
+	ul.pagination li a.active {
+		background-color:#F8730C;
+		color:#fff;
+		border: 1px solid #F8730C;
+	}
+	
+	ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+	/*** 分頁 結尾 ***/
+	
+	
+	#rs-right-box {
+		display:none;
+	}
+	
+	.rs-dl-os1 {
+		display: none;
+	}
+	.rs-dl-os2 {
+		display:none;
+	}
+}

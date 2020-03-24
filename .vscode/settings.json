@@ -1,0 +1,5 @@
+{
+    "blade.format.enable": true,
+    "blade.newLine": false,
+    "files.associations": {"*.blade.php":"html"},
+}
