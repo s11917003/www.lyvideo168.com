@@ -85,10 +85,6 @@ Route::get('/comm/reply/loadmore', 'Article\CmtController@loadreply');
 //發文
 Route::post('/upload/request', 'Article\UploadController@store');
 
-//發文new
-//Route::post('/upload2/request', 'Article\Upload2Controller@store');
-
-
 //PR頁面
 Route::get('/pr/{adid}', 'Pr\Type1Controller@view')->where('adid', '[0-9]+');
 

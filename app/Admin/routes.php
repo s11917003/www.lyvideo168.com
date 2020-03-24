@@ -17,9 +17,6 @@ Route::group([
     //$router->resource('postarticle2', PostsArticle2Controller::class);
     $router->resource('posttag', PostsTagController::class);
     $router->resource('postfilter', PostsFilterController::class);
-    $router->resource('adarticle', AdArticleController::class);
-    $router->resource('adlaunch', AdLaunchController::class);
-    $router->resource('addetailbn', AdDetailBannerController::class);
     $router->resource('postcmt', CmtController::class);
 
 });
