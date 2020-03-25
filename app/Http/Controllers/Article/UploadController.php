@@ -73,7 +73,16 @@ class UploadController extends Controller {
 					'ffprobe.binaries' => 'C:/ffmpeg/bin/ffprobe.exe'
 				 
 				]);
-				
+				//取得影片長度
+				$ffmpeg  = \FFMpeg\FFMpeg::create([
+					'ffmpeg.binaries' => ('C:/ffmpeg/bin/ffmpeg.exe'),
+					'ffprobe.binaries' => ('C:/ffmpeg/bin/ffprobe.exe'),
+					'timeout' => 3600,
+					'ffmpeg.threads' => 12
+				]);
+
+
+			
 				$sec = $ffprobe->format($file)  // extracts streams informations
 							->get('duration');// returns the duration property
 				
@@ -81,16 +90,22 @@ class UploadController extends Controller {
 				$timecode = gmdate("H:i:s", $sec);
 
 				$filename = date('Ymdis') . '-' . 4 . '-' . 'x264';
-		        $path = '/upvideo/' . date('Y') . '/' . date('m');		        
-		        
+		        $path = '/public/upvideo/' . date('Y') . '/' . date('m'). '/' . $filename;		        
+		        $pathD=  date('Y') . '/' . date('m'). '/' . $filename;	
 			
 				//儲存影片
 				$disk->putFileAs($path, new File($file), $filename . '.mp4' , 'public');
 				$vfileexist = $disk->exists($path . '/' . $filename . '.mp4');
-				
-				
 				if($vfileexist) {
-					$post->video_url = storage_path($filename.'.mp4'); //影片			
+					$post->video_url = $pathD  . '/' . $filename . '.m3u8'; //影片	
+					/*   切m3u8檔案  */
+					$video = $ffmpeg->open($file);
+					$format = new \FFMpeg\Format\Video\X264('libmp3lame', 'libx264');
+					$format->on('progress', function ($video, $format, $percentage) {
+						echo "$percentage % transcoded";
+					});
+		 
+					$video ->save($format ,storage_path().'/app'.$path.'/'.$filename.'.m3u8');
 				} else {
 					return response()->json([
 					    'ret' => -1,
@@ -102,7 +117,7 @@ class UploadController extends Controller {
 		
 		$post->user_id = 4;
 		$post->cate_id = $request->type;
-		$post->folder = $path .'/'. $filename;
+		$post->folder =  $pathD;
 		$post->title = preg_replace('!\s+!', ' ', strip_tags(nl2br($request->content), '<br /><br>'));
 		$post->created_time = date('Y-m-d h:i:s');
 		$post->hd = $request->hd;

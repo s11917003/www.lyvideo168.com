@@ -20,11 +20,10 @@
 //line bot
 Route::get('rd/test', 'Rd\RdController@index');
 Route::get('/rd/gentbimg', 'Rd\GenTbImgController@index');
-
 Route::get('rd/genacc', 'Rd\RdController@genacc');
 
 //首頁
-Route::get('/warning', 'Auth\AuthAgeController@warning');//首頁  
+Route::get('/warning', 'Auth\AuthAgeController@warning');//首頁  g
 Route::get('/{id?}', 'Index\IndexController@index')->where('id', '[0-9]+');//走分頁
 Route::get('/getmore/{id?}', 'Index\IndexController@loadmore');//影片 JSON 格式
 
