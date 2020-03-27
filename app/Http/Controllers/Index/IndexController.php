@@ -1,8 +1,9 @@
 <?php
 namespace App\Http\Controllers\Index;
 use App\Http\Controllers\Controller;
+use Illuminate\Pagination;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 use App\Model\PostsArticle;
 use App\Model\PostsCategory;
 use App\Model\PostsDetail;
@@ -28,13 +29,12 @@ class IndexController extends Controller {
 		   	header('Location:/warning');
 		   	return ;
 	   	}   	
-	   	
-				
-		$category = PostsCategory::all();
+	 
+	 	$category = PostsCategory::all();
 		$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->with('commentsGod')->where('cate_id', 3)->where('status', 1)->where('covered', 1)->orderBy('id', 'desc')->Paginate(6, null, 1, $page);
 		
-		$lastPage = $posts->lastPage();
-		$currentPage = $posts->currentPage();
+		// $lastPage = $posts->lastPage();
+		// $currentPage = $posts->currentPage();
 	    
 	    $tagarr = [1,2,4,10,11];
 		$relate = PostsTagRelationships::with('article')->whereIn('post_tag_id', $tagarr)->where('status',1)->groupBy('post_id')->inRandomOrder()->limit(10)->get();	 		
@@ -46,8 +46,8 @@ class IndexController extends Controller {
 		return  view('app_rwd.index.default', [
 			'category'=>$category,
 			'posts'=>$posts,
-			'lastPage' => $lastPage,
-			'currentPage' => $currentPage,
+			'lastPage' =>  1,
+			'currentPage' => 1,
 			'device' => $device,
 			'relate' => $relate,
 			'loadmore' => true,
