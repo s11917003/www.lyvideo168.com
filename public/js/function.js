@@ -164,17 +164,28 @@ $(document).ready(function () {
 				alert('哥哥您別急呀！');
 				return false;
 			}
-			
+
+			num =  $('#cuttime').val()
+			num2 =  $('#cuttime2').val()
+			if(isNaN(Number(num)) || isNaN(Number(num2))){  
+				alert('请输入正整数');
+				return false;
+			} else if(Number(num)<0 || Number(num2)<0) {
+				alert('请输入正整数');
+				return false;
+			}
+		 
 			if($('#postContent').val() != '') {
+		
 				uploading = true;
 				$("#publishBtn").prop('disabled', true);
 				$("#publishBtn").css( "background-color", '#c7c5c1');
 				$("#publishBtn").html('<img src="/img/source.gif?a=1" style="height:18px;">');
 				uploadFile(event, $('.tablinks.active').data('id'))
-
 				return;
-			} else {
-				alert('哥哥您的內容沒有寫唷!');
+			} 
+			else {
+				alert('哥哥您的內容沒有寫唷');
 				return;
 			}
 		}

@@ -33,7 +33,6 @@ class GetVideoController extends Controller {
 		$m3u8Url = $article->video_url;
 		$folderUrl = $article->folder;
 		$expirtime = time()+3600;
-//		exec("python3.4 /www/www.c8c8tv.com/python/signedCdnUrl.py $m3u8Url $expirtime 'm3u8' 0", $m3u8o);
 
 		$arrContextOptions=[
 			"ssl"=>[
@@ -41,35 +40,18 @@ class GetVideoController extends Controller {
 		            "verify_peer_name"=>false,
 		        ],
 		];
-		//echo $m3u8Url;
 		
-		$m3u8text = file_get_contents(public_path() . '/upvideo/' . $m3u8Url, false, stream_context_create($arrContextOptions));
-
+		$m3u8text = file_get_contents(public_path() . '/storage/upvideo/' . $m3u8Url, false, stream_context_create($arrContextOptions));
 		$m3u8 = new M3u8();
 		$m3u8->read($m3u8text);
 		
-		
 		$count = $m3u8->getSegments()->count();
-		
-		//var_dump($m3u8->getSegments()[0]->getUri());
-		/*
-		$urlstring = str_replace('.m3u8', '', $m3u8Url);
-		//exec("python3.5 /www/www.lyvideo168.com/python/signedCdnUrl.py $urlstring $expirtime 'ts' $count", $output);
-		//$tsstring = str_replace('[','',$output[0]);
-		//$tsstring = str_replace(']','',$tsstring);
-		//$tsstring = str_replace("'",'',$tsstring);
-		$arr = explode(',', $tsstring);
-		*/
 		
 		for($i=0; $i<$count; $i++) {
 			$uri = $m3u8->getSegments()[$i]->getUri();
-			
-			$m3u8->getSegments()[$i]->getUri()->setUri(url('/') . '/upvideo/' . $folderUrl . '/' . $uri);
-			
-			// original
-			//$m3u8->getSegments()[$i]->getUri()->setUri('http://lyvideo168.com/upvideo/post/' . $uri);
+			$m3u8->getSegments()[$i]->getUri()->setUri(url('/') . '/storage/upvideo/' . $folderUrl . '/' . $uri);
 		}
-		
+	 
 		echo $m3u8->dump();
 	}
 	

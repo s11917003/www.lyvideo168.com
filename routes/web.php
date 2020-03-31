@@ -20,11 +20,12 @@
 //line bot
 Route::get('rd/test', 'Rd\RdController@index');
 Route::get('/rd/gentbimg', 'Rd\GenTbImgController@index');
-
 Route::get('rd/genacc', 'Rd\RdController@genacc');
 
-//首頁
-Route::get('/warning', 'Auth\AuthAgeController@warning');//首頁  
+//首頁member
+// Route::group(['prefix' => ''], function($router) {
+  	Route::get('/warning', 'Auth\AuthAgeController@warning');//首頁  
+// });
 Route::get('/{id?}', 'Index\IndexController@index')->where('id', '[0-9]+');//走分頁
 Route::get('/getmore/{id?}', 'Index\IndexController@loadmore');//影片 JSON 格式
 
@@ -39,23 +40,24 @@ Route::get('/pv/{id}', 'Index\IndexController@postviewapp')->where('id', '[0-9]+
 
 
 //發文頁面
-Route::get('/article/post', 'Index\IndexController@postpage');
-
+// Route::group(['middleware' => ['auth:web']], function () {
+			Route::get('/article/post', 'Index\IndexController@postpage');
+// });
 //交換連結
 Route::get('/linkex', 'Service\PageController@linkexchange');
 
 
 //登入頁面
-/*
-Route::group(['prefix' => 'member'], function($router) {
-	Route::get('/login', 'Member\MemberController@login');		//登入
+
+// Route::group(['prefix' => 'member'], function($router) {
+	Route::get('/login', 'Member\MemberController@login')->name('login'); 		//登入
 	Route::get('/logout', 'Member\MemberController@logout');	//登出
-});
-*/	
+// });
+
 
 
 //openid
-/*
+
 Route::group(['prefix' => 'openid'], function ($router) {
 	Route::get('/facebook/login', 'Member\FbOpenidController@redirectToProvider');
 	Route::get('/facebook/callback', 'Member\FbOpenidController@handleProviderCallback');
@@ -68,7 +70,7 @@ Route::group(['prefix' => 'openid'], function ($router) {
 	Route::get('/line/login', 'Member\LineOpenidController@redirectToProvider');
 	Route::get('/line/callback', 'Member\LineOpenidController@handleProviderCallback');	
 });
-*/
+
 
 //sns ckick
 //Route::post('/sns/ev/request', 'Article\SnsController@snsclick');
@@ -84,10 +86,6 @@ Route::get('/comm/reply/loadmore', 'Article\CmtController@loadreply');
 
 //發文
 Route::post('/upload/request', 'Article\UploadController@store');
-
-//發文new
-//Route::post('/upload2/request', 'Article\Upload2Controller@store');
-
 
 //PR頁面
 Route::get('/pr/{adid}', 'Pr\Type1Controller@view')->where('adid', '[0-9]+');
@@ -177,9 +175,9 @@ Route::get('/avdb/clawjavbuzz', 'Avdb\ClawController@clawjavbuzz');
 
 
 //avdb page
-Route::get('/censord/{id?}', 'Avdb\IndexController@index')->where('id', '[0-9]+');
-Route::get('/uncensord/{id?}', 'Avdb\IndexController@uncensord')->where('id', '[0-9]+');
-Route::get('/avdbview/{id?}', 'Avdb\IndexController@avdbpostview')->where('id', '[0-9]+');
+// Route::get('/censord/{id?}', 'Avdb\IndexController@index')->where('id', '[0-9]+');
+// Route::get('/uncensord/{id?}', 'Avdb\IndexController@uncensord')->where('id', '[0-9]+');
+// Route::get('/avdbview/{id?}', 'Avdb\IndexController@avdbpostview')->where('id', '[0-9]+');
 
 
 //event page

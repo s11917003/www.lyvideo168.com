@@ -18,7 +18,7 @@
 @section('maincontent')
 	<div>
 		<div style="position: relative">				
-			<video id='av-video' width="600" height="264" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered" poster="{{$post->cover_img}}" preload= "none" controls>
+			<video id='av-video' width="600" height="254" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered" poster="{{ asset('storage'.$post->cover_img) }}" preload= "none" controls>
 				<source src="/getvideo/{{$post->id}}" type="application/x-mpegURL">
 			</video>
 			<script>

@@ -24,33 +24,14 @@
 			<div class="rs-contentword">
 				<h2><a href="javascript:void(0)">{!! $post->title !!}</a></h2>
 					<div style="position: relative">
-						<!-- JuicyAds v3.0
-						@if ($device != 'ios' && $device != 'android')
-						<div id='videocoverad' style="width: 100%; height: 100%; position: absolute; left: 0; top: 0; background-color: '#80808000'; z-index: 99; display: block">
-							<div style="position: absolute;top: 80px; left: 200px; width: 300px; height: 250px;">
-								<div style="padding: 0 0 0 4px; width: 20px; height: 20px; left: 5px; top: 5px; position: absolute; z-index: 1000; background-color: #c1c1c1; color:#828282; border-radius: 50%;" id='closead'><a href="javascript:void(0)">X</a></div>
-								
-								<script type="text/javascript" data-cfasync="false" async src="https://adserver.juicyads.com/js/jads.js"></script>
-								<ins id="697681" data-width="300" data-height="262"></ins>
-								<script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':697681});</script>								
-							</div>
-						</div>
-						@else
-						<div id='videocoverad' style="width: 100%; height: 100%; position: absolute; left: 0; top: 0; background-color: '#80808000'; z-index: 999; display: block">
-							<div style="position: absolute;top: 0; left: 10%; width: 300px; height: 250px;">
-								<div style="padding: 0 0 0 4px; width: 20px; height: 20px; left: 5px; top: 5px;;position: absolute; z-index: 1000; background-color: #c1c1c1; color:#828282; border-radius: 50%;" id='closead'><a href="javascript:void(0)">X</a></div>
-								<script type="text/javascript" data-cfasync="false" async src="https://adserver.juicyads.com/js/jads.js"></script>
-								<ins id="697681" data-width="300" data-height="262"></ins>
-								<script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':697681});</script>
-							</div>
-						</div>						
-						@endif
-						JuicyAds END -->
+
 						<video id='av-video' width="600" height="264" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered" poster="{{asset('storage'.$post->cover_img)}}" controls>
 						  <source
 						     src="/getvideo/{{$post->id}}"
 						     type="application/x-mpegURL">
 						</video>
+
+						<!-- <source src="http://127.0.0.1:8000/storage/public/upvideo/2019/08/zzn/output000.ts" type="application/x-mpegURL">   -->
 						<script>
 						var player = videojs('av-video',{
 								html5: {
@@ -138,7 +119,7 @@
 				<div style="float: left;padding: 10px; width: 230px; height: 185px; margin: 5px; background: #f1f1f1; overflow: hidden">
 					<a href="/p/{{$re->post_id}}">
 					
-					<img src="{{ asset('storage'.$re->article['tb_img']) }}"  style="width: 210px;">
+					<img src="{{ asset('storage'.$re->article['tb_img']) }}"  style="width: 210px; height: 80%;">
 					<div style="font-size: 8; padding-top: 5px;">{{$re->article['title']}}</div>
 					</a>
 				</div>

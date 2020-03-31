@@ -192,7 +192,9 @@ return [
 		Ipunkt\LaravelAnalytics\AnalyticsServiceProvider::class,
 		//sitemap
 		//Roumen\Sitemap\SitemapServiceProvider::class,
-		//Srmklive\PayPal\Providers\PayPalServiceProvider::class
+        //Srmklive\PayPal\Providers\PayPalServiceProvider::class
+        
+        Pbmedia\LaravelFFMpeg\FFMpegServiceProvider::class,
 		
     ],
 
@@ -244,7 +246,8 @@ return [
 		'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 		'Image' => Intervention\Image\Facades\Image::class,
 		'Analytics' => Ipunkt\LaravelAnalytics\AnalyticsFacade::class,
-		'PayPal' => Srmklive\PayPal\Facades\PayPal::class
+        'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
+        'FFMpeg' => Pbmedia\LaravelFFMpeg\FFMpegFacade::class
     ],
 
 ];
