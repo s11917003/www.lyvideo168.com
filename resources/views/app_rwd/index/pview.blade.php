@@ -119,7 +119,7 @@
 				<div style="float: left;padding: 10px; width: 230px; height: 185px; margin: 5px; background: #f1f1f1; overflow: hidden">
 					<a href="/p/{{$re->post_id}}">
 					
-					<img src="{{ asset('storage'.$re->article['tb_img']) }}"  style="width: 210px;">
+					<img src="{{ asset('storage'.$re->article['tb_img']) }}"  style="width: 210px; height: 80%;">
 					<div style="font-size: 8; padding-top: 5px;">{{$re->article['title']}}</div>
 					</a>
 				</div>

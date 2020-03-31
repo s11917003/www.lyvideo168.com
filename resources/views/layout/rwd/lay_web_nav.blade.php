@@ -36,13 +36,19 @@
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/tag/3">无修正</a>
-				</li>											
+				</li>	
 				<li class="nav-item">
+					<a class="nav-link" href="/tag/33">台湾</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/tag/25">偷拍</a>
+				</li>													
+				<!-- <li class="nav-item">
 					<a class="nav-link" href="/censord/">有码数G库</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/uncensord/">无码数G库</a>
-				</li>				
+				</li>				 -->
 			</ul>
 		</div>
 	</nav>

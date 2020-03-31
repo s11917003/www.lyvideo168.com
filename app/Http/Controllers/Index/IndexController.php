@@ -33,8 +33,8 @@ class IndexController extends Controller {
 	 	$category = PostsCategory::all();
 		$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->with('commentsGod')->where('cate_id', 3)->where('status', 1)->where('covered', 1)->orderBy('id', 'desc')->Paginate(6, null, 1, $page);
 		
-		// $lastPage = $posts->lastPage();
-		// $currentPage = $posts->currentPage();
+		$lastPage = $posts->lastPage();
+		$currentPage = $posts->currentPage();
 	    
 	    $tagarr = [1,2,4,10,11];
 		$relate = PostsTagRelationships::with('article')->whereIn('post_tag_id', $tagarr)->where('status',1)->groupBy('post_id')->inRandomOrder()->limit(10)->get();	 		
@@ -46,8 +46,8 @@ class IndexController extends Controller {
 		return  view('app_rwd.index.default', [
 			'category'=>$category,
 			'posts'=>$posts,
-			'lastPage' =>  1,
-			'currentPage' => 1,
+			'lastPage' =>  $lastPage,
+			'currentPage' => $currentPage,
 			'device' => $device,
 			'relate' => $relate,
 			'loadmore' => true,
@@ -85,7 +85,7 @@ class IndexController extends Controller {
 		}
 		
 		//$relate = \DB::table('posts_tag_relationships')->whereIn('post_tag_id', $tagarr)->groupBy('post_id')->inRandomOrder()->limit(6)->get();
-		$relate = PostsTagRelationships::with('article')->whereIn('post_tag_id', $tagarr)->where('status',1)->groupBy('post_id')->inRandomOrder()->limit(14)->get();	 		
+		$relate = PostsTagRelationships::with('article')->where('post_id','!=', $id)->whereIn('post_tag_id', $tagarr)->where('status',1)->groupBy('post_id')->inRandomOrder()->limit(14)->get();	 		
 		if($article) {
 			$device = Utils::chkdevice();
 			return view('app_rwd.index.pview',[
@@ -121,7 +121,7 @@ class IndexController extends Controller {
 		}
 		
 		//$relate = \DB::table('posts_tag_relationships')->whereIn('post_tag_id', $tagarr)->groupBy('post_id')->inRandomOrder()->limit(6)->get();
-		$relate = PostsTagRelationships::with('article')->whereIn('post_tag_id', $tagarr)->where('status',1)->groupBy('post_id')->inRandomOrder()->limit(14)->get();	 		
+		$relate = PostsTagRelationships::with('article')->where('post_id', '!=' ,  $id)->whereIn('post_tag_id', $tagarr)->where('status',1)->groupBy('post_id')->inRandomOrder()->limit(14)->get();	 		
 		if($article) {
 			$device = Utils::chkdevice();
 			return view('app_rwd.index.pviewtest',[

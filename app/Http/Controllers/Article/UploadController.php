@@ -10,9 +10,9 @@ use App\Model\PostsCategory;
 use App\Model\PostsTag;
 use App\Model\PostsTagRelationships;
  
-use Pbmedia\LaravelFFMpeg\FFMpegFacade  as FFMpeg;
-use FFMpeg\Format\Video\X264 as X264;
-
+// use Pbmedia\LaravelFFMpeg\FFMpegFacade  as FFMpeg;
+// use FFMpeg\Format\Video\X264 as X264;
+use FFMpeg\FFMpeg;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Image;
 use Intervention\Image\Font;
@@ -91,6 +91,17 @@ class UploadController extends Controller {
 				$sec = floor($sec) - $cuttime - $cuttime2;				
 				$timecode = gmdate("H:i:s", $sec);
 
+
+				if($sec<=0){
+					return response()->json([
+						'ret' => -1,
+						'msg' => '影片长度有误，请重新输入'
+					]); 
+				}
+				$start = gmdate("H:i:s",$cuttime);	
+				$end = gmdate("H:i:s", floor($sec) + $cuttime);	
+			
+			 
 				$filename = date('Ymdis') . '-' . 4 . '-' . 'x264';
 			
 				$pathD=  date('Y') . '/' . date('m'). '/' . $filename;	
@@ -101,43 +112,47 @@ class UploadController extends Controller {
 				$vfileexist = $disk->exists($path . '/' . $filename . '.mp4');
 				if($vfileexist) {
 					$post->video_url = $pathD  . '/' . $filename . '.m3u8'; //影片
-					$lowBitrate = (new X264)->setKiloBitrate(250);
-					$midBitrate = (new   X264)->setKiloBitrate(500);
-					$highBitrate = (new   X264)->setKiloBitrate(1000);
-					$format = new \FFMpeg\Format\Video\X264('libmp3lame', 'libx264');
-					$format->on('progress', function ($video, $format, $percentage) {
-						echo "$percentage % transcoded";
-					});
-FFMpeg::fromDisk('local')
-    ->open('SampleVideo_1280x720_1mb.mp4')
-    ->exportForHLS()
  
-	->informat(new \FFMpeg\Format\Video\X264('libmp3lame', 'libx264'))
-    ->save('adaptive_steve.m3u8');
-					return;
-					// /*   切m3u8檔案  */
-					// $video = $ffmpeg->open($file);
-					// $disk->makeDirectory($pathImg);
-					// // 在视频一半的地方截圖
-					// $frame = $video->frame(\FFMpeg\Coordinate\TimeCode::fromSeconds(intval($sec/2)));
-					// $frame->save(storage_path().'/app'.$pathImg.'/'.$filename.'.jpg'); 
-				 
-					// $post->cover_img =  '/upvideo'.$pathD  . '/' . $filename . '.jpg'; //截圖
-					// $post->tb_img =  '/upvideo'.$pathD  . '/' . $filename . '.jpg'; //截圖
+					set_time_limit(0);
+					//轉檔 浮水印
+
 					
+					//裁剪視頻
+					// var_dump("ffmpeg -i ".storage_path().'/app'.$path.'/'.$filename.'.mp4'." -ss ".$start." -c copy -t ".$timecode." ".storage_path().'/app'.$path.'/'.$filename.'1.mp4');
+					shell_exec("ffmpeg -i ".storage_path().'/app'.$path.'/'.$filename.'.mp4'." -ss ".$start." -c copy -t ".$end." ".storage_path().'/app'.$path.'/'.$filename.'1.mp4');
+					shell_exec("ffmpeg -i ".storage_path().'/app'.$path.'/'.$filename.'1.mp4'." -profile:v baseline -b:v 1200k -maxrate 1200k -b:a 41k -start_number 0 -hls_time 20 -hls_list_size 0 -vf \"drawtext=fontfile=Microsoft YaHei Mono.ttf:text='lygj16888.com':y=line_h:x=W-w:fontsize=10:fontcolor=yellow:shadowx=1:shadowy=1\""." -codec:v libx264 -codec:a copy -y -f hls ".storage_path().'/app'.$path.'/'.$filename.'.m3u8');
+					$disk->makeDirectory($pathImg);
+					// // 在视频一半的地方截圖
+					unlink(storage_path().'/app'.$path.'/'.$filename.'.mp4');
+					unlink(storage_path().'/app'.$path.'/'.$filename.'1.mp4');
+					$video = $ffmpeg->open($file);
+					$frame = $video->frame(\FFMpeg\Coordinate\TimeCode::fromSeconds(intval($sec/2)));
+					$frame->save(storage_path().'/app'.$pathImg.'/'.$filename.'.jpg'); 
+				 
+					$post->cover_img =  '/upimage/'.$pathD  . '/' . $filename . '.jpg'; //截圖
+					$post->tb_img =  '/upimage/'.$pathD  . '/' . $filename . '.jpg'; //截圖
+					
+					// $video
+					// ->filters()
+					// ->watermark(public_path('/img/120.png'), 
+					// array(
+					// 	'position' => 'relative',
+					// 	'top' => 25,
+					// 	'right' => 50,
+					// ));
 				
 					// // $video->save(new \FFMpeg\Format\Video\X264() ,storage_path().'/app'.$path.'/'.$filename.'.m3u8');
 					// $format = new \FFMpeg\Format\Video\X264('libmp3lame', 'libx264');
 					// $format->on('progress', function ($video, $format, $percentage) {
 					// 	echo "$percentage % transcoded";
 					// });
-					// $video->filters()->watermark(public_path('/img/120.png'), array(
-					// 	'position' => 'absolute',
-					// 	'x' => 1180,
-					// 	'y' => 620,
-					// ));
-					// // //$video->setSegmentLength(4); // optional
 					// $video->save($format ,storage_path().'/app'.$path.'/'.$filename.'.m3u8');
+
+					// //$video->setSegmentLength(4); // optional
+					
+					
+				
+
 				} else {
 					return response()->json([
 					    'ret' => -1,
@@ -154,7 +169,8 @@ FFMpeg::fromDisk('local')
 		$post->created_time = date('Y-m-d h:i:s');
 		$post->hd = $request->hd;
 		$post->video_len = $timecode;
-		$post->cuttime = $cuttime;
+		$post->cuttime = 60;
+		$post->covered = 1;
 		
 		$sf = new StrFilter();
 		if($sf->chktext($request->content)) {
@@ -164,7 +180,7 @@ FFMpeg::fromDisk('local')
 		}
 		
 		$post->status = 1; //預設審查
-		$post->covered = 0;
+		$post->covered = 1;
 		$post->save();
 		
 		 
