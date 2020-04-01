@@ -1,19 +1,19 @@
 
 <!-- Nav -->
-<!--
+
 <div id="rs-topnav">
 	<ul>
-		@if(Session::has('USER')) 
-		<li ><a href="javascript:void(0);">哈友：{{ Session('USER.NICK_NAME')}}</a></li>
-		<li ><a class="logout" href="/member/logout">登出</a></li>
+		@if (Auth::check())
+		<li ><a href="javascript:void(0);">哈友：{{Auth::User()->nick_name}}</a></li>
+		<li ><a class="logout" href="/logout">登出</a></li>
 		@else
-		<li ><a href="/member/login">登入</a></li>
+		<li ><a href="/login">登入</a></li>
 		@endif
-		<li ><a href="/article/post">發佈</a></li>
-		<li ><a href="/help">幫助</a></li>			
+		<!-- <li ><a href="/article/post">發佈</a></li> -->
+		<!-- <li ><a href="/help">幫助</a></li>			 -->
 	</ul>	
 </div>
-<div id="rs-topnav">			
+<!--<div id="rs-topnav">			
 	<ul>
 		<li><a href="/">段子</a></li>			
 		<li><a href="/category/pic">圖片</a></li>			

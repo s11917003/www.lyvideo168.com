@@ -103,10 +103,15 @@ class LoginController extends Controller
     {
         //
     }
-    public function loggedIn(){
+    public function loggedIn(Request $request){
    
     $input = Request::all();
-    
+    if (Auth::viaRemember())
+    {
+        $user = Auth::guard('web')->User();
+        //    // $user->generateToken();
+        return Redirect::intended('/');
+    }
 
     $rules = ['email'=>'required|email',
               'password'=>'required'
@@ -114,13 +119,17 @@ class LoginController extends Controller
  
     $validator = Validator::make($input, $rules);
 
- 
+    $remember =false;
+    if( array_key_exists('remember',$input)){
+        $remember =true;
+    }
+   
+
     if ($validator->passes()) {  
-       
-        if (Auth::attempt(['email' => $input['email'],'password' => $input['password']])) {
+        if (Auth::attempt(['email' => $input['email'],'password' => $input['password']],$remember)) {
             $user = Auth::guard('web')->User();
         //    // $user->generateToken();
-            return Redirect::intended('homeIndex');
+            return Redirect::intended('/');
         }
 
         return Redirect::to('login')
@@ -137,16 +146,17 @@ class LoginController extends Controller
         return view('homeIndex');
     }
     public function logOut(){
-        $user = Auth::guard('api')->user();
+        // $user = Auth::guard('api')->user();
 
-        if ($user) {
-            $user->api_token = null;
-            $user->save();
-        }
+        // if ($user) {
+        //     $user->api_token = null;
+        //     $user->save();
+        // }
     
         Auth::logout();
-        return Redirect::to('login')  
-        ->with('success',  'log out');;
+       // header("Location:/");	
+         return Redirect::to('/')  ;
+        // ->with('success',  'log out');;
     }
     
     /**

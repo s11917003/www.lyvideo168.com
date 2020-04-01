@@ -10,6 +10,7 @@
 <link href="/css/bootstrap-4.0.0.css?r=@php echo uniqid(); @endphp" rel="stylesheet">
 <link href="https://vjs.zencdn.net/6.6.3/video-js.css" rel="stylesheet">
 <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 <style>
 	.video-js {
 		$primary-background-color: #fa0;
@@ -26,6 +27,7 @@
 <script type="text/javascript" src="/js/jquery.lazyload.js"></script>
 <script type="text/javascript" src="/js/jquery.visible.js"></script>
 <script src="/js/bootstrap-4.0.0.js"></script>
+
 <script>
 	$(function(){
 		$(".rs-contentword img").lazyload({
