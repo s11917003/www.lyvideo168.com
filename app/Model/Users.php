@@ -6,7 +6,7 @@ class Users extends Model
 {
     protected $table = 'users';
     protected $fillable = [];
-    protected $primaryKey = 'user_id';
+    protected $primaryKey = 'id';
     //public $timestamps = false;
 	protected $hidden = ['password'];
 
