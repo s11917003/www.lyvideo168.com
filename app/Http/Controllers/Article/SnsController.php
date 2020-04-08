@@ -59,7 +59,7 @@ class SnsController extends Controller {
 				}
 				
 				//新增點贊紀錄
-				$count = $this->digg($postid, $kind, $action, $user['USER_ID']);
+				$count = $this->digg($postid, $kind, $action, $user['ID']);
 				if($count == false) {
 					return response()->json([
 					    'ret' => -3,
@@ -79,7 +79,7 @@ class SnsController extends Controller {
 				}
 				
 				//新增評論點贊紀錄
-				$count = $this->rdigg($postid, $kind, $action, $user['USER_ID']);
+				$count = $this->rdigg($postid, $kind, $action, $user['ID']);
 				if($count == false) {
 					return response()->json([
 					    'ret' => -3,

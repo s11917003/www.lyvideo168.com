@@ -4,6 +4,22 @@
 	<div id="rs-maintop">	
 		<div class="rs-maintop-box">				
 			<div class="rs-logo"><a href="/"></a></div>
+			{{ isset($postArticle) ? $postArticle : false }} 
+			@if ($postArticle == false)
+			<div id="rs-topnav">
+				<ul class="loginBar">
+					@if (Auth::check())
+					<li ><a class="logout" href="/logout">登出</a></li>
+					<li ><a href="javascript:void(0);">哈友：{{Auth::User()->nick_name}}</a></li>
+					
+					@else
+					<li ><a href="/login">登入</a></li>
+					@endif
+					<!-- <li ><a href="/article/post">發佈</a></li> -->
+					<!-- <li ><a href="/help">幫助</a></li>			 -->
+				</ul>	
+			</div>
+			@endif
 		{{--	JuicyAds v3.0 -->
 			@if ($device =='ios' || $device == 'android')
 			<div class="rs-logo" style="width: 300px; height: 50px; margin: 0 auto; background-color: #cecece">				 

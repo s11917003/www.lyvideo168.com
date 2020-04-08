@@ -13,7 +13,7 @@
 
 
 // Route::get('/', function () {
-//     // return view('welcome');
+//     return view('welcome');
 // });
 
 
@@ -30,19 +30,30 @@ Route::get('/{id?}', 'Index\IndexController@index')->where('id', '[0-9]+');//走
 Route::get('/getmore/{id?}', 'Index\IndexController@loadmore');//影片 JSON 格式
 
 //文章內頁
-Route::get('/p/{id}', 'Index\IndexController@postview')->where('id', '[0-9]+'); //詳細文章
-Route::get('/category/{cat}/{id?}', 'Index\IndexController@category')->where('cat', '[A-Za-z]+')->where('id', '[0-9]+');
-Route::get('/tag/{id}/{page?}', 'Index\IndexController@tag')->where('id', '[0-9]+'); //分頁
+
   
 //測試頁
 Route::get('/pt/{id}', 'Index\IndexController@postviewtest')->where('id', '[0-9]+');
 Route::get('/pv/{id}', 'Index\IndexController@postviewapp')->where('id', '[0-9]+');
 
+// Route::group(['middleware' => 'web'], function () {
+   Route::auth();
 
-//發文頁面
-// Route::group(['middleware' => ['auth:web']], function () {
-			Route::get('/article/post', 'Index\IndexController@postpage');
+
+   Route::get('login', 'Auth\LoginController@index')->name('login');
+   Route::post('loginPost', 'Auth\LoginController@loggedIn');
+   Route::get('homeIndex','Auth\LoginController@home')->middleware('auth');
+   Route::get('logout', 'Auth\LoginController@logout');
+
+   Route::get('/p/{id}', 'Index\IndexController@postview')->where('id', '[0-9]+')->middleware('auth'); //詳細文章
+	Route::get('/category/{cat}/{id?}', 'Index\IndexController@category')->where('cat', '[A-Za-z]+')->where('id', '[0-9]+')->middleware('auth');
+	Route::get('/tag/{id}/{page?}', 'Index\IndexController@tag')->where('id', '[0-9]+')->middleware('auth');; //分頁
+
 // });
+//發文頁面
+Route::group(['middleware' => ['auth:web']], function () {
+			Route::get('/article/post', 'Index\IndexController@postpage');
+});
 //交換連結
 Route::get('/linkex', 'Service\PageController@linkexchange');
 
@@ -50,8 +61,8 @@ Route::get('/linkex', 'Service\PageController@linkexchange');
 //登入頁面
 
 // Route::group(['prefix' => 'member'], function($router) {
-	Route::get('/login', 'Member\MemberController@login')->name('login'); 		//登入
-	Route::get('/logout', 'Member\MemberController@logout');	//登出
+//	Route::get('/login', 'Member\MemberController@login')->name('login'); 		//登入
+//	Route::get('/logout', 'Member\MemberController@logout');	//登出
 // });
 
 
@@ -198,3 +209,7 @@ Route::get('/event/app/payment/paypal/finish', 'Event\PaymentController@finish')
 
 
 
+
+Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');

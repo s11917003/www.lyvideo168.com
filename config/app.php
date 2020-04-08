@@ -193,8 +193,10 @@ return [
 		//sitemap
 		//Roumen\Sitemap\SitemapServiceProvider::class,
         //Srmklive\PayPal\Providers\PayPalServiceProvider::class
+         
+
         
-        Pbmedia\LaravelFFMpeg\FFMpegServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
 		
     ],
 
@@ -247,7 +249,10 @@ return [
 		'Image' => Intervention\Image\Facades\Image::class,
 		'Analytics' => Ipunkt\LaravelAnalytics\AnalyticsFacade::class,
         'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
-        'FFMpeg' => Pbmedia\LaravelFFMpeg\FFMpegFacade::class
+        'View' => Illuminate\Support\Facades\View::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+        'Input' => Illuminate\Support\Facades\Input::class,
     ],
 
 ];

@@ -9,7 +9,7 @@ use App\Model\PostsCategory;
 use App\Model\PostsDetail;
 use App\Model\PostsTag;
 use App\Model\PostsTagRelationships;
-
+use Illuminate\Support\Facades\Auth;
 use App\Lib\User;
 use App\Lib\Utils;
 
@@ -207,7 +207,6 @@ class IndexController extends Controller {
 			'currentPage' => $currentPage,
 			'cate' => $cats->name_en
 		]);	
-		
 	}
 	
 	//標籤
@@ -247,7 +246,18 @@ class IndexController extends Controller {
 		/*
 	    $u = new User();
 	    $user = $u->checkLogin();
-	    */
+		*/
+	
+		 
+		if (Auth::check()) {
+			// 這個使用者已經登入...
+			if (Auth::User()->user_type != 1){
+				//不為管理者
+				return redirect('/');
+			}
+		} else {
+			return redirect('/');
+		}
 		
 		$tags = PostsTag::where('status', 1)->orderby('term_order', 'desc')->get();
 		
@@ -260,7 +270,8 @@ class IndexController extends Controller {
 		$device = Utils::chkdevice();
 		return view('app_rwd.index.postpagev2',[
 			'tags' => $tags,
-			'device' => $device
+			'device' => $device,
+			'postArticle' => true
 		]);
 	}
 
