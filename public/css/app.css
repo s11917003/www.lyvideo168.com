@@ -744,6 +744,7 @@ pre code {
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
+
 }
 
 .col {
@@ -1224,7 +1225,8 @@ pre code {
 
   .col-md-4 {
     flex: 0 0 33.3333333333%;
-    max-width: 33.3333333333%;
+    max-width: 50%;
+    text-align:center;
   }
 
   .col-md-5 {
@@ -1234,7 +1236,8 @@ pre code {
 
   .col-md-6 {
     flex: 0 0 50%;
-    max-width: 50%;
+    max-width: 70%;
+    margin: 0px auto;
   }
 
   .col-md-7 {
@@ -1245,6 +1248,7 @@ pre code {
   .col-md-8 {
     flex: 0 0 66.6666666667%;
     max-width: 66.6666666667%;
+    margin: 0px auto;
   }
 
   .col-md-9 {
@@ -2297,6 +2301,8 @@ textarea.form-control {
 
 .form-group {
   margin-bottom: 1rem;
+  width: 100%;
+  margin: 0px auto;
 }
 
 .form-text {
@@ -2695,8 +2701,8 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #3490dc;
+  color: #3490dc;
+  /* background-color: #3490dc; */
   border-color: #3490dc;
 }
 

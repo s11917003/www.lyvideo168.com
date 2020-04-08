@@ -36,7 +36,7 @@ Route::get('/getmore/{id?}', 'Index\IndexController@loadmore');//影片 JSON 格
 Route::get('/pt/{id}', 'Index\IndexController@postviewtest')->where('id', '[0-9]+');
 Route::get('/pv/{id}', 'Index\IndexController@postviewapp')->where('id', '[0-9]+');
 
-Route::group(['middleware' => 'web'], function () {
+// Route::group(['middleware' => 'web'], function () {
    Route::auth();
 
 
@@ -49,11 +49,11 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('/category/{cat}/{id?}', 'Index\IndexController@category')->where('cat', '[A-Za-z]+')->where('id', '[0-9]+')->middleware('auth');
 	Route::get('/tag/{id}/{page?}', 'Index\IndexController@tag')->where('id', '[0-9]+')->middleware('auth');; //分頁
 
-});
-//發文頁面
-// Route::group(['middleware' => ['auth:web']], function () {
-			Route::get('/article/post', 'Index\IndexController@postpage');
 // });
+//發文頁面
+Route::group(['middleware' => ['auth:web']], function () {
+			Route::get('/article/post', 'Index\IndexController@postpage');
+});
 //交換連結
 Route::get('/linkex', 'Service\PageController@linkexchange');
 

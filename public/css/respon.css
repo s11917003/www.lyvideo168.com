@@ -6,7 +6,7 @@
 	margin:0;
 	padding:0;
 	font-family: Arial, "微軟正黑體";
-	background-color:#fff;
+	background-color:#f8fafc;
 }
 /*div {
 	padding:10px;
@@ -35,12 +35,13 @@ a,a:hover {
 }
 .rs-maintop-box {
 	width:1000px;
-	height:120px;
+	/* height:120px; */
 	margin:0 auto;
 	text-align: center;
 }
 
 .rs-logo {
+	z-index: 0;
 	float: left;
 }
 
@@ -78,17 +79,37 @@ a,a:hover {
 }
 
 #rs-topnav {
+	z-index: 1;
 	overflow:hidden;
-	background-color:#113;
+	background-color:#000;
 }
 #rs-topnav ul {
 	width:980px;
 	margin:0 auto;
 	padding:0;
+	
 }
 #rs-topnav li {
 	list-style:none;
 	float:left;
+}
+
+#rs-topnav .loginBar {
+	list-style-type: none;
+	margin:0px;
+	padding-top: 75px;
+	float:right;
+	background-color:#000;
+}
+#rs-topnav .loginBar li {
+	margin:7px;
+	padding:5px;
+	float:right;
+	/* width:250px;		  */
+}
+#rs-topnav .loginBar li a{
+	float:right; 
+	padding: 12px 14px;
 }
 #rs-topnav li a {
 	color:#aaa;
@@ -626,18 +647,21 @@ a,a:hover {
 
 /*** 登入頁 開始 ***/
 .rs-post-box {
-	width:626px;
+	width:80%;
 	overflow:hidden;
 	margin:10px auto;
-	background-color:#fff;
-	padding:20px 40px 20px 40px;
+	background-color:#f8fafc;
+	padding:5px 40px 20px 40px;
 	border-radius:6px;
 }
 .rs-fastlogin {
-	width:290px;
+	width:100%;
 	height:400px;
 	margin:0 auto;
 	overflow: hidden;
+}
+.rs-fastlogin h1{
+	padding-bottom: 10px;
 }
 .rs-login-btn-fb a {
 	float:left;
@@ -758,7 +782,7 @@ a,a:hover {
 .tab {
     overflow: hidden;
     border: 0px solid #ccc;
-    background-color: #fff;
+    background-color:#f8fafc;
 	width:415px;
 	padding:0;
 	margin:auto;
@@ -802,7 +826,7 @@ a,a:hover {
     padding: 6px 12px;
     border: 0px solid #ccc;
     border-top: none;
-	background-color:#fff;
+	background-color:#f8fafc;
 	overflow:hidden;
 }
 
@@ -913,12 +937,12 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 	
 	.rs-maintop-box {
 		width:100%;
-		height:80px;
+		height:70px;
 		overflow:hidden;
 	}
 	
 	.rs-logo {
-		float: none
+		float: left
 	}
 	
 	.rs-logo a {
@@ -939,6 +963,24 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 	}
 	#rs-topnav li {
 		list-style:none;
+	}
+	#rs-topnav .loginBar {
+		list-style-type: none;
+		margin:0px;
+		padding: 15px 0px 0px 0px;
+		float:right;
+		background-color:#000;
+	}
+	#rs-topnav .loginBar li {
+		margin:7px;
+		padding:5px;
+		float:right;
+		/* width:250px;		  */
+	}
+	#rs-topnav .loginBar li a{
+		float:right; 
+		padding: 12px 14px;
+		/* font-size: 10px; */
 	}
 	#rs-topnav li a {
 		color:#aaa;
@@ -1186,23 +1228,27 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 		width:100%;
 		margin:0 auto;
 	}
+
+	#ms-optgroup {
+		width:100%;
+	}
 	
 	.rs-maintop-box {
 		width:100%;
-		height:120px;
+		/* height:120px; */
 		overflow:hidden;
 	}
 
 	.rs-logo {
-		float: none
+		float: left;
 	}
 	
 	.rs-logo a {
-		width:250px;
+		width:200px;
 		height:60px;
 		background:url(/img/logo.png) no-repeat top center;
 		background-size:110px;
-		margin:7px auto;
+		margin:12px auto;
 		padding:0;
 	}
 	
@@ -1216,6 +1262,24 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 	}
 	#rs-topnav li {
 		list-style:none;
+	}
+	#rs-topnav .loginBar {
+		list-style-type: none;
+		margin:0px;
+		padding: 15px 0px 0px 0px;
+		float:right;
+		background-color:#000;
+	}
+	#rs-topnav .loginBar li {
+		margin:7px;
+		padding:5px;
+		float:right;
+		/* width:250px;		  */
+	}
+	#rs-topnav .loginBar li a{
+		float:right; 
+		padding: 12px 14px;
+		font-size: 10px;
 	}
 	#rs-topnav li a {
 		color:#aaa;
@@ -1525,8 +1589,8 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 	width:96%;
 	overflow:hidden;
 	margin:10px auto;
-	background-color:#fff;
-	padding:20px;
+	background-color:#f8fafc;
+	/* padding:20px; */
 	border-radius:6px;
 }
 .rs-fastlogin {
@@ -1590,7 +1654,7 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 .tab {
     overflow: hidden;
     border: 0px solid #ccc;
-    background-color: #fff;
+    background-color:#f8fafc;
     width: 98%;
     padding: 0 0 0 10px;
     margin: auto;
@@ -1635,7 +1699,7 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
     padding: 6px 12px;
     border: 0px solid #ccc;
     border-top: none;
-	background-color:#fff;
+	background-color:#f8fafc;
 	overflow:hidden;
 }
 
