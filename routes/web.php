@@ -37,17 +37,18 @@ Route::get('/pt/{id}', 'Index\IndexController@postviewtest')->where('id', '[0-9]
 Route::get('/pv/{id}', 'Index\IndexController@postviewapp')->where('id', '[0-9]+');
 
 // Route::group(['middleware' => 'web'], function () {
-   Route::auth();
+   	Route::auth();
 
 
-   Route::get('login', 'Auth\LoginController@index')->name('login');
-   Route::post('loginPost', 'Auth\LoginController@loggedIn');
-   Route::get('homeIndex','Auth\LoginController@home')->middleware('auth');
-   Route::get('logout', 'Auth\LoginController@logout');
+	Route::get('login', 'Auth\LoginController@index')->name('login');
+	Route::post('loginPost', 'Auth\LoginController@loggedIn');
+	Route::get('homeIndex','Auth\LoginController@home')->middleware('auth');
+	Route::get('logout', 'Auth\LoginController@logout');
 
-   Route::get('/p/{id}', 'Index\IndexController@postview')->where('id', '[0-9]+')->middleware('auth'); //詳細文章
-	Route::get('/category/{cat}/{id?}', 'Index\IndexController@category')->where('cat', '[A-Za-z]+')->where('id', '[0-9]+')->middleware('auth');
-	Route::get('/tag/{id}/{page?}', 'Index\IndexController@tag')->where('id', '[0-9]+')->middleware('auth');; //分頁
+	Route::get('/p/{id}', 'Index\IndexController@postview')->where('id', '[0-9]+');
+	Route::get('/category/{cat}/{id?}', 'Index\IndexController@category')->where('cat', '[A-Za-z]+')->where('id', '[0-9]+'); 
+	Route::get('/tag/{id}/{page?}', 'Index\IndexController@tag')->where('id', '[0-9]+');
+
 
 // });
 //發文頁面
@@ -69,18 +70,18 @@ Route::get('/linkex', 'Service\PageController@linkexchange');
 
 //openid
 
-Route::group(['prefix' => 'openid'], function ($router) {
-	Route::get('/facebook/login', 'Member\FbOpenidController@redirectToProvider');
-	Route::get('/facebook/callback', 'Member\FbOpenidController@handleProviderCallback');
-	Route::get('/google/login', 'Member\GgOpenidController@redirectToProvider');
-	Route::get('/google/callback', 'Member\GgOpenidController@handleProviderCallback');	
-	Route::get('/twitter/login', 'Member\TwitterOpenidController@redirectToProvider');
-	Route::get('/twitter/callback', 'Member\TwitterOpenidController@handleProviderCallback');
-	Route::get('/ig/login', 'Member\IgOpenidController@redirectToProvider');
-	Route::get('/ig/callback', 'Member\IgOpenidController@handleProviderCallback');
-	Route::get('/line/login', 'Member\LineOpenidController@redirectToProvider');
-	Route::get('/line/callback', 'Member\LineOpenidController@handleProviderCallback');	
-});
+// Route::group(['prefix' => 'openid'], function ($router) {
+// 	Route::get('/facebook/login', 'Member\FbOpenidController@redirectToProvider');
+// 	Route::get('/facebook/callback', 'Member\FbOpenidController@handleProviderCallback');
+// 	Route::get('/google/login', 'Member\GgOpenidController@redirectToProvider');
+// 	Route::get('/google/callback', 'Member\GgOpenidController@handleProviderCallback');	
+// 	Route::get('/twitter/login', 'Member\TwitterOpenidController@redirectToProvider');
+// 	Route::get('/twitter/callback', 'Member\TwitterOpenidController@handleProviderCallback');
+// 	Route::get('/ig/login', 'Member\IgOpenidController@redirectToProvider');
+// 	Route::get('/ig/callback', 'Member\IgOpenidController@handleProviderCallback');
+// 	Route::get('/line/login', 'Member\LineOpenidController@redirectToProvider');
+// 	Route::get('/line/callback', 'Member\LineOpenidController@handleProviderCallback');	
+// });
 
 
 //sns ckick

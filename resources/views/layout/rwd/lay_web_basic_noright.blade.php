@@ -59,7 +59,7 @@
 <script type="text/javascript" src="https://js.juicyads.com/jp.php?c=3474y213t244u4q2q28443b494&u=http%3A%2F%2Fwww.juicyads.rocks"></script>
 <!-- JuicyAds PopUnders v3 End -->
 	<!-- HEADER 開始 -->
-	@include('layout.rwd.lay_web_header')
+	@include('layout.rwd.lay_web_header',['postArticle'=>false]))
 	<!-- HEADER 結束 -->
 	<!-- NAV選項區域 開始 -->
 	@include('layout.rwd.lay_web_nav')

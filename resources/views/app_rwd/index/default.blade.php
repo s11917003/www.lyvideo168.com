@@ -14,28 +14,47 @@ No.1老湿机休息站，带你升天带你飞，频繁更新片片精彩！大�
 @stop
 @section('maincontent')
 	<!-- Leftside Article -->
+ 
 	<div id="rs-content-left">
 		<!-- @php ($i = 1) -->
+	 
+		<div class="container">
 		@foreach ($posts as $post)
-		<div id="rs-content-left-box" data-id='{{$post->id}}' data-show=false>
-			<div class="rs-contentpics" style="background: url({{$post->userInfo->avatar}}) no-repeat top center; background-size:50px"><a href="/p/{{$post->id}}"></a></div>
-			<div class="rs-contentname">{{$post->userInfo->nick_name}}<br>{{ Carbon\Carbon::parse($post->created_time)->format('m-d H:i:s') }}</div>
-			<div class="rs-contentword">
-				<h2><a href="/p/{{$post->id}}">{!! $post->title !!}</a></h2>
-				<p style="position: relative"><a href="/p/{{$post->id}}">
-					<img src="/img/if_play_alt_118620.png"  style="position: absolute; top:40%; left:45%; z-index: 999; width: 50px;">
-					<img src="{{ asset('storage'.$post->cover_img) }}" alt="{{$post->title}}" style="min-width: 320px; max-width: 640px;">
-					</a>
-				</p>
+		@if ($loop->index %  2 ==0)
+			<div class="row">
+		@endif
+				<div id="blogVideo" class="blogVideo col">
+					<div id="rs-content-left-box" data-id='{{$post->id}}' data-show=false>
+						<div class="rs-contentpics" style="background: url({{$post->userInfo->avatar}}) no-repeat top center; background-size:50px"><a href="/p/{{$post->id}}"></a></div>
+						<div class="rs-contentname">{{$post->userInfo->nick_name}}<br>{{ Carbon\Carbon::parse($post->created_time)->format('m-d H:i:s') }}</div>
+						<div class="rs-contentword">
+							<h2><a href="/p/{{$post->id}}">{!! $post->title !!}</a></h2>
+							<p style="position: relative"><a href="/p/{{$post->id}}">
+								<img src="/img/if_play_alt_118620.png"  style="position: absolute; top:40%; left:45%; z-index: 999; width: 50px;">
+								<img src="{{ asset('storage'.$post->cover_img) }}" alt="{{$post->title}}" style="min-width: 320px; max-width: 640px; width:100%">
+								</a>
+							</p>
+						</div>
+						<div id="rs-digg-box2" style="float: left; width: 100%; padding-top: 10px">
+							@if ($post->tag)
+								@foreach ($post->tag as $tag)
+								<p><a href="/tag/{{$tag->tagname->id}}" target="_blank" class='rs-digg-box2-tag'>{{$tag->tagname->name}}</a></p>
+								@endforeach
+							@endif
+						</div>		
+					</div>
+				</div>
+		@if ( $loop->index %  2 ==1)
 			</div>
-			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top: 10px">
-				@if ($post->tag)
-					@foreach ($post->tag as $tag)
-					<p><a href="/tag/{{$tag->tagname->id}}" target="_blank" class='rs-digg-box2-tag'>{{$tag->tagname->name}}</a></p>
-					@endforeach
-				@endif
-			</div>		
+		@endif
+		@endforeach
 		</div>
+
+		
+		@foreach ($posts as $post)
+		 
+		  
+		
 		
 		<!-- JuicyAds v3.0
 		@if($i%2 == 0)

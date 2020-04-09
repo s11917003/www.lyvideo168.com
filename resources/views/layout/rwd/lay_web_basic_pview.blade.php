@@ -62,7 +62,7 @@
 -->
 <!-- JuicyAds PopUnders v3 End -->		
 	<!-- HEADER 開始 -->
-	@include('layout.rwd.lay_web_header')
+	@include('layout.rwd.lay_web_header',['postArticle'=>false])
 	<!-- HEADER 結束 -->
 	<!-- NAV選項區域 開始 -->
 	@include('layout.rwd.lay_web_nav')
