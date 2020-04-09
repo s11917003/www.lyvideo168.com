@@ -67,9 +67,9 @@ No.1老濕機休息站，帶你升天帶你飛，每天更新,片片精彩！
 			
 	<!-- RightSideBox -->
 	<!-- Content 右側 結束 -->
-	{{--  <script>
+	  <script>
 		document.getElementById("page").innerHTML = pageInit({{$currentPage}}, {{$lastPage}} ,"/tag/{{$post->post_tag_id}}/");
 		nick = ''			
 
-	</script>  --}}
+	</script> 
 @stop

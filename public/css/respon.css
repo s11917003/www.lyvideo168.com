@@ -137,6 +137,9 @@ a,a:hover {
 	min-height:500px;*/
 	
 }
+#blogVideo {
+	max-width:50%;
+}
 #rs-content-left-box {
 	overflow:hidden;
 	background-color:#fff;
@@ -930,6 +933,10 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 
 /* Tablet view */
 @media screen and (max-width:769px) {
+	#blogVideo {
+		flex-basis:100%;
+		max-width:100%;
+	}
 	#rs-maintop {
 		width:100%;
 		margin:0 auto;
@@ -1223,7 +1230,10 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 
 /* Mobile view */
 @media screen and (max-width:480px) {
-	
+	#blogVideo {
+		flex-basis:100%;
+		max-width:100%;
+	}
 	#rs-maintop {
 		width:100%;
 		margin:0 auto;

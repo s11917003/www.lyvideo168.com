@@ -51,7 +51,7 @@
 	}(document, 'script', 'facebook-jssdk'));
 	</script>
 	<!-- HEADER 開始 -->
-	@include('layout.web.lay_web_header')
+	@include('layout.web.lay_web_header',['postArticle'=>false])
 	<!-- HEADER 結束 -->
 	<!-- NAV選項區域 開始 -->
 	@include('layout.web.lay_web_nav')
