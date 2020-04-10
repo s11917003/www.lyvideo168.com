@@ -48,7 +48,7 @@ Route::get('/pv/{id}', 'Index\IndexController@postviewapp')->where('id', '[0-9]+
 	Route::get('/p/{id}', 'Index\IndexController@postview')->where('id', '[0-9]+');
 	Route::get('/category/{cat}/{id?}', 'Index\IndexController@category')->where('cat', '[A-Za-z]+')->where('id', '[0-9]+'); 
 	Route::get('/tag/{id}/{page?}', 'Index\IndexController@tag')->where('id', '[0-9]+');
-
+	Route::get('/tag/hot/{page?}', 'Index\IndexController@hot');
 
 // });
 //發文頁面

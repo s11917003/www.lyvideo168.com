@@ -87,7 +87,7 @@
 				-->
 				
 				@foreach ($relate as $re)
-				<div style="float: left;padding: 10px; width: 100%; height: 250px; margin: 5px; background: #f1f1f1; overflow: hidden; text-align: center">
+				<div style="float: left;padding: 10px; width: 100%; height: 250px; margin: 5px;  overflow: hidden; text-align: center">
 					<a href="/p/{{$re->post_id}}">
 					<img src="{{ asset('storage'.$re->article['tb_img']) }}"  style="width: 100%;">
 					<div style="font-size: 8; padding-top: 5px;">{{$re->article['title']}}</div>
@@ -116,7 +116,7 @@
 			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px; height: 430px;">
 				<h5>推薦影片</h5>
 				@foreach ($relate as $re)
-				<div style="float: left;padding: 10px; width: 230px; height: 185px; margin: 5px; background: #f1f1f1; overflow: hidden">
+				<div style="float: left;padding: 10px; width: 230px; height: 185px; margin: 5px; overflow: hidden">
 					<a href="/p/{{$re->post_id}}">
 					
 					<img src="{{ asset('storage'.$re->article['tb_img']) }}"  style="width: 210px; height: 80%;">
