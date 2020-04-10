@@ -208,7 +208,46 @@ class IndexController extends Controller {
 			'cate' => $cats->name_en
 		]);	
 	}
-	
+	//熱門
+	public function hot($page = 1) {
+		$article = $this->show_api(1);
+	 
+		
+		// //add pv;
+		// PostsDetail::find($id)->increment('count_view');
+		   	 		
+		// //suggest post
+		// $tags = PostsTagRelationships::where('post_id', $id)->get();
+		// //var_dump($tags);
+		// $tagarr = [];
+		// foreach ($tags as $tag) {
+		// 	$tagarr[] = $tag['post_tag_id'];
+
+		// }
+		
+		//$relate = \DB::table('posts_tag_relationships')->whereIn('post_tag_id', $tagarr)->groupBy('post_id')->inRandomOrder()->limit(6)->get();
+		// $relate = PostsTagRelationships::with('article')->where('post_id','!=', $id)->whereIn('post_tag_id', $tagarr)->where('status',1)->groupBy('post_id')->inRandomOrder()->limit(14)->get();	 		
+		
+		$posts = PostsDetail::with('hot')->orderBy('count_view', 'desc')->Paginate(12, null, 1, $page);
+		$lastPage = $posts->lastPage();
+		$currentPage = $posts->currentPage();
+		 
+		if($posts) {
+			$device = Utils::chkdevice();
+			return view('app_rwd.index.default_hot',[
+				'post'=> $article,
+				'lastPage' => $lastPage,
+				'currentPage' => $currentPage,
+				'device' => $device,
+				'posts'=> $posts,
+				'title'=> '热门影片',
+			]);
+		} else {
+			//沒有文章跳轉
+			echo '沒有文章';
+			header("Location:/"); 
+		}
+	}
 	//標籤
 	public function tag($tag, $page = 1) {
 		
