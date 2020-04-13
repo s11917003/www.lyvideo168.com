@@ -1,75 +1,75 @@
-@extends('layout.rwd.lay_web_basic')
+@extends('layout.rwd.lay_web_basic_pview')
 @section('title')
-{{$tag}}|No.1老濕機休息站，帶你升天帶你飛，每天更新,片片精彩！
+@php echo mb_substr(strip_tags($title) , 0 , 25, 'UTF-8'); @endphp
 @stop
 @section('des')
-No.1老濕機休息站，帶你升天帶你飛，每天更新,片片精彩！
+{{strip_tags($title)}}
 @stop
 @section('topscript')
-<script>
-	var postnick = '';
-	document.write(crc);
+<meta itemprop="name" content="老濕機">
+<meta itemprop="description" content="{{strip_tags($title)}}">
 
+<script>
+	// var postid = '{{$post->id}}';
+	// var postnick = '{{$post->userInfo->nick_name}}';
+	// var nick = postnick
 </script>
 @stop
 @section('maincontent')
-	<!-- Leftside Article -->
-
-
-	<div id="rs-content-left">
-		@php ($i = 1)
-		@foreach ($posts as $post)
-
-		<div id="rs-content-left-box" data-id='{{$post->article['id']}}' data-show=false>
-			<div class="rs-contentpics" style="background: url({{$post->article['userInfo']['avatar']}}) no-repeat top center; background-size:50px"><a href="/p/{{$post->article['id']}}"></a></div>
-			<div class="rs-contentname">{{$post->article['userInfo']['nick_name']}}<br>{{ Carbon\Carbon::parse($post->article['created_time'])->format('m-d H:i:s') }}</div>
-			<div class="rs-contentword">
-				<h2><a href="/p/{{$post->article['id']}}">{!! $post->article['title'] !!}</a></h2>
-				<p style="position: relative"><a href="/p/{{$post->article['id']}}">
-					<img src="/img/if_play_alt_118620.png"  style="position: absolute; top:40%; left:45%; z-index: 999; width: 50px;">
-					<img src="{{ asset('storage'.$post->article->cover_img) }}"       alt="{{$post->article['title']}}" style="min-width: 320px; max-width: 640px;">
+			@if ($device == 'ios' || $device == 'android')
+			<div id="rs-digg-box2"  style="float: left; width: 100%; padding-top:10px; height: 100%;">
+				<h5>热门影片</h5>
+	
+				@foreach ($posts as $post)
+				 <div style="float: left;padding: 10px; width: 100%; height: 260px; margin: 5px;  overflow: hidden; text-align: center">
+					<a href="/p/{{$post->article['id']}}">
+					<img src="{{ asset('storage'.$post->article['tb_img']) }}" style="width: 100%; height: 85%;">
+					<div style="font-size: 8; padding-top: 0px; inline-block; width: 100%; overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{$post->article['title']}}</div>
+					<div style="font-size: 8px; padding-top: 0px;">{{$post->hot['count_view']}}次观看</div>
 					</a>
-				</p>
-			</div>			
-			<div id="rs-digg-box2" style="float: left; width: 100%">
-				@if ($tag)
-					@foreach ($post->article['tag'] as $tt)
-					<p><a href="/tag/{{$tt->tagname->id}}" target="_blank" class="rs-digg-box2-tag">{{$tt->tagname->name}}</a></p>
+				</div> 	
+				@endforeach			
+				<div style="clear: both"></div>
+			</div>
+			@else
+			<div id="rs-digg-box2"  class="justify-content-center"  style="block-size:unset; float: left; width: 100%; padding-top:10px; height: auto;">
+				<div  class="justify-content-center" style="width: auto">
+					<h5>热门影片</h5>
+					@foreach ($posts as $post)
+					<div id="rs-article-box" style="block-size:unset; float:left;padding: 10px;  margin: 5px; overflow: hidden">
+						<a href="/p/{{$post->article['id']}}">
+							<img id="rs-article-box-img" src="{{ asset('storage'.$post->article['tb_img']) }}"  >
+							<label style="padding: 5px 0px 0px 0px;Display: inline-block;  overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{$post->article['title']}}</label>
+							<div style="font-size: 8px; padding-top: 0px;">{{$post->hot['count_view']}}次观看</div>
+						</a>
+					</div>
 					@endforeach
-				@endif
-			</div>					
-		</div>
-		@if($i%2 == 0)
-			<div id="rs-content-left-box">
-			@if ($device == 'android' || $device == 'ios')
-			<div id="rs-digg-box2" style="float: left; width: 100%; height: 120px; text-align:center">
-				<!-- JuicyAds v3.0 -->
-				<script type="text/javascript" data-cfasync="false" async src="https://adserver.juicyads.com/js/jads.js"></script>
-				<ins id="714569" data-width="300" data-height="112"></ins>
-				<script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':714569});</script>
-				<!--JuicyAds END-->
+					<div style="clear: both"></div>
+				</div> 
 			</div>
-			@else		
-			<div id="rs-digg-box2" style="float: left; width: 100%; height: 75px; text-align:center">
-				<!-- JuicyAds v3.0 -->
-				<script type="text/javascript" data-cfasync="false" async src="https://adserver.juicyads.com/js/jads.js"></script>
-				<ins id="714570" data-width="468" data-height="72"></ins>
-				<script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':714570});</script>
-				<!--JuicyAds END-->
-				</div>
-			@endif
-			</div>
-		@endif
-		@php ($i++)
-		@endforeach
-		<div class="rs-contentbox1" id="page"></div>
+			@endif					
+		</div>	
+		<div class="rs-contentbox1" id="page"></div>	
 	</div>
-			
+	<!-- Content 左側 結束 -->
+	<!-- Content 右側 開始 -->
 	<!-- RightSideBox -->
-	<!-- Content 右側 結束 -->
-	  <script>
-		document.getElementById("page").innerHTML = pageInit({{$currentPage}}, {{$lastPage}} ,"/tag/{{$post->post_tag_id}}/");
-		nick = ''			
-
-	</script> 
+	<!-- Content 右側 結束 -->	
+@stop
+@section('footscript')
+<script src="https://apis.google.com/js/platform.js" async defer>
+  {lang: 'zh-TW'}
+</script>
+<script>
+	$('#closead').on('click',function(){
+		//alert('close')
+		$('#videocoverad').hide()
+		
+	})
+</script>
+<script src='/js/comm.js?r=@php echo uniqid(); @endphp' async=""></script>
+<script>
+	document.getElementById("page").innerHTML = pageInit({{$currentPage}}, {{$lastPage}} ,"/tag/{{$tag}}/");
+	nick = ''			
+</script>
 @stop

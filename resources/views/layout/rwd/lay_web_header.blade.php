@@ -6,7 +6,7 @@
 			<div class="rs-logo"><a href="/"></a></div>
 			{{ isset($postArticle) ? $postArticle : false }} 
 			@if ($postArticle == false)
-			<div id="rs-topnav">
+			<div id="rs-loginBar">
 				<ul class="loginBar">
 					@if (Auth::check())
 					<li ><a class="logout" href="/logout">登出</a></li>

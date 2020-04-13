@@ -1,20 +1,26 @@
-@extends('layouts.app')
+@extends('layout.rwd.lay_web_basic_norightnav')
+@section('title')
+老濕機登入
+@stop
+@section('des')
+老濕機上車囉
 
-@section('content')
+@stop
+
+@section('maincontent')
+<h1 align="center">注册</h1>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
-
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+                    <form class="form-horizontal form-register" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
+                            <h7 for="name" class="control-label">Name</h7>
 
-                            <div class="col-md-6">
+                            <div class="">
                                 <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
 
                                 @if ($errors->has('name'))
@@ -26,9 +32,9 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                            <h7 for="email" class="control-label">E-Mail Address</h7>
 
-                            <div class="col-md-6">
+                            <div class="">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
 
                                 @if ($errors->has('email'))
@@ -40,9 +46,9 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
+                            <h7 for="password" class="control-label">Password</h7>
 
-                            <div class="col-md-6">
+                            <div class="">
                                 <input id="password" type="password" class="form-control" name="password" required>
 
                                 @if ($errors->has('password'))
@@ -54,18 +60,20 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+                            <h7 for="password-confirm" class="control-label">Confirm Password</h7>
 
-                            <div class="col-md-6">
+                            <div class="">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
-
+                        <div class="form-group">
+                         
+                        </div>
+                        <hr style="opacity:0;" size="8px" align="center" width="100%">
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Register
-                                </button>
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">  Register</button>
+                               
                             </div>
                         </div>
                     </form>
@@ -74,4 +82,4 @@
         </div>
     </div>
 </div>
-@endsection
+@stop

@@ -55,6 +55,10 @@ class PostsTagRelationships extends Modeli
         return $this->hasOne('App\Model\PostsArticle','id', 'post_id')->with('detail')->with('tag')->with('commentsGod')->with('commentsNew')->with('userInfo')->where('status', 1)->where('covered', 1);
     }
 
+    public function hot() {
+        return $this->hasOne('App\Model\PostsDetail','id', 'post_id');
+    }
+
     public function articleDetail() {
         return $this->hasOne('App\Model\PostsDetail','id', 'post_id');
     }

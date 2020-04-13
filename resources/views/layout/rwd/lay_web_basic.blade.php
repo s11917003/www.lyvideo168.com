@@ -34,11 +34,19 @@
 		$(".rs-contentword img").lazyload({
 			load : cccccount
 		});
+		$('[data-toggle="offcanvas"]').on('click', function () {
+    		$('.offcanvas-collapse').toggleClass('open')
+		  })
+		$('[data-toggle="dropdown"]').on('click', function () {
+    		$('.dropdown-menu').toggleClass('show')
+  	   	})
 	});
 	
 	function cccccount() {
 		//console.log('+++')
 	}
+
+	
 </script>
 {!! Analytics::render() !!}
 

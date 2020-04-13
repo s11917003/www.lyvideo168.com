@@ -32,6 +32,9 @@ a,a:hover {
 #rs-maintop {
 	overflow:hidden;
 	background-color:#000000;
+	position: fixed;
+	width:100%;
+	top:0;
 }
 .rs-maintop-box {
 	width:1000px;
@@ -40,6 +43,85 @@ a,a:hover {
 	text-align: center;
 }
 
+.form-signin .form-register{
+	width: 100%;
+	max-width: 330px;
+	padding: 15px;
+	margin: 0 auto;
+  }
+  .form-signin .checkbox {
+	font-weight: 400;
+  }
+  .form-signin .form-control {
+	position: relative;
+	box-sizing: border-box;
+	height: auto;
+	padding: 10px;
+	font-size: 16px;
+  }
+  .form-signin .form-control:focus {
+	z-index: 2;
+  }
+  .form-signin input[type="email"] {
+	margin-bottom: -1px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+  }
+  .form-signin input[type="password"] {
+	margin-bottom: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+  }
+  .nav-scroller {
+	position: relative;
+	z-index: 2;
+	height: 2.75rem;
+	overflow-y: hidden;
+  }
+  
+  .nav-scroller .nav {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: nowrap;
+	flex-wrap: nowrap;
+	padding-bottom: 1rem;
+	margin-top: -1px;
+	overflow-x: auto;
+	color: rgba(255, 255, 255, .75);
+	text-align: center;
+	white-space: nowrap;
+	-webkit-overflow-scrolling: touch;
+  }
+  
+  .nav-underline .nav-link {
+	padding-top: .75rem;
+	padding-bottom: .75rem;
+	font-size: .875rem;
+	color: var(--secondary);
+  }
+  
+  .nav-underline .nav-link:hover {
+	color: var(--blue);
+  }
+  
+  .nav-underline .active {
+	font-weight: 500;
+	color: var(--gray-dark);
+  }
+  
+  .text-white-50 { color: rgba(255, 255, 255, .5); }
+  
+  .bg-purple { background-color: var(--purple); }
+  
+  .border-bottom { border-bottom: 1px solid #e5e5e5; }
+  
+  .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+  
+  .lh-100 { line-height: 1; }
+  .lh-125 { line-height: 1.25; }
+  .lh-150 { line-height: 1.5; }
+  
 .rs-logo {
 	z-index: 0;
 	float: left;
@@ -90,42 +172,54 @@ a,a:hover {
 	margin-right:16px;
 }
 
-#rs-topnav {
+#rs-topnav  {
 	z-index: 1;
 	overflow:hidden;
 	background-color:#000;
+	position: fixed;
+		top: 150px;
+		width: 100%;
 }
-#rs-topnav ul {
+#rs-loginBar {
+	z-index: 1;
+	overflow:hidden;
+	background-color:#000;
+	position: fixed;
+	top: 12px;
+	width: 50%;
+	right:30px;
+}
+#rs-topnav ul , #rs-loginBar ul{
 	width:980px;
 	margin:0 auto;
 	padding:0;
 	
 }
-#rs-topnav li {
+#rs-topnav li , #rs-loginBar li {
 	list-style:none;
 	float:left;
 }
 
-#rs-topnav .loginBar {
+#rs-loginBar .loginBar {
 	list-style-type: none;
 	margin:0px;
 	padding-top: 75px;
 	float:right;
 	background-color:#000;
 }
-#rs-topnav .loginBar li {
+#rs-loginBar .loginBar li {
 	margin:7px;
 	padding:5px;
 	float:right;
 	/* width:250px;		  */
 }
-#rs-topnav .loginBar li a{
+#rs-loginBar .loginBar li a{
 	float:right; 
 	padding: 12px 14px;
 }
 #rs-topnav li a {
 	color:#aaa;
-	padding:14px 26px;
+	/* //padding:14px 26px; */
 	display:block;
 }
 #rs-topnav li a:hover {
@@ -550,8 +644,12 @@ a,a:hover {
 		-webkit-flex-wrap: wrap;
 		-ms-flex-wrap: wrap;
 		flex-wrap: wrap;
-		width: calc(100% + 3rem);
+		 
 		margin: -1.5rem 0 2rem -1.5rem;
+		width: 100%;
+    	max-width: 330px;
+    	padding: 15px;
+    	margin: 0 auto;
 	}
 
 		form > .field {
@@ -727,7 +825,7 @@ a,a:hover {
 	overflow: hidden;
 	margin-top:1px;
 	padding:10px 0 0 0;
-	/*text-align:center;*/
+	text-align:center;
 }
 
 .rs-contentpics1 {
@@ -845,7 +943,7 @@ a,a:hover {
 	overflow:hidden;
 }
 
-input[type=text],[type=password], select {
+input[type=text],[type=password],[type=email],[type=password], select {
 	width:99%;
 	padding:12px 20px;
 	margin:8px 0;
@@ -945,6 +1043,25 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 
 /* Tablet view */
 @media screen and (max-width:769px) {
+	.offcanvas-collapse {
+		position: fixed;
+		top: 118px; /* Height of navbar */
+		bottom: 0;
+		width: 100%;
+		padding-right: 1rem;
+		padding-left: 1rem;
+		overflow-y: auto;
+		background-color: var(--gray-dark);
+		transition: -webkit-transform .3s ease-in-out;
+		transition: transform .3s ease-in-out;
+		transition: transform .3s ease-in-out, -webkit-transform .3s ease-in-out;
+		-webkit-transform: translateX(100%);
+		transform: translateX(100%);
+	  }
+	  .offcanvas-collapse.open {
+		-webkit-transform: translateX(-1rem);
+		transform: translateX(-1rem); /* Account for horizontal padding on navbar */
+	  }
 	#rs-article-box {
 		width: 230px; height: 240px;
 	}
@@ -965,6 +1082,7 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 	#rs-maintop {
 		width:100%;
 		margin:0 auto;
+		position: fixed;
 	}
 	
 	.rs-maintop-box {
@@ -980,7 +1098,7 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 	.rs-logo a {
 		width:250px;
 		height:80px;
-		background:url(/img/logo.png) no-repeat top center;
+		background:url(/img/logo.png) no-repeat top left;
 		background-size:150px;
 		margin:0 auto;
 		padding:0;
@@ -989,34 +1107,45 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 	#rs-topnav {
 		background-color:#113;
 		margin:0 auto;
+		position: fixed;
+		top: 70px;
+	}
+	#rs-loginBar {
+		background-color:#113;
+		margin:0 auto;
+		position: fixed;
+		top: 0px;
+		width: 50%;
+		right: 0px;
 	}
 	#rs-topnav ul {		
 		padding:0;
+		width: 100%;
 	}
 	#rs-topnav li {
 		list-style:none;
 	}
-	#rs-topnav .loginBar {
+	#rs-loginBar .loginBar {
 		list-style-type: none;
 		margin:0px;
 		padding: 15px 0px 0px 0px;
 		float:right;
 		background-color:#000;
 	}
-	#rs-topnav .loginBar li {
+	#rs-loginBar.loginBar li {
 		margin:7px;
 		padding:5px;
 		float:right;
 		/* width:250px;		  */
 	}
-	#rs-topnav .loginBar li a{
+	#rs-loginBar .loginBar li a{
 		float:right; 
 		padding: 12px 14px;
 		/* font-size: 10px; */
 	}
 	#rs-topnav li a {
 		color:#aaa;
-		padding:14px 26px;
+		/* //padding:14px 26px; */
 		display:block;
 	}
 	#rs-topnav li a:hover {
@@ -1209,7 +1338,7 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 		overflow: hidden;
 		margin-top:1px;
 		padding:10px 0;
-		/*text-align:center;*/
+		text-align:center;
 	}
 
 	ul.pagination {
@@ -1303,9 +1432,10 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 	.rs-logo a {
 		width:200px;
 		height:60px;
-		background:url(/img/logo.png) no-repeat top center;
+		background:url(/img/logo.png) no-repeat top left;
 		background-size:110px;
 		margin:12px auto;
+		margin-left: 12px;
 		padding:0;
 	}
 	
@@ -1315,7 +1445,8 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 	}
 	#rs-topnav ul {		
 		padding:0;
-		background-color: #111;
+		width: 100%;
+		/* background-color: #111; */
 	}
 	#rs-topnav li {
 		list-style:none;
@@ -1340,7 +1471,7 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 	}
 	#rs-topnav li a {
 		color:#aaa;
-		padding:14px 26px;
+		/* //padding:14px 26px; */
 		display:block;
 	}
 	#rs-topnav li a:hover {
@@ -1817,7 +1948,7 @@ label {
 		overflow: hidden;
 		margin-top:1px;
 		padding:10px 0;
-		/*text-align:center;*/
+		text-align:center;
 	}
 
 	ul.pagination {

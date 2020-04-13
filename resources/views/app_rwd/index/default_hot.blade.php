@@ -69,7 +69,7 @@
 </script>
 <script src='/js/comm.js?r=@php echo uniqid(); @endphp' async=""></script>
 <script>
-	document.getElementById("page").innerHTML = pageInit({{$currentPage}}, {{$lastPage}} ,"/tag/hot/");
+	document.getElementById("page").innerHTML = pageInit({{$currentPage}}, {{$lastPage}} ,"/tag/{{$tag}}/");
 	nick = ''			
 </script>
 @stop

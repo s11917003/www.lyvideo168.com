@@ -23,7 +23,16 @@
 <script>
 	$(function(){
 		$(".contentbox img").lazyload();
+		$('[data-toggle="offcanvas"]').on('click', function () {
+    		$('.offcanvas-collapse').toggleClass('open')
+		});
+		$('[data-toggle="dropdown"]').on('click', function () {
+    		$('.dropdown-menu').toggleClass('show')
+  	   	})
 	});
+
+
+	
 </script>
 {!! Analytics::render() !!}
 
