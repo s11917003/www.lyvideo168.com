@@ -38,9 +38,13 @@
     		$('.offcanvas-collapse').toggleClass('open')
 		  })
 		$('[data-toggle="dropdown"]').on('click', function () {
+			if ($('.dropdown-menu').hasClass( "show" ) ) {
+				$('.dropdown-menu').removeClass('show');
+				return;
+			}
     		$('.dropdown-menu').toggleClass('show')
-  	   	})
-	});
+		})
+			 	});
 	
 	function cccccount() {
 		//console.log('+++')

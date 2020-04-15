@@ -24,7 +24,7 @@
 
 			<li class="nav-item dropdown">
 			  <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">所有分类</a>
-			  <div class="dropdown-menu" aria-labelledby="dropdown01">
+			  <div id="dropdown-menu" class="dropdown-menu" aria-labelledby="dropdown01">
 				<a class="dropdown-item" href="/tag/1">日本JAV</a>
 				<a class="dropdown-item" href="/tag/2">欧美</a>
 				<a class="dropdown-item" href="/tag/3">无修正</a>

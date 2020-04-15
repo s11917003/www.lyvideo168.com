@@ -37,9 +37,12 @@
     		$('.offcanvas-collapse').toggleClass('open')
 			 })
 		$('[data-toggle="dropdown"]').on('click', function () {
-			console.log("Hello world!");
-    		$('.dropdown-menu').toggleClass('show')
-  	   	})
+			if ($('.dropdown-menu').hasClass( "show" ) ) {
+				$('.dropdown-menu').removeClass('show');
+				return;
+			}
+    		$('.dropdown-menu').addClass('show')
+		})		 
 	});
 	
 	function cccccount() {

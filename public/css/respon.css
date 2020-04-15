@@ -7,6 +7,7 @@
 	padding:0;
 	font-family: Arial, "微軟正黑體";
 	background-color:#f8fafc;
+	padding-top: 190px;
 }
 /*div {
 	padding:10px;
@@ -35,6 +36,7 @@ a,a:hover {
 	position: fixed;
 	width:100%;
 	top:0;
+	z-index:1001
 }
 .rs-maintop-box {
 	width:1000px;
@@ -174,20 +176,20 @@ a,a:hover {
 
 #rs-topnav  {
 	z-index: 1;
-	overflow:hidden;
+	/* overflow:hidden; */
 	background-color:#000;
 	position: fixed;
-		top: 150px;
-		width: 100%;
+	top: 150px;
+	width: 100%;
+	z-index: 1005;
 }
 #rs-loginBar {
 	z-index: 1;
 	overflow:hidden;
 	background-color:#000;
-	position: fixed;
-	top: 12px;
-	width: 50%;
-	right:30px;
+	position: relative;
+	/* top: 12px; */
+	/* 。 */
 }
 #rs-topnav ul , #rs-loginBar ul{
 	width:980px;
@@ -216,6 +218,7 @@ a,a:hover {
 #rs-loginBar .loginBar li a{
 	float:right; 
 	padding: 12px 14px;
+	color: rgba(255, 255, 255, 0.5);
 }
 #rs-topnav li a {
 	color:#aaa;
@@ -245,6 +248,14 @@ a,a:hover {
 }
 #blogVideo {
 	max-width:50%;
+}
+#blogVideo.video-js {
+	max-width:50%;
+}
+.justify-content-center1 {
+	width: 970px;
+	margin: 0 auto;
+  
 }
 #rs-content-left-box {
 	overflow:hidden;
@@ -1043,9 +1054,13 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 
 /* Tablet view */
 @media screen and (max-width:769px) {
+	#rs-body {
+ 
+		padding-top: 110px;
+	}
 	.offcanvas-collapse {
 		position: fixed;
-		top: 118px; /* Height of navbar */
+		top: 110px; /* Height of navbar */
 		bottom: 0;
 		width: 100%;
 		padding-right: 1rem;
@@ -1090,7 +1105,9 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 		height:70px;
 		overflow:hidden;
 	}
-	
+	.justify-content-center1 {
+		width: 800px;
+	}
 	.rs-logo {
 		float: left
 	}
@@ -1128,7 +1145,7 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 	#rs-loginBar .loginBar {
 		list-style-type: none;
 		margin:0px;
-		padding: 15px 0px 0px 0px;
+		padding: 25px 0px 0px 0px;
 		float:right;
 		background-color:#000;
 	}
@@ -1140,8 +1157,8 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 	}
 	#rs-loginBar .loginBar li a{
 		float:right; 
-		padding: 12px 14px;
-		/* font-size: 10px; */
+		padding: 12px 0px 0px 5px;
+		font-size: 10px;
 	}
 	#rs-topnav li a {
 		color:#aaa;
@@ -1382,6 +1399,11 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 	}
 }
 
+@media screen and (max-width:580px) {
+	.justify-content-center1 {
+		width: 550px;
+	}
+}
 /* Mobile view */
 @media screen and (max-width:480px) {
 	/* #rs-article-box {
