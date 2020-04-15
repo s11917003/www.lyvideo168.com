@@ -72,7 +72,9 @@ body {
   line-height: 1.6;
   color: #212529;
   text-align: left;
-  background-color: #f8fafc;
+ 
+  background-color: #1c1e21;
+ 
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -2301,7 +2303,7 @@ textarea.form-control {
 
 .form-group {
   margin-bottom: 1rem;
-  width: 100%;
+  width: 95%;
   margin: 0px auto;
 }
 
@@ -8237,11 +8239,12 @@ button.bg-dark:focus {
 }
 
 .fixed-top {
-  position: fixed;
+  position: relative;
   top: 0;
   right: 0;
   left: 0;
   z-index: 1030;
+  height:54px;
 }
 
 .fixed-bottom {

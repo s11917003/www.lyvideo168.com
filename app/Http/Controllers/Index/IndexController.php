@@ -241,6 +241,7 @@ class IndexController extends Controller {
 				'device' => $device,
 				'posts'=> $posts,
 				'title'=> '热门影片',
+				'tag' => 'hot',
 			]);
 		} else {
 			//沒有文章跳轉
@@ -250,7 +251,8 @@ class IndexController extends Controller {
 	}
 	//標籤
 	public function tag($tag, $page = 1) {
-		
+		$article = $this->show_api(1);
+
 		//echo($tag);
 		//$category = PostsTag::all();
 		$tags = PostsTag::where('id', $tag)->first();		
@@ -259,24 +261,26 @@ class IndexController extends Controller {
 			return ;
 		}		
 		
-		$posts = PostsTagRelationships::with('article')->where('post_tag_id', $tag)->where('status', 1)->orderBy('post_id', 'desc')->Paginate(10, null, 1, $page);
+		$posts = PostsTagRelationships::with('article')->with('hot')->where('post_tag_id', $tag)->where('status', 1)->orderBy('post_id', 'desc')->Paginate(12, null, 1, $page);
 		
 		//$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->with('commentsGod')->where('cate_id', $cats->id)->where('status', 1)->orderBy('id', 'desc')->Paginate(10, null, 1, $page);
 		$lastPage = $posts->lastPage();
 		$currentPage = $posts->currentPage();
 
-	    $tagarr = [1,2,4,10,11];
-		$relate = PostsTagRelationships::with('article')->whereIn('post_tag_id', $tagarr)->where('status',1)->groupBy('post_id')->inRandomOrder()->limit(10)->get();	 		
+	    // $tagarr = [1,2,4,10,11];
+		// $relate = PostsTagRelationships::with('article')->whereIn('post_tag_id', $tagarr)->where('status',1)->groupBy('post_id')->inRandomOrder()->limit(10)->get();	 		
 		//var_dump($posts);
 		
 		$device = Utils::chkdevice();
 		return  view('app_rwd.index.default_tag', [
+			'post'=> $article,
 			'posts'=>$posts,
 			'lastPage' => $lastPage,
 			'currentPage' => $currentPage,
 			'device' => $device,
-			'relate' => $relate,
-			'tag' => $tags->name
+			// 'relate' => $relate,
+			'tag' => $tags->id,
+			'title' => $tags->name
 		]);	
 		
 	}	
