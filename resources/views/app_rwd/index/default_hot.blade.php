@@ -18,7 +18,7 @@
 @section('maincontent')
 			@if ($device == 'ios' || $device == 'android')
 			<div id="rs-digg-box2"  style="float: left; width: 100%; padding-top:10px; height: 100%;">
-				<h5>热门影片</h5>
+				<h5 style="COLOR: #ccc; font-weight: bold;">热门影片</h5>
 	
 				@foreach ($posts as $post)
 				 <div style="float: left;padding: 10px; width: 100%; height: 260px;    overflow: hidden; text-align: center">
@@ -58,7 +58,7 @@
 			@else
 			<div id="rs-digg-box2"  class="justify-content-center"  style="block-size:unset; float: left; width: 100%; padding-top:10px; height: auto;">
 				<div  class="justify-content-center1" >
-					<h5>热门影片</h5>
+					<h5 style="COLOR: #ccc; font-weight: bold;">热门影片</h5>
 					@foreach ($posts as $post)
 					<div id="rs-article-box" style="block-size:unset; float:left;padding: 10px;  overflow: hidden;  ">
 						<a href="/p/{{$post->id}}">
@@ -89,9 +89,9 @@
 								</div>
 								
 							</div>
-							<label style="padding: 30px 0px 0px 0px;Display: inline-block;  overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{$post->hot['title']}}</label>
-								<div style="font-size: 8px; padding-top: 0px;">{{$post->count_view}}次观看</div>
-						</a>
+							<label style="cursor: pointer; padding: 10px 0px 0px 0px;Display: inline-block;  overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{$post->hot['title']}}</label>
+							
+						</a><div style="font-size: 8px; padding-top: 0px;COLOR: #fff;">{{$post->count_view}}次观看</div>
 					</div>
 					@endforeach
 					<div style="clear: both"></div>

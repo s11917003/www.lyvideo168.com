@@ -161,23 +161,25 @@ sup {
 }
 
 a {
-  color: #007bff;
+  color: #f90;
   text-decoration: none;
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
+  outline-style: none;
 }
 
 a:hover {
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 a:not([href]):not([tabindex]) {
-  color: inherit;
+  background-color:    #f90;
+  color: #000;
   text-decoration: none;
 }
 
 a:not([href]):not([tabindex]):hover, a:not([href]):not([tabindex]):focus {
-  color: inherit;
+  color: #f90;
   text-decoration: none;
 }
 
@@ -3164,7 +3166,7 @@ tbody.collapse.show {
   color: #212529;
   text-align: left;
   list-style: none;
-  background-color: #fff;
+  background-color: #212529;
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
@@ -6146,7 +6148,7 @@ button.bg-light:focus {
 }
 
 .bg-dark {
-  background-color: #343a40 !important;
+  background-color: #1c1e21 !important;
 }
 
 a.bg-dark:hover, a.bg-dark:focus,

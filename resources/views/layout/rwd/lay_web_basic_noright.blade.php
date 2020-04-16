@@ -41,7 +41,7 @@
 				$('.dropdown-menu').removeClass('show');
 				return;
 			}
-    		$('.dropdown-menu').addClass('show')
+    		$('.dropdown-menu').toggleClass('show')
 		})		 
 	});
 	

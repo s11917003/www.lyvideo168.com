@@ -9,11 +9,11 @@
 			<div id="rs-loginBar">
 				<ul class="loginBar">
 					@if (Auth::check())
-					<li ><a class="logout" href="/logout">登出</a></li>
 					<li ><a href="javascript:void(0);">哈友：{{Auth::User()->nick_name}}</a></li>
-					
+						<li ><a class="logout" href="/logout">登出</a></li>
 					@else
 					<li ><a href="/login">登入</a></li>
+					<li ><a href="/register">註冊</a></li>
 					@endif
 					<!-- <li ><a href="/article/post">發佈</a></li> -->
 					<!-- <li ><a href="/help">幫助</a></li>			 -->

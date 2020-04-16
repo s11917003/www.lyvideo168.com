@@ -44,7 +44,7 @@
 				<div style="clear: both"></div>
 		</div>
 		<div style="margin: 10px; text-align: center">
-			<h5>推薦影片</h5>
+			<h5 class="recommend">推荐影片</h5>
 			@foreach ($relate as $re)
 			<div style="float: left; width: 50%; height: 140px;padding: 5px; margin-bottom: 5px">
 				<div id="relate{{$re->article['id']}}" data-pid="{{$re->article['id']}}">
