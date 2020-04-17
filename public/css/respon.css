@@ -59,6 +59,10 @@ a,a:hover {
 	padding: 15px;
 	margin: 0 auto;
   }
+  .form-signin label,.form-register label,.form-signin h1,.form-register h1{
+	color: #ccc;
+  }
+  
   .form-signin .checkbox {
 	font-weight: 400;
   }
@@ -265,6 +269,9 @@ a,a:hover {
 }
 #blogVideo {
 	max-width:50%;
+	background-color: #333;
+    margin: 0 3px 10px 3px;
+    border-radius: 15px;
 }
 #blogVideo.video-js {
 	max-width:50%;

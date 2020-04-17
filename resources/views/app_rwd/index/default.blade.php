@@ -25,46 +25,54 @@ No.1老湿机休息站，带你升天带你飞，频繁更新片片精彩！大�
 		@endif
 				<div id="blogVideo" class="blogVideo col">
 					<div id="rs-content-left-box" data-id='{{$post->id}}' data-show=false>
-						<div class="rs-contentpics" style="background: url({{$post->userInfo->avatar}}) no-repeat top center; background-size:50px"><a href="/p/{{$post->id}}"></a></div>
+						<div class="rs-contentpics" style="background: url({{ $post->userInfo->avatar}}) no-repeat top center; background-size:50px"><a href="/p/{{$post->id}}"></a></div>
 						<div class="rs-contentname">{{$post->userInfo->nick_name}}<br>{{ Carbon\Carbon::parse($post->created_time)->format('m-d H:i:s') }}</div>
 						<div class="rs-contentword">
 							<h2 style="width:100%; padding: 5px 0px 0px 0px;Display: inline-block;  overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/p/{{$post->id}}">{!! $post->title !!}</a></h2>
 							<div poster="" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" height="200px" width="600" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
-								<div class="vjs-poster" tabindex="-1" aria-disabled="false" 
-									style="display: inline-block;
-									vertical-align: middle;
-									background-repeat: no-repeat;
-									background-position: 50% 50%;
-									background-size: contain;
-									cursor: pointer;
-									margin: 0;
-									padding: 0;
-									position: absolute;
-									top: 130px;
-									right: 0;
-									bottom: 0;
-									left: 0;
-									height: 50%;
-									MARGIN: 0PX 0PX 0 10PX;
-									BACKGROUND-COLOR: #000;
-									background-image: url('{{ asset('storage'.$post->cover_img)}}');" 
-								 	<p style="position: relative">
 								<a href="/p/{{$post->id}}">
-									<img src="/img/if_play_alt_118620.png"  style="position: absolute; top:40%; left:45%; z-index: 999; width: 50px;"/>
+									<div class="vjs-poster" tabindex="-1" aria-disabled="false" 
+											style="display: inline-block;
+											vertical-align: middle;
+											background-repeat: no-repeat;
+											background-position: 50% 50%;
+											background-size: contain;
+											cursor: pointer;
+											margin: 0;
+											padding: 0;
+											position: absolute;
+											top: 130px;
+											right: 0;
+											bottom: 0;
+											left: 0;
+											height: 50%;
+											MARGIN: 0PX 10PX 0 10PX;
+											BACKGROUND-COLOR: #000;
+											background-image: url('{{ asset('storage'.$post->cover_img)}}');" 
+										>
+										<img src="/img/if_play_alt_118620.png"  style="position: absolute; top:40%; left:45%; z-index: 999; width: 50px;"/>
+									</div>
 								</a>
-							</p>
 							</div>
-							</div>
-									
-						
 						</div>
-						<div id="rs-digg-box2" style="float: left; width: 100%;     padding-top: 50px; overflow: visible;">
+						@if ($device == 'ios' || $device == 'android')
+						<div id="rs-digg-box2" style="float: left; width: 100%;     padding-top: 25px; overflow: visible;">
 							@if ($post->tag)
 								@foreach ($post->tag as $tag)
 								<p><a href="/tag/{{$tag->tagname->id}}" target="_blank" class='rs-digg-box2-tag'>{{$tag->tagname->name}}</a></p>
 								@endforeach
 							@endif
-						</div>		
+						</div>
+
+						@else
+						<div id="rs-digg-box2" style="float: left; width: 100%;     padding-top: 40px; overflow: visible;">
+							@if ($post->tag)
+								@foreach ($post->tag as $tag)
+								<p><a href="/tag/{{$tag->tagname->id}}" target="_blank" class='rs-digg-box2-tag'>{{$tag->tagname->name}}</a></p>
+								@endforeach
+							@endif
+						</div>
+						@endif		
 					</div>
 				</div>
 		@if ( $loop->index %  2 ==1)
