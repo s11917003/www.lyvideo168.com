@@ -12,7 +12,9 @@ $(document).ready(function () {
 
     function checkFile(event) {
         var $file_input = $(event.currentTarget);
-        var file_name = $file_input.val();
+		var file_name = $file_input.val();
+		
+	
         if(!file_name && $('#postType').val() != 1) {
 	        //alert('哥哥您沒有選擇任何檔案唷！');
         	return false;
@@ -55,7 +57,11 @@ $(document).ready(function () {
 		showHideError($file_input[0].id, false, '');
 		
 		if(is_video) {
-        	videoFile = event.target.files;
+			videoFile = event.target.files;
+			arr=videoFile[0].name.split(".");
+			var removed = arr.splice(arr.length-1,1);
+			$('#postContent').text(arr.join('.'));
+			
 		} else {
 			imgFile = event.target.files;
 		}

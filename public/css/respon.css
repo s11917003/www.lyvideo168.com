@@ -59,7 +59,7 @@ a,a:hover {
 	padding: 15px;
 	margin: 0 auto;
   }
-  .form-signin label,.form-register label,.form-signin h1,.form-register h1{
+  .form-signin label,.form-register label,.form-signin h1,.form-register h1,.form-register h7,#rs-main-content h1{
 	color: #ccc;
   }
   

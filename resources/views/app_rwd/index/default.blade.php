@@ -50,7 +50,7 @@ No.1老湿机休息站，带你升天带你飞，频繁更新片片精彩！大�
 											BACKGROUND-COLOR: #000;
 											background-image: url('{{ asset('storage'.$post->cover_img)}}');" 
 										>
-										<img src="/img/if_play_alt_118620.png"  style="position: absolute; top:40%; left:45%; z-index: 999; width: 50px;"/>
+									
 									</div>
 								</a>
 							</div>
@@ -82,7 +82,7 @@ No.1老湿机休息站，带你升天带你飞，频繁更新片片精彩！大�
 		</div>
 
 		
-		@foreach ($posts as $post)
+		<!-- @foreach ($posts as $post) -->
 		 
 		  
 		
@@ -108,7 +108,7 @@ No.1老湿机休息站，带你升天带你飞，频繁更新片片精彩！大�
 		JuicyAds END -->
 		
 		<!-- @php ($i++)	-->	
-		@endforeach
+		<!-- @endforeach -->
 		<div class="rs-contentbox1" id="page"></div>
 	</div>
 			

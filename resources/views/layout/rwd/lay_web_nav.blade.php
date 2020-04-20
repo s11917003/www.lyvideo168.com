@@ -13,9 +13,6 @@
 
 <div id="rs-topnav">
 	<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark navbar-expand-lg">
-	
-		
-	
 		<div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
 		  <ul class="navbar-nav mr-auto">
 			<li class="nav-item">
@@ -23,9 +20,14 @@
 			</li>
 
 			<li class="nav-item dropdown">
-			  <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">所有分类</a>
+				@if (isset($title)) 
+				<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{$title}}</a>
+				@else
+				<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">所有分类</a>
+				@endif
+			 
 			  <div id="dropdown-menu" class="dropdown-menu" aria-labelledby="dropdown01">
-				<a class="dropdown-item" href="/tag/1">日本JAV</a>
+				<a class="dropdown-item" href="/tag/1">日本</a>
 				<a class="dropdown-item" href="/tag/2">欧美</a>
 				<a class="dropdown-item" href="/tag/3">无修正</a>
 				<a class="dropdown-item" href="/tag/33">台湾</a>

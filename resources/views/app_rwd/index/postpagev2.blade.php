@@ -33,11 +33,11 @@
 						<option value="0">普通(720p-)</option>
 						<option value="1">HD(720p+、碼率大於1200)</option>
 					</select>
-					<div style="font-size: 10px;">
+					<div style="color: #fff;font-size: 10px;">
 					<input type="text" id='cuttime' value=0 style="height: 30px; width: 30%">
 					頭裁切秒數(ex 10秒填10、2分鐘填120,頭砍填入秒數)、預設不填寫
 					</div>
-					<div style="font-size: 10px;">
+					<div style="color: #fff;font-size: 10px;">
 					<input type="text" id='cuttime2' value=0 style="height: 30px; width: 30%">
 					尾裁切秒數(ex 10秒填10、2分鐘填120,尾砍填入秒數)、預設不填寫
 					</div>
