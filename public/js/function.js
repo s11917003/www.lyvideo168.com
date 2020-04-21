@@ -1,8 +1,13 @@
 $(document).ready(function () {
 
 	var videoFile;
+	var videoFile1;
+	var videoFile2;
+	var videoFile3;
+	var videoFile4;
 	var imgFile;
-	$('#videofile').on('change', checkFile);
+	$('#videofile').on('change',function(e){checkFile(e,0)});
+	$('#videofile1').on('change',function(e){checkFile(e,1)});
 	$('#imgfile').on('change', checkFile);
 	
 	var ff =GetURLParameter('focus');
@@ -10,7 +15,9 @@ $(document).ready(function () {
 		$('#reply').focus()
 	}
 
-    function checkFile(event) {
+    function checkFile(event,id=0) {
+
+	  
         var $file_input = $(event.currentTarget);
 		var file_name = $file_input.val();
 		
@@ -26,13 +33,13 @@ $(document).ready(function () {
         }
         
         if(is_video && !/.(mp4|flv|mpeg|mov)/gi.test(file_name)){
-            showHideError($file_input[0].id, true, "請上傳影片檔案,後綴必須是mp4,flv,mov,mpeg");
+            showHideError($file_input[0].id, true, "請上傳影片檔案,後綴必須是mp4,flv,mov,mpeg",id);
             $file_input.val("");
             return false;
         }
 
         if(!is_video && !/.(jpg|jpeg|gif|png)/gi.test(file_name)){
-            showHideError($file_input[0].id, true, "請上傳圖片檔案,後綴必須是jpeg,jpg,gif,png");
+            showHideError($file_input[0].id, true, "請上傳圖片檔案,後綴必須是jpeg,jpg,gif,png",id);
             $file_input.val("");
             return false;
         }
@@ -41,27 +48,54 @@ $(document).ready(function () {
             var size =  $file_input[0].files[0].size;
             if(is_video){
                 if (/.(mp4|webm|ogv)/gi.test(file_name) && size > 1024*1024*3500) {
-                    showHideError($file_input[0].id, true, "你上傳的是mp4文件, 最大支持3.5g");
+                    showHideError($file_input[0].id, true, "你上傳的是mp4文件, 最大支持3.5g",id);
                     $file_input.val("");
                     return false;
                 }
                 // 除了浏览器支持的格式以及avi格式外的其他几种文件,限制为50M
                 if (!/.(mp4|webm|ogv)/gi.test(file_name)&& size > 1024*1024*3500) {
-                    showHideError($file_input[0].id, true, "你上傳的是非mp4文件, 最大支持3.5g");
+                    showHideError($file_input[0].id, true, "你上傳的是非mp4文件, 最大支持3.5g",id);
                     $file_input.val("");
                     return false;
                 }
             }
         }
 		
-		showHideError($file_input[0].id, false, '');
+		showHideError($file_input[0].id, false, '',id);
 		
 		if(is_video) {
-			videoFile = event.target.files;
-			arr=videoFile[0].name.split(".");
+			var tmpvideoFile 
+			if (id==0) {
+				videoFile = event.target.files;
+				tmpvideoFile = videoFile;
+			} if (id==1) {
+				videoFile1 = event.target.files;
+				tmpvideoFile = videoFile1;
+			} if (id==2) {
+				videoFile2 = event.target.files;
+				tmpvideoFile = videoFile2;
+			} if (id==3) {
+				videoFile3 = event.target.files;
+				tmpvideoFile = videoFile3;
+			} if (id==4) {
+				videoFile4 = event.target.files;
+				tmpvideoFile = videoFile4;
+			}
+		
+
+			console.log(videoFile)
+			console.log(videoFile1)
+			console.log(videoFile2)
+			console.log(videoFile3)
+			console.log(videoFile4)
+			arr=tmpvideoFile[0].name.split(".");
 			var removed = arr.splice(arr.length-1,1);
+ 
+		  if (id==0) {
 			$('#postContent').text(arr.join('.'));
-			
+		  } else {
+			$('#postContent' + id).text(arr.join('.'));
+		  }
 		} else {
 			imgFile = event.target.files;
 		}
@@ -69,13 +103,56 @@ $(document).ready(function () {
         //console.log(imgFile)
 		return true;
     }
+	function publishEvent(event,id) {
+		
+ 
+		if($('#imgfile').val() != '' || $('#videofile').val() != '' || $('.tablinks.active').data('id') == 1) {
+			
+			if(uploading == true) {
+				alert('哥哥您別急呀！');
+				return false;
+			}
 
-    function showHideError (id, show, text) {
+			num =  $('#cuttime').val()
+			num2 =  $('#cuttime2').val()
+			if(isNaN(Number(num)) || isNaN(Number(num2))){  
+				alert('请输入正整数');
+				return false;
+			} else if(Number(num)<0 || Number(num2)<0) {
+				alert('请输入正整数');
+				return false;
+			}
+		 
+			if($('#postContent').val() != '') {
+				uploading = true;
+				$("#publishBtn").prop('disabled', true);
+				$("#publishBtn").css( "background-color", '#c7c5c1');
+				$("#publishBtn").html('<img src="/img/source.gif?a=1" style="height:18px;">');
+				uploadFile(event, $('.tablinks.active').data('id'))
+				return;
+			} 
+			else {
+				alert('哥哥您的內容沒有寫唷');
+				return;
+			}
+		}
+		
+		
+		alert('哥哥您沒有選擇任何檔案唷!');
+		return;
+	}
+    function showHideError (id, show, text, postContentId) {
+		var videofileErrorText = ''
+		if (postContentId==0) {
+			videofileErrorText  = 'videofileError';
+		} else {
+			videofileErrorText =  'videofileError'  + postContentId;
+		}
 	    if(show) {
-	        $('#videofileError').text(text);
-			$('#videofileError').show();	    
+	        $('#'+videofileErrorText).text(text);
+			$('#'+videofileErrorText).show();	    
 	    } else {
-			$('#videofileError').hide();	    
+			$('#'+videofileErrorText).hide();	    
 	    }
 
         
@@ -84,8 +161,10 @@ $(document).ready(function () {
     function uploadFile(event, type) {
 		event.stopPropagation(); // Stop stuff happening
 		event.preventDefault(); // Totally stop stuff happening
-		//console.log(videoFile)
+		// console.log(videoFile)
+		// console.log(videoFile1)
 
+		// return;
         //## 宣告一個FormData
         var data = new FormData();
         /*
@@ -94,16 +173,28 @@ $(document).ready(function () {
         }
         */
         if (type == 3) {
-        	data.append("video", videoFile[0]);
-        }
-        //## 將檔案append FormData
-        data.append("content", $('#postContent').val());
-        data.append("userid", user_id);
-        data.append("type", type);
-        data.append("hd", $('#hd').val());
-        data.append("cuttime", $('#cuttime').val());
-        data.append("cuttime2", $('#cuttime2').val());
-        data.append("tags", $('#optgroup').val())
+			data.append("video", videoFile[0]);
+
+			if(videoFile1)
+				data.append("video1", videoFile1[0]);
+		}			
+		data.append("userid", user_id);
+		data.append("type", type);
+		//## 將檔案append FormData
+		for (i = 0; i < 2; i++) {
+			var index = ''
+			if(i!=0) {
+				index = i +''
+			}
+			data.append("content"+index, $('#postContent'+index).val());
+			data.append("hd"+index, $('#hd'+index).val());
+			data.append("cuttime"+index, $('#cuttime'+index).val());
+			data.append("cuttime2"+index, $('#cuttime2'+index).val());
+			data.append("tags"+index, $('#optgroup'+index).val())
+		}
+      
+		// console.log(data)
+		// return
 		
 		$.ajax({
 			method: "POST",
@@ -129,9 +220,13 @@ $(document).ready(function () {
 					$('#videofile').val('');
 					$('#imgfile').val('');
 					$("#publishBtn").prop('disabled', false);
+
+					$('#videofile1').val('');
+				 
 					
 				} else {
 					$('#videofile').val('');
+					$('#videofile1').val('');
 					$('#imgfile').val('');
 					alert(data.msg)
 					$("#publishBtn").prop('disabled', false);
@@ -162,44 +257,21 @@ $(document).ready(function () {
 	
 
 	var uploading = false;
-	$("#publishBtn").on('click', function(event) {
-		
-		if($('#imgfile').val() != '' || $('#videofile').val() != '' || $('.tablinks.active').data('id') == 1) {
-			
-			if(uploading == true) {
-				alert('哥哥您別急呀！');
-				return false;
-			}
-
-			num =  $('#cuttime').val()
-			num2 =  $('#cuttime2').val()
-			if(isNaN(Number(num)) || isNaN(Number(num2))){  
-				alert('请输入正整数');
-				return false;
-			} else if(Number(num)<0 || Number(num2)<0) {
-				alert('请输入正整数');
-				return false;
-			}
-		 
-			if($('#postContent').val() != '') {
-		
-				uploading = true;
-				$("#publishBtn").prop('disabled', true);
-				$("#publishBtn").css( "background-color", '#c7c5c1');
-				$("#publishBtn").html('<img src="/img/source.gif?a=1" style="height:18px;">');
-				uploadFile(event, $('.tablinks.active').data('id'))
-				return;
-			} 
-			else {
-				alert('哥哥您的內容沒有寫唷');
-				return;
-			}
-		}
-		
-		
-		alert('哥哥您沒有選擇任何檔案唷!');
-		return;
-	})
+	$("#publishBtn").on('click', function(e) {
+		publishEvent(e,0);
+	});
+	$("#publishBtn1").on('click', function(e) {
+		publishEvent(e,1);
+	});
+	$("#publishBtn2").on('click', function(e) {
+		publishEvent(e,2);
+	});
+	$("#publishBtn3").on('click', function(e) {
+		publishEvent(e,3);
+	});
+	$("#publishBtn4").on('click', function(e) {
+		publishEvent(e,4);
+	});
 
 	$(document).on('click', '.like', function(){
 		var clickEv = $(this).data('id')

@@ -17,7 +17,7 @@
 				<button class="tablinks active" data-id='3' >視頻</button>
 			</div>
 			
-			<div id="article" class="tabcontent">
+			<div id="article" class="tabcontent" >
 				<!-- <h3 align="center">文章上傳</h3> -->
 				<div class="item-sel">
 					<div class="form-group p-t-xs">
@@ -45,11 +45,50 @@
 					<div class="upload">
 						<input type="file" class="form-upload" name="videofile" id="videofile">
 						<div class="loading-bar" style="width:0%;"><span></span></div>
-					</div>					
+					</div>						
 					<div class="error" id="videofileError" style="display:none; font-size:14px; color: red">請選擇視頻文件,後綴必須是mp4,avi,rmvb,rm,flv,mpeg,ra,ram,mov,wmv</div>
-					<input type="submit" id="publishBtn" value="投稿" d="publishBtn">
+					
 				</div>
+		</div>  
+		<div id="article1" class="tabcontent" >
+			<!-- <h3 align="center">文章上傳</h3> -->
+			<div class="item-sel">
+				<div class="form-group p-t-xs">
+					<select id="optgroup1" multiple="multiple" name='tags[]'>
+						@foreach($tags as $tag)
+							<option value="{{$tag->id}}">{{$tag->name}}</option>
+						@endforeach
+					</select>
+					<script src='https://cdnjs.cloudflare.com/ajax/libs/multi-select/0.9.12/js/jquery.multi-select.min.js' type='text/javascript'></script>
+				</div>
+				<textarea name="text" id="postContent1" placeholder="影片標題" class="form-text"></textarea>
+				<select id="hd1" style="height: 50px;">
+					<option value="0">普通(720p-)</option>
+					<option value="1">HD(720p+、碼率大於1200)</option>
+				</select>
+				<div style="color: #fff;font-size: 10px;">
+				<input type="text" id='cuttime1' value=0 style="height: 30px; width: 30%">
+				頭裁切秒數(ex 10秒填10、2分鐘填120,頭砍填入秒數)、預設不填寫
+				</div>
+				<div style="color: #fff;font-size: 10px;">
+				<input type="text" id='cuttime21' value=0 style="height: 30px; width: 30%">
+				尾裁切秒數(ex 10秒填10、2分鐘填120,尾砍填入秒數)、預設不填寫
+				</div>
+				<!--<input type="text" id='len' placeholder="影片長度(ex 1小時30分0秒填01:30:00)" style="height: 30px;">-->				
+				<div class="upload">
+					<input type="file" class="form-upload" name="videofile1" id="videofile1">
+					<div class="loading-bar" style="width:0%;"><span></span></div>
+				</div>						
+				<div class="error" id="videofileError1" style="display:none; font-size:14px; color: red">請選擇視頻文件,後綴必須是mp4,avi,rmvb,rm,flv,mpeg,ra,ram,mov,wmv</div>
+				<!-- <input type="submit" id="publishBtn1" value="投稿" d="publishBtn1">
+
+				<input type="button" id="addVideo1" value="加影片" d="addVideo"> -->
 			</div>
+		</div>
+
+		<input type="submit" id="publishBtn" value="投稿" d="publishBtn">
+
+		<input type="button" id="addVideo" value="加影片" d="addVideo">
 			
 			<script>
 				$(".tablinks").on('click', function(){
@@ -68,6 +107,16 @@
 				
 				// 初始化
 				$('#optgroup').multiSelect({
+				    selectableOptgroup: true,
+				    afterSelect: function (values) {
+				        //select.modifyselectNum('#optgroup');
+				    },
+				    afterDeselect: function (values) {
+				        //select.modifyselectNum('#optgroup');
+				    }
+				});
+
+				$('#optgroup1').multiSelect({
 				    selectableOptgroup: true,
 				    afterSelect: function (values) {
 				        //select.modifyselectNum('#optgroup');
