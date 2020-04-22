@@ -8,6 +8,9 @@ $(document).ready(function () {
 	var imgFile;
 	$('#videofile').on('change',function(e){checkFile(e,0)});
 	$('#videofile1').on('change',function(e){checkFile(e,1)});
+	$('#videofile2').on('change',function(e){checkFile(e,2)});
+	$('#videofile3').on('change',function(e){checkFile(e,3)});
+	$('#videofile4').on('change',function(e){checkFile(e,4)});
 	$('#imgfile').on('change', checkFile);
 	
 	var ff =GetURLParameter('focus');
@@ -105,7 +108,8 @@ $(document).ready(function () {
     }
 	function publishEvent(event,id) {
 		
- 
+
+		 
 		if($('#imgfile').val() != '' || $('#videofile').val() != '' || $('.tablinks.active').data('id') == 1) {
 			
 			if(uploading == true) {
@@ -121,6 +125,29 @@ $(document).ready(function () {
 			} else if(Number(num)<0 || Number(num2)<0) {
 				alert('请输入正整数');
 				return false;
+			}
+
+			for(i=1;i<=4;i++) {
+				if($("#article"+i).is(":visible")){
+					num =  $('#cuttime'+i).val()
+					num2 =  $('#cuttime2'+i).val()
+					if(isNaN(Number(num)) || isNaN(Number(num2))){  
+						alert('请输入正整数');
+						return false;
+					} else if(Number(num)<0 || Number(num2)<0) {
+						alert('请输入正整数');
+						return false;
+					}
+
+					if($('#videofile'+i).val() == '') {
+						alert('哥哥您有檔案未输入唷!');
+						return false;
+					}
+					if($('#postContent'+i).val() == '') {
+						alert('哥哥您有內容沒有寫唷');
+					}
+				}
+
 			}
 		 
 			if($('#postContent').val() != '') {
@@ -177,11 +204,17 @@ $(document).ready(function () {
 
 			if(videoFile1)
 				data.append("video1", videoFile1[0]);
+			if(videoFile2)
+			data.append("video2", videoFile2[0]);
+			if(videoFile3)
+			data.append("video3", videoFile3[0]);
+			if(videoFile4)
+			data.append("video4", videoFile4[0]);
 		}			
 		data.append("userid", user_id);
 		data.append("type", type);
 		//## 將檔案append FormData
-		for (i = 0; i < 2; i++) {
+		for (i = 0; i < 4; i++) {
 			var index = ''
 			if(i!=0) {
 				index = i +''
@@ -217,16 +250,23 @@ $(document).ready(function () {
 				if(data.ret == 0 || data.ret == -3) {
 					//toastr["error"](data.msg);
 					alert(data.msg);
-					$('#videofile').val('');
+					
 					$('#imgfile').val('');
 					$("#publishBtn").prop('disabled', false);
-
+					$('#videofile').val('');
 					$('#videofile1').val('');
-				 
+					$('#videofile2').val('');
+					$('#videofile3').val('');
+					$('#videofile4').val('');
+
 					
 				} else {
 					$('#videofile').val('');
 					$('#videofile1').val('');
+					$('#videofile2').val('');
+					$('#videofile3').val('');
+					$('#videofile4').val('');
+
 					$('#imgfile').val('');
 					alert(data.msg)
 					$("#publishBtn").prop('disabled', false);

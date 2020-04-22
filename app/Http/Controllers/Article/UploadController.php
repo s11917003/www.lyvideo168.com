@@ -53,7 +53,7 @@ class UploadController extends Controller {
 		$type = $request->type;
 	    switch ($type) {
 			case 3: //影片
-				for ($i = 0; $i < 2; $i++) { 
+				for ($i = 0; $i <= 4; $i++) { 
 					if($i==0) {
 						$cuttime = $request->cuttime;
 						$cuttime2 = $request->cuttime2;
@@ -61,33 +61,35 @@ class UploadController extends Controller {
 						$hd = $request->hd;
 						$content = $request->content;
 						$thisTags = $request->input('tags');
-					} else	if($i==1) {
-						$cuttime = $request->cuttime1;
-						$cuttime2 = $request->cuttime21;
-						$file = $request->file('video1');
-						$hd = $request->hd1;
-						$content = $request->content1;
-						$thisTags = $request->input('tags1');
-
+					} else	 {
+						$cuttime = $request['cuttime'.$i];
+						$cuttime2 = $request['cuttime2'.$i];
+						$file = $request->file('video'.$i);
+						$hd = $request['hd'.$i];
+						$content = $request['content'.$i];
+						$thisTags = $request->input('tags'.$i);
 					}
 
-
+					if (is_null($file)) {
+						break;
+					}
 					$post = new PostsArticle();
 					$sec = $ffprobe->format($file)  // extracts streams informations
 								->get('duration');// returns the duration property
 					
 					$sec = floor($sec) - $cuttime - $cuttime2;				
 					$timecode = gmdate("H:i:s", $sec);
-					if($sec<=0){
-						return response()->json([
-							'ret' => -1,
-							'msg' => '影片长度有误，请重新输入'
-						]); 
-					}
+				
 					$start = gmdate("H:i:s",$cuttime);	
 					$end = gmdate("H:i:s", floor($sec) + $cuttime);	
 					$filename = date('Ymdis') . '-' . 4 . '-' . 'x264';
 				
+					if($sec<=0){
+						return response()->json([
+							'ret' => -1,
+							'msg' => $filename.'影片长度有误，请重新输入'
+						]); 
+					}
 					$pathD=  date('Y') . '/' . date('m'). '/' . $filename;	
 					$path = '/public/upvideo/' .$pathD;	
 					$pathImg = '/public/upimage/' .$pathD;		       
@@ -116,7 +118,7 @@ class UploadController extends Controller {
 					} else {
 						return response()->json([
 							'ret' => -1,
-							'msg' => '上傳失敗!'
+							'msg' => $filename.'上传失败,上传已中断'
 						]); 					
 					}
 	
@@ -125,7 +127,7 @@ class UploadController extends Controller {
 					$post->user_id = 4;
 					$post->cate_id = $type;
 					$post->folder =  $pathD;
-					$post->title = preg_replace('!\s+!', ' ', strip_tags(nl2br($request->content), '<br /><br>'));
+					$post->title = preg_replace('!\s+!', ' ', strip_tags(nl2br($content), '<br /><br>'));
 					$post->created_time = date('Y-m-d h:i:s');
 					$post->hd = $hd;
 					$post->video_len = $timecode;
@@ -171,7 +173,7 @@ class UploadController extends Controller {
 		
 		return response()->json([
 		    'ret' => 1,
-		    'msg' => '上傳成功，請等待審查!',
+		    'msg' => '上传成功，请等待审查!',
 		    'file' => $type
 		]);
 	}

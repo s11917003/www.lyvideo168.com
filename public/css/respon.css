@@ -139,6 +139,7 @@ a,a:hover {
 .rs-logo {
 	z-index: 0;
 	float: left;
+	background-color:#000;
 }
 
 .rs-logo a {
@@ -207,7 +208,7 @@ a,a:hover {
 #rs-loginBar {
 	z-index: 1;
 	overflow:hidden;
-	/* background-color:#000; */
+	background-color:#000;
 	position: relative;
 	/* top: 12px; */
 	/* 。 */
@@ -474,7 +475,7 @@ a,a:hover {
 .rs-digg-box2-tag {
 	padding: 5px 8px;
 	background-color: #525252; 
-	color: #000000
+	color: #FFFFFF
 }
 .rs-digg-box2 h5{ 
 	background-color: #555; 
