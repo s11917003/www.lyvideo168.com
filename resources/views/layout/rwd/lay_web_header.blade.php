@@ -2,11 +2,19 @@
 	<!-- HEADER 結束 -->
 	<!-- Header -->
 	<div id="rs-maintop">	
-		<div class="rs-maintop-box">				
-			<div class="rs-logo"><a href="/"></a></div>
+		<div class="rs-maintop-box" style="DISPLAY: flex;  flex-direction: row; align-items: center;">
+			<div class="a navbar navbar-expand-md fixed-top navbar-dark bg-dark navbar-expand-lg">
+				
+				<button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+					<span class="navbar-toggler-icon"></span>
+				</button><a class="navbar-brand" href="#"></a>
+			</div>	
+		
+			<div class=" b rs-logo"><a href="/"></a></div>
+			<div class="c filler"></div>			
 			{{ isset($postArticle) ? $postArticle : false }} 
 			@if ($postArticle == false)
-			<div id="rs-loginBar">
+			<div id="rs-loginBar" class="d">
 				<ul class="loginBar">
 					@if (Auth::check())
 					<li ><a href="javascript:void(0);">哈友：{{Auth::User()->nick_name}}</a></li>
@@ -34,6 +42,39 @@
 			</div>
 			@endif  --}}
 			
+		</div>
+		<div id="nav-link-mask" class="nav-link-mask"  style="display:none;"></div>
+		<div id ="nav-link-box" class="offcanvas-collapse  nav-link-box" >
+			<div class="navbar-collapse" id="navbarsExampleDefault">
+				<div class="navbar-tab"  style="height: 100%; width: 300px; background-color: #000;" >
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item">
+							<a class="nav-link" href="/tag/hot">热门</a>
+						</li>
+			
+						<li class="nav-item dropdown">
+							@if (isset($title)) 
+							<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{$title}}</a>
+							@else
+							<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">所有分类</a>
+							@endif
+						
+							
+						</li>
+						<div id="dropdown-menu" class="dropdown-menu" aria-labelledby="dropdown01">
+							<a class="dropdown-item" href="/tag/1">日本</a>
+							<a class="dropdown-item" href="/tag/2">欧美</a>
+							<a class="dropdown-item" href="/tag/3">无修正</a>
+							<a class="dropdown-item" href="/tag/33">台湾</a>
+							<a class="dropdown-item" href="/tag/25">偷拍</a>
+						</div>
+					</ul>
+			</div>
+			<!-- <form class="form-inline my-2 my-lg-0">
+			  <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+			  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			</form> -->
+		  </div>
 		</div>
 		</div>
 	</div>	

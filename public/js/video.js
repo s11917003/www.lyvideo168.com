@@ -25168,7 +25168,7 @@ if (window_1.VIDEOJS_NO_DYNAMIC_STYLE !== true && isReal()) {
     if (head) {
       head.insertBefore(style, head.firstChild);
     }
-    setTextContent(style, '\n      .video-js {\n        width: 300px;\n        height: 150px;\n      }\n\n      .vjs-fluid {\n        padding-top: 56.25%\n      }\n    ');
+    setTextContent(style, '\n      .video-js {\n        width: 300px;\n        height: 100px;\n      }\n\n      .vjs-fluid {\n        padding-top: 56.25%\n      }\n    ');
   }
 }
 
