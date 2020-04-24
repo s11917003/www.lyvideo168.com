@@ -20,16 +20,22 @@ No.1老湿机休息站，带你升天带你飞，频繁更新片片精彩！大�
 	 
 		<div class="container">
 		@foreach ($posts as $post)
-		@if ($loop->index %  2 ==0)
+		@if ((($device == 'ios' || $device == 'android') &&  ($loop->index %  2 ==0))   || ( ($device != 'ios' && $device != 'android')  &&  ($loop->index %  3 ==0))  )
+	 
 			<div class="row">
 		@endif
-				<div id="blogVideo" class="blogVideo col">
-					<div id="rs-content-left-box" data-id='{{$post->id}}' data-show=false>
+				@if ($device == 'ios' || $device == 'android')
+					<div id="blogVideo" class="blogVideo col" style="max-width:48%;">
+						<div id="rs-content-left-box" data-id='{{$post->id}}' data-show=false style="height:170px;">
+				@else
+					<div id="blogVideo" class="blogVideo col">
+						<div id="rs-content-left-box" data-id='{{$post->id}}' data-show=false> 
+				@endif
 						<!-- <div class="rs-contentpics" style="background: url({{ $post->userInfo->avatar}}) no-repeat top center; background-size:50px"><a href="/p/{{$post->id}}"></a></div> -->
-						<!-- <div class="rs-contentname">{{$post->userInfo->nick_name}}<br>{{ Carbon\Carbon::parse($post->created_time)->format('m-d H:i:s') }}</div> -->
+						<!-- <div class="rs-contentname">{{$post->userInfo->nick_name}}<br>{{ Carbon\Carbon::parse($post->created_time)->format('m-d H:i:s') }}</div> --> 
 						<div class="rs-contentword">
 							<h2 style="width:100%; padding: 0px 0px 0px 0px;Display: inline-block;  overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/p/{{$post->id}}">{!! $post->title !!}</a></h2>
-							<div poster="" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" height="200px" width="600" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
+							<div poster="" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:90px;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
 								<a href="/p/{{$post->id}}">
 									<div class="vjs-poster" tabindex="-1" aria-disabled="false" 
 											style="display: inline-block;
@@ -75,7 +81,7 @@ No.1老湿机休息站，带你升天带你飞，频繁更新片片精彩！大�
 						@endif		
 					</div>
 				</div>
-		@if ( $loop->index %  2 ==1)
+		@if ((($device == 'ios' || $device == 'android') &&  ($loop->index %  2 ==1))   ||   ( ($device != 'ios' && $device != 'android')  &&  ($loop->index %  3 ==2))  )
 			</div>
 		@endif
 		@endforeach

@@ -78,7 +78,7 @@
 			JuicyAds END-->
 			
 			@if ($device == 'ios' || $device == 'android')
-			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px; height: 2950px;">
+			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px; height: AUTO;">
 				<h5 class="recommend">推荐影片</h5>
 				<!--
 				@php
@@ -88,10 +88,33 @@
 				
 				@foreach ($relate as $re)
 				<div style="float: left;padding: 10px; width: 100%; height: 250px; margin: 5px;  overflow: hidden; text-align: center">
-					<a href="/p/{{$re->post_id}}">
-					<img src="{{ asset('storage'.$re->article['tb_img']) }}"  style="width: 100%;">
-					<div style="font-size: 8; padding-top: 5px;">{{$re->article['title']}}</div>
-					</a>
+					
+					<div poster="" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:80%;    padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
+						<a href="/p/{{$re->post_id}}">
+							<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
+														vertical-align: middle;
+														background-repeat: no-repeat;
+														background-position: 50% 50%;
+														background-size: contain;
+														cursor: pointer;
+														margin: 0;
+														padding: 0;
+														position: relative;
+														top: 0PX;
+														right: 0;
+														bottom: 0;
+														left: 0;
+														height: 100%;  
+														 WIDTH: 100%;
+														MARGIN: 0PX 5PX 0 5PX;
+														BACKGROUND-COLOR: #000;
+														background-image: url('{{ asset('storage'.$re->article['tb_img'])}}');" 
+													>
+							</div>
+							<div style="font-size: 8; padding-top: 5px;">{{$re->article['title']}}</div>
+		
+						</a>
+					</div>
 				</div>
 				
 				<!-- JuicyAds v3.0
@@ -117,11 +140,35 @@
 				<h5 class="recommend">推荐影片</h5>
 				@foreach ($relate as $re)
 				<div style="float: left;padding: 10px; width: 230px; height: 185px; margin: 5px; overflow: hidden">
-					<a href="/p/{{$re->post_id}}">
+					<div poster="" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:80%;    padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
+						<a href="/p/{{$re->post_id}}">
+							<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
+														vertical-align: middle;
+														background-repeat: no-repeat;
+														background-position: 50% 50%;
+														background-size: contain;
+														cursor: pointer;
+														margin: 0;
+														padding: 0;
+														position: relative;
+														top: 0PX;
+														right: 0;
+														bottom: 0;
+														left: 0;
+														height: 100%;  
+														 WIDTH: 100%;
+														MARGIN: 0PX 5PX 0 5PX;
+														BACKGROUND-COLOR: #000;
+														background-image: url('{{ asset('storage'.$re->article['tb_img'])}}');" 
+													>
+							</div>
+							<!-- <img src="{{ asset('storage'.$re->article['tb_img']) }}" style="width: 300px;"> -->
+							<div style="font-size: 8; padding-top: 5px;">{{$re->article['title']}}</div>
+		
+						</a>
+					</div>
 					
-					<img src="{{ asset('storage'.$re->article['tb_img']) }}"  style="width: 210px; height: 80%;">
-					<div style="font-size: 8; padding-top: 5px;">{{$re->article['title']}}</div>
-					</a>
+				 
 				</div>
 				@endforeach
 				<div style="clear: both"></div>

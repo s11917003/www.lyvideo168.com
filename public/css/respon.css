@@ -8,6 +8,7 @@
 	font-family: Arial, "微軟正黑體";
 	background-color:#1c1e21;
 	padding-top: 45px;
+	color: #999;
 }
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	font-weight: bold;
@@ -340,7 +341,7 @@ transform: translateX(0rem);
 	
 }
 #blogVideo {
-	max-width:50%;
+	max-width:33%;
 	background-color: #333;
     margin: 0 3px 10px 3px;
     border-radius: 15px;
@@ -514,7 +515,7 @@ transform: translateX(0rem);
 	padding:0;
 	margin:0;
 	color:#f90;
-	font-size:17px;
+	font-size:15px;
 	font-weight: bolder;
 }
 
@@ -544,7 +545,7 @@ transform: translateX(0rem);
 }
 
 .rs-digg-box2-tag {
-	padding: 5px 4px 5px 4px;
+	padding: 5px 4px 5px 0px;
 	background-color: #333;
     color: #f90;
 }
@@ -1148,10 +1149,17 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 	/*margin:40px 0 0 0;*/
 	/* background-color: #fff; */
 }
-
-#rs-footer a {
-	color: #555;
+#rs-footer p {
+	color:#f90;
 }
+#rs-footer a {
+	color: #fff;
+}
+
+/* #blogVideo {
+	flex-basis:100%;
+	max-width:33%;
+} */
 
 
 /* Tablet view */
@@ -1171,10 +1179,7 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 		flex-basis:100%;
 		max-width:100%;
 	}
-	#blogVideo {
-		flex-basis:100%;
-		max-width:100%;
-	}
+	 
 	#rs-maintop {
 		width:100%;
 		margin:0 auto;
@@ -1431,6 +1436,13 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 	.rs-dl-os2 {
 		display:none;
 	}
+	#blogVideo {
+		flex-basis:100%;
+		max-width:32%;
+	}
+	.container {
+		max-width: 540px;
+	}
 }
 
 @media screen and (max-width:580px) {
@@ -1464,7 +1476,7 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 	}
 	#blogVideo {
 		flex-basis:100%;
-		max-width:48%;
+		max-width:32%;
 	}
 	#rs-maintop {
 		width:100%;

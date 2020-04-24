@@ -6,7 +6,8 @@
 {{strip_tags($post->title)}}
 @stop
 @section('topscript')
-<meta itemprop="name" content="老濕機">
+<meta itemprop="name" content="
+">
 <meta itemprop="description" content="{{strip_tags($post->title)}}">
 
 <script>
