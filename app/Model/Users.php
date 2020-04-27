@@ -8,6 +8,7 @@ class Users extends Model
     protected $fillable = [];
     protected $primaryKey = 'user_id';
     //public $timestamps = false;
-	protected $hidden = ['password'];
+    protected $hidden = ['password'];
+    protected $rememberTokenName = '';
 
 }

@@ -223,7 +223,7 @@ a,a:hover {
 	top: 70px;
 }
 .nav-link-mask {
-	width:1100%;
+	width:110%;
 	position: fixed;
 	top: 45px; /* Height of navbar */
 	bottom: 0;
@@ -243,10 +243,10 @@ a,a:hover {
 
 }
 .offcanvas-collapse {
-	/* position: fixed; */
+	position: fixed;
 	top: 45px; /* Height of navbar */
 	bottom: 0;
-	/* background-color:rgba(28, 30, 33, 1)  ; */
+	background-color:rgba(28, 30, 33, 1)  ;
  
 	margin: 0 auto;
  
@@ -259,6 +259,8 @@ a,a:hover {
 	transform: translateX(-100%);
 }
 .offcanvas-collapse.open {
+	display: inline;
+
 -webkit-transform: translateX(0rem);
 transform: translateX(0rem);  
 }
@@ -344,7 +346,8 @@ transform: translateX(0rem);
 	max-width:33%;
 	background-color: #333;
     margin: 0 3px 10px 3px;
-    border-radius: 15px;
+	border-radius: 15px;
+	padding: 0px;
 }
 #blogVideo.video-js {
 	max-width:50%;
