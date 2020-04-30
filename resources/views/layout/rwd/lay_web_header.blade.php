@@ -12,7 +12,7 @@
 		
 			<div class=" b rs-logo"><a href="/"></a></div>
 			<div class="c filler"></div>			
-			{{ isset($postArticle) ? $postArticle : false }} 
+			@php (isset($postArticle) ? $postArticle : false )
 			@if ($postArticle == false)
 			<div id="rs-loginBar" class="d">
 				<ul class="loginBar">

@@ -315,7 +315,7 @@ $(document).ready(function () {
 
 	$(document).on('click', '.like', function(){
 		var clickEv = $(this).data('id')
-		snsclick(clickEv)		
+		// snsclick(clickEv)		
 	})
 	/*
 	$('.like').on('click', function(){

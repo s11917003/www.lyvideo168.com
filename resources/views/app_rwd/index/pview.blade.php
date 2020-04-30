@@ -8,7 +8,7 @@
 @section('topscript')
 <meta itemprop="name" content="老濕機">
 <meta itemprop="description" content="{{strip_tags($post->title)}}">
-
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 <script>
 	var postid = '{{$post->id}}';
 	var postnick = '{{$post->userInfo->nick_name}}';
@@ -17,10 +17,10 @@
 @stop
 @section('maincontent')
 	<!-- Content 左側 開始 -->
-	<div id="rs-content-left">
+	<div id="">  
 		<div id="rs-content-left-box">
-			<div class="rs-contentpics" style="background: url({{$post->userInfo->avatar}}) no-repeat top center; background-size:50px"><a href="/p/{{$post->id}}"></a></div>
-			<div class="rs-contentname">{{$post->userInfo->nick_name}}<br>{{ Carbon\Carbon::parse($post->created_time)->format('m-d H:i:s') }}</div>
+			<!-- <div class="rs-contentpics" style="background: url({{$post->userInfo->avatar}}) no-repeat top center; background-size:50px"><a href="/p/{{$post->id}}"></a></div>
+			<div class="rs-contentname">{{$post->userInfo->nick_name}}<br>{{ Carbon\Carbon::parse($post->created_time)->format('m-d H:i:s') }}</div> -->
 			<div class="rs-contentword">
 				<h2><a href="javascript:void(0)">{!! $post->title !!}</a></h2>
 					<div style="position: relative">
@@ -58,7 +58,23 @@
 			</div>
 			@endif
 			JuicyAds END -->
-			
+			<div id="rs-digg-box2">
+				<div class="rs-digg-left">
+					<div class="" id='post-digg-{{$post->id}}' data-id='post-digg-{{$post->id}}'><i class=""></i><span> {{$postsDetail->count_view}} views</span></span></div>
+				</div>
+				<div class="rs-digg-right orange5">
+					@if ($status == 1)
+						<div class="rs-digg like rs-digg-click" id='post-digg-thumbs-up' data-id='{{$post->id}}'><i class="fas fa-thumbs-up fa-w-16"></i><span> {{$postsDetail->count_digg}} </span></span></div>
+						<div class="rs-digg like " id='post-digg-thumbs-down' data-id='{{$post->id}}'><i class="fas fa-thumbs-down"></i><span> {{$postsDetail->count_bury}} </span></div>
+					@elseif ($status == 2)
+						<div class="rs-digg like" id='post-digg-thumbs-up' data-id='{{$post->id}}'><i class="fas fa-thumbs-up fa-w-16"></i><span> {{$postsDetail->count_digg}} </span></span></div>
+						<div class="rs-digg like rs-digg-click" id='post-digg-thumbs-down' data-id='{{$post->id}}'><i class="fas fa-thumbs-down"></i><span> {{$postsDetail->count_bury}} </span></div>
+					@else  
+						<div class="rs-digg like" id='post-digg-thumbs-up' data-id='{{$post->id}}'><i class="fas fa-thumbs-up fa-w-16"></i><span> {{$postsDetail->count_digg}} </span></span></div>
+						<div class="rs-digg like" id='post-digg-thumbs-down' data-id='{{$post->id}}'><i class="fas fa-thumbs-down"></i><span> {{$postsDetail->count_bury}} </span></div>
+					@endif
+				</div>
+			</div>
 			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px;">
 				@if ($post->tag)
 					@foreach ($post->tag as $tag)
@@ -186,10 +202,81 @@
   {lang: 'zh-TW'}
 </script>
 <script>
+	
 	$('#closead').on('click',function(){
 		//alert('close')
 		$('#videocoverad').hide()
 		
+	})
+	$.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+	$('#post-digg-thumbs-up').on('click',function(){
+		// if($("#post-digg-thumbs-up").hasClass('rs-digg-click')) {
+		// console.log('hasClass')
+		// 	return
+		// }
+		var id =  $(this).attr("data-id") 
+		$.ajax({
+			type:"POST",
+			url:"/thumbsup",
+			dataType:"json",
+			data:{id:id},
+			success:function(result){
+				
+				var status = result['status']
+				var loginstatus = result['login']
+				var count_digg = result['count_digg']
+				var count_bury = result['count_bury']
+				if(!loginstatus || loginstatus == false ) {
+					window.location.href = '/login'
+					return
+				}
+				$("#post-digg-thumbs-down span").html(' '+count_bury+' ');
+				$("#post-digg-thumbs-up span").html(' '+count_digg+' ');
+				$("#post-digg-thumbs-down").removeClass('rs-digg-click');
+				$("#post-digg-thumbs-up").removeClass('rs-digg-click');
+				if(status == 1 ) {
+					$("#post-digg-thumbs-up").addClass('rs-digg-click');
+				}
+				
+				
+			}
+		});	
+	})
+
+	$('#post-digg-thumbs-down').on('click',function(){
+		// if($("#post-digg-thumbs-down").hasClass('rs-digg-click')) {
+		// console.log('hasClass')
+		// 	return
+		// }
+		var id =  $(this).attr("data-id") 
+		$.ajax({
+			type:"POST",
+			url:"/thumbsdown",
+			dataType:"json",
+			data:{id:id},
+			success:function(result){
+				var status = result['status']
+				var loginstatus = result['login']
+				var count_digg = result['count_digg']
+				var count_bury = result['count_bury']
+				if(!loginstatus || loginstatus == false ) {
+					window.location.href = '/login'
+					return
+				}
+				$("#post-digg-thumbs-down span").html(' '+count_bury+' ');
+				$("#post-digg-thumbs-up span").html(' '+count_digg+' ');
+				$("#post-digg-thumbs-up ").removeClass('rs-digg-click');
+				$("#post-digg-thumbs-down").removeClass('rs-digg-click');
+				if(status == 2 ) {
+					$("#post-digg-thumbs-down").addClass('rs-digg-click');
+				}
+				
+			}
+		});	
 	})
 </script>
 <script src='/js/comm.js?r=@php echo uniqid(); @endphp' async=""></script>
