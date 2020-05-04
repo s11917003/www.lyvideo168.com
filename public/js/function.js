@@ -107,9 +107,19 @@ $(document).ready(function () {
 		return true;
     }
 	function publishEvent(event,id) {
-		
 
+		// console.log('#publishEvent')
+		// for (i = 0; i < 5; i++) {
+		// 	var index = ''
+		// 	if(i!=0) {
+		// 		index = i +''
+		// 	}
+
+		// 	console.log( $('#optgroup'+index).val())
 		 
+			 
+		// }
+		// 	return
 		if($('#imgfile').val() != '' || $('#videofile').val() != '' || $('.tablinks.active').data('id') == 1) {
 			
 			if(uploading == true) {
@@ -117,17 +127,17 @@ $(document).ready(function () {
 				return false;
 			}
 
-			num =  $('#cuttime').val()
-			num2 =  $('#cuttime2').val()
-			if(isNaN(Number(num)) || isNaN(Number(num2))){  
-				alert('请输入正整数');
-				return false;
-			} else if(Number(num)<0 || Number(num2)<0) {
-				alert('请输入正整数');
-				return false;
-			}
+			// num =  $('#cuttime').val()
+			// num2 =  $('#cuttime2').val()
+			// if(isNaN(Number(num)) || isNaN(Number(num2))){  
+			// 	alert('请输入正整数');
+			// 	return false;
+			// } else if(Number(num)<0 || Number(num2)<0) {
+			// 	alert('请输入正整数');
+			// 	return false;
+			// }
 
-			for(i=1;i<=4;i++) {
+			for (i = 0; i < 5; i++)
 				if($("#article"+i).is(":visible")){
 					num =  $('#cuttime'+i).val()
 					num2 =  $('#cuttime2'+i).val()
@@ -159,7 +169,7 @@ $(document).ready(function () {
 				return;
 			} 
 			else {
-				alert('哥哥您的內容沒有寫唷');
+				alert('哥哥您的內容沒有寫唷1');
 				return;
 			}
 		}
@@ -214,7 +224,7 @@ $(document).ready(function () {
 		data.append("userid", user_id);
 		data.append("type", type);
 		//## 將檔案append FormData
-		for (i = 0; i < 4; i++) {
+		for (i = 0; i < 5; i++) {
 			var index = ''
 			if(i!=0) {
 				index = i +''
@@ -300,18 +310,7 @@ $(document).ready(function () {
 	$("#publishBtn").on('click', function(e) {
 		publishEvent(e,0);
 	});
-	$("#publishBtn1").on('click', function(e) {
-		publishEvent(e,1);
-	});
-	$("#publishBtn2").on('click', function(e) {
-		publishEvent(e,2);
-	});
-	$("#publishBtn3").on('click', function(e) {
-		publishEvent(e,3);
-	});
-	$("#publishBtn4").on('click', function(e) {
-		publishEvent(e,4);
-	});
+
 
 	$(document).on('click', '.like', function(){
 		var clickEv = $(this).data('id')
