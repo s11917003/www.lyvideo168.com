@@ -7,7 +7,7 @@
 	padding:0;
 	font-family: Arial, "微軟正黑體";
 	background-color:#1c1e21;
-	padding-top: 45px;
+	padding-top: 55px;
 	color: #999;
 }
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
@@ -1228,6 +1228,9 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 		height:45px;
 		overflow:hidden;
 	}
+	#rs-maintop form input {
+		/* display: none; */
+	}
 	.justify-content-center1 {
 		width: 800px;
 	}
@@ -1525,7 +1528,7 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 		width:100%;
 		margin:0 auto;
 	}
-
+	
 	#ms-optgroup {
 		width:100%;
 	}

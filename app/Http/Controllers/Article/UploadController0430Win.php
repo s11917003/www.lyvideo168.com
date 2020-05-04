@@ -38,16 +38,13 @@ class UploadController extends Controller {
 
 		 
 		$ffprobe = \FFMpeg\FFProbe::create([
-			// 'ffprobe.binaries' => 'C:/ffmpeg/bin/ffprobe.exe'
-			'ffprobe.binaries' => ('/usr/bin/ffmpeg-git-amd64-static/ffprobe')
+			'ffprobe.binaries' => 'C:/ffmpeg/bin/ffprobe.exe'
 		 
 		]);
 	 
 		$ffmpeg  = \FFMpeg\FFMpeg::create([
-			// 'ffmpeg.binaries' => ('C:/ffmpeg/bin/ffmpeg.exe'),
-			// 'ffprobe.binaries' => ('C:/ffmpeg/bin/ffprobe.exe'),
-			'ffmpeg.binaries' => ('/usr/bin/ffmpeg-git-amd64-static/ffmpeg'),
-			'ffprobe.binaries' => ('/usr/bin/ffmpeg-git-amd64-static/ffprobe'),
+			'ffmpeg.binaries' => ('C:/ffmpeg/bin/ffmpeg.exe'),
+			'ffprobe.binaries' => ('C:/ffmpeg/bin/ffprobe.exe'),
 			'timeout' => 3600,
 			'ffmpeg.threads' => 12
 		]);
@@ -107,10 +104,6 @@ class UploadController extends Controller {
 						// var_dump("ffmpeg -i ".storage_path().'/app'.$path.'/'.$filename.'.mp4'." -ss ".$start." -c copy -t ".$timecode." ".storage_path().'/app'.$path.'/'.$filename.'1.mp4');
 						shell_exec("ffmpeg -i ".storage_path().'/app'.$path.'/'.$filename.'.mp4'." -ss ".$start." -c copy -t ".$end." ".storage_path().'/app'.$path.'/'.$filename.'1.mp4');
 						shell_exec("ffmpeg -i ".storage_path().'/app'.$path.'/'.$filename.'1.mp4'." -profile:v baseline -b:v 1200k -maxrate 1200k -b:a 41k -start_number 0 -hls_time 20 -hls_list_size 0 -vf \"drawtext=fontfile=Microsoft YaHei Mono.ttf:text='lygj16888.com':y=line_h:x=W-w:fontsize=10:fontcolor=yellow:shadowx=1:shadowy=1\""." -codec:v libx264 -codec:a copy -y -f hls ".storage_path().'/app'.$path.'/'.$filename.'.m3u8');
-						// shell_exec("/usr/bin/ffmpeg-git-amd64-static/ffmpeg -i ".storage_path().'/app'.$path.'/'.$filename.'.mp4'." -ss ".$start." -c copy -t ".$end." ".storage_path().'/app'.$path.'/'.$filename.'1.mp4');
-						// shell_exec("/usr/bin/ffmpeg-git-amd64-static/ffmpeg -i ".storage_path().'/app'.$path.'/'.$filename.'1.mp4'." -profile:v baseline -b:v 1200k -maxrate 1200k -b:a 41k -start_number 0 -hls_time 20 -hls_list_size 0 -vf \"drawtext=fontfile=Microsoft YaHei Mono.ttf:text='lygj16888.com':y=line_h:x=W-w:fontsize=10:fontcolor=yellow:shadowx=1:shadowy=1\""." -codec:v libx264 -codec:a copy -y -f hls ".storage_path().'/app'.$path.'/'.$filename.'.m3u8');
-						
-						
 						$disk->makeDirectory($pathImg);
 						// // 在视频一半的地方截圖
 						unlink(storage_path().'/app'.$path.'/'.$filename.'.mp4');

@@ -10,8 +10,13 @@
 				</button><a class="navbar-brand" href="#"></a>
 			</div>	
 		
-			<div class=" b rs-logo"><a href="/"></a></div>
-			<div class="c filler"></div>			
+			<div class="rs-logo"><a href="/"></a></div>	
+			<!-- <form class="form-signin" method="POST"  style="    max-width: 220px; height: 30px; padding: 0px;">
+				<input  style="width: 100px; height: 100%; margin: 0;   padding: 0px;    border-radius: 0; border: 0;" type="text" name="search" id="search" value="{{ old('email') }}" class="form-control" placeholder="Search" required="" autofocus="">
+				<div style="margin: 0px 0;height:  99%;background-color:white;padding: 5px 11px 5px 11px;color:#111"><i class="fas  fa-search"></i></div>
+			 
+			</form> -->
+			<div class="filler"></div>			
 			@php (isset($postArticle) ? $postArticle : false )
 			@if ($postArticle == false)
 			<div id="rs-loginBar" class="d">
