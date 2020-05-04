@@ -6,7 +6,8 @@
 {{strip_tags($post->title)}}
 @stop
 @section('topscript')
-<meta itemprop="name" content="老濕機">
+<meta itemprop="name" content="
+">
 <meta itemprop="description" content="{{strip_tags($post->title)}}">
 
 <script>
@@ -44,7 +45,7 @@
 				<div style="clear: both"></div>
 		</div>
 		<div style="margin: 10px; text-align: center">
-			<h5>推薦影片</h5>
+			<h5 class="recommend">推荐影片</h5>
 			@foreach ($relate as $re)
 			<div style="float: left; width: 50%; height: 140px;padding: 5px; margin-bottom: 5px">
 				<div id="relate{{$re->article['id']}}" data-pid="{{$re->article['id']}}">

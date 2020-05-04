@@ -1,8 +1,16 @@
 $(document).ready(function () {
 
 	var videoFile;
+	var videoFile1;
+	var videoFile2;
+	var videoFile3;
+	var videoFile4;
 	var imgFile;
-	$('#videofile').on('change', checkFile);
+	$('#videofile').on('change',function(e){checkFile(e,0)});
+	$('#videofile1').on('change',function(e){checkFile(e,1)});
+	$('#videofile2').on('change',function(e){checkFile(e,2)});
+	$('#videofile3').on('change',function(e){checkFile(e,3)});
+	$('#videofile4').on('change',function(e){checkFile(e,4)});
 	$('#imgfile').on('change', checkFile);
 	
 	var ff =GetURLParameter('focus');
@@ -10,9 +18,13 @@ $(document).ready(function () {
 		$('#reply').focus()
 	}
 
-    function checkFile(event) {
+    function checkFile(event,id=0) {
+
+	  
         var $file_input = $(event.currentTarget);
-        var file_name = $file_input.val();
+		var file_name = $file_input.val();
+		
+	
         if(!file_name && $('#postType').val() != 1) {
 	        //alert('哥哥您沒有選擇任何檔案唷！');
         	return false;
@@ -24,13 +36,13 @@ $(document).ready(function () {
         }
         
         if(is_video && !/.(mp4|flv|mpeg|mov)/gi.test(file_name)){
-            showHideError($file_input[0].id, true, "請上傳影片檔案,後綴必須是mp4,flv,mov,mpeg");
+            showHideError($file_input[0].id, true, "請上傳影片檔案,後綴必須是mp4,flv,mov,mpeg",id);
             $file_input.val("");
             return false;
         }
 
         if(!is_video && !/.(jpg|jpeg|gif|png)/gi.test(file_name)){
-            showHideError($file_input[0].id, true, "請上傳圖片檔案,後綴必須是jpeg,jpg,gif,png");
+            showHideError($file_input[0].id, true, "請上傳圖片檔案,後綴必須是jpeg,jpg,gif,png",id);
             $file_input.val("");
             return false;
         }
@@ -39,23 +51,54 @@ $(document).ready(function () {
             var size =  $file_input[0].files[0].size;
             if(is_video){
                 if (/.(mp4|webm|ogv)/gi.test(file_name) && size > 1024*1024*3500) {
-                    showHideError($file_input[0].id, true, "你上傳的是mp4文件, 最大支持3.5g");
+                    showHideError($file_input[0].id, true, "你上傳的是mp4文件, 最大支持3.5g",id);
                     $file_input.val("");
                     return false;
                 }
                 // 除了浏览器支持的格式以及avi格式外的其他几种文件,限制为50M
                 if (!/.(mp4|webm|ogv)/gi.test(file_name)&& size > 1024*1024*3500) {
-                    showHideError($file_input[0].id, true, "你上傳的是非mp4文件, 最大支持3.5g");
+                    showHideError($file_input[0].id, true, "你上傳的是非mp4文件, 最大支持3.5g",id);
                     $file_input.val("");
                     return false;
                 }
             }
         }
 		
-		showHideError($file_input[0].id, false, '');
+		showHideError($file_input[0].id, false, '',id);
 		
 		if(is_video) {
-        	videoFile = event.target.files;
+			var tmpvideoFile 
+			if (id==0) {
+				videoFile = event.target.files;
+				tmpvideoFile = videoFile;
+			} if (id==1) {
+				videoFile1 = event.target.files;
+				tmpvideoFile = videoFile1;
+			} if (id==2) {
+				videoFile2 = event.target.files;
+				tmpvideoFile = videoFile2;
+			} if (id==3) {
+				videoFile3 = event.target.files;
+				tmpvideoFile = videoFile3;
+			} if (id==4) {
+				videoFile4 = event.target.files;
+				tmpvideoFile = videoFile4;
+			}
+		
+
+			console.log(videoFile)
+			console.log(videoFile1)
+			console.log(videoFile2)
+			console.log(videoFile3)
+			console.log(videoFile4)
+			arr=tmpvideoFile[0].name.split(".");
+			var removed = arr.splice(arr.length-1,1);
+ 
+		  if (id==0) {
+			$('#postContent').text(arr.join('.'));
+		  } else {
+			$('#postContent' + id).text(arr.join('.'));
+		  }
 		} else {
 			imgFile = event.target.files;
 		}
@@ -63,13 +106,83 @@ $(document).ready(function () {
         //console.log(imgFile)
 		return true;
     }
+	function publishEvent(event) {
+		if($('#imgfile').val() != '' || $('#videofile').val() != '' || $('.tablinks.active').data('id') == 1) {
+			
+			if(uploading == true) {
+				alert('哥哥您別急呀！');
+				return false;
+			}
 
-    function showHideError (id, show, text) {
+			// num =  $('#cuttime').val()
+			// num2 =  $('#cuttime2').val()
+			// if(isNaN(Number(num)) || isNaN(Number(num2))){  
+			// 	alert('请输入正整数');
+			// 	return false;
+			// } else if(Number(num)<0 || Number(num2)<0) {
+			// 	alert('请输入正整数');
+			// 	return false;
+			// }
+
+			for (i = 0; i < 5; i++) {
+				var index = ''
+				if(i!=0) {
+					index = i +''
+				}
+				console.log( $("#article"+index).is(":visible"))
+				if($("#article"+index).is(":visible")){
+					num =  $('#cuttime'+index).val()
+					num2 =  $('#cuttime2'+index).val()
+					if(isNaN(Number(num)) || isNaN(Number(num2))){  
+						alert('请输入正整数');
+						return false;
+					} else if(Number(num)<0 || Number(num2)<0) {
+						alert('请输入正整数');
+						return false;
+					}
+					if($('#optgroup'+index).val().length == 0) {
+						alert('哥哥您未输入分類唷!');
+						return false;
+					}
+
+					if($('#videofile'+index).val() == '') {
+						alert('哥哥您有檔案未输入唷!');
+						return false;
+					}
+					if($('#postContent'+index).val() == '') {
+						alert('哥哥您有內容沒有寫唷');
+						return false;
+					}
+				}
+
+			}
+		 
+		 
+				uploading = true;
+				$("#publishBtn").prop('disabled', true);
+				$("#publishBtn").css( "background-color", '#c7c5c1');
+				$("#publishBtn").html('<img src="/img/source.gif?a=1" style="height:18px;">');
+				uploadFile(event, $('.tablinks.active').data('id'))
+				return;
+			 
+		}
+		
+		
+		alert('哥哥您沒有選擇任何檔案唷!');
+		return;
+	}
+    function showHideError (id, show, text, postContentId) {
+		var videofileErrorText = ''
+		if (postContentId==0) {
+			videofileErrorText  = 'videofileError';
+		} else {
+			videofileErrorText =  'videofileError'  + postContentId;
+		}
 	    if(show) {
-	        $('#videofileError').text(text);
-			$('#videofileError').show();	    
+	        $('#'+videofileErrorText).text(text);
+			$('#'+videofileErrorText).show();	    
 	    } else {
-			$('#videofileError').hide();	    
+			$('#'+videofileErrorText).hide();	    
 	    }
 
         
@@ -78,8 +191,10 @@ $(document).ready(function () {
     function uploadFile(event, type) {
 		event.stopPropagation(); // Stop stuff happening
 		event.preventDefault(); // Totally stop stuff happening
-		//console.log(videoFile)
+		// console.log(videoFile)
+		// console.log(videoFile1)
 
+		// return;
         //## 宣告一個FormData
         var data = new FormData();
         /*
@@ -88,16 +203,34 @@ $(document).ready(function () {
         }
         */
         if (type == 3) {
-        	data.append("video", videoFile[0]);
-        }
-        //## 將檔案append FormData
-        data.append("content", $('#postContent').val());
-        data.append("userid", user_id);
-        data.append("type", type);
-        data.append("hd", $('#hd').val());
-        data.append("cuttime", $('#cuttime').val());
-        data.append("cuttime2", $('#cuttime2').val());
-        data.append("tags", $('#optgroup').val())
+			data.append("video", videoFile[0]);
+
+			if(videoFile1)
+				data.append("video1", videoFile1[0]);
+			if(videoFile2)
+			data.append("video2", videoFile2[0]);
+			if(videoFile3)
+			data.append("video3", videoFile3[0]);
+			if(videoFile4)
+			data.append("video4", videoFile4[0]);
+		}			
+		data.append("userid", user_id);
+		data.append("type", type);
+		//## 將檔案append FormData
+		for (i = 0; i < 5; i++) {
+			var index = ''
+			if(i!=0) {
+				index = i +''
+			}
+			data.append("content"+index, $('#postContent'+index).val());
+			data.append("hd"+index, $('#hd'+index).val());
+			data.append("cuttime"+index, $('#cuttime'+index).val());
+			data.append("cuttime2"+index, $('#cuttime2'+index).val());
+			data.append("tags"+index, $('#optgroup'+index).val())
+		}
+      
+		// console.log(data)
+		// return
 		
 		$.ajax({
 			method: "POST",
@@ -117,17 +250,50 @@ $(document).ready(function () {
 				}
 			},			
 			success: function(data){
+				$("#spinner").hide();
 				if(data.ret == 0 || data.ret == -3) {
 					//toastr["error"](data.msg);
 					alert(data.msg);
-					$('#videofile').val('');
+					
 					$('#imgfile').val('');
 					$("#publishBtn").prop('disabled', false);
+					$("#publishBtn").css( "background-color", '');
+					$('#videofile').val('');
+					$('#postContent').text('');
+					$('#cuttime').val(0);
+					$('#cuttime2').val(0);
+					$('#hd option').get(0).selected = true;
+					$('#optgroup').multiSelect('deselect_all');
+					for (i = 1; i < 5; i++) {
+						$('#videofile'+i).val('');
+						$('#postContent' + i).text('');
+						$('#cuttime'+i).val(0);
+						$('#cuttime2'+i).val(0);
+						$('#hd'+i+' option').get(0).selected = true;
+						$('#optgroup'+i).multiSelect('deselect_all');
+					}
+				
+
 					
 				} else {
 					$('#videofile').val('');
+					$('#postContent').text('');
+					$('#cuttime').val(0);
+					$('#cuttime2').val(0);
+					$('#hd option').get(0).selected = true;
+					$('#optgroup').multiSelect('deselect_all');
+					for (i = 1; i < 5; i++) {
+						$('#postContent' + i).text('');
+						$('#videofile'+i).val('');
+						$('#cuttime'+i).val(0);
+						$('#cuttime2'+i).val(0);
+						$('#hd'+i+' option').get(0).selected = true;
+						$('#optgroup'+i).multiSelect('deselect_all');
+					}
+
 					$('#imgfile').val('');
 					alert(data.msg)
+					$("#publishBtn").css( "background-color", '');
 					$("#publishBtn").prop('disabled', false);
 					//window.location.href='/';
 	      		}
@@ -136,6 +302,7 @@ $(document).ready(function () {
 
 	      	},
 		  	error :function( data ) {
+				$("#spinner").hide();
 	        	var errors = data.responseJSON;
 				if( data.status === 422 ) {
 					$.each(errors, function(index, value) {
@@ -150,54 +317,24 @@ $(document).ready(function () {
 			var loaded = evt.loaded;     //已经上传大小情况
 			var tot = evt.total;      //附件总大小
 			var per = Math.floor(100*loaded/tot);  //已经上传的百分比
+
+			if(per == 100) {
+				$("#spinner").show();
+			}
+			
 			$(".loading-bar").css("width" , per +"%").find("span").html( per +"%");
 		}
     }
 	
 
 	var uploading = false;
-	$("#publishBtn").on('click', function(event) {
-		
-		if($('#imgfile').val() != '' || $('#videofile').val() != '' || $('.tablinks.active').data('id') == 1) {
-			
-			if(uploading == true) {
-				alert('哥哥您別急呀！');
-				return false;
-			}
-
-			num =  $('#cuttime').val()
-			num2 =  $('#cuttime2').val()
-			if(isNaN(Number(num)) || isNaN(Number(num2))){  
-				alert('请输入正整数');
-				return false;
-			} else if(Number(num)<0 || Number(num2)<0) {
-				alert('请输入正整数');
-				return false;
-			}
-		 
-			if($('#postContent').val() != '') {
-		
-				uploading = true;
-				$("#publishBtn").prop('disabled', true);
-				$("#publishBtn").css( "background-color", '#c7c5c1');
-				$("#publishBtn").html('<img src="/img/source.gif?a=1" style="height:18px;">');
-				uploadFile(event, $('.tablinks.active').data('id'))
-				return;
-			} 
-			else {
-				alert('哥哥您的內容沒有寫唷');
-				return;
-			}
-		}
-		
-		
-		alert('哥哥您沒有選擇任何檔案唷!');
-		return;
-	})
+	$("#publishBtn").on('click', function(e) {
+		publishEvent(e);
+	});
 
 	$(document).on('click', '.like', function(){
 		var clickEv = $(this).data('id')
-		snsclick(clickEv)		
+		// snsclick(clickEv)		
 	})
 	/*
 	$('.like').on('click', function(){
@@ -256,7 +393,7 @@ $(document).ready(function () {
 	})
 	
 	$('[id*=replybtn]').on('click', function(){
-		console.log(nick)
+	
 		var pid = $(this).data('postid')
 
 		var replytext = $('#reply-'+pid).val()
@@ -274,7 +411,7 @@ $(document).ready(function () {
 		if(nick == '') {
 			nick = $('#post-nick-'+pid).val()
 		}
-						
+		$("#spinner").shww();				
 		$.ajax({
 			method: "POST",
 			dataType: "json",
@@ -290,6 +427,7 @@ $(document).ready(function () {
 				userid: user_id				
 			},		
 			success: function(data){
+			
 				if(data.ret == 1) {
 					//toastr["info"](data.msg);
 					//$('#'+clickbtn+' span').text(data.count)
@@ -303,6 +441,7 @@ $(document).ready(function () {
 	      		}
 	      	},
 		  	error :function( data ) {
+			
 	        	var errors = data.responseJSON;
 				if( data.status === 422 ) {
 					$.each(errors, function(index, value) {

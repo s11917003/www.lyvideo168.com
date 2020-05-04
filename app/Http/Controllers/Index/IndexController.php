@@ -8,8 +8,10 @@ use App\Model\PostsArticle;
 use App\Model\PostsCategory;
 use App\Model\PostsDetail;
 use App\Model\PostsTag;
+use App\Model\PostsDigg;
 use App\Model\PostsTagRelationships;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use App\Lib\User;
 use App\Lib\Utils;
 
@@ -31,7 +33,7 @@ class IndexController extends Controller {
 	   	}   	
 	 
 	 	$category = PostsCategory::all();
-		$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->with('commentsGod')->where('cate_id', 3)->where('status', 1)->where('covered', 1)->orderBy('id', 'desc')->Paginate(6, null, 1, $page);
+		$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->with('commentsGod')->where('cate_id', 3)->where('status', 1)->where('covered', 1)->orderBy('id', 'desc')->Paginate(12, null, 1, $page);
 		
 		$lastPage = $posts->lastPage();
 		$currentPage = $posts->currentPage();
@@ -72,9 +74,12 @@ class IndexController extends Controller {
 			return ;
 		}
 		
+
+
 		//add pv;
 		PostsDetail::find($id)->increment('count_view');
-		   	 		
+		$postsDetail = PostsDetail::find($id);
+	 
 		//suggest post
 		$tags = PostsTagRelationships::where('post_id', $id)->get();
 		//var_dump($tags);
@@ -86,12 +91,25 @@ class IndexController extends Controller {
 		
 		//$relate = \DB::table('posts_tag_relationships')->whereIn('post_tag_id', $tagarr)->groupBy('post_id')->inRandomOrder()->limit(6)->get();
 		$relate = PostsTagRelationships::with('article')->where('post_id','!=', $id)->whereIn('post_tag_id', $tagarr)->where('status',1)->groupBy('post_id')->inRandomOrder()->limit(14)->get();	 		
+		
+
+		$status = 0;
+		if (Auth::check()) {
+			$user  = Auth::User();
+			if ($user) {
+				$postsDigg = PostsDigg::where('user_id',$user->user_id)->where('post_id',$id)->first();
+				$status = $postsDigg['status'];
+			}
+		}
+		
 		if($article) {
 			$device = Utils::chkdevice();
 			return view('app_rwd.index.pview',[
 				'post'=>$article,
 				'device' => $device,
-				'relate' => $relate
+				'relate' => $relate,
+				'postsDetail' => $postsDetail,
+				'status' => $status,
 			]);
 		} else {
 			//沒有文章跳轉
@@ -196,7 +214,7 @@ class IndexController extends Controller {
 			return ;
 		}		
 		
-		$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->with('commentsGod')->where('cate_id', $cats->id)->where('status', 1)->where('covered', 1)->orderBy('id', 'desc')->Paginate(10, null, 1, $page);
+		$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->with('commentsGod')->where('cate_id', $cats->id)->where('status', 1)->where('covered', 1)->orderBy('id', 'desc')->Paginate(12, null, 1, $page);
 		$lastPage = $posts->lastPage();
 		$currentPage = $posts->currentPage();
 				
@@ -332,6 +350,88 @@ class IndexController extends Controller {
 		return view('app_rwd.index.postpagev5',[
 			'tags' => $tags
 		]);
+	}
+ 
+	public function thumbsup(Request $request){
+		if (Auth::check()) {
+			// 這個使用者已經登入...
+			$user  = Auth::User();
+			if ($user) {
+				$id = intval($request->id);
+ 
+				$postsDigg =PostsDigg::where('user_id',$user->user_id)->where('post_id',$id)->first();
+				$status = 0;
+				if($postsDigg) {
+					$status = $postsDigg['status'];
+				   if ($status == 1){ //有讚
+						PostsDetail::find($id)->decrement('count_digg');
+				   } else if ($status == 2){ //有倒讚
+						$postsDetail = PostsDetail::find($id);
+						$postsDetail->increment('count_digg');
+						$postsDetail->decrement('count_bury');
+					 
+				   } else {
+						PostsDetail::find($id)->increment('count_digg');
+				   }
+				} else {
+					PostsDetail::find($id)->increment('count_digg');
+				}
+
+				if($status != 1) {
+					$status = 1;
+					PostsDigg::where('user_id',$user->user_id)->where('post_id',$id)->update( [ 'status' => 1 ] );
+				} else {
+					$status = 0;
+					PostsDigg::where('user_id',$user->user_id)->where('post_id',$id)->update( [ 'status' => 0 ] );
+				}
+
+				$postsDetail = PostsDetail::find($id);
+				return response()->json(['count_digg' => $postsDetail['count_digg'],'count_bury' => $postsDetail['count_bury'], 'status' => $status,'login' => true]);
+			}
+		} else {
+			return response()->json(['count_digg' => 1, 'status' => 1,'login' => false]);
+		}
+
+	}
+	public function thumbsdown(Request $request){
+		if (Auth::check()) {
+			// 這個使用者已經登入...
+			$user  = Auth::User();
+			if ($user) {
+				$id = intval($request->id);
+ 
+				$postsDigg =PostsDigg::where('user_id',$user->user_id)->where('post_id',$id)->first();
+				$status = 0;
+				if($postsDigg) {
+					$status = $postsDigg['status'];
+					
+				   if ($status == 1){ //有讚
+						$postsDetail = PostsDetail::find($id);
+						$postsDetail->increment('count_bury');
+						$postsDetail->decrement('count_digg');
+				   } else if ($status == 2){ //有倒讚
+						PostsDetail::find($id)->decrement('count_bury');
+				   } else {
+						PostsDetail::find($id)->increment('count_bury');
+				   }
+				} else {
+					PostsDetail::find($id)->increment('count_bury');
+				}
+
+				if($status != 2) {
+					$status = 2;
+					PostsDigg::where('user_id',$user->user_id)->where('post_id',$id)->update( [ 'status' => 2 ] );
+				} else {
+					$status = 0;
+					PostsDigg::where('user_id',$user->user_id)->where('post_id',$id)->update( [ 'status' => 0 ] );
+				}
+
+				$postsDetail = PostsDetail::find($id);
+				return response()->json(['count_digg' => $postsDetail['count_digg'],'count_bury' => $postsDetail['count_bury'], 'status' => $status,'login' => true]);
+			}
+		} else {
+			return response()->json(['count_digg' => 1, 'status' => 1,'login' => false]);
+		}	 
 	}
 	
 }

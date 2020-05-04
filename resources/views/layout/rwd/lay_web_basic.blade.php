@@ -35,7 +35,9 @@
 			load : cccccount
 		});
 		$('[data-toggle="offcanvas"]').on('click', function () {
-    		$('.offcanvas-collapse').toggleClass('open')
+			$('.offcanvas-collapse').toggleClass('open')
+			$('#nav-link-mask').toggle()
+			
 		  })
 		$('[data-toggle="dropdown"]').on('click', function () {
 			if ($('.dropdown-menu').hasClass( "show" ) ) {
@@ -44,7 +46,7 @@
 			}
     		$('.dropdown-menu').toggleClass('show')
 		})
-			 	});
+	});
 	
 	function cccccount() {
 		//console.log('+++')
