@@ -38,16 +38,16 @@ class UploadController extends Controller {
 
 		 
 		$ffprobe = \FFMpeg\FFProbe::create([
-			// 'ffprobe.binaries' => 'C:/ffmpeg/bin/ffprobe.exe'
-			'ffprobe.binaries' => ('/usr/bin/ffmpeg-git-amd64-static/ffprobe')
+			'ffprobe.binaries' => 'C:/ffmpeg/bin/ffprobe.exe'
+			// 'ffprobe.binaries' => ('/usr/bin/ffmpeg-git-amd64-static/ffprobe')
 		 
 		]);
 	 
 		$ffmpeg  = \FFMpeg\FFMpeg::create([
-			// 'ffmpeg.binaries' => ('C:/ffmpeg/bin/ffmpeg.exe'),
-			// 'ffprobe.binaries' => ('C:/ffmpeg/bin/ffprobe.exe'),
-			'ffmpeg.binaries' => ('/usr/bin/ffmpeg-git-amd64-static/ffmpeg'),
-			'ffprobe.binaries' => ('/usr/bin/ffmpeg-git-amd64-static/ffprobe'),
+			'ffmpeg.binaries' => ('C:/ffmpeg/bin/ffmpeg.exe'),
+			'ffprobe.binaries' => ('C:/ffmpeg/bin/ffprobe.exe'),
+			// 'ffmpeg.binaries' => ('/usr/bin/ffmpeg-git-amd64-static/ffmpeg'),
+			// 'ffprobe.binaries' => ('/usr/bin/ffmpeg-git-amd64-static/ffprobe'),
 			'timeout' => 3600,
 			'ffmpeg.threads' => 12
 		]);

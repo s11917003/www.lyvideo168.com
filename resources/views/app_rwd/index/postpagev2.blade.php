@@ -189,7 +189,6 @@
 					</div>						
 					<div class="error" id="videofileError4" style="display:none; font-size:14px; color: red">請選擇視頻文件,後綴必須是mp4,avi,rmvb,rm,flv,mpeg,ra,ram,mov,wmv</div>
 					<!-- <input type="submit" id="publishBtn1" value="投稿" d="publishBtn1">
-
 					<input type="button" id="addVideo1" value="加影片" d="addVideo"> -->
 				</div>
 			</div>
@@ -197,6 +196,12 @@
 			<input type="submit" id="publishBtn" value="投稿" d="publishBtn">
 			<input type="button" id="addVideo" value="加影片" d="addVideo" data-tab='1' >
 			<input type="button" id="rmoveVideo" style="display: none;" value="刪除" d="rmoveVideo" data-tab='1' >
+			<div id="spinner" class=""  style="    background-color: black;
+			opacity: 0.7;display: none; width: 100%;height: 100%;position: fixed;top: 0px;left: 0px;">
+				<div class="spinner-border" style="top: 50%; position: fixed; left: 45%;" role="status">
+				  <span class="sr-only">Loading...</span>
+				</div>
+			</div>
 			<script>
 				$(".tablinks").on('click', function(){
 					var clicked = $(this).data('id');

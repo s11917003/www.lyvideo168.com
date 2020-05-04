@@ -106,20 +106,7 @@ $(document).ready(function () {
         //console.log(imgFile)
 		return true;
     }
-	function publishEvent(event,id) {
-
-		// console.log('#publishEvent')
-		// for (i = 0; i < 5; i++) {
-		// 	var index = ''
-		// 	if(i!=0) {
-		// 		index = i +''
-		// 	}
-
-		// 	console.log( $('#optgroup'+index).val())
-		 
-			 
-		// }
-		// 	return
+	function publishEvent(event) {
 		if($('#imgfile').val() != '' || $('#videofile').val() != '' || $('.tablinks.active').data('id') == 1) {
 			
 			if(uploading == true) {
@@ -137,10 +124,15 @@ $(document).ready(function () {
 			// 	return false;
 			// }
 
-			for (i = 0; i < 5; i++)
-				if($("#article"+i).is(":visible")){
-					num =  $('#cuttime'+i).val()
-					num2 =  $('#cuttime2'+i).val()
+			for (i = 0; i < 5; i++) {
+				var index = ''
+				if(i!=0) {
+					index = i +''
+				}
+				console.log( $("#article"+index).is(":visible"))
+				if($("#article"+index).is(":visible")){
+					num =  $('#cuttime'+index).val()
+					num2 =  $('#cuttime2'+index).val()
 					if(isNaN(Number(num)) || isNaN(Number(num2))){  
 						alert('请输入正整数');
 						return false;
@@ -148,30 +140,31 @@ $(document).ready(function () {
 						alert('请输入正整数');
 						return false;
 					}
+					if($('#optgroup'+index).val().length == 0) {
+						alert('哥哥您未输入分類唷!');
+						return false;
+					}
 
-					if($('#videofile'+i).val() == '') {
+					if($('#videofile'+index).val() == '') {
 						alert('哥哥您有檔案未输入唷!');
 						return false;
 					}
-					if($('#postContent'+i).val() == '') {
+					if($('#postContent'+index).val() == '') {
 						alert('哥哥您有內容沒有寫唷');
+						return false;
 					}
 				}
 
 			}
 		 
-			if($('#postContent').val() != '') {
+		 
 				uploading = true;
 				$("#publishBtn").prop('disabled', true);
 				$("#publishBtn").css( "background-color", '#c7c5c1');
 				$("#publishBtn").html('<img src="/img/source.gif?a=1" style="height:18px;">');
 				uploadFile(event, $('.tablinks.active').data('id'))
 				return;
-			} 
-			else {
-				alert('哥哥您的內容沒有寫唷1');
-				return;
-			}
+			 
 		}
 		
 		
@@ -257,28 +250,50 @@ $(document).ready(function () {
 				}
 			},			
 			success: function(data){
+				$("#spinner").hide();
 				if(data.ret == 0 || data.ret == -3) {
 					//toastr["error"](data.msg);
 					alert(data.msg);
 					
 					$('#imgfile').val('');
 					$("#publishBtn").prop('disabled', false);
+					$("#publishBtn").css( "background-color", '');
 					$('#videofile').val('');
-					$('#videofile1').val('');
-					$('#videofile2').val('');
-					$('#videofile3').val('');
-					$('#videofile4').val('');
+					$('#postContent').text('');
+					$('#cuttime').val(0);
+					$('#cuttime2').val(0);
+					$('#hd option').get(0).selected = true;
+					$('#optgroup').multiSelect('deselect_all');
+					for (i = 1; i < 5; i++) {
+						$('#videofile'+i).val('');
+						$('#postContent' + i).text('');
+						$('#cuttime'+i).val(0);
+						$('#cuttime2'+i).val(0);
+						$('#hd'+i+' option').get(0).selected = true;
+						$('#optgroup'+i).multiSelect('deselect_all');
+					}
+				
 
 					
 				} else {
 					$('#videofile').val('');
-					$('#videofile1').val('');
-					$('#videofile2').val('');
-					$('#videofile3').val('');
-					$('#videofile4').val('');
+					$('#postContent').text('');
+					$('#cuttime').val(0);
+					$('#cuttime2').val(0);
+					$('#hd option').get(0).selected = true;
+					$('#optgroup').multiSelect('deselect_all');
+					for (i = 1; i < 5; i++) {
+						$('#postContent' + i).text('');
+						$('#videofile'+i).val('');
+						$('#cuttime'+i).val(0);
+						$('#cuttime2'+i).val(0);
+						$('#hd'+i+' option').get(0).selected = true;
+						$('#optgroup'+i).multiSelect('deselect_all');
+					}
 
 					$('#imgfile').val('');
 					alert(data.msg)
+					$("#publishBtn").css( "background-color", '');
 					$("#publishBtn").prop('disabled', false);
 					//window.location.href='/';
 	      		}
@@ -287,6 +302,7 @@ $(document).ready(function () {
 
 	      	},
 		  	error :function( data ) {
+				$("#spinner").hide();
 	        	var errors = data.responseJSON;
 				if( data.status === 422 ) {
 					$.each(errors, function(index, value) {
@@ -301,6 +317,11 @@ $(document).ready(function () {
 			var loaded = evt.loaded;     //已经上传大小情况
 			var tot = evt.total;      //附件总大小
 			var per = Math.floor(100*loaded/tot);  //已经上传的百分比
+
+			if(per == 100) {
+				$("#spinner").show();
+			}
+			
 			$(".loading-bar").css("width" , per +"%").find("span").html( per +"%");
 		}
     }
@@ -308,9 +329,8 @@ $(document).ready(function () {
 
 	var uploading = false;
 	$("#publishBtn").on('click', function(e) {
-		publishEvent(e,0);
+		publishEvent(e);
 	});
-
 
 	$(document).on('click', '.like', function(){
 		var clickEv = $(this).data('id')
@@ -373,7 +393,7 @@ $(document).ready(function () {
 	})
 	
 	$('[id*=replybtn]').on('click', function(){
-		console.log(nick)
+	
 		var pid = $(this).data('postid')
 
 		var replytext = $('#reply-'+pid).val()
@@ -391,7 +411,7 @@ $(document).ready(function () {
 		if(nick == '') {
 			nick = $('#post-nick-'+pid).val()
 		}
-						
+		$("#spinner").shww();				
 		$.ajax({
 			method: "POST",
 			dataType: "json",
@@ -407,6 +427,7 @@ $(document).ready(function () {
 				userid: user_id				
 			},		
 			success: function(data){
+			
 				if(data.ret == 1) {
 					//toastr["info"](data.msg);
 					//$('#'+clickbtn+' span').text(data.count)
@@ -420,6 +441,7 @@ $(document).ready(function () {
 	      		}
 	      	},
 		  	error :function( data ) {
+			
 	        	var errors = data.responseJSON;
 				if( data.status === 422 ) {
 					$.each(errors, function(index, value) {
