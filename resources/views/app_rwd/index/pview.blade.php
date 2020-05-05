@@ -22,7 +22,7 @@
 			<!-- <div class="rs-contentpics" style="background: url({{$post->userInfo->avatar}}) no-repeat top center; background-size:50px"><a href="/p/{{$post->id}}"></a></div>
 			<div class="rs-contentname">{{$post->userInfo->nick_name}}<br>{{ Carbon\Carbon::parse($post->created_time)->format('m-d H:i:s') }}</div> -->
 			<div class="rs-contentword">
-				<h2><a href="javascript:void(0)">{!! $post->title !!}</a></h2>
+				<h2><a href="javascript:void(0)"  style="FONT-SIZE: 28PX;">{!! $post->title !!}</a></h2>
 					<div style="position: relative">
 
 						<video id='av-video' width="600" height="264" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered" poster="{{asset('storage'.$post->cover_img)}}" controls>
@@ -30,13 +30,11 @@
 						     src="/getvideo/{{$post->id}}"
 						     type="application/x-mpegURL">
 						</video>
-
-						<!-- <source src="http://127.0.0.1:8000/storage/public/upvideo/2019/08/zzn/output000.ts" type="application/x-mpegURL">   -->
 						<script>
 						var player = videojs('av-video',{
 								html5: {
 									hls: {
-								          overrideNative: true
+								          overrideNative: true  
 								    },
 									nativeVideoTracks: false,
 									nativeAudioTracks: false,
@@ -59,10 +57,10 @@
 			@endif
 			JuicyAds END -->
 			<div id="rs-digg-box2">
-				<div class="rs-digg-left">
+				<div class="rs-digg-left"     style="float: left; width: auto; padding: 0px 3px;">
 					<div class="" id='post-digg-{{$post->id}}' data-id='post-digg-{{$post->id}}'><i class=""></i><span> {{$postsDetail->count_view}} views</span></span></div>
 				</div>
-				<div class="rs-digg-right orange5">
+				<div class="rs-digg-right orange5"   style="margin:0;">
 					@if ($status == 1)
 						<div class="rs-digg like rs-digg-click" id='post-digg-thumbs-up' data-id='{{$post->id}}'><i class="fas fa-thumbs-up fa-w-16"></i><span> {{$postsDetail->count_digg}} </span></span></div>
 						<div class="rs-digg like " id='post-digg-thumbs-down' data-id='{{$post->id}}'><i class="fas fa-thumbs-down"></i><span> {{$postsDetail->count_bury}} </span></div>

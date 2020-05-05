@@ -33,7 +33,7 @@ class IndexController extends Controller {
 	   	}   	
 	 
 	 	$category = PostsCategory::all();
-		$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->with('commentsGod')->where('cate_id', 3)->where('status', 1)->where('covered', 1)->orderBy('id', 'desc')->Paginate(12, null, 1, $page);
+		$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->with('commentsGod')->where('cate_id', 3)->where('status', 1)->where('covered', 1)->orderBy('id', 'desc')->Paginate(18, null, 1, $page);
 		
 		$lastPage = $posts->lastPage();
 		$currentPage = $posts->currentPage();
@@ -375,6 +375,12 @@ class IndexController extends Controller {
 				   }
 				} else {
 					PostsDetail::find($id)->increment('count_digg');
+
+					$Digg = new PostsDigg;
+					$Digg->user_id = $user->user_id;
+					$Digg->post_id = $id;
+					$Digg->status = 1;
+					$Digg->save();
 				}
 
 				if($status != 1) {
@@ -416,6 +422,11 @@ class IndexController extends Controller {
 				   }
 				} else {
 					PostsDetail::find($id)->increment('count_bury');
+					$Digg = new PostsDigg;
+					$Digg->user_id = $user->user_id;
+					$Digg->post_id = $id;
+					$Digg->status = 2;
+					$Digg->save();
 				}
 
 				if($status != 2) {

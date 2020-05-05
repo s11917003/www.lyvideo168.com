@@ -239,14 +239,16 @@ a,a:hover {
 	bottom: 0;
 	width: 100%;
 	margin: 0 auto;
+	/* Background-color: rgba(28, 30, 33, 0); */
 	/* background-color:rgba(28, 30, 33, 0.6)  ; */
 
 }
 .offcanvas-collapse {
+	/* Background-color: rgba(13, 24, 41, 0); */
 	position: fixed;
 	top: 45px; /* Height of navbar */
 	bottom: 0;
-	background-color:rgba(28, 30, 33, 1)  ;
+	/* background-color:rgba(28, 30, 33, 0)  ; */
  
 	margin: 0 auto;
  
@@ -259,6 +261,7 @@ a,a:hover {
 	transform: translateX(-100%);
 }
 .offcanvas-collapse.open {
+	
 	display: inline;
 
 -webkit-transform: translateX(0rem);
@@ -358,8 +361,9 @@ transform: translateX(0rem);
 #blogVideo .detail {
 	position:  absolute;  
 	padding: 0px 7px; 
-	bottom: 16%; 
+	bottom: 0%; 
 	font-size:6px;
+	color: #fff;
 	width: 100%;
 }
 #blogVideo .detail .rs-digg-left{
@@ -516,7 +520,8 @@ transform: translateX(0rem);
 	width:100%;
 	margin:0 auto;
 	line-height:20px;
-	float: left
+	float: left;
+	color: #f90;
 }
 
 .rs-contentword p {
@@ -626,7 +631,7 @@ transform: translateX(0rem);
 	overflow:hidden;
 	margin:0;
 	padding:0;
-	float:left;
+	/* float:left; */
 }
 .rs-digg-fb a {
 	width:30px;
@@ -1290,7 +1295,8 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 		/* background-color:#fff; */
 		display:block;
 		font-size:14px;
-		float: left
+		float: left;
+		color: #f90;
 	}
 
 	.contentword-ll {
@@ -1718,7 +1724,7 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 		overflow:hidden;
 		margin:0;
 		padding:0;
-		float:right;
+		/* float:right; */
 	}
 	.rs-digg-fb a {
 		width:30px;

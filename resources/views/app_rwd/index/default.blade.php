@@ -21,7 +21,6 @@ No.1老湿机休息站，带你升天带你飞，频繁更新片片精彩！大�
 		<div class="container">
 		@foreach ($posts as $post)
 		@if ((($device == 'ios' || $device == 'android') &&  ($loop->index %  2 ==0))   || ( ($device != 'ios' && $device != 'android')  &&  ($loop->index %  3 ==0))  )
-	 
 			<div class="row">
 		@endif
 				@if ($device == 'ios' || $device == 'android')
@@ -34,7 +33,7 @@ No.1老湿机休息站，带你升天带你飞，频繁更新片片精彩！大�
 						<!-- <div class="rs-contentpics" style="background: url({{ $post->userInfo->avatar}}) no-repeat top center; background-size:50px"><a href="/p/{{$post->id}}"></a></div> -->
 						<!-- <div class="rs-contentname">{{$post->userInfo->nick_name}}<br>{{ Carbon\Carbon::parse($post->created_time)->format('m-d H:i:s') }}</div> --> 
 						<div class="rs-contentword">
-							<h2 style="width:95%; padding: 0px 0px 0px 0px;Display: inline-block;  overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/p/{{$post->id}}">{!! $post->title !!}</a></h2>
+							<h2 style="width:95%; padding: 0px 0px 0px 0px;Display: inline-block;  overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color:#b02b7c;"><a href="/p/{{$post->id}}">{!! $post->title !!}</a></h2>
 							<div poster="" class=" embed-responsive embed-responsive-16by9  video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	  id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
 								<a href="/p/{{$post->id}}">
 									<div class="vjs-poster" tabindex="-1" aria-disabled="false" 
@@ -57,8 +56,6 @@ No.1老湿机休息站，带你升天带你飞，频繁更新片片精彩！大�
 											background-image: url('{{ asset('storage'.$post->cover_img)}}');" 
 										>
 									
-									</div>
-								</a>
 							</div>
 							<div id="rs-digg-box2 "  class="detail"  >
 								<div class="rs-digg-left" >
@@ -70,6 +67,9 @@ No.1老湿机休息站，带你升天带你飞，频繁更新片片精彩！大�
 								 
 								</div>
 							</div>
+								</a>
+							</div>
+						
 						</div>
 					
 						@if ($device == 'ios' || $device == 'android')

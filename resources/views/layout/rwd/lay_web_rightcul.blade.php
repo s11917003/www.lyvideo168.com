@@ -39,7 +39,7 @@
 											>
 					</div>
 					<!-- <img src="{{ asset('storage'.$re->article['tb_img']) }}" style="width: 300px;"> -->
-					<div style="font-size: 8; padding-top: 5px;">{{$re->article['title']}}</div>
+					<div style="    text-align: center; font-size: 8; padding-top: 5px; overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color:#f90;">{{$re->article['title']}}</div>
 
 				</a>
 			</div>
@@ -48,7 +48,7 @@
 	</div>
 	<!-- JuicyAds v3.0
 	<div id="rs-right-box">
-		<script type="text/javascript" data-cfasync="false" async src="https://adserver.juicyads.com/js/jads.js"></script>
+		<script type="text/javascript" data-cfasync="f alse" async src="https://adserver.juicyads.com/js/jads.js"></script>
 		<ins id="697681" data-width="300" data-height="262"></ins>
 		<script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':697681});</script>
 	</div>
