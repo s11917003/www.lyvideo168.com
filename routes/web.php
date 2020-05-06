@@ -24,17 +24,17 @@ Route::get('rd/genacc', 'Rd\RdController@genacc');
 
 //首頁member
 // Route::group(['prefix' => ''], function($router) {
-  	Route::get('/warning', 'Auth\AuthAgeController@warning');//首頁  
+  	// Route::get('/warning', 'Auth\AuthAgeController@warning');//首頁  
 // });
 Route::get('/{id?}', 'Index\IndexController@index')->where('id', '[0-9]+');//走分頁
-Route::get('/getmore/{id?}', 'Index\IndexController@loadmore');//影片 JSON 格式
+// Route::get('/getmore/{id?}', 'Index\IndexController@loadmore');//影片 JSON 格式
 
 //文章內頁
 
   
 //測試頁
-Route::get('/pt/{id}', 'Index\IndexController@postviewtest')->where('id', '[0-9]+');
-Route::get('/pv/{id}', 'Index\IndexController@postviewapp')->where('id', '[0-9]+');
+// Route::get('/pt/{id}', 'Index\IndexController@postviewtest')->where('id', '[0-9]+');
+// Route::get('/pv/{id}', 'Index\IndexController@postviewapp')->where('id', '[0-9]+');
 
 // Route::group(['middleware' => 'web'], function () {
    	Route::auth();
@@ -57,6 +57,9 @@ Route::get('/pv/{id}', 'Index\IndexController@postviewapp')->where('id', '[0-9]+
 Route::group(['middleware' => ['auth:web']], function () {
 			Route::get('/article/post', 'Index\IndexController@postpage');
 });
+//發文
+Route::post('/upload/request', 'Article\UploadController@store');
+
 //交換連結
 Route::get('/linkex', 'Service\PageController@linkexchange');
 
@@ -98,8 +101,6 @@ Route::post('/sns/appreply/request', 'Article\CmtAppController@store');
 Route::get('/comm/reply/loadmore', 'Article\CmtController@loadreply');
 */
 
-//發文
-Route::post('/upload/request', 'Article\UploadController@store');
 
 //PR頁面
 Route::get('/pr/{adid}', 'Pr\Type1Controller@view')->where('adid', '[0-9]+');
@@ -195,17 +196,17 @@ Route::get('/avdb/clawjavbuzz', 'Avdb\ClawController@clawjavbuzz');
 
 
 //event page
-Route::get('/event/dl', 'Event\IndexController@download');
-Route::get('/event/apk/download', 'Event\IndexController@apkdownload');
+// Route::get('/event/dl', 'Event\IndexController@download');
+// Route::get('/event/apk/download', 'Event\IndexController@apkdownload');
 
-Route::get('/event/app/en', 'Event\IndexController@download');
-Route::get('/event/app/tw', 'Event\IndexController@downloadtw');
+// Route::get('/event/app/en', 'Event\IndexController@download');
+// Route::get('/event/app/tw', 'Event\IndexController@downloadtw');
 
-Route::get('/event/app/payment/paypal', 'Event\PaymentController@index');
-Route::get('/event/app/payment/paypal/request', 'Event\PaymentController@request');
-Route::post('/event/app/payment/paypal/ipn', 'Event\PaymentController@ipn');
-Route::get('/event/app/payment/paypal/success', 'Event\PaymentController@success');
-Route::get('/event/app/payment/paypal/finish', 'Event\PaymentController@finish');
+// Route::get('/event/app/payment/paypal', 'Event\PaymentController@index');
+// Route::get('/event/app/payment/paypal/request', 'Event\PaymentController@request');
+// Route::post('/event/app/payment/paypal/ipn', 'Event\PaymentController@ipn');
+// Route::get('/event/app/payment/paypal/success', 'Event\PaymentController@success');
+// Route::get('/event/app/payment/paypal/finish', 'Event\PaymentController@finish');
 
 
 

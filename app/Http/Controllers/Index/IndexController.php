@@ -19,18 +19,18 @@ class IndexController extends Controller {
 	
 	public function index($page = 1) {
 
-       	$value = @$_COOKIE['appdl'];
-	   	if($value == true) {
-		   	header('Location:/event/app/en');
-		   	return ;
-	   	}
+       	// $value = @$_COOKIE['appdl'];
+	   	// if($value == true) {
+		//    	header('Location:/event/app/en');
+		//    	return ;
+	   	// }
 
 
-       	$value = @$_COOKIE['agevarify'];
-	   	if($value != true) {
-		   	header('Location:/warning');
-		   	return ;
-	   	}   	
+       	// $value = @$_COOKIE['agevarify'];
+	   	// if($value != true) {
+		//    	header('Location:/warning');
+		//    	return ;
+	   	// }   	
 	 
 	 	$category = PostsCategory::all();
 		$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->with('commentsGod')->where('cate_id', 3)->where('status', 1)->where('covered', 1)->orderBy('id', 'desc')->Paginate(18, null, 1, $page);
