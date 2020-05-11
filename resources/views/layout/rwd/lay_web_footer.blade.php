@@ -1,6 +1,6 @@
 	<!-- rs-footer -->
 	<div id="rs-footer">
-		<p>&copy; N-FILE</p>
+		<p>&copy; @lang('default.title')</p>
 		<p><a href="/service/privacy">隱私條款</a> | <a href="/service/dmca">DMCA</a> | <a href="/service/important">重要聲明</a>｜
 		<script id="_wau49z">var _wau = _wau || []; _wau.push(["small", "fx6a31y81z", "49z"]);</script><script async src="//waust.at/s.js"></script>
 		<!-- Histats.com  (div with counter) -->

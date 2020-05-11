@@ -1,9 +1,9 @@
 @extends('layout.rwd.lay_web_basic')
 @section('title')
-老湿机休息站-免费视频分享网
+@lang('default.description')-免费视频分享网
 @stop
 @section('des')
-No.1老湿机休息站，带你升天带你飞，频繁更新片片精彩！大量线上免费视频，100%免费色情视频、成人短视频、高清成人视频，支援手机收看！
+No.1 @lang('default.title')，带你升天带你飞，频繁更新片片精彩！大量线上免费视频，100%免费色情视频、成人短视频、高清成人视频，支援手机收看！
 @stop
 @section('topscript')
 <script>

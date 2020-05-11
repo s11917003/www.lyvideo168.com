@@ -1,9 +1,9 @@
 @extends('layout.rwd.lay_web_basic_norightnav')
 @section('title')
-老濕機登入
+@lang('default.title')登入
 @stop
 @section('des')
-老濕機上車囉
+@lang('default.description') 上車囉
 @stop
 
 @section('maincontent')

@@ -1,13 +1,13 @@
 @extends('layout.rwd.lay_web_basic')
 @section('title')
-老濕機連結交換
+@lang('default.title')連結交換
 @stop
 @section('des')
-老濕機連結交換，情色網站互連
+@lang('default.title')連結交換，情色網站互連
 @stop
 @section('topscript')
-<meta itemprop="name" content="老濕機">
-<meta itemprop="description" content="老濕機連結交換，情色網站互連">
+<meta itemprop="name" content="@lang('default.description')">
+<meta itemprop="description" content="@lang('default.description')連結交換，情色網站互連">
 @stop
 @section('maincontent')
 	<!-- Content 左側 開始 -->

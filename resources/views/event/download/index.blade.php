@@ -2,8 +2,8 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>老濕機</title>
-    <meta property="og:title" content="老濕機 - 免費下載無限看"/>
+    <title>@lang('default.title')</title>
+    <meta property="og:title" content="@lang('default.title') - 免費下載無限看"/>
     <meta property="og:description" content="首選優質、豐富的看片APP。免註冊，免費播放，天天更新帶著你看片。"/>
     <meta property="og:type" content="product"/>
     <meta property="og:url" content="http://www.gporn.cc"/>
@@ -75,7 +75,7 @@
         <div id="hero-container" class="cf animated fadeInUp">
           <div id="hero-content">
             <img src="/event/download/img/app-icon.png" width="72" height="72" id="hero-icon">
-            <h1 id="hero-title" class="ct1">老濕機</h1>
+            <h1 id="hero-title" class="ct1">@lang('default.title')</h1>
             <p id="hero-message" class="ct1">首選優質、豐富的看片APP。免註冊，免費播放，天天更新帶著你看片</p>
             <div id="hero-stores">
               <a href="javascript:go_android();" target="_blank"><img src="/event/download/img/badge-play-store3.png" alt="Get it on Google Play" class="hero-store-badge"></a>

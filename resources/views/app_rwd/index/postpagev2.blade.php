@@ -1,9 +1,9 @@
 @extends('layout.rwd.lay_web_basic_noright')
 @section('title')
-老濕機發布
+@lang('default.title')發布
 @stop
 @section('des')
-老濕機上車囉
+@lang('default.description')上車囉
 @stop
 @section('maincontent')
         <link href='https://cdnjs.cloudflare.com/ajax/libs/multi-select/0.9.12/css/multi-select.min.css' rel='stylesheet'>

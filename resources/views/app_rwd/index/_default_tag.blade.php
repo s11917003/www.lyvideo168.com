@@ -1,9 +1,9 @@
 @extends('layout.rwd.lay_web_basic')
 @section('title')
-{{$tag}}|No.1老濕機休息站，帶你升天帶你飛，每天更新,片片精彩！
+{{$tag}}|No.1 @lang('default.description')休息站，帶你升天帶你飛，每天更新,片片精彩！
 @stop
 @section('des')
-No.1老濕機休息站，帶你升天帶你飛，每天更新,片片精彩！
+No.1 @lang('default.description')休息站，帶你升天帶你飛，每天更新,片片精彩！
 @stop
 @section('topscript')
 <script>

@@ -6,7 +6,7 @@
 {{strip_tags($title)}}
 @stop
 @section('topscript')
-<meta itemprop="name" content="老濕機">
+<meta itemprop="name" content="@lang('default.description')">
 <meta itemprop="description" content="{{strip_tags($title)}}">
 
 <script>
