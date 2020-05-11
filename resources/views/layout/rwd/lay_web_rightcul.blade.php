@@ -16,7 +16,9 @@
 	<div id="rs-right-box">
 		<div class="rs-appinfo">No.1 @lang('default.description')休息站，带你升天带你飞，频繁更新片片精彩！</div>
 		@foreach ($relate as $re)
+	
 		<div style="width: 240PX; height: 180px; padding:10px 15PX 0 15PX;overflow: hidden;MARGIN: 0 AUTO;">
+			@if ($loop->index %  5 !=0)
 			<div poster="" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:100%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
 				<a href="/p/{{$re->post_id}}">
 					<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
@@ -44,6 +46,36 @@
 
 				</a>
 			</div>
+			@else	
+			<div poster="" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:100%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
+				<a href="{{$ad[1]->web_url}}">
+					<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
+												vertical-align: middle;
+												background-repeat: no-repeat;
+												background-position: 50% 50%;
+												background-size: contain;
+												cursor: pointer;
+												margin: 0;
+												padding: 0;
+												position: relative;
+												top: 0PX;
+												right: 0;
+												bottom: 0;
+												left: 0;
+												height: 80%;  
+												 WIDTH: 100%;
+												MARGIN: 0PX 5PX 0 5PX;
+												BACKGROUND-COLOR: #000;
+												background-image: url('{{ asset($ad[1]->bg_img)}}');" 
+											>
+					</div>
+					<!-- <img src="{{ asset('storage'.$re->article['tb_img']) }}" style="width: 300px;"> -->
+					<div style="text-align: center; font-size: 8; padding-top: 5px; overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color:#f90;">{{$ad[1] }}</div>
+
+				</a>
+			</div>
+			@endif
+					 
 		</div>
 		@endforeach
 	</div>

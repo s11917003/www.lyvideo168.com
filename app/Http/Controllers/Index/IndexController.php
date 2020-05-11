@@ -9,6 +9,7 @@ use App\Model\PostsCategory;
 use App\Model\PostsDetail;
 use App\Model\PostsTag;
 use App\Model\PostsDigg;
+use App\Model\AdDetailBanner;
 use App\Model\PostsTagRelationships;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -42,11 +43,12 @@ class IndexController extends Controller {
 	    $tagarr = [1,2,4,10,11];
 		$relate = PostsTagRelationships::with('article')->whereIn('post_tag_id', $tagarr)->where('status',1)->groupBy('post_id')->inRandomOrder()->limit(10)->get();	 		
 
-	 
+		$adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(2)->get();
 		//return  view('app.index.default', [
 		$device = Utils::chkdevice();
 		
 		return  view('app_rwd.index.default', [
+			'ad'=>$adDetail,
 			'category'=>$category,
 			'posts'=>$posts,
 			'lastPage' =>  $lastPage,
@@ -93,7 +95,7 @@ class IndexController extends Controller {
 		//$relate = \DB::table('posts_tag_relationships')->whereIn('post_tag_id', $tagarr)->groupBy('post_id')->inRandomOrder()->limit(6)->get();
 		$relate = PostsTagRelationships::with('article')->where('post_id','!=', $id)->whereIn('post_tag_id', $tagarr)->where('status',1)->groupBy('post_id')->inRandomOrder()->limit(14)->get();	 		
 		
-
+		$adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(2)->get();
 		$status = 0;
 		if (Auth::check()) {
 			$user  = Auth::User();
@@ -106,6 +108,7 @@ class IndexController extends Controller {
 		if($article) {
 			$device = Utils::chkdevice();
 			return view('app_rwd.index.pview',[
+				'ad'=>$adDetail,
 				'post'=>$article,
 				'device' => $device,
 				'relate' => $relate,

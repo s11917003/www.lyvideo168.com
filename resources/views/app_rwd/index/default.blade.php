@@ -16,7 +16,7 @@ No.1 @lang('default.title')，带你升天带你飞，频繁更新片片精彩�
 	<!-- Leftside Article -->
  
 	<div id="rs-content-left">
-		<!-- @php ($i = 1) -->
+		@php ($i = 1) 
 	 
 		<div class="container">
 		@foreach ($posts as $post)
@@ -32,7 +32,9 @@ No.1 @lang('default.title')，带你升天带你飞，频繁更新片片精彩�
 				@endif
 						<!-- <div class="rs-contentpics" style="background: url({{ $post->userInfo->avatar}}) no-repeat top center; background-size:50px"><a href="/p/{{$post->id}}"></a></div> -->
 						<!-- <div class="rs-contentname">{{$post->userInfo->nick_name}}<br>{{ Carbon\Carbon::parse($post->created_time)->format('m-d H:i:s') }}</div> --> 
+						@if($i%6 != 5)
 						<div class="rs-contentword">
+							
 							<h2 style="width:95%; padding: 0px 0px 0px 0px;Display: inline-block;  overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color:#b02b7c;"><a href="/p/{{$post->id}}">{!! $post->title !!}</a></h2>
 							<div poster="" class=" embed-responsive embed-responsive-16by9  video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	  id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
 								<a href="/p/{{$post->id}}">
@@ -71,7 +73,6 @@ No.1 @lang('default.title')，带你升天带你飞，频繁更新片片精彩�
 							</div>
 						
 						</div>
-					
 						@if ($device == 'ios' || $device == 'android')
 						<div id="rs-digg-box2" style="float: left; width: 100%; position: relative; left: -5px     padding-top: 0px; overflow: visible;">
 							@if ($post->tag)
@@ -89,12 +90,52 @@ No.1 @lang('default.title')，带你升天带你飞，频繁更新片片精彩�
 								@endforeach
 							@endif
 						</div>
-						@endif		
+						@endif
+						
+
+						@else	
+						<div class="rs-contentword">
+							
+							<h2 style="width:95%; padding: 0px 0px 0px 0px;Display: inline-block;  overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color:#b02b7c;"><a href="{{$ad[0]->web_url}}">{!! $ad[0]->campaign_name !!}</a></h2>
+							<div poster="" class=" embed-responsive embed-responsive-16by9  video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
+								<a href="{{$ad[0]->web_url}}">
+									<div class="vjs-poster" tabindex="-1" aria-disabled="false" 
+											style="display: inline-block;
+											vertical-align: middle;
+											background-repeat: no-repeat;
+											background-position: 50% 50%;
+											background-size: contain;
+											cursor: pointer;
+											margin: 0;
+											padding: 0;
+											position: absolute;
+											top: 0px;
+											right: 0;
+											bottom: 0;
+											left: 0;
+											height: 100%;
+											MARGIN: 0PX 5PX 0 5PX;
+											BACKGROUND-COLOR: #000;
+											background-image: url('{{ asset($ad[0]->bg_img)}}');" 
+										>
+								</div>
+								</a>	
+							</div>
+									
+						 
+						</div>
+						
+						 
+
+
+						@endif
+					 
 					</div>
 				</div>
 		@if ((($device == 'ios' || $device == 'android') &&  ($loop->index %  2 ==1))   ||   ( ($device != 'ios' && $device != 'android')  &&  ($loop->index %  3 ==2))  )
 			</div>
 		@endif
+		@php ($i++)		
 		@endforeach
 		</div>
 
@@ -124,7 +165,7 @@ No.1 @lang('default.title')，带你升天带你飞，频繁更新片片精彩�
 		@endif
 		JuicyAds END -->
 		
-		<!-- @php ($i++)	-->	
+	
 		<!-- @endforeach -->
 		<div class="rs-contentbox1" id="page"></div>
 	</div>
