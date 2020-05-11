@@ -1,6 +1,6 @@
-	<div id="rs-right-box">
-		<div class="rs-appinfo">No.1 @lang('default.description')休息站，带你升天带你飞，频繁更新片片精彩！</div>
-	</div>
+	<!-- <div id="rs-right-box">
+	
+	</div> -->
 	<!-- JuicyAds v3.0
 	<div id="rs-right-box">
 		<script type="text/javascript" data-cfasync="false" async src="https://adserver.juicyads.com/js/jads.js"></script>
@@ -14,6 +14,7 @@
 	</div>
 	-->
 	<div id="rs-right-box">
+		<div class="rs-appinfo">No.1 @lang('default.description')休息站，带你升天带你飞，频繁更新片片精彩！</div>
 		@foreach ($relate as $re)
 		<div style="width: 240PX; height: 180px; padding:10px 15PX 0 15PX;overflow: hidden;MARGIN: 0 AUTO;">
 			<div poster="" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:100%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">

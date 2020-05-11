@@ -81,9 +81,9 @@
 	<!-- NAV選項區域 開始 -->
 	@include('layout.rwd.lay_web_nav')
 	<!-- NAV選項區域 結束 -->
-	<div id="rs-main-content">
+	<div id="rs-main-content"> 
+		@include('layout.rwd.lay_web_rightcul')
         @yield('maincontent')
-        @include('layout.rwd.lay_web_rightcul')
 	</div>
 	<!-- Footer 開始 -->
 	@include('layout.rwd.lay_web_footer')
