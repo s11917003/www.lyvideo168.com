@@ -89,5 +89,7 @@
 	@include('layout.rwd.lay_web_footer')
 	<!-- Footer 結束 -->
 	@yield('footscript')
+
+	@yield('footscript1')
 </body>
 </html>

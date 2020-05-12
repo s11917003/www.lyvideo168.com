@@ -44,11 +44,14 @@ class IndexController extends Controller {
 		$relate = PostsTagRelationships::with('article')->whereIn('post_tag_id', $tagarr)->where('status',1)->groupBy('post_id')->inRandomOrder()->limit(10)->get();	 		
 
 		$adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(2)->get();
+
+		$adHalf = AdDetailBanner::inRandomOrder()->where('type', 'half')->where('status',1)->limit(1)->get();
 		//return  view('app.index.default', [
 		$device = Utils::chkdevice();
 		
 		return  view('app_rwd.index.default', [
 			'ad'=>$adDetail,
+			'adHalf'=>$adHalf,
 			'category'=>$category,
 			'posts'=>$posts,
 			'lastPage' =>  $lastPage,
