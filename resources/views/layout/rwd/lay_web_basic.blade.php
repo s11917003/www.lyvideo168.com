@@ -31,6 +31,26 @@
 <script src="/js/bootstrap-4.0.0.js"></script>
 <script>
 	$(function(){
+		$.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+		});
+		$('.adClick').on('click',function(){
+			var id =  $(this).attr("data-id") 
+			console.log('id'+id)
+
+			$.ajax({
+				type:"get",
+				url:"/clickAd/"+id,
+				success:function(result){
+					// var address = result['address'];
+					// console.log(address);
+					// window.location.href = address;
+				}
+			});	
+
+		})	
 		$(".rs-contentword img").lazyload({
 			load : cccccount
 		});

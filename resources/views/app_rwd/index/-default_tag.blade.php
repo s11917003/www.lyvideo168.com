@@ -80,7 +80,7 @@
 							
 						</div>
 						<div style="font-size: 8; padding-top: 0px; inline-block; width: 100%; overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{$post->campaign_name}}</div>
-						<div style="font-size: 8px; padding-top: 0px;">    </div>
+						<div style="font-size: 8px; padding-top: 0px;">----</div>
 						</a>
 				@endif
 				</div> 	
@@ -92,12 +92,10 @@
 				<div  class="justify-content-center1">
 					<h5 style="COLOR: #ccc; font-weight: bold;">{{$title}}</h5>
 					@foreach ($posts as $post)
-					<div id="rs-article-box" style="block-size:unset; float:left;padding: 10px;overflow: hidden;">
+					<div id="rs-article-box" style="block-size:unset; float:left;padding: 10px;overflow: hidden">
 						@if (is_Null($post->isAd))
 						<a href="/p/{{$post->article['id']}}">
-							<!-- <img id="rs-article-box-img" src="{{ asset('storage'.$post->hot['tb_img']) }}"  >
-							 <label style="padding: 5px 0px 0px 0px;Display: inline-block;  overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{$post->hot['title']}}</label>
-							<div style="font-size: 8px; padding-top: 0px;">{{$post->count_view}}次观看</div> --> 
+							<!-- <img id="rs-article-box-img" src="{{ asset('storage'.$post->article['tb_img']) }}"  > -->
 							<div poster="" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" height="200px" width="600" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
 								<div class="vjs-poster" tabindex="-1" aria-disabled="false" 
 									style="display: inline-block;
@@ -122,12 +120,11 @@
 								</div>
 								
 							</div>
-							<label style="cursor: pointer; padding: 10px 0px 0px 0px;Display: inline-block;  overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{$post->article['title']}}</label>
+							<label style="cursor: pointer; padding: 5px 0px 0px 0px;Display: inline-block;  overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{$post->article['title']}}</label>
 						
-						</a>
-						<div style="font-size: 8px; padding-top: 0px;COLOR: #fff;">{{$post->hot['count_view']}}次观看</div>
+						</a>	<div style="font-size: 8px; padding-top: 0px;COLOR: #fff;">{{$post->hot['count_view']}}次观看</div>
 						@else
-						<a href="{{$post->web_url}}" data-id='{{$post->id}}' class="adClick"   target="_blank"> 
+						<a href="{{$post->web_url}}" data-id='{{$post->id}}' class="adClick"   target="_blank">
 							<!-- <img id="rs-article-box-img" src="{{ asset('storage'.$post->hot['tb_img']) }}"  >
 							<label style="padding: 5px 0px 0px 0px;Display: inline-block;  overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{$post->hot['title']}}</label>
 							<div style="font-size: 8px; padding-top: 0px;">{{$post->count_view}}次观看</div> -->
@@ -157,7 +154,7 @@
 							<label style="cursor: pointer; padding: 10px 0px 0px 0px;Display: inline-block;  overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{$post->campaign_name}}</label>
 							
 						</a>
-						<div style="font-size: 8px; padding-top: 0px;COLOR: #fff;  opacity: 0;">．</div>
+						<div style="font-size: 8px; padding-top: 0px;COLOR: #fff;">．</div>
 						@endif
 					</div>
 					@endforeach

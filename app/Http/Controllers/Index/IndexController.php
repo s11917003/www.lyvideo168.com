@@ -52,24 +52,31 @@ class IndexController extends Controller {
 		//return  view('app.index.default', [
 		$device = Utils::chkdevice();
 	 
-		
-		if(count($relate1) >=0){
+		$now = date('Y-m-d H:i:s');
+		if(count($relate1) >0){
 			foreach ($adHalf as $ad) {
+				$log =  ['ad_id' => $ad->id ,'action-type' =>0,'updated_at'=>$now] ;
+				$adlog[]  = $log;
 				$ad->isAd  = true;
 				$this->array_insert($relate1,rand(0,count($relate1)-1),$ad);
 				
 			}
 		}
 
-		if(count($posts1) >=0){
+		if(count($posts1) >0){
 			foreach ($adDetail as $ad) {
+				$log =  ['ad_id' => $ad->id ,'action-type' =>0,'updated_at'=>$now] ;
+				$adlog[]  = $log;;
 				$ad->isAd  = true;
 				$this->array_insert($posts1,rand(0,count($posts1)-1),$ad);
 			}
 		}
  
- 
-	// return;
+		if(count($adlog) >0){
+			DB::table('ad_detail_banner_log')->insert($adlog);
+		}
+	
+		 
 		return  view('app_rwd.index.default', [
 			// 'ad'=>$adDetail,
 			'adHalf'=>$adHalf,
@@ -83,7 +90,7 @@ class IndexController extends Controller {
 			'path' =>  env('APP_URL').'app/public',		
 		]);
 	}
-	
+	 
 	public function loadmore($page = 2) {
 		$category = PostsCategory::all();
 		$posts = PostsArticle::with('detail')->with('userInfo')->where('status', 1)->where('covered', 1)->orderBy('id', 'desc')->Paginate(10, null, 1, $page);
@@ -131,13 +138,22 @@ class IndexController extends Controller {
 				$status = $postsDigg['status'];
 			}
 		}
-		 
-		if(count($relate) >=0){
+		$now = date('Y-m-d H:i:s');
+		if(count($relate) >0){
 			foreach ($adDetail as $ad) {
+				$log =  ['ad_id' => $ad->id ,'action-type' =>0,'updated_at'=>$now] ;
+				$adlog[]  = $log;;
 				$ad->isAd  = true;
 				$this->array_insert($relate,rand(0,count($relate)-1),$ad);
 			}
 		}
+
+		if(count($adlog) >0){
+			DB::table('ad_detail_banner_log')->insert($adlog);
+		}
+	
+
+
 		if($article) {
 			$device = Utils::chkdevice();
 			return view('app_rwd.index.pview',[
@@ -289,13 +305,19 @@ class IndexController extends Controller {
 		$currentPage = $posts->currentPage();
 		 
 
-		if(count($posts) >=0){
+		$now = date('Y-m-d H:i:s');
+		if(count($posts) >0){
 			foreach ($adDetail as $ad) {
+				$log =  ['ad_id' => $ad->id ,'action-type' =>0,'updated_at'=>$now] ;
+				$adlog[]  = $log;;
 				$ad->isAd  = true;
 				$this->array_insert($posts,rand(0,count($posts)-1),$ad);
 			}
 		}
 
+		if(count($adlog) >0){
+			DB::table('ad_detail_banner_log')->insert($adlog);
+		}
 		 
 		if($posts) {
 			$device = Utils::chkdevice();
@@ -334,11 +356,19 @@ class IndexController extends Controller {
 
 		$adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(2)->get();
 	 
-		if(count($posts) >=0){
+	 
+		$now = date('Y-m-d H:i:s');
+		if(count($posts) >0){
 			foreach ($adDetail as $ad) {
+				$log =  ['ad_id' => $ad->id ,'action-type' =>0,'updated_at'=>$now] ;
+				$adlog[]  = $log;;
 				$ad->isAd  = true;
 				$this->array_insert($posts,rand(0,count($posts)-1),$ad);
 			}
+		}
+
+		if(count($adlog) >0){
+			DB::table('ad_detail_banner_log')->insert($adlog);
 		}
  
 	    // $tagarr = [1,2,4,10,11];
@@ -512,6 +542,19 @@ class IndexController extends Controller {
 		} else {
 			return response()->json(['count_digg' => 1, 'status' => 1,'login' => false]);
 		}	 
+	}
+	public function clickAd(Request $request, $id){
+		// $ad = $this->get_ad($id);
+		$ad = AdDetailBanner::where('id',$id)->where('status', 1)->first();
+		if(!$ad) {
+			header("Location:/");
+			return ;
+		}
+		$now = date('Y-m-d H:i:s');
+		$log =  ['ad_id' => $id ,'action-type' =>1,'updated_at'=>$now] ;
+		DB::table('ad_detail_banner_log')->insert($log);
+	 
+		return response()->json(['status' => 1,'address' => $ad->web_url]);
 	}
 	
 }

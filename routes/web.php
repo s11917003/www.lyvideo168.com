@@ -52,6 +52,8 @@ Route::get('/{id?}', 'Index\IndexController@index')->where('id', '[0-9]+');//走
 	Route::post('thumbsup', 'Index\IndexController@thumbsup');
 	Route::post('thumbsdown', 'Index\IndexController@thumbsdown');
 
+
+	// Route::get('/tag/{id}/{page?}', 'Index\IndexController@tag')->where('id', '[0-9]+');
 // });
 //發文頁面
 Route::group(['middleware' => ['auth:web']], function () {
@@ -60,6 +62,12 @@ Route::group(['middleware' => ['auth:web']], function () {
 //發文
 Route::post('/upload/request', 'Article\UploadController@store');
 
+// //getvideo
+Route::get('/getvideo/{id}', 'Index\GetVideoController@index');
+// Route::get('/getvideoapp/{id}', 'Index\GetVideoAppController@index');
+
+// //getvideo
+Route::get('/clickAd/{id}', 'Index\IndexController@clickAd')->where('id', '[0-9]+');
 //交換連結
 // Route::get('/linkex', 'Service\PageController@linkexchange');
 
@@ -176,9 +184,7 @@ Route::post('/api/user/update', 'Member\AppOpenidController@infoupdate');
 // Route::get('/spyder/clawpost', 'Rd\GetTextController@clawpost');
 
 
-// //getvideo
-// Route::get('/getvideo/{id}', 'Index\GetVideoController@index');
-// Route::get('/getvideoapp/{id}', 'Index\GetVideoAppController@index');
+
 
 
 // //avdb 爬蟲
