@@ -28,123 +28,112 @@ No.1 @lang('default.title')，带你升天带你飞，频繁更新片片精彩�
 		@endfor -->
 		@foreach ($posts as $post) 
 		
-		@if ((($device == 'ios' || $device == 'android') &&  ($i %  2 ==0))   || ( ($device != 'ios' && $device != 'android')  &&  ($i %  3 ==0))  )
-			<div class="row">
-		@endif
-				@if ($device == 'ios' || $device == 'android')
+			@if ((($device == 'ios' || $device == 'android') &&  ($loop->index %  2 ==0))   || ( ($device != 'ios' && $device != 'android')  &&  ($loop->index %  3 ==0))  )
+				<div class="row">
+			@endif
+
+			@if ($device == 'ios' || $device == 'android')
 					<div id="blogVideo" class="blogVideo col" style="max-width:48%;">
 						<div id="rs-content-left-box  embed-responsive embed-responsive-16by9" data-id='{{$post->id}}' data-show=false style="height:170px;">
-				@else
+			@else
 					<div id="blogVideo" class="blogVideo col">
 						<div id="rs-content-left-box" data-id='{{$post->id}}' data-show=false> 
-				@endif
-						<!-- <div class="rs-contentpics" style="background: url({{ $post->userInfo->avatar}}) no-repeat top center; background-size:50px"><a href="/p/{{$post->id}}"></a></div> -->
-						<!-- <div class="rs-contentname">{{$post->userInfo->nick_name}}<br>{{ Carbon\Carbon::parse($post->created_time)->format('m-d H:i:s') }}</div> --> 
-						@if(rand(1,10) != 8)
-						<div class="rs-contentword">
-							
-							<h2 style="width:95%; padding: 0px 0px 0px 0px;Display: inline-block;  overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color:#b02b7c;"><a href="/p/{{$post->id}}">{!! $post->title !!}</a></h2>
-							<div poster="" class=" embed-responsive embed-responsive-16by9  video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	  id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
-								<a href="/p/{{$post->id}}">
-									<div class="vjs-poster" tabindex="-1" aria-disabled="false" 
-											style="display: inline-block;
-											vertical-align: middle;
-											background-repeat: no-repeat;
-											background-position: 50% 50%;
-											background-size: contain;
-											cursor: pointer;
-											margin: 0;
-											padding: 0;
-											position: absolute;
-											top: 0px;
-											right: 0;
-											bottom: 0;
-											left: 0;
-											height: 100%;
-											MARGIN: 0PX 5PX 0 5PX;
-											BACKGROUND-COLOR: #000;
-											background-image: url('{{ asset('storage'.$post->cover_img)}}');" 
-										>
-									
-							</div>
-							<div id="rs-digg-box2 "  class="detail"  >
-								<div class="rs-digg-left" >
-									<div class="" id='post-digg' data-id='post-digg'><i class=""></i><span> {{$post->detail->count_view}} views</span></span></div>
-								</div>
-								<div class="rs-digg-right"  >
-										<div class="rs-digg"  id='post-digg-thumbs-up' data-id='1'><i class="fas fa-thumbs-up fa-w-16"></i><span> {{$post->detail->count_digg}} </span></span></div>
-										<div class="rs-digg "  id='post-digg-thumbs-down' data-id='1'><i class="fas fa-thumbs-down"></i><span> {{$post->detail->count_bury}} </span></div>
-								 
-								</div>
-							</div>
-								</a>
-							</div>
+			@endif
+ 
+			
+			@if (is_Null($post->isAd))
+			<div class="rs-contentword">
+				<h2 style="width:95%; padding: 0px 0px 0px 0px;Display: inline-block;  overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color:#b02b7c;"><a href="/p/{{$post->id}}">{!! $post->title !!}</a></h2>
+				<div poster="" class=" embed-responsive embed-responsive-16by9  video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	  id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
+					<a href="/p/{{$post->id}}">
+						<div class="vjs-poster" tabindex="-1" aria-disabled="false" 
+								style="display: inline-block;
+								vertical-align: middle;
+								background-repeat: no-repeat;
+								background-position: 50% 50%;
+								background-size: contain;
+								cursor: pointer;
+								margin: 0;
+								padding: 0;
+								position: absolute;
+								top: 0px;
+								right: 0;
+								bottom: 0;
+								left: 0;
+								height: 100%;
+								MARGIN: 0PX 5PX 0 5PX;
+								BACKGROUND-COLOR: #000;
+								background-image: url('{{ asset('storage'.$post->cover_img)}}');" 
+							>
 						
-						</div>
-						@if ($device == 'ios' || $device == 'android')
-						<div id="rs-digg-box2" style="float: left; width: 100%; position: relative; left: -5px     padding-top: 0px; overflow: visible;">
-							@if ($post->tag)
-								@foreach ($post->tag as $tag)
-								<p><a href="/tag/{{$tag->tagname->id}}" target="_blank" class='rs-digg-box2-tag'>{{$tag->tagname->name}}</a></p>
-								@endforeach
-							@endif
-						</div>
-
-						@else
-						<div id="rs-digg-box2" style="float: left; width: 100%;     padding-top: 0px; overflow: visible;">
-							@if ($post->tag)
-								@foreach ($post->tag as $tag)
-								<p><a href="/tag/{{$tag->tagname->id}}" target="_blank" class='rs-digg-box2-tag'>{{$tag->tagname->name}}</a></p>
-								@endforeach
-							@endif
-						</div>
-						@endif
-						
-
-						@else		
-						<!-- @php  ($loop->remaining -= 1) -->
-						<div class="rs-contentword">
-							
-							<h2 style="width:95%; padding: 0px 0px 0px 0px;Display: inline-block;  overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color:#b02b7c;"><a href="{{$ad[0]->web_url}}"  target="_blank">{!! $ad[0]->campaign_name !!}</a></h2>
-							<div poster="" class=" embed-responsive embed-responsive-16by9  video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
-								<a href="{{$ad[0]->web_url}}"  target="_blank">
-									<div class="vjs-poster" tabindex="-1" aria-disabled="false" 
-											style="display: inline-block;
-											vertical-align: middle;
-											background-repeat: no-repeat;
-											background-position: 50% 50%;
-											background-size: contain;
-											cursor: pointer;
-											margin: 0;
-											padding: 0;
-											position: absolute;
-											top: 0px;
-											right: 0;
-											bottom: 0;
-											left: 0;
-											height: 100%;
-											MARGIN: 0PX 5PX 0 5PX;
-											BACKGROUND-COLOR: #000;
-											background-image: url('{{  asset('storage/'.$ad[0]->bg_img)}}');" 
-										>
-								</div>
-								</a>	
-							</div>
-									
-						 
-						</div>
-						
-						 
-
-
-						@endif
+				</div>
+				<div id="rs-digg-box2 "  class="detail"  >
+					<div class="rs-digg-left" >
+						<div class="" id='post-digg' data-id='post-digg'><i class=""></i><span> {{$post->detail->count_view}} views</span></span></div>
+					</div>
+					<div class="rs-digg-right"  >
+							<div class="rs-digg"  id='post-digg-thumbs-up' data-id='1'><i class="fas fa-thumbs-up fa-w-16"></i><span> {{$post->detail->count_digg}} </span></span></div>
+							<div class="rs-digg "  id='post-digg-thumbs-down' data-id='1'><i class="fas fa-thumbs-down"></i><span> {{$post->detail->count_bury}} </span></div>
 					 
 					</div>
 				</div>
-		@if ((($device == 'ios' || $device == 'android') &&  ($i %  2 ==1))   ||   ( ($device != 'ios' && $device != 'android')  &&  ($i %  3 ==2))  )
+					</a>
+				</div>
 			</div>
-		@endif
-		@php ($i++)		
+				@if ($device == 'ios' || $device == 'android')
+					<div id="rs-digg-box2" style="float: left; width: 100%; position: relative; left: -5px     padding-top: 0px; overflow: visible;">
+						@if ($post->tag)
+							@foreach ($post->tag as $tag)
+							<p><a href="/tag/{{$tag->tagname->id}}" target="_blank" class='rs-digg-box2-tag'>{{$tag->tagname->name}}</a></p>
+							@endforeach
+						@endif
+					</div>
+
+				@else
+					<div id="rs-digg-box2" style="float: left; width: 100%;     padding-top: 0px; overflow: visible;">
+						@if ($post->tag)
+							@foreach ($post->tag as $tag)
+							<p><a href="/tag/{{$tag->tagname->id}}" target="_blank" class='rs-digg-box2-tag'>{{$tag->tagname->name}}</a></p>
+							@endforeach
+						@endif
+					</div>
+				@endif
+			@else
+			<div class="rs-contentword">
+				<h2 style="width:95%; padding: 0px 0px 0px 0px;Display: inline-block;  overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color:#b02b7c;"><a href="{{$post->web_url}}">{!!is_Null($post->isAd).'  '  . $post->campaign_name !!}</a></h2>
+				<div poster="" class=" embed-responsive embed-responsive-16by9  video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
+					<a href="{{$post->web_url}}"  target="_blank">
+						<div class="vjs-poster" tabindex="-1" aria-disabled="false" 
+						style="display: inline-block;
+						vertical-align: middle;
+						background-repeat: no-repeat;
+						background-position: 50% 50%;
+						background-size: contain;
+						cursor: pointer;
+						margin: 0;
+						padding: 0;
+						position: absolute;
+						top: 0px;
+						right: 0;
+						bottom: 0;
+						left: 0;
+						height: 100%;
+						MARGIN: 0PX 5PX 0 5PX;
+						BACKGROUND-COLOR: #000;
+						background-image: url('{{ asset('storage/'.$post->bg_img)}}');" 
+					>
+				
+					</div>
+					</a>	
+				</div>
+			</div>
+			@endif
+						</div>
+					</div>
+			@if ((($device == 'ios' || $device == 'android') &&  ($loop->index %  2 ==1))   ||   ( ($device != 'ios' && $device != 'android')  &&  ($loop->index %  3 ==2))  )
+				</div>
+			@endif
+	 
 		@endforeach
 		</div>
 

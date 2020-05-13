@@ -61,7 +61,7 @@ Route::group(['middleware' => ['auth:web']], function () {
 Route::post('/upload/request', 'Article\UploadController@store');
 
 //交換連結
-Route::get('/linkex', 'Service\PageController@linkexchange');
+// Route::get('/linkex', 'Service\PageController@linkexchange');
 
 
 //登入頁面
@@ -102,40 +102,40 @@ Route::get('/comm/reply/loadmore', 'Article\CmtController@loadreply');
 */
 
 
-//PR頁面
-Route::get('/pr/{adid}', 'Pr\Type1Controller@view')->where('adid', '[0-9]+');
+// //PR頁面
+// Route::get('/pr/{adid}', 'Pr\Type1Controller@view')->where('adid', '[0-9]+');
 
 
-//service
-Route::group(['prefix' => 'service'], function ($router) {
-	Route::get('/dmca', 'Service\PageController@dmca');
-	Route::get('/privacy', 'Service\PageController@privacy');
-	Route::get('/important', 'Service\PageController@important');
-	Route::get('/report/{id}', 'Service\PageController@report')->where('id', '[0-9]+');
-});
+// //service
+// Route::group(['prefix' => 'service'], function ($router) {
+// 	Route::get('/dmca', 'Service\PageController@dmca');
+// 	Route::get('/privacy', 'Service\PageController@privacy');
+// 	Route::get('/important', 'Service\PageController@important');
+// 	Route::get('/report/{id}', 'Service\PageController@report')->where('id', '[0-9]+');
+// });
 
-//app api
-Route::group(['prefix' => 'api'], function ($router) {
-	Route::get('/allarticle', 'Index\AppController@allArticle');
-});
+// //app api
+// Route::group(['prefix' => 'api'], function ($router) {
+// 	Route::get('/allarticle', 'Index\AppController@allArticle');
+// });
 
 //sitemap
 //Route::get('/sitemap', 'Rd\SitemapController@generate');
 
 //api
-Route::get('/api/getlist/{id?}', 'Api\PostController@index')->where('id', '[0-9]+');
-Route::get('/api/hotlist/{id?}', 'Api\PostController@hotlist')->where('id', '[0-9]+');
+// Route::get('/api/getlist/{id?}', 'Api\PostController@index')->where('id', '[0-9]+');
+// Route::get('/api/hotlist/{id?}', 'Api\PostController@hotlist')->where('id', '[0-9]+');
 
-Route::get('/api/tag/{id}/{page?}', 'Api\PostController@tag')->where('id', '[0-9]+');
-Route::get('/api/getTagList', 'Api\PostController@getTagList');
-Route::get('/api/getrelate/{id}', 'Api\PostController@getRelate');
+// Route::get('/api/tag/{id}/{page?}', 'Api\PostController@tag')->where('id', '[0-9]+');
+// Route::get('/api/getTagList', 'Api\PostController@getTagList');
+// Route::get('/api/getrelate/{id}', 'Api\PostController@getRelate');
 
-Route::get('/api/auth/bindauth', 'Api\AuthController@bindcards');
-Route::get('/api/auth/varify', 'Api\AuthController@varify');
+// Route::get('/api/auth/bindauth', 'Api\AuthController@bindcards');
+// Route::get('/api/auth/varify', 'Api\AuthController@varify');
 
-Route::get('/api/auth/getauthcode', 'Api\AuthController@getauthcode');
-Route::get('/api/auth/chklicence', 'Api\AuthController@chklicence');
-Route::get('/api/auth/coupon', 'Api\AuthController@coupon');
+// Route::get('/api/auth/getauthcode', 'Api\AuthController@getauthcode');
+// Route::get('/api/auth/chklicence', 'Api\AuthController@chklicence');
+// Route::get('/api/auth/coupon', 'Api\AuthController@coupon');
 
 /*
 Route::get('/api/getpost/{id}', 'Api\PostController@show_api')->where('id', '[0-9]+');
@@ -149,19 +149,19 @@ Route::get('/api/mylike/{userid}/{page?}', 'Api\PostController@mylikeart')->wher
 
 Route::get('/api/appconfig', 'Api\AppConfigController@getconfig');
 */
-Route::get('/api/apk/appcadconfig', 'Api\AppConfigController@getconfigAndroid');
-Route::get('/api/ios/appcadconfig', 'Api\AppConfigController@getconfigIos');
-Route::get('/api/ad/detailbnconfig/{type}', 'Api\AppConfigController@getconfigBn');
+// Route::get('/api/apk/appcadconfig', 'Api\AppConfigController@getconfigAndroid');
+// Route::get('/api/ios/appcadconfig', 'Api\AppConfigController@getconfigIos');
+// Route::get('/api/ad/detailbnconfig/{type}', 'Api\AppConfigController@getconfigBn');
 
-Route::get('/api/getver', 'Api\AppConfigController@getVersion');
+// Route::get('/api/getver', 'Api\AppConfigController@getVersion');
 
-Route::get('/api/payment/request', 'Api\AuthController@paymentrequest');
-Route::post('/api/payment/varify', 'Api\AuthController@paymentvarify');
+// Route::get('/api/payment/request', 'Api\AuthController@paymentrequest');
+// Route::post('/api/payment/varify', 'Api\AuthController@paymentvarify');
 
 //paypal
-Route::get('/api/payment/paypal/webhook', function() {
-	return 'hi';
-});
+// Route::get('/api/payment/paypal/webhook', function() {
+// 	return 'hi';
+// });
 
 
 /*
@@ -172,21 +172,21 @@ Route::post('/api/user/update', 'Member\AppOpenidController@infoupdate');
 */
 
 //spider
-Route::get('/spyder/getText', 'Rd\GetTextController@getext');
-Route::get('/spyder/clawpost', 'Rd\GetTextController@clawpost');
+// Route::get('/spyder/getText', 'Rd\GetTextController@getext');
+// Route::get('/spyder/clawpost', 'Rd\GetTextController@clawpost');
 
 
-//getvideo
-Route::get('/getvideo/{id}', 'Index\GetVideoController@index');
-Route::get('/getvideoapp/{id}', 'Index\GetVideoAppController@index');
+// //getvideo
+// Route::get('/getvideo/{id}', 'Index\GetVideoController@index');
+// Route::get('/getvideoapp/{id}', 'Index\GetVideoAppController@index');
 
 
-//avdb 爬蟲
-Route::get('/avdb/clawinfo', 'Avdb\ClawController@index');
-Route::get('/avdb/clawavdetail', 'Avdb\ClawController@clawavdetail');
+// //avdb 爬蟲
+// Route::get('/avdb/clawinfo', 'Avdb\ClawController@index');
+// Route::get('/avdb/clawavdetail', 'Avdb\ClawController@clawavdetail');
 
-//javhihi 爬蟲
-Route::get('/avdb/clawjavbuzz', 'Avdb\ClawController@clawjavbuzz');
+// //javhihi 爬蟲
+// Route::get('/avdb/clawjavbuzz', 'Avdb\ClawController@clawjavbuzz');
 
 
 //avdb page

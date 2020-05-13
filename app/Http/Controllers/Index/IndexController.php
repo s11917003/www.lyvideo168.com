@@ -34,30 +34,51 @@ class IndexController extends Controller {
 	   	// }   	
 	 
 	 	$category = PostsCategory::all();
-		$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->with('commentsGod')->where('cate_id', 3)->where('status', 1)->where('covered', 1)->orderBy('id', 'desc')->Paginate(18, null, 1, $page);
+		$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->with('commentsGod')->where('cate_id', 3)->where('status', 1)->where('covered', 1)->orderBy('id', 'desc')->Paginate(21, null, 1, $page);
 		
-		
+	
 		$lastPage = $posts->lastPage();
 		$currentPage = $posts->currentPage();
 	    
 	    $tagarr = [1,2,4,10,11];
 		$relate = PostsTagRelationships::with('article')->whereIn('post_tag_id', $tagarr)->where('status',1)->groupBy('post_id')->inRandomOrder()->limit(10)->get();	 		
+	
 
-		$adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(2)->get();
+		$relate1 = $relate;
+		$posts1 = $posts;
+		$adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(3)->get();
 
 		$adHalf = AdDetailBanner::inRandomOrder()->where('type', 'half')->where('status',1)->limit(1)->get();
 		//return  view('app.index.default', [
 		$device = Utils::chkdevice();
+	 
 		
+		if(count($relate1) >=0){
+			foreach ($adHalf as $ad) {
+				$ad->isAd  = true;
+				$this->array_insert($relate1,rand(0,count($relate1)-1),$ad);
+				
+			}
+		}
+
+		if(count($posts1) >=0){
+			foreach ($adDetail as $ad) {
+				$ad->isAd  = true;
+				$this->array_insert($posts1,rand(0,count($posts1)-1),$ad);
+			}
+		}
+ 
+ 
+	// return;
 		return  view('app_rwd.index.default', [
-			'ad'=>$adDetail,
+			// 'ad'=>$adDetail,
 			'adHalf'=>$adHalf,
 			'category'=>$category,
-			'posts'=>$posts,
+			'posts'=>$posts1,
 			'lastPage' =>  $lastPage,
 			'currentPage' => $currentPage,
 			'device' => $device,
-			'relate' => $relate,
+			'relate' => $relate1,
 			'loadmore' => true,
 			'path' =>  env('APP_URL').'app/public',		
 		]);
@@ -94,11 +115,14 @@ class IndexController extends Controller {
 			$tagarr[] = $tag['post_tag_id'];
 
 		}
-		
+	
 		//$relate = \DB::table('posts_tag_relationships')->whereIn('post_tag_id', $tagarr)->groupBy('post_id')->inRandomOrder()->limit(6)->get();
-		$relate = PostsTagRelationships::with('article')->where('post_id','!=', $id)->whereIn('post_tag_id', $tagarr)->where('status',1)->groupBy('post_id')->inRandomOrder()->limit(14)->get();	 		
+		$relate = PostsTagRelationships::with('article')->where('post_id','!=', $id)->whereIn('post_tag_id', $tagarr)->where('status',1)->groupBy('post_id')->inRandomOrder()->limit(10)->get();	 		
 		
 		$adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(2)->get();
+		
+	
+		
 		$status = 0;
 		if (Auth::check()) {
 			$user  = Auth::User();
@@ -107,11 +131,17 @@ class IndexController extends Controller {
 				$status = $postsDigg['status'];
 			}
 		}
-		
+		 
+		if(count($relate) >=0){
+			foreach ($adDetail as $ad) {
+				$ad->isAd  = true;
+				$this->array_insert($relate,rand(0,count($relate)-1),$ad);
+			}
+		}
 		if($article) {
 			$device = Utils::chkdevice();
 			return view('app_rwd.index.pview',[
-				'ad'=>$adDetail,
+				// 'ad'=>$adDetail,
 				'post'=>$article,
 				'device' => $device,
 				'relate' => $relate,
@@ -253,9 +283,19 @@ class IndexController extends Controller {
 		//$relate = \DB::table('posts_tag_relationships')->whereIn('post_tag_id', $tagarr)->groupBy('post_id')->inRandomOrder()->limit(6)->get();
 		// $relate = PostsTagRelationships::with('article')->where('post_id','!=', $id)->whereIn('post_tag_id', $tagarr)->where('status',1)->groupBy('post_id')->inRandomOrder()->limit(14)->get();	 		
 		
-		$posts = PostsDetail::with('hot')->orderBy('count_view', 'desc')->Paginate(12, null, 1, $page);
+		$posts = PostsDetail::with('hot')->orderBy('count_view', 'desc')->Paginate(10, null, 1, $page);
+		$adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(2)->get();
 		$lastPage = $posts->lastPage();
 		$currentPage = $posts->currentPage();
+		 
+
+		if(count($posts) >=0){
+			foreach ($adDetail as $ad) {
+				$ad->isAd  = true;
+				$this->array_insert($posts,rand(0,count($posts)-1),$ad);
+			}
+		}
+
 		 
 		if($posts) {
 			$device = Utils::chkdevice();
@@ -286,12 +326,21 @@ class IndexController extends Controller {
 			return ;
 		}		
 		
-		$posts = PostsTagRelationships::with('article')->with('hot')->where('post_tag_id', $tag)->where('status', 1)->orderBy('post_id', 'desc')->Paginate(12, null, 1, $page);
+		$posts = PostsTagRelationships::with('article')->with('hot')->where('post_tag_id', $tag)->where('status', 1)->orderBy('post_id', 'desc')->Paginate(10, null, 1, $page);
 		
 		//$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->with('commentsGod')->where('cate_id', $cats->id)->where('status', 1)->orderBy('id', 'desc')->Paginate(10, null, 1, $page);
 		$lastPage = $posts->lastPage();
 		$currentPage = $posts->currentPage();
 
+		$adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(2)->get();
+	 
+		if(count($posts) >=0){
+			foreach ($adDetail as $ad) {
+				$ad->isAd  = true;
+				$this->array_insert($posts,rand(0,count($posts)-1),$ad);
+			}
+		}
+ 
 	    // $tagarr = [1,2,4,10,11];
 		// $relate = PostsTagRelationships::with('article')->whereIn('post_tag_id', $tagarr)->where('status',1)->groupBy('post_id')->inRandomOrder()->limit(10)->get();	 		
 		//var_dump($posts);
@@ -405,6 +454,19 @@ class IndexController extends Controller {
 			return response()->json(['count_digg' => 1, 'status' => 1,'login' => false]);
 		}
 
+	}
+	public function array_insert(&$arr,$index,$value)
+	{
+		$lengh = count($arr);
+		if($index<0||$index>$lengh)
+			return;
+	
+		for($i=$lengh; $i>$index; $i--){
+			$arr[$i] = $arr[$i-1];
+		}
+	
+		$arr[$index] = $value;
+	 
 	}
 	public function thumbsdown(Request $request){
 		if (Auth::check()) {

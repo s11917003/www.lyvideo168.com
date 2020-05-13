@@ -102,7 +102,7 @@
 				
 				@foreach ($relate as $re)
 				<div style="float: left;padding: 10px; width: 100%; height: 250px; margin: 5px;  overflow: hidden; text-align: center">
-					@if (rand(1,8) != 8)
+					@if (is_Null($re->isAd))
 					<div poster="" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:80%;    padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
 						<a href="/p/{{$re->post_id}}">
 							<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
@@ -131,7 +131,7 @@
 					</div>
 					@else
 					<div poster="" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:80%;    padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
-						<a href="{{'storage/'.$ad[0]->web_url}}"  target="_blank">
+						<a href="{{'storage/'.$re->web_url}}"  target="_blank">
 							<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
 														vertical-align: middle;
 														background-repeat: no-repeat;
@@ -149,11 +149,11 @@
 														 WIDTH: 100%;
 														MARGIN: 0PX 5PX 0 5PX;
 														BACKGROUND-COLOR: #000;
-														background-image: url('{{ asset('storage/'.$ad[0]->bg_img)}}');" 
+														background-image: url('{{ asset('storage/'.$re->bg_img)}}');" 
 													>
 													
 							</div>
-							<div style="font-size: 8; padding-top: 5px;">{{$ad[0]->campaign_name}}</div>
+							<div style="font-size: 8; padding-top: 5px;">{{$re->campaign_name}}</div>
 		
 						</a>
 					</div>
@@ -179,11 +179,11 @@
 				<div style="clear: both"></div>
 			</div>
 			@else
-			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px; height: 430px;">
+			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px; height: 630px;">
 				<h5 class="recommend">推荐影片</h5>
 				@foreach ($relate as $re)
 				<div style="float: left;padding: 10px; width: 230px; height: 185px; margin: 5px; overflow: hidden">
-					@if ($loop->index %  5 !=0)
+					@if (is_Null($re->isAd))
 					<div poster="" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:80%;    padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
 						<a href="/p/{{$re->post_id}}">
 							<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
@@ -213,7 +213,7 @@
 					</div>
 					@else
 					<div poster="" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:80%;    padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
-						<a href="{{$ad[0]->web_url}}"  target="_blank">
+						<a href="{{$re->web_url}}"  target="_blank">
 							<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
 														vertical-align: middle;
 														background-repeat: no-repeat;
@@ -231,11 +231,11 @@
 														 WIDTH: 100%;
 														MARGIN: 0PX 5PX 0 5PX;
 														BACKGROUND-COLOR: #000;
-														background-image: url('{{ asset('storage/'.$ad[0]->bg_img)}}');" 
+														background-image: url('{{ asset('storage/'.$re->bg_img)}}');" 
 													>
 							</div>
 							<!-- <img src="{{ asset('storage'.$re->article['tb_img']) }}" style="width: 300px;"> -->
-							<div style="font-size: 8; padding-top: 5px;">{{$ad[0]->campaign_name}}</div>
+							<div style="font-size: 8; padding-top: 5px;">{{$re->campaign_name}}</div>
 		
 						</a>
 					</div>
