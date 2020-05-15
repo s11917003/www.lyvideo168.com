@@ -26,7 +26,7 @@
 </head>
 <body id="rs-body">
 <!-- JuicyAds PopUnders v3 Start -->
-<script type="text/javascript" src="https://js.juicyads.com/jp.php?c=3474y213t244u4q2q28443b494&u=http%3A%2F%2Fwww.juicyads.rocks"></script>
+<!-- <script type="text/javascript" src="https://js.juicyads.com/jp.php?c=3474y213t244u4q2q28443b494&u=http%3A%2F%2Fwww.juicyads.rocks"></script> -->
 <!-- JuicyAds PopUnders v3 End -->
 	<!-- HEADER 結束 -->
 	<!-- NAV選項區域 結束 -->
