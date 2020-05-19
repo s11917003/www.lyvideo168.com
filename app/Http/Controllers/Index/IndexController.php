@@ -10,12 +10,13 @@ use App\Model\PostsDetail;
 use App\Model\PostsTag;
 use App\Model\PostsDigg;
 use App\Model\AdDetailBanner;
+use App\Model\Device;
 use App\Model\PostsTagRelationships;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Lib\User;
 use App\Lib\Utils;
-
+use Cookie;
 class IndexController extends Controller {	
 	
 	public function index($page = 1) {
@@ -32,7 +33,25 @@ class IndexController extends Controller {
 		//    	header('Location:/warning');
 		//    	return ;
 	   	// }   	
-	 
+		   
+		$device = Utils::chkdevice();
+		$value = @$_COOKIE['appdl'];
+	   	if($value != true) {
+			Cookie::make('appdl',true,180);
+
+			$deviveArr  =['web' =>1 ,'android'=>2,'ios'=>3];
+
+		 
+		   if(is_Null($deviveArr[$device])){	 
+			$d = Device::find(4);
+			$d->count +=1;
+			$d->save();
+		   } else {
+			$d = Device::find($deviveArr[$device]);
+			$d->count +=1;
+			$d->save();
+		   }
+	   	} 
 	 	$category = PostsCategory::all();
 		$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->with('commentsGod')->where('cate_id', 3)->where('status', 1)->where('covered', 1)->orderBy('id', 'desc')->Paginate(21, null, 1, $page);
 		
@@ -50,12 +69,12 @@ class IndexController extends Controller {
 
 		$adHalf = AdDetailBanner::inRandomOrder()->where('type', 'half')->where('status',1)->limit(1)->get();
 		//return  view('app.index.default', [
-		$device = Utils::chkdevice();
+		
 	 
 		$now = date('Y-m-d H:i:s');
 		if(count($relate1) >0){
 			foreach ($adHalf as $ad) {
-				$log =  ['ad_id' => $ad->id ,'action-type' =>0,'updated_at'=>$now] ;
+				$log =  ['ad_id' => $ad->id ,'actiontype' =>0,'updated_at'=>$now] ;
 				$adlog[]  = $log;
 				$ad->isAd  = true;
 				$this->array_insert($relate1,rand(0,count($relate1)-1),$ad);
@@ -65,7 +84,7 @@ class IndexController extends Controller {
 
 		if(count($posts1) >0){
 			foreach ($adDetail as $ad) {
-				$log =  ['ad_id' => $ad->id ,'action-type' =>0,'updated_at'=>$now] ;
+				$log =  ['ad_id' => $ad->id ,'actiontype' =>0,'updated_at'=>$now] ;
 				$adlog[]  = $log;;
 				$ad->isAd  = true;
 				$this->array_insert($posts1,rand(0,count($posts1)-1),$ad);
@@ -141,7 +160,7 @@ class IndexController extends Controller {
 		$now = date('Y-m-d H:i:s');
 		if(count($relate) >0){
 			foreach ($adDetail as $ad) {
-				$log =  ['ad_id' => $ad->id ,'action-type' =>0,'updated_at'=>$now] ;
+				$log =  ['ad_id' => $ad->id ,'actiontype' =>0,'updated_at'=>$now] ;
 				$adlog[]  = $log;;
 				$ad->isAd  = true;
 				$this->array_insert($relate,rand(0,count($relate)-1),$ad);
@@ -308,7 +327,7 @@ class IndexController extends Controller {
 		$now = date('Y-m-d H:i:s');
 		if(count($posts) >0){
 			foreach ($adDetail as $ad) {
-				$log =  ['ad_id' => $ad->id ,'action-type' =>0,'updated_at'=>$now] ;
+				$log =  ['ad_id' => $ad->id ,'actiontype' =>0,'updated_at'=>$now] ;
 				$adlog[]  = $log;;
 				$ad->isAd  = true;
 				$this->array_insert($posts,rand(0,count($posts)-1),$ad);
@@ -360,7 +379,7 @@ class IndexController extends Controller {
 		$now = date('Y-m-d H:i:s');
 		if(count($posts) >0){
 			foreach ($adDetail as $ad) {
-				$log =  ['ad_id' => $ad->id ,'action-type' =>0,'updated_at'=>$now] ;
+				$log =  ['ad_id' => $ad->id ,'actiontype' =>0,'updated_at'=>$now] ;
 				$adlog[]  = $log;;
 				$ad->isAd  = true;
 				$this->array_insert($posts,rand(0,count($posts)-1),$ad);
@@ -551,7 +570,7 @@ class IndexController extends Controller {
 			return ;
 		}
 		$now = date('Y-m-d H:i:s');
-		$log =  ['ad_id' => $id ,'action-type' =>1,'updated_at'=>$now] ;
+		$log =  ['ad_id' => $id ,'actiontype' =>1,'updated_at'=>$now] ;
 		DB::table('ad_detail_banner_log')->insert($log);
 	 
 		return response()->json(['status' => 1,'address' => $ad->web_url]);
