@@ -66,12 +66,16 @@ class IndexController extends Controller {
 		$relate1 = $relate;
 		$posts1 = $posts;
 		$adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(3)->get();
-
 		$adHalf = AdDetailBanner::inRandomOrder()->where('type', 'half')->where('status',1)->limit(1)->get();
+		$adFloat = AdDetailBanner::inRandomOrder()->where('type', 'float')->where('status',1)->first();
 		//return  view('app.index.default', [
 		
 	 
 		$now = date('Y-m-d H:i:s');
+		if($adFloat){
+			$log =  ['ad_id' => $adFloat->id ,'actiontype' =>0,'updated_at'=>$now] ;
+			$adlog[]  = $log;
+		}
 		if(count($relate1) >0){
 			foreach ($adHalf as $ad) {
 				$log =  ['ad_id' => $ad->id ,'actiontype' =>0,'updated_at'=>$now] ;
@@ -99,6 +103,7 @@ class IndexController extends Controller {
 		return  view('app_rwd.index.default', [
 			// 'ad'=>$adDetail,
 			'adHalf'=>$adHalf,
+			'adFloat' => $adFloat,
 			'category'=>$category,
 			'posts'=>$posts1,
 			'lastPage' =>  $lastPage,

@@ -43,7 +43,7 @@ No.1 @lang('default.title')，带你升天带你飞，频繁更新片片精彩�
 			
 			@if (is_Null($post->isAd))
 			<div class="rs-contentword">
-				<h2 style="width:95%; padding: 0px 0px 0px 0px;Display: inline-block;  overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color:#b02b7c;"><a href="/p/{{$post->id}}">{!! $post->title !!}</a></h2>
+				<h2 style="width:95%; padding: 0px 0px 0px 0px;Display: inline-block;  overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color:#f90;"><a href="/p/{{$post->id}}">{!! $post->title !!}</a></h2>
 				<div poster="" class=" embed-responsive embed-responsive-16by9  video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	  id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
 					<a href="/p/{{$post->id}}">
 						<div class="vjs-poster" tabindex="-1" aria-disabled="false" 
@@ -100,7 +100,7 @@ No.1 @lang('default.title')，带你升天带你飞，频繁更新片片精彩�
 				@endif
 			@else
 			<div class="rs-contentword">
-				<h2  data-id='{{$post->id}}' class="adClick" style="width:95%; padding: 0px 0px 0px 0px;Display: inline-block;  overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color:#b02b7c;"><a href="{{$post->web_url}}"  target="_blank">{!! $post->campaign_name !!}</a></h2>
+				<h2  data-id='{{$post->id}}' class="adClick" style="width:95%; padding: 0px 0px 0px 0px;Display: inline-block;  overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color:#f90;"><a href="{{$post->web_url}}"  target="_blank">{!! $post->campaign_name !!}</a></h2>
 				<div poster=""  data-id='{{$post->id}}' class="adClick embed-responsive embed-responsive-16by9  video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
 					<a href="{{$post->web_url}}"  target="_blank">
 						<div class="vjs-poster" tabindex="-1" aria-disabled="false" 

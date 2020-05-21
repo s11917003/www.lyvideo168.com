@@ -19,7 +19,7 @@
 			<div class="filler"></div>			
 			@php (isset($postArticle) ? $postArticle : false )
 			@if ($postArticle == false)
-			<div id="rs-loginBar" class="d">
+			<div id="rs-loginBar">
 				<ul class="loginBar">
 					@if (Auth::check())
 					<li ><a href="javascript:void(0);">@lang('default.member')：{{Auth::User()->nick_name}}</a></li>
@@ -77,7 +77,18 @@
 			  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 			</form>
 		  </div> -->
-		  <div id="nav-link-mask" class="nav-link-mask"  style="display: none;"></div>
+		<!-- @php (isset($adFloat) ? $adFloat : false ) -->
+		@if (isset($adFloat))
+		<div id="adRightPanel"  >
+			<div 	style="position: relative;  bottom: 0; height: 100%;width:100%;">
+				<a href="{{$adFloat->web_url}}"  target="_blank">
+					<div data-id='{{$adFloat->id}}' class="adClick"   style="Boverflow: hidden; background-repeat: no-repeat;   background-position: 50% 50%; background-size: contain;height: 100%; width:100%;background-image: url('{{ asset('storage/'.$adFloat->bg_img)}}');" >
+					</div>
+				</a>
+			</div>
+		</div> 
+		@endif
+		<div id="nav-link-mask" class="nav-link-mask"  style="display: none;"></div>
 	 
 		<div id ="nav-link-box" class="offcanvas-collapse  nav-link-box" >
 			<div class="navbar-collapse" id="navbarsExampleDefault">
