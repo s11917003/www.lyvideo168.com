@@ -66,12 +66,16 @@ class IndexController extends Controller {
 		$relate1 = $relate;
 		$posts1 = $posts;
 		$adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(3)->get();
-
 		$adHalf = AdDetailBanner::inRandomOrder()->where('type', 'half')->where('status',1)->limit(1)->get();
+		$adFloat = AdDetailBanner::inRandomOrder()->where('type', 'float')->where('status',1)->first();
 		//return  view('app.index.default', [
 		
 	 
 		$now = date('Y-m-d H:i:s');
+		if($adFloat){
+			$log =  ['ad_id' => $adFloat->id ,'actiontype' =>0,'updated_at'=>$now] ;
+			$adlog[]  = $log;
+		}
 		if(count($relate1) >0){
 			foreach ($adHalf as $ad) {
 				$log =  ['ad_id' => $ad->id ,'actiontype' =>0,'updated_at'=>$now] ;
@@ -99,6 +103,7 @@ class IndexController extends Controller {
 		return  view('app_rwd.index.default', [
 			// 'ad'=>$adDetail,
 			'adHalf'=>$adHalf,
+			'adFloat' => $adFloat,
 			'category'=>$category,
 			'posts'=>$posts1,
 			'lastPage' =>  $lastPage,
@@ -407,7 +412,63 @@ class IndexController extends Controller {
 		]);	
 		
 	}	
+	public function destroy($id)
+    {
+        //
+    }
+    public function searchVideo($search ='',$page = 1){
 	
+
+		$article = $this->show_api(1);
+		$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->with('commentsGod')
+		->where('cate_id', 3)->where('status', 1)->where('covered', 1)
+		->where('title','like', '%'.$search.'%')
+		->orderBy('id', 'desc')
+		->Paginate(12, null, 1, $page);
+
+
+		//$adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(2)->get();
+		$lastPage = $posts->lastPage();
+		$currentPage = $posts->currentPage();
+		 
+
+		// $now = date('Y-m-d H:i:s');
+		// if(count($posts) >0){
+		// 	foreach ($adDetail as $ad) {
+		// 		$log =  ['ad_id' => $ad->id ,'actiontype' =>0,'updated_at'=>$now] ;
+		// 		$adlog[]  = $log;;
+		// 		$ad->isAd  = true;
+		// 		$this->array_insert($posts,rand(0,count($posts)-1),$ad);
+		// 	}
+		// }
+
+		// if(count($adlog) >0){
+		// 	DB::table('ad_detail_banner_log')->insert($adlog);
+		// }
+		 
+		if($posts) {
+
+			//  return $posts;
+			$device = Utils::chkdevice();
+			return view('app_rwd.index.default_search',[
+				'post'=> $article,
+				'search'=>$search,
+				'lastPage' => $lastPage,
+				'currentPage' => $currentPage,
+				'device' => $device,
+				'posts'=> $posts,
+				'title'=> '搜尋',
+				'tag' => 'search',
+			]);
+		} else {
+			//沒有文章跳轉
+			echo '沒有文章';
+			header("Location:/"); 
+		}
+
+ 
+ 
+    }
 	public function postpage() {
 		/*
 	    $u = new User();

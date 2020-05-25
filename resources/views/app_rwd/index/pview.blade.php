@@ -22,7 +22,7 @@
 			<!-- <div class="rs-contentpics" style="background: url({{$post->userInfo->avatar}}) no-repeat top center; background-size:50px"><a href="/p/{{$post->id}}"></a></div>
 			<div class="rs-contentname">{{$post->userInfo->nick_name}}<br>{{ Carbon\Carbon::parse($post->created_time)->format('m-d H:i:s') }}</div> -->
 			<div class="rs-contentword">
-				<h2><a href="javascript:void(0)"  style="FONT-SIZE: 28PX;">{!! $post->title !!}</a></h2>
+				<h2   style="overflow: hidden;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;color:#f90;"><a href="javascript:void(0)"  style="FONT-SIZE: 28PX;">{!! $post->title !!}</a></h2>
 					<div style="position: relative">
 
 						<video id='av-video' width="600" height="264" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered" poster="{{asset('storage'.$post->cover_img)}}" controls>

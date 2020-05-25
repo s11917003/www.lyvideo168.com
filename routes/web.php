@@ -51,7 +51,7 @@ Route::get('/{id?}', 'Index\IndexController@index')->where('id', '[0-9]+');//走
 	Route::get('/tag/hot/{page?}', 'Index\IndexController@hot');
 	Route::post('thumbsup', 'Index\IndexController@thumbsup');
 	Route::post('thumbsdown', 'Index\IndexController@thumbsdown');
-
+	Route::get('/search/{search}/{page?}/', 'Index\IndexController@searchVideo')->where('page', '[0-9]+');
 
 	// Route::get('/tag/{id}/{page?}', 'Index\IndexController@tag')->where('id', '[0-9]+');
 // });

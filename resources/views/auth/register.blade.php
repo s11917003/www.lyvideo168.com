@@ -7,7 +7,7 @@
 @stop
 
 @section('maincontent')
-<h1 align="center">注册</h1>
+<h1 align="center">@lang('default.register')</h1>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -17,7 +17,7 @@
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <h7 for="name" class="control-label">Name</h7>
+                            <h7 for="name" class="control-label">@lang('default.name')</h7>
 
                             <div class="">
                                 <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
@@ -31,7 +31,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <h7 for="email" class="control-label">E-Mail Address</h7>
+                            <h7 for="email" class="control-label">@lang('default.email')</h7>
 
                             <div class="">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
@@ -45,7 +45,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <h7 for="password" class="control-label">Password</h7>
+                            <h7 for="password" class="control-label">@lang('default.password')</h7>
 
                             <div class="">
                                 <input id="password" type="password" class="form-control" name="password" required>
@@ -59,7 +59,7 @@
                         </div>
 
                         <div class="form-group">
-                            <h7 for="password-confirm" class="control-label">Confirm Password</h7>
+                            <h7 for="password-confirm" class="control-label">@lang('default.confirm')</h7>
 
                             <div class="">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
@@ -71,7 +71,7 @@
                         <hr style="opacity:0;" size="8px" align="center" width="100%">
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button class="btn btn-lg btn-primary btn-block" type="submit">  Register</button>
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">@lang('default.register')</button>
                                
                             </div>
                         </div>

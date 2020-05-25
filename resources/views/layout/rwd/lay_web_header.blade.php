@@ -3,7 +3,7 @@
 	<!-- Header -->
 	<div id="rs-maintop">	
 		<div class="rs-maintop-box" style="DISPLAY: flex;  flex-direction: row; align-items: center;">
-			<div class="a navbar navbar-expand-md fixed-top navbar-dark bg-dark navbar-expand-lg">
+			<div id="navbar-expand-md" class="a navbar navbar-expand-md fixed-top navbar-dark bg-dark navbar-expand-lg">
 				
 				<button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
 					<span class="navbar-toggler-icon"></span>
@@ -14,26 +14,28 @@
 			<!-- <form class="form-signin" method="POST"  style="    max-width: 220px; height: 30px; padding: 0px;">
 				<input  style="width: 100px; height: 100%; margin: 0;   padding: 0px;    border-radius: 0; border: 0;" type="text" name="search" id="search" value="{{ old('email') }}" class="form-control" placeholder="Search" required="" autofocus="">
 				<div style="margin: 0px 0;height:  99%;background-color:white;padding: 5px 11px 5px 11px;color:#111"><i class="fas  fa-search"></i></div>
-			 
+			   <form class="form-signin" method="POST" >
+          
 			</form> -->
-			<div class="filler"></div>			
-			@php (isset($postArticle) ? $postArticle : false )
-			@if ($postArticle == false)
-			<div id="rs-loginBar" class="d">
-				<ul class="loginBar">
-					@if (Auth::check())
-					<li ><a href="javascript:void(0);">哈友：{{Auth::User()->nick_name}}</a></li>
-						<li ><a class="logout" href="/logout">登出</a></li>
-					@else
-					<li ><a href="/login">登入</a></li>
-					<li ><a href="/register">註冊</a></li>
-					@endif
-					<!-- <li ><a href="/article/post">發佈</a></li> -->
-					<!-- <li ><a href="/help">幫助</a></li>			 -->
-				</ul>	
-			</div>
-			@endif
-			
+			<div class="filler"><i class="fas fa-search "></i></div>	
+			 
+				<div class="searchBox" data-toggle="searchBox" >	
+					<form  style="padding: 5px;position:relative; width: 100%; height: 100%; margin: 0;max-width: 100%;"  method="GET">
+						{{ csrf_field() }}
+						<div id="close"  style="text-align:center;left: 5px;top:0;position: absolute;; width: 50px; height: 36px; margin: 4px 
+						auto;background-color: #000;
+						border-color: #000;" class="btn btn-sm btn-primary" value="Search" >
+							<i class="fas fa-times-circle fa-2x"></i>
+						</div>
+						<input id='input' type="text" style="margin: 0;margin-left: 55px;margin-right: 55px;padding: 0px;position:relative; width: 100%; height: 100%; " name="query" placeholder="search" />
+						<div  id="submit" style="text-align:center;right: 5px;top:0;position: absolute;; width: 50px; height: 36px; margin: 4px 
+						auto;background-color: #f90;
+						border-color: #f90;" class="btn btn-sm btn-primary" value="Search" >
+							<i class="fas fa-search "></i>
+						</div>
+					</form>
+				</div>
+		 
 		{{--	 
 			@if ($device =='ios' || $device == 'android')
 			<div class="rs-logo" style="width: 300px; height: 50px; margin: 0 auto; background-color: #cecece">				 
@@ -46,7 +48,8 @@
 				<ins id="714568" data-width="728" data-height="102"></ins>
 				<script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':714568});</script>
 			</div>
-			@endif  --}}
+			@endif  
+		--}}
 			
 		</div>
 		<!-- <div class="offcanvas-collapse " id="navbarsExampleDefault">
@@ -77,12 +80,42 @@
 			  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 			</form>
 		  </div> -->
-		  <div id="nav-link-mask" class="nav-link-mask"  style="display: none;"></div>
+		<!-- @php (isset($adFloat) ? $adFloat : false ) -->
+		@if (isset($adFloat))
+		<div id="adRightPanel"  >
+			<div 	style="position: relative;  bottom: 0; height: 100%;width:100%;">
+				<a href="{{$adFloat->web_url}}"  target="_blank">
+					<div data-id='{{$adFloat->id}}' class="adClick"   style="Boverflow: hidden; background-repeat: no-repeat;   background-position: 50% 50%; background-size: contain;height: 100%; width:100%;background-image: url('{{ asset('storage/'.$adFloat->bg_img)}}');" >
+					</div>
+				</a>
+			</div>
+		</div> 
+		@endif
+		<div id="nav-link-mask" class="nav-link-mask"  style="display: none;"></div>
 	 
 		<div id ="nav-link-box" class="offcanvas-collapse  nav-link-box" >
 			<div class="navbar-collapse" id="navbarsExampleDefault">
 				<div class="navbar-tab"  style="height: 100%; width: 300px; background-color: #000;" >
 					<ul class="navbar-nav mr-auto">
+						<li class="nav-item">
+							<!-- @php (isset($postArticle) ? $postArticle : false )
+			@if ($postArticle == false) -->
+			<div id="rs-loginBar">
+				<ul class="loginBar">
+					@if (Auth::check())
+					<li ><a href="javascript:void(0);">@lang('default.member')：{{Auth::User()->nick_name}}</a></li>
+						<li ><a class="logout" href="/logout">@lang('default.logout')</a></li>
+					@else
+					<li ><a href="/login">@lang('default.login')</a></li>
+					<li ><a href="/register">@lang('default.register')</a></li>
+					@endif
+					<!-- <li ><a href="/article/post">發佈</a></li> -->
+					<!-- <li ><a href="/help">幫助</a></li>			 -->
+				</ul>	
+			</div>
+			<!-- @endif -->
+						</li>
+			
 						<li class="nav-item">
 							<a class="nav-link" href="/tag/hot">热门</a>
 						</li>
@@ -113,3 +146,36 @@
 		</div>  
 		</div>
 	</div>	
+
+	<script>
+		$(function(){
+			if($( window ).width() >770) {
+				$('.searchBox').addClass('open');
+			}
+	 
+			$('.searchBox #close').on('click', function () {
+				$('.searchBox').toggleClass('open')
+			});
+
+			$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+			});
+			$('.searchBox #submit').on('click',function(){
+				var text =  $( ".searchBox #input" ).val();
+				if(text =='') {
+					alert("请输入搜寻内容");
+					return;
+				}
+				location.replace("/search/"+text+"/1");
+			})	
+
+
+			$('.filler').on('click', function () {
+				$('.searchBox').toggleClass('open')
+			});
+		
+		});
+		
+	</script>
