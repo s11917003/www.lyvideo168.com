@@ -53,11 +53,20 @@ a,a:hover {
 	margin:0 auto;
 	text-align: center;
 }
-
+.filler {
+	width: 45px;
+	height:  45px;
+	position: absolute;
+	right: 0px;
+	top: 0;
+}
+.filler .fa-search{
+	margin: 13px auto;
+}
 #adRightPanel {
 	height: 100px; 
 	width: 100px; 
-
+  
 	position: fixed;
 	top: 70%;
 	right: 0px;
@@ -170,10 +179,9 @@ a,a:hover {
 .rs-logo {
 	z-index: 0;
 	float: left;
-	 
     background-color: #000;
     position: relative;
-
+    margin:0px auto ;
 }
 
 .rs-logo a {
@@ -258,6 +266,19 @@ a,a:hover {
 	/* background-color:rgba(28, 30, 33, 0.6)  ; */
 
 }
+.searchBox {
+	z-index: 1030;
+	position: fixed;
+	right: 0px;
+	width: 300px; 
+	height: 45px; 
+	margin: 0;
+}
+
+.searchBox #close {
+	display: none;
+}
+
 .offcanvas-collapse {
 	/* Background-color: rgba(13, 24, 41, 0); */
 	position: fixed;
@@ -287,7 +308,7 @@ transform: translateX(0rem);
 	/* margin:0 auto; */
 	/* position: fixed; */
 	top: 0px;
-	width: 50%;
+	width: 100%;
 	right: 0px;
 	flex-basis: 100%;
 	text-align: right;
@@ -359,6 +380,9 @@ transform: translateX(0rem);
 	/*background-color:#ddd;
 	min-height:500px;*/
 	
+}
+#navbar-expand-md {
+	position: absolute;
 }
 #blogVideo {
 	max-width:32%;
@@ -1504,6 +1528,29 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 	}
 	.container {
 		max-width: 540px;
+	}
+
+	.searchBox {
+
+		transition: -webkit-transform .3s ease-in-out;
+		transition: transform .3s ease-in-out;
+		transition: transform .3s ease-in-out, -webkit-transform .3s ease-in-out;
+		-webkit-transform: translateY(-100%);
+		transform: translateY(-100%);
+	
+		z-index: 1030;
+		position: fixed;
+		right: 0px;
+		width: 100%; 
+		height: 45px; 
+		margin: 0;
+	}
+	.searchBox #close {
+		display: initial;
+	}
+	.searchBox.open {
+		-webkit-transform: translateY(0rem);
+		transform: translateY(0rem);  
 	}
 }
 
