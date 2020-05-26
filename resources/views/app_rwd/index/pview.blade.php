@@ -18,11 +18,22 @@
 @section('maincontent')
 	<!-- Content 左側 開始 -->
 	<div id="">  
+	
+		<div id="rs-content-left-box">
+	
+		 
+			<div 	style="BACKGROUND-COLOR: #000;  height: 80px;width:100%;max-width: 450px;">
+				<a href="{{$adHalf[0]->web_url}}"  target="_blank">
+					<div data-id='{{$adHalf[0]->id}}' class="adClick"   style="overflow: hidden; background-repeat: no-repeat;   background-position: 50% 50%; background-size: contain;height: 100%;max-width: 450px; width:100%;background-image: url('{{  asset('storage/'.$adHalf[0]->bg_img)}}');" >
+					</div>
+				</a>
+			</div>
+		</div>
+	
 		<div id="rs-content-left-box">
 			<!-- <div class="rs-contentpics" style="background: url({{$post->userInfo->avatar}}) no-repeat top center; background-size:50px"><a href="/p/{{$post->id}}"></a></div>
 			<div class="rs-contentname">{{$post->userInfo->nick_name}}<br>{{ Carbon\Carbon::parse($post->created_time)->format('m-d H:i:s') }}</div> -->
 			<div class="rs-contentword">
-				<h2   style="overflow: hidden;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;color:#f90;"><a href="javascript:void(0)"  style="FONT-SIZE: 28PX;">{!! $post->title !!}</a></h2>
 					<div style="position: relative">
 
 						<video id='av-video' width="600" height="264" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered" poster="{{asset('storage'.$post->cover_img)}}" controls>
@@ -80,7 +91,9 @@
 					@endforeach
 				@endif
 			</div>
-			
+			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px;">
+				<h2   style="overflow: hidden;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;color:#f90;"><a href="javascript:void(0)"  style="FONT-SIZE: 28PX;">{!! $post->title !!}</a></h2>
+			</div>
 			<!-- JuicyAds v3.0
 			@if ($device == 'ios' || $device == 'android')
 			<div id="rs-digg-box2" style="float: left; width: 100%; height: 280px; background-color: #cecece; text-align: center">
@@ -101,7 +114,7 @@
 				-->
 				
 				@foreach ($relate as $re)
-				<div style="float: left;padding: 10px; width: 100%; height: 250px; margin: 5px;  overflow: hidden; text-align: center">
+				<div style="float: left;padding: 10px; width: 70%; height: 200px; margin: 5px;  overflow: hidden; text-align: center">
 					@if (is_Null($re->isAd))
 					<div poster="" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:80%;    padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
 						<a href="/p/{{$re->post_id}}">

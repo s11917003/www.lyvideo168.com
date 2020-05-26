@@ -5,16 +5,16 @@
 @section('des')
 {{strip_tags($title)}}
 @stop
-@section('topscript')
+<!-- @section('topscript') -->
 <meta itemprop="name" content="@lang('default.description')">
 <meta itemprop="description" content="{{strip_tags($title)}}">
 
-<script>
+<!-- <script>
 	// var postid = '{{$post->id}}';
 	// var postnick = '{{$post->userInfo->nick_name}}';
 	// var nick = postnick
 </script>
-@stop
+@stop -->
 @section('maincontent')
 			@if ($device == 'ios' || $device == 'android')
 			<div id="rs-digg-box2"  style="float: left; width: 100%; padding-top:10px; height: auto;">

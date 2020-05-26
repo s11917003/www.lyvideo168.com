@@ -186,10 +186,10 @@ a,a:hover {
 
 .rs-logo a {
 	display:block;
-	width:140px;
+	width:170px;
 	height:43px;
 	background:url(/img/logo.png) no-repeat left;
-	background-size:130px;
+	background-size:170px;
 	margin:2px auto;
 	margin-left: 0px;
 	padding:0; 
@@ -1613,8 +1613,8 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 	}
 	
 	.rs-logo a {
-		background-size: 90px;
-		width: 90px;
+		background-size: 135px;
+		width: 135px;
 		/* width:200px;
 		height:60px;
 		background:url(/img/logo.png) no-repeat top left;

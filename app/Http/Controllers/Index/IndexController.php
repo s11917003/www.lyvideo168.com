@@ -99,7 +99,6 @@ class IndexController extends Controller {
 			DB::table('ad_detail_banner_log')->insert($adlog);
 		}
 	
-		 
 		return  view('app_rwd.index.default', [
 			// 'ad'=>$adDetail,
 			'adHalf'=>$adHalf,
@@ -151,6 +150,7 @@ class IndexController extends Controller {
 		$relate = PostsTagRelationships::with('article')->where('post_id','!=', $id)->whereIn('post_tag_id', $tagarr)->where('status',1)->groupBy('post_id')->inRandomOrder()->limit(10)->get();	 		
 		
 		$adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(2)->get();
+		$adHalf = AdDetailBanner::inRandomOrder()->where('type', 'half')->where('status',1)->limit(1)->get();
 		
 	
 		
@@ -172,16 +172,21 @@ class IndexController extends Controller {
 			}
 		}
 
+		foreach ($adDetail as $ad) {
+			$log =  ['ad_id' => $ad->id ,'actiontype' =>0,'updated_at'=>$now] ;
+			$adlog[]  = $log;;
+			$ad->isAd  = true;
+		}
+		
 		if(count($adlog) >0){
 			DB::table('ad_detail_banner_log')->insert($adlog);
 		}
 	
-
-
 		if($article) {
 			$device = Utils::chkdevice();
 			return view('app_rwd.index.pview',[
 				// 'ad'=>$adDetail,
+				'adHalf'=>$adHalf, 
 				'post'=>$article,
 				'device' => $device,
 				'relate' => $relate,
@@ -448,7 +453,7 @@ class IndexController extends Controller {
 		 
 		if($posts) {
 
-			//  return $posts;
+			return $posts;
 			$device = Utils::chkdevice();
 			return view('app_rwd.index.default_search',[
 				'post'=> $article,
