@@ -114,7 +114,7 @@
 				-->
 				
 				@foreach ($relate as $re)
-				<div style="float: left;padding: 10px; width: 70%; height: 200px; margin: 5px;  overflow: hidden; text-align: center">
+				<div style="padding: 10px; width: 70%; height: 200px; margin: 5px;  overflow: hidden; text-align: center;margin: 0px auto;">
 					@if (is_Null($re->isAd))
 					<div poster="" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:80%;    padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
 						<a href="/p/{{$re->post_id}}">

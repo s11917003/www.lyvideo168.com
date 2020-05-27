@@ -453,7 +453,7 @@ class IndexController extends Controller {
 		 
 		if($posts) {
 
-			return $posts;
+			//return $posts;
 			$device = Utils::chkdevice();
 			return view('app_rwd.index.default_search',[
 				'post'=> $article,
