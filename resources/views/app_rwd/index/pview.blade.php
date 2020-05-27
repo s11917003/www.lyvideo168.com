@@ -22,9 +22,9 @@
 		<div id="rs-content-left-box">
 	
 		 
-			<div 	style="BACKGROUND-COLOR: #000;  height: 80px;width:100%;max-width: 450px;">
+			<div 	style="BACKGROUND-COLOR: #000;  height: 80px;width:100%;">
 				<a href="{{$adHalf[0]->web_url}}"  target="_blank">
-					<div data-id='{{$adHalf[0]->id}}' class="adClick"   style="overflow: hidden; background-repeat: no-repeat;   background-position: 50% 50%; background-size: contain;height: 100%;max-width: 450px; width:100%;background-image: url('{{  asset('storage/'.$adHalf[0]->bg_img)}}');" >
+					<div data-id='{{$adHalf[0]->id}}' class="adClick"   style="overflow: hidden; background-repeat: no-repeat;   background-position: 50% 50%; background-size: contain;height: 100%;width:100%;background-image: url('{{  asset('storage/'.$adHalf[0]->bg_img)}}');" >
 					</div>
 				</a>
 			</div>
@@ -92,7 +92,7 @@
 				@endif
 			</div>
 			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px;">
-				<h2   style="overflow: hidden;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;color:#f90;"><a href="javascript:void(0)"  style="FONT-SIZE: 28PX;">{!! $post->title !!}</a></h2>
+				<h2   style="overflow: hidden;overflow: hidden;text-overflow: ellipsis;color:#f90;"><a href="javascript:void(0)"  style="FONT-SIZE: 18PX;">{!! $post->title !!}</a></h2>
 			</div>
 			<!-- JuicyAds v3.0
 			@if ($device == 'ios' || $device == 'android')

@@ -96,9 +96,9 @@
 	<div id="nav-link-mask" class="nav-link-mask"  style="display: none;"></div>
  
 	<div id ="nav-link-box" class="offcanvas-collapse  nav-link-box" >
-		<div class="navbar-collapse" id="navbarsExampleDefault">
+		<div class="navbar-collapse" style=" max-width: 100%; width: 100%; margin: 0;" id="navbarsExampleDefault">
 			<div class="navbar-tab"  style="height: 100%; width: 300px; background-color: #000;" >
-				<ul class="navbar-nav mr-auto">
+				<ul class="navbar-nav mr-auto" style="height:100%">
 					<li class="nav-item">
 						<!-- @php (isset($postArticle) ? $postArticle : false )
 		@if ($postArticle == false) -->
@@ -106,10 +106,10 @@
 			<ul class="loginBar">
 				@if (Auth::check())
 				<li ><a href="javascript:void(0);">@lang('default.member')：{{Auth::User()->nick_name}}</a></li>
-					<li ><a class="logout" href="/logout">@lang('default.logout')</a></li>
+				<li ><a class="logout" href="/logout">@lang('default.logout')</a></li>
 				@else
-				<li ><a href="/login">@lang('default.login')</a></li>
-				<li ><a href="/register">@lang('default.register')</a></li>
+				<li ><button type="button" class="btn btn-primary btn-lg btn-block"><a href="/login">@lang('default.login')</a></button></li>
+				<li ><button type="button" class="btn btn-primary btn-lg btn-block"><a href="/register">@lang('default.register')</a></button></li>
 				@endif
 				<!-- <li ><a href="/article/post">發佈</a></li> -->
 				<!-- <li ><a href="/help">幫助</a></li>			 -->
@@ -131,7 +131,22 @@
 					
 						
 					</li>
-					<div id="dropdown-menu" class="dropdown-menu" aria-labelledby="dropdown01">
+					<div id="dropdown-menu" class="dropdown-menu show" style="height:auto;    overflow-y: scroll;" aria-labelledby="dropdown01">
+						<a class="dropdown-item" href="/tag/1">日本</a>
+						<a class="dropdown-item" href="/tag/2">欧美</a>
+						<a class="dropdown-item" href="/tag/3">无修正</a>
+						<a class="dropdown-item" href="/tag/33">台湾</a>
+						<a class="dropdown-item" href="/tag/25">偷拍</a>
+						<a class="dropdown-item" href="/tag/1">日本</a>
+						<a class="dropdown-item" href="/tag/2">欧美</a>
+						<a class="dropdown-item" href="/tag/3">无修正</a>
+						<a class="dropdown-item" href="/tag/33">台湾</a>
+						<a class="dropdown-item" href="/tag/25">偷拍</a>
+						<a class="dropdown-item" href="/tag/1">日本</a>
+						<a class="dropdown-item" href="/tag/2">欧美</a>
+						<a class="dropdown-item" href="/tag/3">无修正</a>
+						<a class="dropdown-item" href="/tag/33">台湾</a>
+						<a class="dropdown-item" href="/tag/25">偷拍</a>
 						<a class="dropdown-item" href="/tag/1">日本</a>
 						<a class="dropdown-item" href="/tag/2">欧美</a>
 						<a class="dropdown-item" href="/tag/3">无修正</a>
@@ -162,13 +177,13 @@
 				$('#nav-link-mask').toggle()
 			});
 
-			$('[data-toggle="dropdown"]').on('click', function () {
-				if ($('.dropdown-menu').hasClass( "show" ) ) {
-					$('.dropdown-menu').removeClass('show');
-					return;
-				}
-				$('.dropdown-menu').toggleClass('show')
-			})	
+			// $('[data-toggle="dropdown"]').on('click', function () {
+			// 	if ($('.dropdown-menu').hasClass( "show" ) ) {
+			// 		$('.dropdown-menu').removeClass('show');
+			// 		return;
+			// 	}
+			// 	$('.dropdown-menu').toggleClass('show')
+			// })	
 
 			$.ajaxSetup({
 			headers: {
