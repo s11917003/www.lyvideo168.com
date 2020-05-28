@@ -28,7 +28,7 @@
 							<i class="fas fa-times-circle fa-2x"></i>
 						</div>
 						<input id='input' type="text" style="margin: 0;margin-left: 55px;margin-right: 55px;padding: 0px;position:relative; width: 100%; height: 100%; " name="query" placeholder="search" />
-						<div  id="submit" style="text-align:center;right: 5px;top:0;position: absolute;; width: 50px; height: 36px; margin: 4px 
+						<div  id="submit" style="padding-top: 6px;text-align:center;right: 5px;top:0;position: absolute;; width: 50px; height: 36px; margin: 4px 
 						auto;background-color: #f90;
 						border-color: #f90;" class="btn btn-sm btn-primary" value="Search" >
 							<i class="fas fa-search "></i>
@@ -137,21 +137,31 @@
 						<a class="dropdown-item" href="/tag/3">无修正</a>
 						<a class="dropdown-item" href="/tag/33">台湾</a>
 						<a class="dropdown-item" href="/tag/25">偷拍</a>
-						<a class="dropdown-item" href="/tag/1">日本</a>
-						<a class="dropdown-item" href="/tag/2">欧美</a>
-						<a class="dropdown-item" href="/tag/3">无修正</a>
-						<a class="dropdown-item" href="/tag/33">台湾</a>
+
+						<a class="dropdown-item" href="/tag/4">素人</a>
+						<a class="dropdown-item" href="/tag/5">巨乳</a>
+						<a class="dropdown-item" href="/tag/6">制服</a>
+						<a class="dropdown-item" href="/tag/7">人妻</a>
+						<a class="dropdown-item" href="/tag/8">熟女</a>
+						<a class="dropdown-item" href="/tag/9">偶像</a>
+						<a class="dropdown-item" href="/tag/10">少女</a>
+						<a class="dropdown-item" href="/tag/11">AV女优</a>
+						<a class="dropdown-item" href="/tag/12">中出</a>
+						<a class="dropdown-item" href="/tag/13">长腿</a>
+						<a class="dropdown-item" href="/tag/14">SM</a>
+						<a class="dropdown-item" href="/tag/15">口交</a>
+						<a class="dropdown-item" href="/tag/16">角色扮演</a>
+						<a class="dropdown-item" href="/tag/17">多P</a>
+						<a class="dropdown-item" href="/tag/18">同性恋</a>
+						<a class="dropdown-item" href="/tag/19">人妖</a>
+						<a class="dropdown-item" href="/tag/20">韩国</a>
 						<a class="dropdown-item" href="/tag/25">偷拍</a>
-						<a class="dropdown-item" href="/tag/1">日本</a>
-						<a class="dropdown-item" href="/tag/2">欧美</a>
-						<a class="dropdown-item" href="/tag/3">无修正</a>
-						<a class="dropdown-item" href="/tag/33">台湾</a>
-						<a class="dropdown-item" href="/tag/25">偷拍</a>
-						<a class="dropdown-item" href="/tag/1">日本</a>
-						<a class="dropdown-item" href="/tag/2">欧美</a>
-						<a class="dropdown-item" href="/tag/3">无修正</a>
-						<a class="dropdown-item" href="/tag/33">台湾</a>
-						<a class="dropdown-item" href="/tag/25">偷拍</a>
+
+						<a class="dropdown-item" href="/tag/27">写真</a>
+						<a class="dropdown-item" href="/tag/28">国内</a>
+
+						<a class="dropdown-item" href="/tag/29">处女</a>
+						<a class="dropdown-item" href="/tag/30">孕妇</a>
 					</div>
 				</ul>
 		</div>

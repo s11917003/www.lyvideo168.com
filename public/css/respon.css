@@ -429,8 +429,10 @@ transform: translateX(0rem);
 	float: right;
 }
 #blogVideo .detail .rs-digg-right .rs-digg{
-	border:0px; padding: 0px 3px; width: auto;
-	margin: 0
+	border:0px; padding: 0px 3px; 
+	width: auto;
+	margin: 0;
+	color: white;
 }
 #blogVideo .detail #post-digg-thumbs-up,#blogVideo .detail #post-digg-thumbs-down{
 	font-size:10px;

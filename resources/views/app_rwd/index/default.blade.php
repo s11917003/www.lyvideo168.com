@@ -130,9 +130,10 @@ No.1 @lang('default.title')，带你升天带你飞，频繁更新片片精彩�
 					</div>
 					</a>	
 				</div>
-				<div id="rs-digg-box2" style="float: left; width: 100%;     padding-top: 0px; overflow: visible;">
+			
+			</div>	
+			<div id="rs-digg-box2" style="float: left; width: 100%;     padding-top: 0px; overflow: visible;">
 					<p><a href="{{$post->web_url}}"  target="_blank" class='rs-digg-box2-tag'>AD</a></p>
-				</div>
 			</div>
 			@endif
 						</div>
