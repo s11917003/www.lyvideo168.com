@@ -105,8 +105,8 @@
 		<div id="rs-loginBar">
 			<ul class="loginBar">
 				@if (Auth::check())
-				<li ><a href="javascript:void(0);">@lang('default.member')：{{Auth::User()->nick_name}}</a></li>
-				<li ><a class="logout" href="/logout">@lang('default.logout')</a></li>
+				<li ><button type="button" class="btn btn-primary btn-lg btn-block"><a href="javascript:void(0);">@lang('default.member')：{{Auth::User()->nick_name}}</a></button></li>
+				<li ><button type="button" class="btn btn-primary btn-lg btn-block"><a class="logout" href="/logout"  style="float: right;">@lang('default.logout')</a></button></li>
 				@else
 				<li ><button type="button" class="btn btn-primary btn-lg btn-block"><a href="/login">@lang('default.login')</a></button></li>
 				<li ><button type="button" class="btn btn-primary btn-lg btn-block"><a href="/register">@lang('default.register')</a></button></li>

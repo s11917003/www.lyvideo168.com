@@ -15,12 +15,12 @@ No.1 @lang('default.title')，带你升天带你飞，频繁更新片片精彩�
 @section('maincontent')
 	<!-- Leftside Article -->
  
-	<div id="rs-content-left">
+	<div id="rs-content-left"  >
 		@php ($i = 0) 
 	
 			
 	
-		<div class="container">
+		<div class="container" style="width:100%;   padding-right: 0px; padding-left: 3px;">
 		 
 		<!-- @for  ($j = 0; $j < count($posts); $j++)
 		@php ($post = $posts[$j])
@@ -28,15 +28,19 @@ No.1 @lang('default.title')，带你升天带你飞，频繁更新片片精彩�
 		@endfor -->
 		@foreach ($posts as $post) 
 		
-			@if ((($device == 'ios' || $device == 'android') &&  ($loop->index %  2 ==0))   || ( ($device != 'ios' && $device != 'android')  &&  ($loop->index %  3 ==0))  )
-				<div class="row">
+			@if ( ($device != 'ios' && $device != 'android')  &&  ($loop->index %  200000 ==0) )
+				<div class="row" style="display: inline-table;     margin-right: 0px; margin-left: 0px;">
+			@endif
+
+			@if (($device == 'ios' || $device == 'android') &&  ($loop->index %  200000 ==0))
+				<div class="row" style="width:100%;   margin-right: 0px; margin-left: 0px;">
 			@endif
 
 			@if ($device == 'ios' || $device == 'android')
-					<div id="blogVideo" class="blogVideo col" style="max-width:48%;">
+					<div id="blogVideo" class="blogVideo col" style="max-width:48%;height: auto;">
 						<div id="rs-content-left-box  embed-responsive embed-responsive-16by9" data-id='{{$post->id}}' data-show=false style="height:170px;">
 			@else
-					<div id="blogVideo" class="blogVideo col">
+					<div id="blogVideo" class="blogVideo col"  style="display:inline-grid;">
 						<div id="rs-content-left-box" data-id='{{$post->id}}' data-show=false> 
 			@endif
  
@@ -126,11 +130,14 @@ No.1 @lang('default.title')，带你升天带你飞，频繁更新片片精彩�
 					</div>
 					</a>	
 				</div>
+				<div id="rs-digg-box2" style="float: left; width: 100%;     padding-top: 0px; overflow: visible;">
+					<p><a href="{{$post->web_url}}"  target="_blank" class='rs-digg-box2-tag'>AD</a></p>
+				</div>
 			</div>
 			@endif
 						</div>
 					</div>
-			@if ((($device == 'ios' || $device == 'android') &&  ($loop->index %  2 ==1))   ||   ( ($device != 'ios' && $device != 'android')  &&  ($loop->index %  3 ==2))  )
+			@if ((($device == 'ios' || $device == 'android') &&  ($loop->index %  200000 ==199999))   ||   ( ($device != 'ios' && $device != 'android')  &&  ($loop->index %  200000 ==199999))  )
 				</div>
 			@endif
 	 
