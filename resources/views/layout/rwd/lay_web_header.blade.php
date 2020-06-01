@@ -92,7 +92,7 @@
 			</a>
 		</div>
 	</div> 
-	@endif
+	@endif    
 	<div id="nav-link-mask" class="nav-link-mask"  style="display: none;"></div>
  
 	<div id ="nav-link-box" class="offcanvas-collapse  nav-link-box" >

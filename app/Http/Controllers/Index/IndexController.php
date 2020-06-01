@@ -72,6 +72,7 @@ class IndexController extends Controller {
 		
 	 
 		$now = date('Y-m-d H:i:s');
+		$adlog = [];
 		if($adFloat){
 			$log =  ['ad_id' => $adFloat->id ,'actiontype' =>0,'updated_at'=>$now] ;
 			$adlog[]  = $log;
@@ -155,6 +156,7 @@ class IndexController extends Controller {
 	
 		
 		$status = 0;
+		$adlog = [];
 		if (Auth::check()) {
 			$user  = Auth::User();
 			if ($user) {
@@ -333,7 +335,7 @@ class IndexController extends Controller {
 		$lastPage = $posts->lastPage();
 		$currentPage = $posts->currentPage();
 		 
-
+		$adlog = [];
 		$now = date('Y-m-d H:i:s');
 		if(count($posts) >0){
 			foreach ($adDetail as $ad) {
@@ -387,6 +389,7 @@ class IndexController extends Controller {
 	 
 	 
 		$now = date('Y-m-d H:i:s');
+		$adlog = [];
 		if(count($posts) >0){
 			foreach ($adDetail as $ad) {
 				$log =  ['ad_id' => $ad->id ,'actiontype' =>0,'updated_at'=>$now] ;
@@ -427,7 +430,8 @@ class IndexController extends Controller {
 		$article = $this->show_api(1);
 		$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->with('commentsGod')
 		->where('cate_id', 3)->where('status', 1)->where('covered', 1)
-		->where('title','like', '%'.$search.'%')
+		->whereRaw("UPPER(title) LIKE '%". strtoupper($search)."%'")
+		// ->where('title','like', '%'.$search.'%')
 		->orderBy('id', 'desc')
 		->Paginate(12, null, 1, $page);
 
