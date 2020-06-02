@@ -41,6 +41,10 @@
 					<input type="text" id='cuttime2' value=0 style="height: 30px; width: 30%">
 					尾裁切秒數(ex 10秒填10、2分鐘填120,尾砍填入秒數)、預設不填寫
 					</div>
+					<div style="color: #fff;font-size: 10px;">
+					<input type="text" id='watermark' value="{{ $waterMark }}" style="height: 30px; width: 30%">
+					浮水印文字
+					</div>
 					<!--<input type="text" id='len' placeholder="影片長度(ex 1小時30分0秒填01:30:00)" style="height: 30px;">-->				
 					<div class="upload">
 						<input type="file" class="form-upload" name="videofile" id="videofile">
@@ -74,6 +78,11 @@
 					<input type="text" id='cuttime21' value=0 style="height: 30px; width: 30%">
 					尾裁切秒數(ex 10秒填10、2分鐘填120,尾砍填入秒數)、預設不填寫
 					</div>
+					<div style="color: #fff;font-size: 10px;">
+					<input type="text" id='watermark1' value="{{ $waterMark }}" style="height: 30px; width: 30%">
+					浮水印文字
+					</div>
+
 					<!--<input type="text" id='len' placeholder="影片長度(ex 1小時30分0秒填01:30:00)" style="height: 30px;">-->				
 					<div class="upload">
 						<input type="file" class="form-upload" name="videofile1" id="videofile1">
@@ -109,6 +118,10 @@
 					<div style="color: #fff;font-size: 10px;">
 					<input type="text" id='cuttime22' value=0 style="height: 30px; width: 30%">
 					尾裁切秒數(ex 10秒填10、2分鐘填120,尾砍填入秒數)、預設不填寫
+					</div>
+					<div style="color: #fff;font-size: 10px;">
+					<input type="text" id='watermark2' value="{{ $waterMark }}" style="height: 30px; width: 30%">
+					浮水印文字
 					</div>
 					<!--<input type="text" id='len' placeholder="影片長度(ex 1小時30分0秒填01:30:00)" style="height: 30px;">-->				
 					<div class="upload">
@@ -146,6 +159,10 @@
 					<input type="text" id='cuttime23' value=0 style="height: 30px; width: 30%">
 					尾裁切秒數(ex 10秒填10、2分鐘填120,尾砍填入秒數)、預設不填寫
 					</div>
+					<div style="color: #fff;font-size: 10px;">
+					<input type="text" id='watermark3' value="{{ $waterMark }}" style="height: 30px; width: 30%">
+					浮水印文字
+					</div>
 					<!--<input type="text" id='len' placeholder="影片長度(ex 1小時30分0秒填01:30:00)" style="height: 30px;">-->				
 					<div class="upload">
 						<input type="file" class="form-upload" name="videofile1" id="videofile3">
@@ -181,6 +198,10 @@
 					<div style="color: #fff;font-size: 10px;">
 					<input type="text" id='cuttime24' value=0 style="height: 30px; width: 30%">
 					尾裁切秒數(ex 10秒填10、2分鐘填120,尾砍填入秒數)、預設不填寫
+					</div>
+					<div style="color: #fff;font-size: 10px;">
+					<input type="text" id='watermark4' value="{{ $waterMark }}" style="height: 30px; width: 30%">
+					浮水印文字
 					</div>
 					<!--<input type="text" id='len' placeholder="影片長度(ex 1小時30分0秒填01:30:00)" style="height: 30px;">-->				
 					<div class="upload">

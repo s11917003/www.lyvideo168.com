@@ -144,6 +144,10 @@ $(document).ready(function () {
 						alert('哥哥您未输入分類唷!');
 						return false;
 					}
+					if($('#watermark'+index).val().length == 0) {
+						alert('哥哥浮水印文字未输入唷!');
+						return false;
+					}
 
 					if($('#videofile'+index).val() == '') {
 						alert('哥哥您有檔案未输入唷!');
@@ -226,6 +230,7 @@ $(document).ready(function () {
 			data.append("hd"+index, $('#hd'+index).val());
 			data.append("cuttime"+index, $('#cuttime'+index).val());
 			data.append("cuttime2"+index, $('#cuttime2'+index).val());
+			data.append("watermark"+index, $('#watermark'+index).val());
 			data.append("tags"+index, $('#optgroup'+index).val())
 		}
       

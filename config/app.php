@@ -124,6 +124,8 @@ return [
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
+    'watermarkText' => env('APP_WatermarkText', 'lygj16888.com'),
+    'env_machine' => env('APP_ENV_MACHINE', 'linux'),
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

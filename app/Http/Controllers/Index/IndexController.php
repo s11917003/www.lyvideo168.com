@@ -456,7 +456,6 @@ class IndexController extends Controller {
 		// }
 		 
 		if($posts) {
-
 			//return $posts;
 			$device = Utils::chkdevice();
 			return view('app_rwd.index.default_search',[
@@ -496,7 +495,7 @@ class IndexController extends Controller {
 		}
 		
 		$tags = PostsTag::where('status', 1)->orderby('term_order', 'desc')->get();
-		
+		$waterMark = config('app.watermarkText');
 		/*
 		if($user == false) {
 			header("Location:/") ;
@@ -505,6 +504,7 @@ class IndexController extends Controller {
 	    */
 		$device = Utils::chkdevice();
 		return view('app_rwd.index.postpagev2',[
+			'waterMark' =>  $waterMark,
 			'tags' => $tags,
 			'device' => $device,
 			'postArticle' => true

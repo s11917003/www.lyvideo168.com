@@ -117,7 +117,13 @@
 		</div>
 		<!-- @endif -->
 					</li>
-		
+					@if (Auth::check())
+					@if (Auth::User()->user_type == 1)
+					<li class="nav-item">
+						<a class="nav-link" href="/article/post">上传影片</a>
+					</li>
+					@endif
+					@endif
 					<li class="nav-item">
 						<a class="nav-link" href="/tag/hot">热门</a>
 					</li>
@@ -162,6 +168,8 @@
 
 						<a class="dropdown-item" href="/tag/29">处女</a>
 						<a class="dropdown-item" href="/tag/30">孕妇</a>
+						<a class="dropdown-item" href="/tag/31">自拍</a>
+						<a class="dropdown-item" href="/tag/32">肛交</a>
 					</div>
 				</ul>
 		</div>
@@ -202,11 +210,12 @@
 			});
 			$('.searchBox #submit').on('click',function(){
 				var text =  $( ".searchBox #input" ).val();
+
 				if(text =='') {
 					alert("请输入搜寻内容");
 					return;
 				}
-				location.replace("/search/"+text+"/1");
+				location.replace("/search/"+encodeURI(text)+"/1");
 			})	
 
 
