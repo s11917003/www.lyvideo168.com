@@ -11,6 +11,7 @@ use App\Model\PostsTag;
 use App\Model\PostsDigg;
 use App\Model\AdDetailBanner;
 use App\Model\Device;
+use App\Model\Announcement;
 use App\Model\PostsTagRelationships;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -68,8 +69,7 @@ class IndexController extends Controller {
 		$adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(3)->get();
 		$adHalf = AdDetailBanner::inRandomOrder()->where('type', 'half')->where('status',1)->limit(1)->get();
 		$adFloat = AdDetailBanner::inRandomOrder()->where('type', 'float')->where('status',1)->first();
-		//return  view('app.index.default', [
-		
+		$announcement =Announcement::inRandomOrder()->where('status',1)->first();
 	 
 		$now = date('Y-m-d H:i:s');
 		$adlog = [];
@@ -95,13 +95,18 @@ class IndexController extends Controller {
 				$this->array_insert($posts1,rand(0,count($posts1)-1),$ad);
 			}
 		}
- 
+
+	 
+		$announcementArr = [];
+		if($announcement){
+			$announcementArr = explode(':', $announcement->text);
+		}
+		
 		if(count($adlog) >0){
 			DB::table('ad_detail_banner_log')->insert($adlog);
 		}
 	
 		return  view('app_rwd.index.default', [
-			// 'ad'=>$adDetail,
 			'adHalf'=>$adHalf,
 			'adFloat' => $adFloat,
 			'category'=>$category,
@@ -111,6 +116,7 @@ class IndexController extends Controller {
 			'device' => $device,
 			'relate' => $relate1,
 			'loadmore' => true,
+			'announcement' => $announcementArr,
 			'path' =>  env('APP_URL').'app/public',		
 		]);
 	}

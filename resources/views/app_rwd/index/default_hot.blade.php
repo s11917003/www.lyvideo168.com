@@ -41,7 +41,7 @@
 						</div>
 						
 					</div>
-					<div style="font-size: 8; padding-top: 0px; inline-block; width: 100%; overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{$post->hot['title']}}</div>
+					<div style="font-size: 8; padding-top: 0px; inline-block; width: 100%; overflow: hidden; overflow: hidden; text-overflow: ellipsis;">{{$post->hot['title']}}</div>
 					<div style="font-size: 8px; padding-top: 0px;">{{$post->count_view}}次观看</div>
 					</a>
 					@else
@@ -71,7 +71,7 @@
 							</div>
 							
 						</div>
-						<div style="font-size: 8; padding-top: 0px; inline-block; width: 100%; overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{$post->campaign_name}}</div>
+						<div style="font-size: 8; padding-top: 0px; inline-block; width: 100%; overflow: hidden;-+++++++++++++++++++++++++ overflow: hidden; text-overflow: ellipsis;">{{$post->campaign_name}}</div>
 						<div style="font-size: 8px; padding-top: 0px;">　　　</div>
 						</a>
 				@endif

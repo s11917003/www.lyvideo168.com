@@ -14,7 +14,35 @@
 	</div>
 	-->
 	<div id="rs-right-box">
-		<div class="rs-appinfo">No.1 @lang('default.description')休息站，带你升天带你飞，频繁更新片片精彩！</div>
+		<!-- <div class="rs-appinfo">No.1 @lang('default.description')休息站，带你升天带你飞，频繁更新片片精彩！</div>
+		 -->
+
+	 
+		@if(!is_Null($announcement))
+		@foreach ($announcement as $announce)
+			@if ($loop->count != 1) 
+				@if ($loop->first)
+					<div style="    display: contents;" class="rs-appinfo"> 		
+				@endif
+
+				@if ($loop->index ==1)
+				<a href="http://{{$announce}}" target="_blank">{{$announce}}</a>
+				@else
+				{{$announce}}	
+				@endif
+
+				@if ($loop->last)
+					</div> 
+				@endif
+			@else
+			<div class="rs-appinfo">{{$announce}}</div> 
+			@endif
+		@endforeach
+			
+		 
+		@endif
+
+		
 		@foreach ($relate as $re)
 	
 		<div style="width: 240PX; height: 180px; padding:10px 0PX 0 0PX;overflow: hidden;MARGIN: 0 AUTO;">

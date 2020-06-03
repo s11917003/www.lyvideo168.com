@@ -84,15 +84,16 @@
 					@endif
 				</div>
 			</div>
+			
+			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px;">
+				<h2   style="overflow: hidden;overflow: hidden;text-overflow: ellipsis;color:#f90;"><a href="javascript:void(0)"  style="FONT-SIZE: 18PX;">{{$post->title}}</a></h2>
+			</div>
 			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px;">
 				@if ($post->tag)
 					@foreach ($post->tag as $tag)
 					<p><a href="/tag/{{$tag->tagname->id}}" target="_blank" class="rs-digg-box2-tag">{{$tag->tagname->name}}</a></p>
 					@endforeach
 				@endif
-			</div>
-			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px;">
-				<h2   style="overflow: hidden;overflow: hidden;text-overflow: ellipsis;color:#f90;"><a href="javascript:void(0)"  style="FONT-SIZE: 18PX;">{!! $post->title !!}</a></h2>
 			</div>
 			<!-- JuicyAds v3.0
 			@if ($device == 'ios' || $device == 'android')
@@ -116,7 +117,7 @@
 				@foreach ($relate as $re)
 				<div style="padding: 10px; width: 70%; height: 200px; margin: 5px;  overflow: hidden; text-align: center;margin: 0px auto;">
 					@if (is_Null($re->isAd))
-					<div poster="" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:80%;    padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
+					<div poster="" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:70%;    padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
 						<a href="/p/{{$re->post_id}}">
 							<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
 														vertical-align: middle;
@@ -138,12 +139,12 @@
 														background-image: url('{{ asset('storage'.$re->article['tb_img'])}}');" 
 													>
 							</div>
-							<div style="font-size: 8; padding-top: 5px;">{{$re->article['title']}}</div>
+							<div style="font-size: 8;padding-top: 5px;">{{$re->article['title']}}</div>
 		
 						</a>
 					</div>
 					@else
-					<div poster="" data-id='{{$re->id}}' class="adClick video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:80%;    padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
+					<div poster="" data-id='{{$re->id}}' class="adClick video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:70%;    padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
 						<a href="{{$re->web_url}}"  target="_blank">
 							<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
 														vertical-align: middle;
@@ -166,7 +167,7 @@
 													>
 													
 							</div>
-							<div style="font-size: 8; padding-top: 5px;">{{$re->campaign_name}}</div>
+							<div style="font-size: 8;     line-height: 16px;letter-spacing: 1px;      word-break: break-all;padding-top: 5px;">{{$re->campaign_name}}</div>
 		
 						</a>
 					</div>
@@ -192,12 +193,12 @@
 				<div style="clear: both"></div>
 			</div>
 			@else
-			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px; height: 630px;">
+			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px; height: auto;">
 				<h5 class="recommend">推荐影片</h5>
 				@foreach ($relate as $re)
-				<div style="float: left;padding: 10px; width: 230px; height: 185px; margin: 5px; overflow: hidden">
+				<div style="float: left;padding: 10px; width: 230px; height: 230px; margin: 5px; overflow: hidden">
 					@if (is_Null($re->isAd))
-					<div poster="" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:80%;    padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
+					<div poster="" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:70%;    padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
 						<a href="/p/{{$re->post_id}}">
 							<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
 														vertical-align: middle;
@@ -220,12 +221,12 @@
 													>
 							</div>
 							<!-- <img src="{{ asset('storage'.$re->article['tb_img']) }}" style="width: 300px;"> -->
-							<div style="font-size: 8; padding-top: 5px;">{{$re->article['title']}}</div>
+							<div style="font-size: 8;    line-height: 16px;letter-spacing: 1px;     word-break: break-all;padding-top: 5px;">{{$re->article['title']}}</div>
 		
 						</a>
 					</div>
 					@else
-					<div poster=""   data-id='{{$re->id}}' class="adClick video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:80%;    padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
+					<div poster=""   data-id='{{$re->id}}' class="adClick video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:70%;   padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
 						<a href="{{$re->web_url}}"  target="_blank">
 							<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
 														vertical-align: middle;
@@ -248,7 +249,7 @@
 													>
 							</div>
 							<!-- <img src="{{ asset('storage'.$re->article['tb_img']) }}" style="width: 300px;"> -->
-							<div style="font-size: 8; padding-top: 5px;">{{$re->campaign_name}}</div>
+							<div style="font-size: 8;    line-height: 16px;letter-spacing: 1px;     word-break: break-all;padding-top: 5px;">{{$re->campaign_name}}</div>
 		
 						</a>
 					</div>
