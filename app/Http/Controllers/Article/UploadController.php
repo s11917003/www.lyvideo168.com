@@ -34,8 +34,7 @@ class UploadController extends Controller {
 	        //'tag' => 'required',
 	        'content' => 'required|max:300'
 		]);
-		// var_dump('APP_ENV_MACHINE '.env('APP_ENV_MACHINE'));
-		if(env('APP_ENV_MACHINE') == 'win'){
+		if( config('app.env_machine') == 'win'){
 			$ffprobe = \FFMpeg\FFProbe::create([
 				'ffprobe.binaries' => 'C:/ffmpeg/bin/ffprobe.exe'
 			]);
@@ -71,6 +70,7 @@ class UploadController extends Controller {
 					if($i==0) {
 						$cuttime = $request->cuttime;
 						$cuttime2 = $request->cuttime2;
+						$watermark = $request->watermark;
 						$file = $request->file('video');
 						$hd = $request->hd;
 						$content = $request->content;
@@ -78,6 +78,7 @@ class UploadController extends Controller {
 					} else	 {
 						$cuttime = $request['cuttime'.$i];
 						$cuttime2 = $request['cuttime2'.$i];
+						$watermark = $request['watermark'.$i];
 						$file = $request->file('video'.$i);
 						$hd = $request['hd'.$i];
 						$content = $request['content'.$i];
@@ -115,12 +116,12 @@ class UploadController extends Controller {
 						set_time_limit(0);//轉檔 浮水印
 					
 						//裁剪視頻
-						if(env('APP_ENV_MACHINE') == 'win'){ 
+						if(config('app.env_machine') == 'win'){ 
 							shell_exec("ffmpeg -i ".storage_path().'/app'.$path.'/'.$filename.'.mp4'." -ss ".$start." -c copy -t ".$end." ".storage_path().'/app'.$path.'/'.$filename.'1.mp4');
-							shell_exec("ffmpeg -i ".storage_path().'/app'.$path.'/'.$filename.'1.mp4'." -profile:v baseline -b:v 1200k -maxrate 1200k -b:a 41k -start_number 0 -hls_time 20 -hls_list_size 0 -vf \"drawtext=fontfile=Microsoft YaHei Mono.ttf:text='lygj16888.com':y=line_h:x=W-w:fontsize=18:fontcolor=yellow:shadowx=1:shadowy=1\""." -codec:v libx264 -codec:a copy -y -f hls ".storage_path().'/app'.$path.'/'.$filename.'.m3u8');
+							shell_exec("ffmpeg -i ".storage_path().'/app'.$path.'/'.$filename.'1.mp4'." -profile:v baseline -b:v 1200k -maxrate 1200k -b:a 41k -start_number 0 -hls_time 20 -hls_list_size 0 -vf \"drawtext=fontfile=Microsoft YaHei Mono.ttf:text='".$watermark."':y=line_h:x=W-w:fontsize=18:fontcolor=yellow:shadowx=1:shadowy=1\""." -codec:v libx264 -codec:a copy -y -f hls ".storage_path().'/app'.$path.'/'.$filename.'.m3u8');
 						} else {
 							shell_exec("/usr/bin/ffmpeg-git-amd64-static/ffmpeg -i ".storage_path().'/app'.$path.'/'.$filename.'.mp4'." -ss ".$start." -c copy -t ".$end." ".storage_path().'/app'.$path.'/'.$filename.'1.mp4');
-							shell_exec("/usr/bin/ffmpeg-git-amd64-static/ffmpeg -i ".storage_path().'/app'.$path.'/'.$filename.'1.mp4'." -profile:v baseline -b:v 1200k -maxrate 1200k -b:a 41k -start_number 0 -hls_time 20 -hls_list_size 0 -vf \"drawtext=fontfile=Microsoft YaHei Mono.ttf:text='lygj16888.com':y=line_h:x=W-w:fontsize=18:fontcolor=yellow:shadowx=1:shadowy=1\""." -codec:v libx264 -codec:a copy -y -f hls ".storage_path().'/app'.$path.'/'.$filename.'.m3u8');
+							shell_exec("/usr/bin/ffmpeg-git-amd64-static/ffmpeg -i ".storage_path().'/app'.$path.'/'.$filename.'1.mp4'." -profile:v baseline -b:v 1200k -maxrate 1200k -b:a 41k -start_number 0 -hls_time 20 -hls_list_size 0 -vf \"drawtext=fontfile=/usr/share/fonts/msyhl.ttc:text='".$watermark."':y=line_h:x=W-w:fontsize=18:fontcolor=yellow:shadowx=1:shadowy=1\""." -codec:v libx264 -codec:a copy -y -f hls ".storage_path().'/app'.$path.'/'.$filename.'.m3u8');
 						}
 
 						$disk->makeDirectory($pathImg);

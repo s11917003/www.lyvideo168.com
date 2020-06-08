@@ -23,17 +23,17 @@
 <script>
 	$(function(){
 		$(".contentbox img").lazyload();
-		$('[data-toggle="offcanvas"]').on('click', function () {
-			$('.offcanvas-collapse').toggleClass('open')
-			$('#nav-link-mask').toggle()
-		});
-		$('[data-toggle="dropdown"]').on('click', function () {
-			if ($('.dropdown-menu').hasClass( "show" ) ) {
-				$('.dropdown-menu').removeClass('show');
-				return;
-			}
-    		$('.dropdown-menu').toggleClass('show')
-		})		 
+		// $('[data-toggle="offcanvas"]').on('click', function () {
+		// 	$('.offcanvas-collapse').toggleClass('open')
+		// 	$('#nav-link-mask').toggle()
+		// });
+		// $('[data-toggle="dropdown"]').on('click', function () {
+		// 	if ($('.dropdown-menu').hasClass( "show" ) ) {
+		// 		$('.dropdown-menu').removeClass('show');
+		// 		return;
+		// 	}
+    	// 	$('.dropdown-menu').toggleClass('show')
+		// })		 
 	});
 
 

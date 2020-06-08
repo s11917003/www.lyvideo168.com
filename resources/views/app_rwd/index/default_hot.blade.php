@@ -5,16 +5,8 @@
 @section('des')
 {{strip_tags($title)}}
 @stop
-@section('topscript')
 <meta itemprop="name" content="@lang('default.description')">
 <meta itemprop="description" content="{{strip_tags($title)}}">
-
-<script>
-	// var postid = '{{$post->id}}';
-	// var postnick = '{{$post->userInfo->nick_name}}';
-	// var nick = postnick
-</script>
-@stop
 @section('maincontent')
 			@if ($device == 'ios' || $device == 'android')
 			<div id="rs-digg-box2"  style="float: left; width: 100%; padding-top:10px; height: auto;">
@@ -49,7 +41,7 @@
 						</div>
 						
 					</div>
-					<div style="font-size: 8; padding-top: 0px; inline-block; width: 100%; overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{$post->hot['title']}}</div>
+					<div style="font-size: 8; padding-top: 0px; inline-block; width: 100%; overflow: hidden; overflow: hidden; text-overflow: ellipsis;">{{$post->hot['title']}}</div>
 					<div style="font-size: 8px; padding-top: 0px;">{{$post->count_view}}次观看</div>
 					</a>
 					@else
@@ -79,7 +71,7 @@
 							</div>
 							
 						</div>
-						<div style="font-size: 8; padding-top: 0px; inline-block; width: 100%; overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{$post->campaign_name}}</div>
+						<div style="font-size: 8; padding-top: 0px; inline-block; width: 100%; overflow: hidden;-+++++++++++++++++++++++++ overflow: hidden; text-overflow: ellipsis;">{{$post->campaign_name}}</div>
 						<div style="font-size: 8px; padding-top: 0px;">　　　</div>
 						</a>
 				@endif

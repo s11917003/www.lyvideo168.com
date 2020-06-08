@@ -14,10 +14,38 @@
 	</div>
 	-->
 	<div id="rs-right-box">
-		<div class="rs-appinfo">No.1 @lang('default.description')休息站，带你升天带你飞，频繁更新片片精彩！</div>
+		<!-- <div class="rs-appinfo">No.1 @lang('default.description')休息站，带你升天带你飞，频繁更新片片精彩！</div>
+		 -->
+
+	 
+		@if(!is_Null($announcement))
+		@foreach ($announcement as $announce)
+			@if ($loop->count != 1) 
+				@if ($loop->first)
+					<div style="    display: contents;" class="rs-appinfo"> 		
+				@endif
+
+				@if ($loop->index ==1)
+				<a href="http://{{$announce}}" target="_blank">{{$announce}}</a>
+				@else
+				{{$announce}}	
+				@endif
+
+				@if ($loop->last)
+					</div> 
+				@endif
+			@else
+			<div class="rs-appinfo">{{$announce}}</div> 
+			@endif
+		@endforeach
+			
+		 
+		@endif
+
+		
 		@foreach ($relate as $re)
 	
-		<div style="width: 240PX; height: 180px; padding:10px 15PX 0 15PX;overflow: hidden;MARGIN: 0 AUTO;">
+		<div style="width: 240PX; height: 180px; padding:10px 0PX 0 0PX;overflow: hidden;MARGIN: 0 AUTO;">
 			@if (is_Null($re->isAd))
 			
 			<div poster="" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:100%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">

@@ -11,6 +11,7 @@ use App\Model\PostsTag;
 use App\Model\PostsDigg;
 use App\Model\AdDetailBanner;
 use App\Model\Device;
+use App\Model\Announcement;
 use App\Model\PostsTagRelationships;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -68,10 +69,10 @@ class IndexController extends Controller {
 		$adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(3)->get();
 		$adHalf = AdDetailBanner::inRandomOrder()->where('type', 'half')->where('status',1)->limit(1)->get();
 		$adFloat = AdDetailBanner::inRandomOrder()->where('type', 'float')->where('status',1)->first();
-		//return  view('app.index.default', [
-		
+		$announcement =Announcement::inRandomOrder()->where('status',1)->first();
 	 
 		$now = date('Y-m-d H:i:s');
+		$adlog = [];
 		if($adFloat){
 			$log =  ['ad_id' => $adFloat->id ,'actiontype' =>0,'updated_at'=>$now] ;
 			$adlog[]  = $log;
@@ -94,14 +95,18 @@ class IndexController extends Controller {
 				$this->array_insert($posts1,rand(0,count($posts1)-1),$ad);
 			}
 		}
- 
+
+	 
+		$announcementArr = [];
+		if($announcement){
+			$announcementArr = explode(':', $announcement->text);
+		}
+		
 		if(count($adlog) >0){
 			DB::table('ad_detail_banner_log')->insert($adlog);
 		}
 	
-		 
 		return  view('app_rwd.index.default', [
-			// 'ad'=>$adDetail,
 			'adHalf'=>$adHalf,
 			'adFloat' => $adFloat,
 			'category'=>$category,
@@ -111,6 +116,7 @@ class IndexController extends Controller {
 			'device' => $device,
 			'relate' => $relate1,
 			'loadmore' => true,
+			'announcement' => $announcementArr,
 			'path' =>  env('APP_URL').'app/public',		
 		]);
 	}
@@ -151,10 +157,12 @@ class IndexController extends Controller {
 		$relate = PostsTagRelationships::with('article')->where('post_id','!=', $id)->whereIn('post_tag_id', $tagarr)->where('status',1)->groupBy('post_id')->inRandomOrder()->limit(10)->get();	 		
 		
 		$adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(2)->get();
+		$adHalf = AdDetailBanner::inRandomOrder()->where('type', 'half')->where('status',1)->limit(1)->get();
 		
 	
 		
 		$status = 0;
+		$adlog = [];
 		if (Auth::check()) {
 			$user  = Auth::User();
 			if ($user) {
@@ -172,16 +180,21 @@ class IndexController extends Controller {
 			}
 		}
 
+		foreach ($adDetail as $ad) {
+			$log =  ['ad_id' => $ad->id ,'actiontype' =>0,'updated_at'=>$now] ;
+			$adlog[]  = $log;;
+			$ad->isAd  = true;
+		}
+		
 		if(count($adlog) >0){
 			DB::table('ad_detail_banner_log')->insert($adlog);
 		}
 	
-
-
 		if($article) {
 			$device = Utils::chkdevice();
 			return view('app_rwd.index.pview',[
 				// 'ad'=>$adDetail,
+				'adHalf'=>$adHalf, 
 				'post'=>$article,
 				'device' => $device,
 				'relate' => $relate,
@@ -328,7 +341,7 @@ class IndexController extends Controller {
 		$lastPage = $posts->lastPage();
 		$currentPage = $posts->currentPage();
 		 
-
+		$adlog = [];
 		$now = date('Y-m-d H:i:s');
 		if(count($posts) >0){
 			foreach ($adDetail as $ad) {
@@ -382,6 +395,7 @@ class IndexController extends Controller {
 	 
 	 
 		$now = date('Y-m-d H:i:s');
+		$adlog = [];
 		if(count($posts) >0){
 			foreach ($adDetail as $ad) {
 				$log =  ['ad_id' => $ad->id ,'actiontype' =>0,'updated_at'=>$now] ;
@@ -422,7 +436,8 @@ class IndexController extends Controller {
 		$article = $this->show_api(1);
 		$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->with('commentsGod')
 		->where('cate_id', 3)->where('status', 1)->where('covered', 1)
-		->where('title','like', '%'.$search.'%')
+		->whereRaw("UPPER(title) LIKE '%". strtoupper($search)."%'")
+		// ->where('title','like', '%'.$search.'%')
 		->orderBy('id', 'desc')
 		->Paginate(12, null, 1, $page);
 
@@ -447,8 +462,7 @@ class IndexController extends Controller {
 		// }
 		 
 		if($posts) {
-
-			//  return $posts;
+			//return $posts;
 			$device = Utils::chkdevice();
 			return view('app_rwd.index.default_search',[
 				'post'=> $article,
@@ -487,7 +501,7 @@ class IndexController extends Controller {
 		}
 		
 		$tags = PostsTag::where('status', 1)->orderby('term_order', 'desc')->get();
-		
+		$waterMark = config('app.watermarkText');
 		/*
 		if($user == false) {
 			header("Location:/") ;
@@ -496,6 +510,7 @@ class IndexController extends Controller {
 	    */
 		$device = Utils::chkdevice();
 		return view('app_rwd.index.postpagev2',[
+			'waterMark' =>  $waterMark,
 			'tags' => $tags,
 			'device' => $device,
 			'postArticle' => true

@@ -114,13 +114,13 @@ Route::get('/comm/reply/loadmore', 'Article\CmtController@loadreply');
 // Route::get('/pr/{adid}', 'Pr\Type1Controller@view')->where('adid', '[0-9]+');
 
 
-// //service
-// Route::group(['prefix' => 'service'], function ($router) {
-// 	Route::get('/dmca', 'Service\PageController@dmca');
-// 	Route::get('/privacy', 'Service\PageController@privacy');
-// 	Route::get('/important', 'Service\PageController@important');
-// 	Route::get('/report/{id}', 'Service\PageController@report')->where('id', '[0-9]+');
-// });
+//service
+Route::group(['prefix' => 'service'], function ($router) {
+	Route::get('/dmca', 'Service\PageController@dmca');
+	Route::get('/privacy', 'Service\PageController@privacy');
+	Route::get('/important', 'Service\PageController@important');
+	// Route::get('/report/{id}', 'Service\PageController@report')->where('id', '[0-9]+');
+});
 
 // //app api
 // Route::group(['prefix' => 'api'], function ($router) {
