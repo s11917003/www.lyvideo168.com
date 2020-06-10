@@ -117,17 +117,29 @@ class UploadController extends Controller {
 					
 						//裁剪視頻
 						if(config('app.env_machine') == 'win'){ 
-							shell_exec("ffmpeg -i ".storage_path().'/app'.$path.'/'.$filename.'.mp4'." -ss ".$start." -c copy -t ".$end." ".storage_path().'/app'.$path.'/'.$filename.'1.mp4');
-							shell_exec("ffmpeg -i ".storage_path().'/app'.$path.'/'.$filename.'1.mp4'." -profile:v baseline -b:v 1200k -maxrate 1200k -b:a 41k -start_number 0 -hls_time 20 -hls_list_size 0 -vf \"drawtext=fontfile=Microsoft YaHei Mono.ttf:text='".$watermark."':y=line_h:x=W-w:fontsize=18:fontcolor=yellow:shadowx=1:shadowy=1\""." -codec:v libx264 -codec:a copy -y -f hls ".storage_path().'/app'.$path.'/'.$filename.'.m3u8');
+							if($cuttime == 0 && $cuttime2 == 0) {
+								shell_exec("ffmpeg -i ".storage_path().'/app'.$path.'/'.$filename.'.mp4'." -profile:v baseline -b:v 1200k -maxrate 1200k -b:a 41k -start_number 0 -hls_time 20 -hls_list_size 0 -vf \"drawtext=fontfile=Microsoft YaHei Mono.ttf:text='".$watermark."':y=line_h:x=W-w:fontsize=18:fontcolor=yellow:shadowx=1:shadowy=1\""." -codec:v libx264 -codec:a copy -y -f hls ".storage_path().'/app'.$path.'/'.$filename.'.m3u8');
+							} else {
+								shell_exec("ffmpeg -i ".storage_path().'/app'.$path.'/'.$filename.'.mp4'." -ss ".$start." -c copy -t ".$end." ".storage_path().'/app'.$path.'/'.$filename.'1.mp4');
+								shell_exec("ffmpeg -i ".storage_path().'/app'.$path.'/'.$filename.'1.mp4'." -profile:v baseline -b:v 1200k -maxrate 1200k -b:a 41k -start_number 0 -hls_time 20 -hls_list_size 0 -vf \"drawtext=fontfile=Microsoft YaHei Mono.ttf:text='".$watermark."':y=line_h:x=W-w:fontsize=18:fontcolor=yellow:shadowx=1:shadowy=1\""." -codec:v libx264 -codec:a copy -y -f hls ".storage_path().'/app'.$path.'/'.$filename.'.m3u8');
+								unlink(storage_path().'/app'.$path.'/'.$filename.'1.mp4');
+							}
+						
 						} else {
-							shell_exec("/usr/bin/ffmpeg-git-amd64-static/ffmpeg -i ".storage_path().'/app'.$path.'/'.$filename.'.mp4'." -ss ".$start." -c copy -t ".$end." ".storage_path().'/app'.$path.'/'.$filename.'1.mp4');
-							shell_exec("/usr/bin/ffmpeg-git-amd64-static/ffmpeg -i ".storage_path().'/app'.$path.'/'.$filename.'1.mp4'." -profile:v baseline -b:v 1200k -maxrate 1200k -b:a 41k -start_number 0 -hls_time 20 -hls_list_size 0 -vf \"drawtext=fontfile=/usr/share/fonts/msyhl.ttc:text='".$watermark."':y=line_h:x=W-w:fontsize=18:fontcolor=yellow:shadowx=1:shadowy=1\""." -codec:v libx264 -codec:a copy -y -f hls ".storage_path().'/app'.$path.'/'.$filename.'.m3u8');
+							if($cuttime == 0 && $cuttime2 == 0) {
+								shell_exec("/usr/bin/ffmpeg-git-amd64-static/ffmpeg -i ".storage_path().'/app'.$path.'/'.$filename.'.mp4'." -profile:v baseline -b:v 1200k -maxrate 1200k -b:a 41k -start_number 0 -hls_time 20 -hls_list_size 0 -vf \"drawtext=fontfile=/usr/share/fonts/msyhl.ttc:text='".$watermark."':y=line_h:x=W-w:fontsize=18:fontcolor=yellow:shadowx=1:shadowy=1\""." -codec:v libx264 -codec:a copy -y -f hls ".storage_path().'/app'.$path.'/'.$filename.'.m3u8');
+							}
+							else {
+								shell_exec("/usr/bin/ffmpeg-git-amd64-static/ffmpeg -i ".storage_path().'/app'.$path.'/'.$filename.'.mp4'." -ss ".$start." -c copy -t ".$end." ".storage_path().'/app'.$path.'/'.$filename.'1.mp4');
+								shell_exec("/usr/bin/ffmpeg-git-amd64-static/ffmpeg -i ".storage_path().'/app'.$path.'/'.$filename.'1.mp4'." -profile:v baseline -b:v 1200k -maxrate 1200k -b:a 41k -start_number 0 -hls_time 20 -hls_list_size 0 -vf \"drawtext=fontfile=/usr/share/fonts/msyhl.ttc:text='".$watermark."':y=line_h:x=W-w:fontsize=18:fontcolor=yellow:shadowx=1:shadowy=1\""." -codec:v libx264 -codec:a copy -y -f hls ".storage_path().'/app'.$path.'/'.$filename.'.m3u8');
+								unlink(storage_path().'/app'.$path.'/'.$filename.'1.mp4');
+							}		
 						}
 
 						$disk->makeDirectory($pathImg);
 						// // 在视频一半的地方截圖
 						unlink(storage_path().'/app'.$path.'/'.$filename.'.mp4');
-						unlink(storage_path().'/app'.$path.'/'.$filename.'1.mp4');
+					 
 						$video = $ffmpeg->open($file);
 						$frame = $video->frame(\FFMpeg\Coordinate\TimeCode::fromSeconds(intval($sec/2)));
 						$frame->save(storage_path().'/app'.$pathImg.'/'.$filename.'.jpg'); 

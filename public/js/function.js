@@ -35,8 +35,8 @@ $(document).ready(function () {
 	        is_video = false;
         }
         
-        if(is_video && !/.(mp4|flv|mpeg|mov)/gi.test(file_name)){
-            showHideError($file_input[0].id, true, "請上傳影片檔案,後綴必須是mp4,flv,mov,mpeg",id);
+        if(is_video && !/.(mp4)/gi.test(file_name)){
+            showHideError($file_input[0].id, true, "請上傳影片檔案,後綴必須是mp4",id);
             $file_input.val("");
             return false;
         }
