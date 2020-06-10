@@ -39,15 +39,13 @@ class IndexController extends Controller {
 		$value = @$_COOKIE['appdl'];
 	   	if($value != true) {
 			Cookie::make('appdl',true,180);
-
 			$deviveArr  =['web' =>1 ,'android'=>2,'ios'=>3];
-
 		 
 		   if(is_Null($deviveArr[$device])){	 
 			$d = Device::find(4);
 			$d->count +=1;
 			$d->save();
-		   } else {
+		   } else { 
 			$d = Device::find($deviveArr[$device]);
 			$d->count +=1;
 			$d->save();
