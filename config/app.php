@@ -126,6 +126,7 @@ return [
 
     'watermarkText' => env('APP_WatermarkText', 'lygj16888.com'),
     'env_machine' => env('APP_ENV_MACHINE', 'linux'),
+    'web_type' => env('web_type', 1),
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

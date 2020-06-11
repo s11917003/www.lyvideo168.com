@@ -57,7 +57,11 @@
 </script>
 @yield('topscript')
 </head>
-<body id="rs-body">
+@if (config('app.web_type') == 1)
+	<body id="rs-body">
+@else 
+	<body id="rs-body" class="rs-body1" >
+@endif
 <!-- JuicyAds PopUnders v3 Start -->
 <!-- <script type="text/javascript" src="https://js.juicyads.com/jp.php?c=3474y213t244u4q2q28443b494&u=http%3A%2F%2Fwww.juicyads.rocks"></script> -->
 <!-- JuicyAds PopUnders v3 End -->
@@ -65,11 +69,21 @@
 	@include('layout.rwd.lay_web_header',['postArticle'=>false])
 	<!-- HEADER 結束 -->
 	<!-- NAV選項區域 開始 -->
-	@include('layout.rwd.lay_web_nav')
+	
 	<!-- NAV選項區域 結束 -->
-	<div id="rs-main-content">
-        @yield('maincontent')
+	@if (config('app.web_type') == 1)
+	<div id="rs-main-content"> 
+		@yield('maincontent')
 	</div>
+	@else 
+	<div id="rs-main-content1"> 
+		@include('layout.rwd.lay_web_left_sidebar')
+		@yield('maincontent')
+		@include('layout.rwd.lay_web_right_sidebar')
+	</div>
+	@endif
+
+ 
 	<!-- Footer 開始 -->
 	<!-- Footer 結束 -->
 	@yield('footscript')

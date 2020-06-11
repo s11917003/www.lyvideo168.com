@@ -1,6 +1,11 @@
 
 	<!-- HEADER 結束 -->
 	<!-- Header -->
+	@if (config('app.web_type') == 1)
+	<div id="rs-maintop">	
+	@else 
+	<div id="rs-maintop" class="rs-maintop1">	
+	@endif
 	<div id="rs-maintop">	
 		<div class="rs-maintop-box" style="DISPLAY: flex;  flex-direction: row; align-items: center;">
 			<div id="navbar-expand-md" class="a navbar navbar-expand-md fixed-top navbar-dark bg-dark navbar-expand-lg">
@@ -129,11 +134,9 @@
 					</li>
 		
 					<li class="nav-item dropdown">
-						@if (isset($title)) 
-						<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{$title}}</a>
-						@else
+						
 						<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">所有分类</a>
-						@endif
+			
 					
 						
 					</li>

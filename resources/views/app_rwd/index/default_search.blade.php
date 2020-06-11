@@ -81,7 +81,7 @@
 				<div style="clear: both"></div>
 			</div>
 			@else
-			<div id="rs-digg-box2"  class="justify-content-center"  style="block-size:unset; float: left; width: 100%; padding-top:10px; height: auto;">
+			<div id="rs-digg-box2"  class="rs-digg-box5 justify-content-center"  style="block-size:unset; float: left; padding-top:10px; height: auto;">
 				<div  class="justify-content-center1" >
 					<h5 style="COLOR: #ccc; font-weight: bold;">搜寻结果 : {{$search}}</h5>
 					@foreach ($posts as $post)
