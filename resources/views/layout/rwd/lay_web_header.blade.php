@@ -6,9 +6,14 @@
 	@else 
 	<div id="rs-maintop" class="rs-maintop1">	
 	@endif
-	<div id="rs-maintop">	
+	 
 		<div class="rs-maintop-box" style="DISPLAY: flex;  flex-direction: row; align-items: center;">
-			<div id="navbar-expand-md" class="a navbar navbar-expand-md fixed-top navbar-dark bg-dark navbar-expand-lg">
+			@if (config('app.web_type') == 1)
+			<div id="navbar-expand-md" class="a navbar navbar-expand-md fixed-top navbar-dark bg-dark navbar-expand-lg">	
+			@else 
+			<div id="navbar-expand-md" class="a navbar navbar-expand-md fixed-top navbar-dark bg-dark1 navbar-expand-lg">
+			@endif
+			 
 				<button class="navbar-toggler p-0 border-0" style="margin-left: 10px;margin-top: 4px;" type="button" data-toggle="offcanvas">
 					<i class="fas fa-bars" style="color:#f90; font-size:24px;"></i>
  
@@ -27,9 +32,9 @@
 				<div class="searchBox" data-toggle="searchBox" >	
 					<form  style="padding: 5px;position:relative; width: 100%; height: 100%; margin: 0;max-width: 100%;"  method="GET">
 						{{ csrf_field() }}
-						<div id="close"  style="text-align:center;left: 5px;top:0;position: absolute;; width: 50px; height: 36px; margin: 4px 
-						auto;background-color: #000;
-						border-color: #000;" class="btn btn-sm btn-primary" value="Search" >
+						<div id="close"   style="text-align:center;left: 5px;top:0;position: absolute;; width: 50px; height: 36px; margin: 4px 
+						auto;
+						 " class="btn btn-sm btn-primary" value="Search" >
 							<i class="fas fa-times-circle fa-2x"></i>
 						</div>
 						<input id='input' type="text" style="margin: 0;margin-left: 55px;margin-right: 55px;padding: 0px;position:relative; width: 100%; height: 100%; " name="query" placeholder="search" />
@@ -102,7 +107,7 @@
  
 	<div id ="nav-link-box" class="offcanvas-collapse  nav-link-box" >
 		<div class="navbar-collapse" style=" max-width: 100%; width: 100%; margin: 0;" id="navbarsExampleDefault">
-			<div class="navbar-tab"  style="height: 100%; width: 300px; background-color: #000;" >
+			<div class="navbar-tab"  style="height: 100%; width: 300px;  " >
 				<ul class="navbar-nav mr-auto" style="height:100%">
 					<li class="nav-item">
 						<!-- @php (isset($postArticle) ? $postArticle : false )
@@ -141,6 +146,11 @@
 						
 					</li>
 					<div id="dropdown-menu" class="dropdown-menu show" style="height:auto;    overflow-y: scroll;" aria-labelledby="dropdown01">
+						
+<!-- 						
+						
+						
+						
 						<a class="dropdown-item" href="/tag/1">日本</a>
 						<a class="dropdown-item" href="/tag/2">欧美</a>
 						<a class="dropdown-item" href="/tag/3">无修正</a>
@@ -172,7 +182,7 @@
 						<a class="dropdown-item" href="/tag/29">处女</a>
 						<a class="dropdown-item" href="/tag/30">孕妇</a>
 						<a class="dropdown-item" href="/tag/31">自拍</a>
-						<a class="dropdown-item" href="/tag/32">肛交</a>
+						<a class="dropdown-item" href="/tag/32">肛交</a> -->
 					</div>
 				</ul>
 		</div>

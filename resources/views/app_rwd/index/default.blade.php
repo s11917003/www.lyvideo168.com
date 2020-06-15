@@ -34,7 +34,11 @@ No.1 @lang('default.title')，带你升天带你飞，频繁更新片片精彩�
 			@endif
 
 			@if ($device == 'ios' || $device == 'android')
-					<div id="blogVideo" class="blogVideo col" style="max-width:48%;height: auto;">
+					@if (config('app.web_type') == 1)
+					<div id="blogVideo" class="blogVideo1 col" style="max-width:48%;height: auto;">
+					@else
+					<div id="blogVideo" class="blogVideo1 col" style="height: auto;">
+					@endif
 						<div id="rs-content-left-box  embed-responsive embed-responsive-16by9" data-id='{{$post->id}}' data-show=false style="height:170px;">
 			@else
 					<div id="blogVideo" class="blogVideo1 col"  style="display:inline-grid;">

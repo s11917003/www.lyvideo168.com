@@ -7,10 +7,11 @@
 <title>@yield('title')</title>
 <meta name="description" content="@yield('des')">
 <link href="/css/respon.css?r=@php echo uniqid(); @endphp" rel="stylesheet" type="text/css">
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 <link href="/css/bootstrap-4.0.0.css?r=@php echo uniqid(); @endphp" rel="stylesheet">
 <link href="https://vjs.zencdn.net/6.6.3/video-js.css" rel="stylesheet">
 <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
-<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
 <style>
 	.video-js {
 		$primary-background-color: #fa0;
@@ -57,6 +58,7 @@
 </script>
 @yield('topscript')
 </head>
+
 @if (config('app.web_type') == 1)
 	<body id="rs-body">
 @else 
