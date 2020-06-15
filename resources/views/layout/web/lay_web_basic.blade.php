@@ -23,7 +23,21 @@
 <script>
 	$(function(){
 		$(".contentbox img").lazyload();
+		// $('[data-toggle="offcanvas"]').on('click', function () {
+		// 	$('.offcanvas-collapse').toggleClass('open')
+		// 	$('#nav-link-mask').toggle()
+		// });
+		// $('[data-toggle="dropdown"]').on('click', function () {
+		// 	if ($('.dropdown-menu').hasClass( "show" ) ) {
+		// 		$('.dropdown-menu').removeClass('show');
+		// 		return;
+		// 	}
+    	// 	$('.dropdown-menu').toggleClass('show')
+		// })		 
 	});
+
+
+	
 </script>
 {!! Analytics::render() !!}
 
@@ -51,7 +65,7 @@
 	}(document, 'script', 'facebook-jssdk'));
 	</script>
 	<!-- HEADER 開始 -->
-	@include('layout.web.lay_web_header')
+	@include('layout.web.lay_web_header',['postArticle'=>false])
 	<!-- HEADER 結束 -->
 	<!-- NAV選項區域 開始 -->
 	@include('layout.web.lay_web_nav')

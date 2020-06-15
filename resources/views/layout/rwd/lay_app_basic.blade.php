@@ -4,7 +4,7 @@
 <meta charset="utf-8">	
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>@yield('title') - 老湿机</title>
+<title>@yield('title')</title>
 <meta name="description" content="@yield('des')">
 <link href="/css/respon.css?" rel="stylesheet" type="text/css">
 <link href="/css/bootstrap-4.0.0.css" rel="stylesheet">
@@ -24,9 +24,14 @@
 <!-- If you'd like to support IE8 -->
 @yield('topscript')
 </head>
-<body id="rs-body">
+@if (config('app.web_type') == 1)
+	<body id="rs-body">
+@else 
+	<body id="rs-body" class="rs-body1" >
+@endif
+
 <!-- JuicyAds PopUnders v3 Start -->
-<script type="text/javascript" src="https://js.juicyads.com/jp.php?c=3474y213t244u4q2q28443b494&u=http%3A%2F%2Fwww.juicyads.rocks"></script>
+<!-- <script type="text/javascript" src="https://js.juicyads.com/jp.php?c=3474y213t244u4q2q28443b494&u=http%3A%2F%2Fwww.juicyads.rocks"></script> -->
 <!-- JuicyAds PopUnders v3 End -->
 	<!-- HEADER 結束 -->
 	<!-- NAV選項區域 結束 -->

@@ -4,12 +4,14 @@
 <meta charset="utf-8">	
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>@yield('title') - 老湿机</title>
+<title>@yield('title')</title>
 <meta name="description" content="@yield('des')">
 <link href="/css/respon.css?r=@php echo uniqid(); @endphp" rel="stylesheet" type="text/css">
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 <link href="/css/bootstrap-4.0.0.css?r=@php echo uniqid(); @endphp" rel="stylesheet">
 <link href="https://vjs.zencdn.net/6.6.3/video-js.css" rel="stylesheet">
 <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
 <style>
 	.video-js {
 		$primary-background-color: #fa0;
@@ -26,16 +28,20 @@
 <script type="text/javascript" src="/js/jquery.lazyload.js"></script>
 <script type="text/javascript" src="/js/jquery.visible.js"></script>
 <script src="/js/bootstrap-4.0.0.js"></script>
+
 <script>
 	$(function(){
 		$(".rs-contentword img").lazyload({
 			load : cccccount
 		});
+	 
 	});
 	
 	function cccccount() {
 		console.log('+++')
 	}
+
+	
 </script>
 {!! Analytics::render() !!}
 
@@ -52,19 +58,34 @@
 </script>
 @yield('topscript')
 </head>
-<body id="rs-body">
+
+@if (config('app.web_type') == 1)
+	<body id="rs-body">
+@else 
+	<body id="rs-body" class="rs-body1" >
+@endif
 <!-- JuicyAds PopUnders v3 Start -->
-<script type="text/javascript" src="https://js.juicyads.com/jp.php?c=3474y213t244u4q2q28443b494&u=http%3A%2F%2Fwww.juicyads.rocks"></script>
+<!-- <script type="text/javascript" src="https://js.juicyads.com/jp.php?c=3474y213t244u4q2q28443b494&u=http%3A%2F%2Fwww.juicyads.rocks"></script> -->
 <!-- JuicyAds PopUnders v3 End -->
 	<!-- HEADER 開始 -->
-	@include('layout.rwd.lay_web_header')
+	@include('layout.rwd.lay_web_header',['postArticle'=>false])
 	<!-- HEADER 結束 -->
 	<!-- NAV選項區域 開始 -->
-	@include('layout.rwd.lay_web_nav')
+	
 	<!-- NAV選項區域 結束 -->
-	<div id="rs-main-content">
-        @yield('maincontent')
+	@if (config('app.web_type') == 1)
+	<div id="rs-main-content"> 
+		@yield('maincontent')
 	</div>
+	@else 
+	<div id="rs-main-content1"> 
+		@include('layout.rwd.lay_web_left_sidebar')
+		@yield('maincontent')
+		@include('layout.rwd.lay_web_right_sidebar')
+	</div>
+	@endif
+
+ 
 	<!-- Footer 開始 -->
 	<!-- Footer 結束 -->
 	@yield('footscript')

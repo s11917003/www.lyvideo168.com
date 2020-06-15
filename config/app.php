@@ -77,7 +77,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'zh-CN',
 
     /*
     |--------------------------------------------------------------------------
@@ -124,6 +124,10 @@ return [
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
+    'watermarkText' => env('APP_WatermarkText', 'lygj16888.com'),
+    'web_name' => env('APP_Web_Name', '857video.com'),
+    'env_machine' => env('APP_ENV_MACHINE', 'linux'),
+    'web_type' => env('web_type', 1),
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -192,7 +196,11 @@ return [
 		Ipunkt\LaravelAnalytics\AnalyticsServiceProvider::class,
 		//sitemap
 		//Roumen\Sitemap\SitemapServiceProvider::class,
-		//Srmklive\PayPal\Providers\PayPalServiceProvider::class
+        //Srmklive\PayPal\Providers\PayPalServiceProvider::class
+         
+
+        
+        Collective\Html\HtmlServiceProvider::class,
 		
     ],
 
@@ -244,7 +252,11 @@ return [
 		'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 		'Image' => Intervention\Image\Facades\Image::class,
 		'Analytics' => Ipunkt\LaravelAnalytics\AnalyticsFacade::class,
-		'PayPal' => Srmklive\PayPal\Facades\PayPal::class
+        'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
+        'View' => Illuminate\Support\Facades\View::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+        'Input' => Illuminate\Support\Facades\Input::class,
     ],
 
 ];

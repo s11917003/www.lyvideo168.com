@@ -6,7 +6,7 @@
 {{strip_tags($post->title)}}
 @stop
 @section('topscript')
-<meta itemprop="name" content="老濕機">
+<meta itemprop="name" content="@lang('default.description')">
 <meta itemprop="description" content="{{strip_tags($post->title)}}">
 
 <script>
@@ -93,7 +93,7 @@
 			@endif
 			@if ($device == 'ios' || $device == 'android')
 			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px; height: 2950px;">
-				<h5>推薦影片</h5>
+				<h5 class="recommend">推荐影片</h5>
 				@php
 				$i = 0
 				@endphp
@@ -121,7 +121,7 @@
 			</div>
 			@else
 			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px; height: 430px;">
-				<h5>推薦影片</h5>
+				<h5 class="recommend">推荐影片</h5>
 				@foreach ($relate as $re)
 				<div style="float: left;padding: 10px; width: 230px; height: 185px; margin: 5px; background: #f1f1f1; overflow: hidden">
 					<a href="/p/{{$re->post_id}}">

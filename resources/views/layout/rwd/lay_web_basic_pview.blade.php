@@ -4,7 +4,7 @@
 <meta charset="utf-8">	
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>@yield('title') - 老湿机</title>
+<title>@yield('title')</title>
 <meta name="description" content="@yield('des')">
 <link href="/css/respon.css" rel="stylesheet" type="text/css">
 <link href="/css/bootstrap-4.0.0.css" rel="stylesheet">
@@ -28,17 +28,49 @@
 <script type="text/javascript" src="/js/jquery.lazyload.js"></script>
 <script type="text/javascript" src="/js/jquery.visible.js"></script>
 <script src="/js/popper.min.js"></script>
-<script src="/js/bootstrap-4.0.0.js"></script>
+<script<script src="/js/bootstrap-4.0.0.js"></script>
 <script>
 	$(function(){
+		$.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+		});
+		$('.adClick').on('click',function(){
+			var id =  $(this).attr("data-id") 
+			console.log('id'+id)
+
+			$.ajax({
+				type:"get",
+				url:"/clickAd/"+id,
+				success:function(result){
+					// var address = result['address'];
+					// console.log(address);
+					// window.location.href = address;
+				}
+			});	
+
+		})	
 		$(".rs-contentword img").lazyload({
 			load : cccccount
 		});
+		// $('[data-toggle="offcanvas"]').on('click', function () {
+		// 	$('.offcanvas-collapse').toggleClass('open')
+		// 	$('#nav-link-mask').toggle()
+		//   })
+		//  $('[data-toggle="dropdown"]').on('click', function () {
+		// 	if ($('.dropdown-menu').hasClass( "show" ) ) {
+		// 		$('.dropdown-menu').removeClass('show');
+		// 		return;
+		// 	}
+    	// 	$('.dropdown-menu').toggleClass('show')
+		// })		 
 	});
 	
 	function cccccount() {
 		console.log('+++')
 	}
+	 
 </script>
 {!! Analytics::render() !!}
 
@@ -55,22 +87,36 @@
 </script>
 @yield('topscript')
 </head>
-<body id="rs-body">
+@if (config('app.web_type') == 1)
+	<body id="rs-body">
+@else 
+	<body id="rs-body" class="rs-body1" >
+@endif
 <!-- JuicyAds PopUnders v3 Start -->
 <!--
 <script type="text/javascript" src="https://js.juicyads.com/jp.php?c=3474y213t244u4q2q28443b494&u=http%3A%2F%2Fwww.juicyads.rocks"></script>
 -->
 <!-- JuicyAds PopUnders v3 End -->		
 	<!-- HEADER 開始 -->
-	@include('layout.rwd.lay_web_header')
+	@include('layout.rwd.lay_web_header',['postArticle'=>false])
 	<!-- HEADER 結束 -->
-	<!-- NAV選項區域 開始 -->
-	@include('layout.rwd.lay_web_nav')
-	<!-- NAV選項區域 結束 -->
-	<div id="rs-main-content">
-        @yield('maincontent')
+ 
+	@if (config('app.web_type') == 1)
+	<div id="rs-main-content"> 
+		@yield('maincontent')
         @include('layout.rwd.lay_web_rightcul_norelate')
 	</div>
+	@else 
+	<div id="rs-main-content1"> 
+		@include('layout.rwd.lay_web_left_sidebar')
+		@include('layout.rwd.lay_web_right_sidebar')
+		@yield('maincontent')
+        @include('layout.rwd.lay_web_rightcul_norelate')
+		
+	</div>
+	@endif
+
+	 
 	<!-- Footer 開始 -->
 	@include('layout.rwd.lay_web_footer')
 	<!-- Footer 結束 -->

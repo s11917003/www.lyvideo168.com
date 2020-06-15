@@ -6,9 +6,9 @@
 {{strip_tags($post->title)}}
 @stop
 @section('topscript')
-<meta itemprop="name" content="老濕機">
+<meta itemprop="name" content="@lang('default.description')">
 <meta itemprop="description" content="{{$post->title}}">
-<meta itemprop="keyword" content="老濕機,{{$post->idno}},{{$post->producer}}">
+<meta itemprop="keyword" content="@lang('default.description'),{{$post->idno}},{{$post->producer}}">
 @stop
 @section('maincontent')
 	<!-- Content 左側 開始 -->

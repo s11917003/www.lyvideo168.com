@@ -1,9 +1,9 @@
 @extends('layout.rwd.lay_web_basic_warning')
 @section('title')
-老濕機休息站
+@lang('default.title')休息站
 @stop
 @section('des')
-No.1老濕機休息站，帶你升天帶你飛，每天更新,片片精彩！
+No.1 @lang('default.description')休息站，帶你升天帶你飛，每天更新,片片精彩！
 @stop
 @section('topscript')
 <script>
@@ -27,7 +27,7 @@ function enter() {
 @stop
 @section('maincontent')
 <div style="width: 100%; margin: 0 auto; padding-top: 50px;">
-	<p align="center"><strong>No.1老濕機休息站，帶你升天帶你飛，每天更新！</strong></p>
+	<p align="center"><strong>No.1 @lang('default.description')休息站，帶你升天帶你飛，每天更新！</strong></p>
 	<p align="center"><strong>本站依據TICRF網站分級制度進行分級，本站為限制級網站、未滿18歲、禁止進入</strong></p>
 </div>
 <div style="width: 350px;  border: 8px solid #ffb403; margin: 0 auto">

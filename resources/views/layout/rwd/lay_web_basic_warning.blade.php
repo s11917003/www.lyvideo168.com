@@ -4,7 +4,7 @@
 <meta charset="utf-8">	
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>@yield('title') - 老湿机</title>
+<title>@yield('title')</title>
 <meta name="description" content="@yield('des')">
 <link href="/css/respon.css?r=@php echo uniqid(); @endphp" rel="stylesheet" type="text/css">
 <link href="/css/bootstrap-4.0.0.css?r=@php echo uniqid(); @endphp" rel="stylesheet">
@@ -29,14 +29,18 @@
 {!! Analytics::render() !!}
 @yield('topscript')
 </head>
-<body id="rs-body">
+@if (config('app.web_type') == 1)
+	<body id="rs-body">
+@else 
+	<body id="rs-body" class="rs-body1" >
+@endif
 	<div id="rs-main-content" style="width: 100%">
         @yield('maincontent')
 	</div>
 	<!-- Footer 開始 -->
 		<!-- rs-footer -->
 	<div id="rs-footer">
-		<p>&copy; 老湿机</p>
+		<p>&copy; @lang('default.title')</p>
 	</div>
 	<script src="/js/draw.js"></script>
 	<!-- Footer 結束 -->
