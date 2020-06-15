@@ -29,7 +29,11 @@
 {!! Analytics::render() !!}
 @yield('topscript')
 </head>
-<body id="rs-body">
+@if (config('app.web_type') == 1)
+	<body id="rs-body">
+@else 
+	<body id="rs-body" class="rs-body1" >
+@endif
 	<div id="rs-main-content" style="width: 100%">
         @yield('maincontent')
 	</div>

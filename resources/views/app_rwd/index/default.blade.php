@@ -14,18 +14,15 @@ No.1 @lang('default.title')，带你升天带你飞，频繁更新片片精彩�
 @stop
 @section('maincontent')
 	<!-- Leftside Article -->
- 
-	<div id="rs-content-left"  >
+		@if (config('app.web_type') == 1)
+		<div id="rs-content-left">
+		@else 
+		<div id="rs-content">
+		@endif
+	
 		@php ($i = 0) 
-	
-			
-	
 		<div class="container" style="width:100%;   padding-right: 0px; padding-left: 3px;">
-		 
-		<!-- @for  ($j = 0; $j < count($posts); $j++)
-		@php ($post = $posts[$j])
-		<h2 style="width:95%; padding: 0px 0px 0px 0px;Display: inline-block;  overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color:#b02b7c;"><a href="/p/{{$post->id}}">{!! $post->title !!}</a></h2>
-		@endfor -->
+	 
 		@foreach ($posts as $post) 
 		
 			@if ( ($device != 'ios' && $device != 'android')  &&  ($loop->index %  200000 ==0) )
@@ -37,10 +34,14 @@ No.1 @lang('default.title')，带你升天带你飞，频繁更新片片精彩�
 			@endif
 
 			@if ($device == 'ios' || $device == 'android')
-					<div id="blogVideo" class="blogVideo col" style="max-width:48%;height: auto;">
+					@if (config('app.web_type') == 1)
+					<div id="blogVideo" class="blogVideo1 col" style="max-width:48%;height: auto;">
+					@else
+					<div id="blogVideo" class="blogVideo1 col" style="height: auto;">
+					@endif
 						<div id="rs-content-left-box  embed-responsive embed-responsive-16by9" data-id='{{$post->id}}' data-show=false style="height:170px;">
 			@else
-					<div id="blogVideo" class="blogVideo col"  style="display:inline-grid;">
+					<div id="blogVideo" class="blogVideo1 col"  style="display:inline-grid;">
 						<div id="rs-content-left-box" data-id='{{$post->id}}' data-show=false> 
 			@endif
  
@@ -94,11 +95,22 @@ No.1 @lang('default.title')，带你升天带你飞，频繁更新片片精彩�
 					</div>
 
 				@else
-					<div id="rs-digg-box2" style="float: left; width: 100%;     padding-top: 0px; overflow: visible;">
+						@if (config('app.web_type') == 1)
+						<div id="rs-digg-box2" style="float: left; width: 100%;     padding-top: 0px; overflow: visible;">
+						@else 
+						<div id="rs-digg-box2" style="float: left; width: 100%;     padding-top: 0px; overflow: hidden;
+							Display: inline-block;
+							white-space: nowrap;
+							overflow: hidden;
+							text-overflow: ellipsis;">
+						@endif
+					
 						@if ($post->tag)
+						<p>
 							@foreach ($post->tag as $tag)
-							<p><a href="/tag/{{$tag->tagname->id}}" target="_blank" class='rs-digg-box2-tag'>{{$tag->tagname->name}}</a></p>
+							<a href="/tag/{{$tag->tagname->id}}" target="_blank" class='rs-digg-box2-tag'>{{$tag->tagname->name}}</a>
 							@endforeach
+						</p>
 						@endif
 					</div>
 				@endif

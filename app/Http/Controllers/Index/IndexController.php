@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Lib\User;
 use App\Lib\Utils;
 use Cookie;
+use Carbon\Carbon;
 class IndexController extends Controller {	
 	
 	public function index($page = 1) {
@@ -39,15 +40,13 @@ class IndexController extends Controller {
 		$value = @$_COOKIE['appdl'];
 	   	if($value != true) {
 			Cookie::make('appdl',true,180);
-
 			$deviveArr  =['web' =>1 ,'android'=>2,'ios'=>3];
-
 		 
 		   if(is_Null($deviveArr[$device])){	 
 			$d = Device::find(4);
 			$d->count +=1;
 			$d->save();
-		   } else {
+		   } else { 
 			$d = Device::find($deviveArr[$device]);
 			$d->count +=1;
 			$d->save();
@@ -55,8 +54,7 @@ class IndexController extends Controller {
 	   	} 
 	 	$category = PostsCategory::all();
 		$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->with('commentsGod')->where('cate_id', 3)->where('status', 1)->where('covered', 1)->orderBy('id', 'desc')->Paginate(21, null, 1, $page);
-		
-	
+	 
 		$lastPage = $posts->lastPage();
 		$currentPage = $posts->currentPage();
 	    
@@ -638,9 +636,23 @@ class IndexController extends Controller {
 			return response()->json(['count_digg' => 1, 'status' => 1,'login' => false]);
 		}	 
 	}
+	public function videoinfo(Request $request){
+
+		$all = PostsArticle::where('status', 1)->where('covered', 1)->orderBy('id', 'desc')->count();
+		$today = PostsArticle::whereDate('created_time', Carbon::now()->format('m/d/Y'))->where('covered', 1)->orderBy('id', 'desc')->count();
+		$tags = PostsTag::where('status', 1)->orderby('term_order', 'desc')->get();
+		// $today = 1;
+	 
+		$tagarr = [];
+		foreach ($tags as $tag) {
+			$tagarr[] = ['name'=>$tag['name'],'id'=>$tag['id']];
+		}
+		return response()->json(['all' => $all,'today' => $today,'tags'=>$tagarr]);
+	}
 	public function clickAd(Request $request, $id){
 		// $ad = $this->get_ad($id);
 		$ad = AdDetailBanner::where('id',$id)->where('status', 1)->first();
+	
 		if(!$ad) {
 			header("Location:/");
 			return ;

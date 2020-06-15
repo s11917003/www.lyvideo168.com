@@ -125,7 +125,9 @@ return [
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
     'watermarkText' => env('APP_WatermarkText', 'lygj16888.com'),
+    'web_name' => env('APP_Web_Name', '857video.com'),
     'env_machine' => env('APP_ENV_MACHINE', 'linux'),
+    'web_type' => env('web_type', 1),
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

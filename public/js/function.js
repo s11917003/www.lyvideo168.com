@@ -1,5 +1,62 @@
 $(document).ready(function () {
 
+	var tagsCookie = getCookie('tags');
+	var allVideoCookie = getCookie('allVideoCount');
+	var todayVideoCookie = getCookie('todayVideoCount');
+	if (todayVideoCookie && allVideoCookie && tagsCookie) {
+		$("#nav-link-box-right .all").html(allVideoCookie);
+		$("#nav-link-box-right .today").html(todayVideoCookie);
+		var tags = tagsCookie.split('|');
+		
+		for(i=0;i<tags.length;i++){
+			tagData = tags[i].split(',');
+			var tag =  '<a class="dropdown-item" href="/tag/'+tagData[0]+'">'+ tagData[1]  +'</a>';
+			$(".dropdown-menu").append(tag);
+		 
+		}
+
+	} else {
+		$.ajax({
+			type:"get",
+			url:"/videoinfo",
+			success:function(result){
+				var all = result['all'];
+				var today = result['today'];
+				var tags = result['tags'];
+				$("#nav-link-box-right .all").html(all);
+				$("#nav-link-box-right .today").html(today);
+
+				if(all == 0 || !all){
+					setCookie('allVideoCount','0',1);
+				} else {
+					setCookie('allVideoCount',all,1);
+				}
+				if(today == 0 || !today){
+					setCookie('todayVideoCount','0',1);
+				} else {
+					setCookie('todayVideoCount',today,1);
+				}
+				 
+				var textTags = ''
+				for(i=0;i<tags.length;i++){
+					var tag =  '<a class="dropdown-item" href="/tag/'+tags[i]['id']+'">'+ tags[i]['name']  +'</a>';
+					$(".dropdown-menu").append(tag);
+					if(i==tags.length-1 && i!= 1){
+						textTags += tags[i]['id']+','+ tags[i]['name'];
+					} else {
+						textTags += tags[i]['id']+','+ tags[i]['name']+'|';
+					}
+				}
+
+				if(textTags){
+					console.log('textTags' ,textTags)
+					setCookie('tags',textTags,7);
+				}
+				
+			}
+		});
+	}
+
 	var videoFile;
 	var videoFile1;
 	var videoFile2;
@@ -35,8 +92,8 @@ $(document).ready(function () {
 	        is_video = false;
         }
         
-        if(is_video && !/.(mp4|flv|mpeg|mov)/gi.test(file_name)){
-            showHideError($file_input[0].id, true, "請上傳影片檔案,後綴必須是mp4,flv,mov,mpeg",id);
+        if(is_video && !/.(mp4)/gi.test(file_name)){
+            showHideError($file_input[0].id, true, "請上傳影片檔案,後綴必須是mp4",id);
             $file_input.val("");
             return false;
         }
@@ -637,6 +694,29 @@ function getElementViewTop(element){
 		var elementScrollTop=document.documentElement.scrollTop; 
 	}
 	return actualTop-elementScrollTop;
+}
+
+function setCookie(name,value,days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+function eraseCookie(name) {   
+    document.cookie = name+'=; Max-Age=-99999999;';  
 }
 
 

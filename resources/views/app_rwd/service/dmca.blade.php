@@ -46,7 +46,7 @@ DMCA
 					<p>Please be aware that if you knowingly materially misrepresent that material or activity on @lang('default.description') was removed or disabled by mistake or misidentification, you may be held liable for damages (including costs and attorneys’ fees) under Section 512(f) of the DMCA.</p>
 					<h2>Repeat Infringers</h2>
 					<p>In accordance with the DMCA and other applicable law, we have adopted a policy of terminating or disabling, in appropriate circumstances and at our sole discretion, the accounts of users who are deemed to be repeat infringers. We may also at our sole discretion limit access to @lang('default.description'), terminate or disable the accounts of any users who infringe any intellectual property rights of others, whether or not there is any repeat infringement.</p>
-					</div>
+				 
 			</div>
 
 

@@ -19,7 +19,7 @@
 	<!-- Content 左側 開始 -->
 	<div id="">  
 	
-		<div id="rs-content-left-box">
+		<div id="rs-content-left-box" class="rs-content-left-box1">
 	
 		 
 			<div 	style="BACKGROUND-COLOR: #000;  height: 80px;width:100%;">
@@ -30,7 +30,7 @@
 			</div>
 		</div>
 	
-		<div id="rs-content-left-box">
+		<div id="rs-content-left-box" class="rs-content-left-box1">
 			<!-- <div class="rs-contentpics" style="background: url({{$post->userInfo->avatar}}) no-repeat top center; background-size:50px"><a href="/p/{{$post->id}}"></a></div>
 			<div class="rs-contentname">{{$post->userInfo->nick_name}}<br>{{ Carbon\Carbon::parse($post->created_time)->format('m-d H:i:s') }}</div> -->
 			<div class="rs-contentword">
