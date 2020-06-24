@@ -122,17 +122,25 @@ class UploadController extends Controller {
 						$img_info = getimagesize(storage_path().'/app'.$pathImg.'/'.$filename.'.jpg');
 
 						$fontsize = 18;
-						$Marquee  = "w-tw-w/10*mod(t\,15)";
+						$Marquee="";
  						if($img_info[0] > $img_info[1]) { //橫向
-							$Marquee  = "w-tw-w/15*mod(t\,20)";
+							//$Marquee  = "w-tw-w/15*mod(t\,20)";
+							$Marquee="w-mod(max(t-15\,-15)*(w+tw)/16\,(w+tw))";
+							if (strlen($watermark) >=40) {
+								$Marquee="w-mod(max(t-20\,-20)*(w+tw)/21\,(w+tw))";
+							}
 							$fontsize  = 24;
 							if($img_info[1] >=720) {
 								$fontsize  = 45;
 							} else if ($img_info[1] >=1080) {
 								$fontsize  = 70;
 							}
-
 						} else {
+							$Marquee="w-mod(max(t-10\,-10)*(w+tw)/11\,(w+tw))";
+							if (strlen($watermark) >=30) {
+								$Marquee="w-mod(max(t-20\,-20)*(w+tw)/21\,(w+tw))";
+							}
+						
 							if($img_info[0] >=720) {
 								$fontsize  = 45;
 							} else if ($img_info[0] >=1080) {
