@@ -495,9 +495,21 @@ transform: translateX(0rem);
 	margin-bottom: 10px;
 }
 
+#rs-main-content1  input, #rs-main-content1 select, #rs-main-content1  textarea,#rs-main-content1  .ms-list ul,
+#rs-main-content1  .ms-list li,#rs-main-content1  .ms-selection ul, #rs-main-content1 .ms-selection li {
+    background-color: white;
+}
+#rs-main-content1 .ms-selectable li:hover {
+   background-color: #2d353c;
+}
+#rs-main-content1 input[type=submit]   {
+	border: 1px solid #2d353c;
+	color: #6d7983;
+}
 #rs-main-content1 #nav-link-box-right  .nav-item {
 	padding: 8px 21px;
 	font-size: 12px;
+	
 }
 #rs-main-content1 #nav-link-box-right  .nav-item  i{
 	float: left;
@@ -508,7 +520,9 @@ transform: translateX(0rem);
     font-size: 14px;
 }
 
-
+#rs-main-content1 .rs-post-box,#rs-main-content1 .rs-post-box .tab,#rs-main-content1 .rs-post-box .tabcontent {
+	background-color: white;
+}
 
 
 #rs-main-content1 #nav-link-box .navbar-tab,#rs-main-content1 #nav-link-box-right .navbar-tab{
@@ -530,22 +544,16 @@ transform: translateX(0rem);
 }
 #rs-main-content1 #rs-content ,#rs-main-content1 .rs-content-left-box1,
 #rs-main-content1 .rs-digg-box5,
-#rs-main-content1 .rs-privacy{
+#rs-main-content1 .rs-privacy ,#rs-main-content1 .rs-post-box{
 	margin: 0 190px 0 190px;
-    padding: 0 5px 0px 5px ;
+	padding: 0 5px 0px 5px ;
+	 
 }
-#rs-main-content1 .rs-digg-box5{
-	width: auto;
-}
-
-
-#rs-main-content1 .rs-digg-box5 .justify-content-center1 {
-	width: auto;
-}
+ 
 #rs-main-content1 .rs-digg-box5 h5{
 	padding-left:5px ;
 }
-#rs-main-content1 #rs-digg-box5 .justify-content-center1{
+#rs-main-content1 #rs-digg-box5 .justify-content-center1 ,#rs-main-content1 .rs-post-box{
 	width: auto;
 }
 #rs-content-left {
@@ -1523,7 +1531,7 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 	#rs-maintop.rs-maintop1 {
 		display: block;
 	}
-	#rs-main-content1 #rs-content ,#rs-main-content1 .rs-privacy{
+	#rs-main-content1 #rs-content ,#rs-main-content1 .rs-privacy,#rs-main-content1 .rs-post-box{
 	
 		margin: 0 5px 0 5px;
 		padding: 2px 2px 5px;
