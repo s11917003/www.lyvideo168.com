@@ -6,7 +6,12 @@
 		<div id="rs-footer" class="rs-footer1">	
 		@endif
 		<p>&copy; @lang('default.title')</p>
-		<p><a href="/service/privacy">隱私條款</a> | <a href="/service/dmca">DMCA</a> | <a href="/service/important">重要聲明</a>｜
+		<p>
+			<!-- <a href="">{{$footer}}</a> |  -->
+			@foreach ($footer as $fo)
+			<a href="{{$fo->href}}">{{$fo->text}}</a> | 
+			@endforeach
+			<a href="/service/privacy">隱私條款</a> | <a href="/service/dmca">DMCA</a> | <a href="/service/important">重要聲明</a>｜
 		<script id="_wau49z">var _wau = _wau || []; _wau.push(["small", "fx6a31y81z", "49z"]);</script><script async src="//waust.at/s.js"></script>
 		<!-- Histats.com  (div with counter) -->
 		<!-- <div id="histats_counter"></div> -->

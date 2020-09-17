@@ -21,7 +21,29 @@
 	
 		<div id="rs-content-left-box" class="rs-content-left-box1">
 	
-		 
+			@if(!is_Null($marquee))
+			<marquee>
+			@foreach ($marquee as $quee )
+				@if ($loop->count != 1) 
+					@if ($loop->first)
+						<div style="display: contents;color: rgb(255, 217, 0)" class="rs-appinfo"> 		
+					@endif
+	
+					@if ($loop->index ==1)
+					<a href="http://{{$quee }}" target="_blank">{{$quee}}</a>
+					@else
+					{{$quee}}	
+					@endif
+	
+					@if ($loop->last)
+						</div> 
+					@endif
+				@else
+				<div class="rs-appinfo">{{$quee}}</div> 
+				@endif
+			@endforeach
+			</marquee>
+			@endif
 			<div 	style="BACKGROUND-COLOR: #000;  height: 80px;width:100%;">
 				<a href="{{$adHalf[0]->web_url}}"  target="_blank">
 					<div data-id='{{$adHalf[0]->id}}' class="adClick"   style="overflow: hidden; background-repeat: no-repeat;   background-position: 50% 50%; background-size: contain;height: 100%;width:100%;background-image: url('{{  asset('storage/'.$adHalf[0]->bg_img)}}');" >

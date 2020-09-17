@@ -7,6 +7,7 @@ use App\Model\PostsArticle;
 use App\Model\PostsCategory;
 use App\Model\PostsDetail;
 use App\Model\PostsTag;
+use App\Model\Footer;
 use App\Model\PostsTagRelationships;
 use App\Model\PostsComments;
 use App\Model\PostsCommentsLog;
