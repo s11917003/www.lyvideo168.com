@@ -1332,7 +1332,7 @@ transform: translateX(0rem);
 	overflow:hidden;
 }
 
-input[type=text],[type=password],[type=email],[type=password], select {
+input[type=text],[type=password],[type=email],[type=password] select {
 	width:99%;
 	padding:12px 20px;
 	margin:8px 0;
@@ -2543,3 +2543,38 @@ label {
   bottom: 0;
   left: 0;
 }
+
+.userinfo  {
+	margin-bottom: 10px;
+	color:#bbb
+}
+.userinfo  .title {
+	font-weight: bold;
+	padding-bottom: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+#input1,#input2,#input3 {
+	display: inline-flex;
+}
+
+.edit {
+	display: flex;
+	font-weight: normal;
+}
+.nav-item .title {
+	padding-top: 8px;
+}
+
+.input.wrong , .input.correct {
+
+	padding: 5px;
+}
+
+.input.wrong , .input.correct {
+
+	padding: 5px;
+}
+
+ 

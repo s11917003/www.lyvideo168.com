@@ -41,7 +41,7 @@
 			
 		 
 		@endif
-		<h6 style="margin-top: 20px;color: #BBB;">热门影片</h6>
+		<h4 style="text-align:center;margin-top: 20px;color: #BBB;">热门影片排行区</h4>
 		@foreach ($hot as $inx => $ht)
 	
 		<div style="width: 240PX; height: 180px; padding:10px 0PX 0 0PX;overflow: hidden;MARGIN: 0 AUTO;">
@@ -68,7 +68,7 @@
 											>
 					</div>
 					 
-					<div style="text-align: center; font-size: 8; padding-top: 5px; overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color:#f90;">{{$ht->hot->title}}</div>
+					<div style="text-align: center; font-size: 8; padding-top: 5px; overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color:#f90;">{{$inx+1}} {{$ht->hot->title}}</div>
 
 				</a>
 			</div>
@@ -100,7 +100,7 @@
 				@endforeach
 			</tbody>
 		  </table> -->
-		  <h6 style="margin-top: 20px;color: #BBB;">推荐影片</h6>
+		  <!-- <h6 style="margin-top: 20px;color: #BBB;">推荐影片</h6>
 		@foreach ($relate as $re)
 	
 		<div style="width: 240PX; height: 180px; padding:10px 0PX 0 0PX;overflow: hidden;MARGIN: 0 AUTO;">
@@ -127,7 +127,7 @@
 												background-image: url('{{ asset('storage'.$re->article['tb_img'])}}');" 
 											>
 					</div>
-					<!-- <img src="{{ asset('storage'.$re->article['tb_img']) }}" style="width: 300px;"> -->
+				 
 					<div style="text-align: center; font-size: 8; padding-top: 5px; overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color:#f90;">{{$re->article['title']}}</div>
 
 				</a>
@@ -155,7 +155,7 @@
 												background-image: url('{{ asset('storage/'.$re->bg_img)}}');" 
 											>
 					</div>
-					<!-- <img src="{{ asset('storage'.$re->article['tb_img']) }}" style="width: 300px;"> -->
+				 
 					<div style="text-align: center; font-size: 8; padding-top: 5px; overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color:#f90;">{{$re->campaign_name }}</div>
 
 				</a>
@@ -163,7 +163,7 @@
 			@endif
 					 
 		</div>
-		@endforeach
+		@endforeach -->
 	</div>
 	<!-- JuicyAds v3.0
 	<div id="rs-right-box">

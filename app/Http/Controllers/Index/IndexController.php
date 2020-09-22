@@ -8,6 +8,7 @@ use App\Model\PostsArticle;
 use App\Model\PostsCategory;
 use App\Model\PostsDetail;
 use App\Model\PostsTag;
+use App\Model\Users;
 use App\Model\PostsDigg;
 use App\Model\AdDetailBanner;
 use App\Model\Device;
@@ -17,7 +18,7 @@ use App\Model\Announcement;
 use App\Model\PostsTagRelationships;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use App\Lib\User;
+//  use App\Lib\User;
 use App\Lib\Utils;
 use Cookie;
 use Carbon\Carbon;
@@ -63,7 +64,6 @@ class IndexController extends Controller {
 	    $tagarr = [1,2,4,10,11];
 		$relate = PostsTagRelationships::with('article')->whereIn('post_tag_id', $tagarr)->where('status',1)->groupBy('post_id')->inRandomOrder()->limit(10)->get();	 		
 	
-
 		$relate1 = $relate;
 		$posts1 = $posts;
 		$adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(3)->get();
@@ -575,6 +575,117 @@ class IndexController extends Controller {
 			'device' => $device,
 			'postArticle' => true
 		]);
+	}
+	public function updateUser(Request $request){
+		if (Auth::check()) {
+			// 這個使用者已經登入...
+
+
+
+		
+			$user  = Auth::User();
+			if ($user) {
+				$column = '';
+				$value ='';
+				if($request->nick_name) {
+					$column ='nick_name';
+					$value = $request->nick_name;
+
+				
+				} else if($request->aaccount) {
+					$column ='aaccount';
+					$value = $request->aaccount;
+					
+				 
+				} else if ($request->wechat ) {
+					$column ='wechat';
+					$value = $request->wechat;
+				}
+				 
+
+			 
+				Users::where('login_account','test002@gmail.com')->update( [ $column => $value ] );
+				return response()->json(['nick_name' =>$request->nick_name,'aaccount' => $request->aaccount,'wechat' => $request->wechat,'match',$match ]);
+				 
+				
+			}
+		} else {
+			return response()->json(['count_digg' => 1, 'status' => 1,'login' => false]);
+		}
+
+	}
+	public function userInfo(Request $request){
+		if (Auth::check()) {
+			// 這個使用者已經登入...
+			$user  = Auth::User();
+			if ($user) {
+				$id = intval($request->id);
+ 
+				$postsDigg =PostsDigg::where('user_id',$user->user_id)->orderBy('post_id', 'desc')->pluck('post_id');
+				$footer =footer::all();	 
+				$category = PostsCategory::all();
+
+
+				$posts  = [];
+				if($postsDigg) {
+					$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->where('cate_id', 3)->where('status', 1)->whereIn('id', $postsDigg)->where('covered', 1)->orderBy('id', 'desc')->get();
+				}
+
+				 
+				$device = Utils::chkdevice();
+				return view('app_rwd.index.user_info',[
+						// 'post'=> $article,
+						'footer'=>$footer,
+						// 'lastPage' => $lastPage,
+						// 'currentPage' => $currentPage,
+						'device' => $device,
+						 'posts'=> $posts,   
+						'title'=> '用戶资讯',
+						 'user'=>$user,
+						// 'marquee' => $marqueeArr,
+					]);
+				 
+				 
+				
+				$status = 0;
+				if($postsDigg) {
+					$status = $postsDigg['status'];
+				   if ($status == 1){ //有讚
+						PostsDetail::find($id)->decrement('count_digg');
+				   } else if ($status == 2){ //有倒讚
+						$postsDetail = PostsDetail::find($id);
+						$postsDetail->increment('count_digg');
+						$postsDetail->decrement('count_bury');
+					 
+				   } else {
+						PostsDetail::find($id)->increment('count_digg');
+				   }
+				} else {
+					PostsDetail::find($id)->increment('count_digg');
+
+					$Digg = new PostsDigg;
+					$Digg->user_id = $user->user_id;
+					$Digg->post_id = $id;
+					$Digg->status = 1;
+					$Digg->save();
+				}
+
+				if($status != 1) {
+					$status = 1;
+					PostsDigg::where('user_id',$user->user_id)->where('post_id',$id)->update( [ 'status' => 1 ] );
+				} else {
+					$status = 0;
+					PostsDigg::where('user_id',$user->user_id)->where('post_id',$id)->update( [ 'status' => 0 ] );
+				}
+
+				$postsDetail = PostsDetail::find($id);
+				return response()->json(['count_digg' => $postsDetail['count_digg'],'count_bury' => $postsDetail['count_bury'], 'status' => $status,'login' => true]);
+			}
+		} else {
+			header("Location:/");
+			return; 
+		}
+
 	}
 
 	public function postpageNew() {

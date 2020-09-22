@@ -30,6 +30,34 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('aaccount') ? ' has-error' : '' }}">
+                            <h7 for="aaccount" class="control-label">{{config('app.webAccountText')}}会员号</h7>
+
+                            <div class="">
+                                <input id="aaccount" type="text" class="form-control" name="aaccount" value="{{ old('aaccount') }}" required>
+
+                                @if ($errors->has('aaccount'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('aaccount') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('wechat') ? ' has-error' : '' }}">
+                            <h7 for="weChat" class="control-label">@lang('default.wechat')</h7>
+
+                            <div class="">
+                                <input id="wechat" type="text" class="form-control" name="wechat" value="{{ old('wechat') }}" required>
+
+                                @if ($errors->has('wechat'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('wechat') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <h7 for="email" class="control-label">@lang('default.email')</h7>
 
