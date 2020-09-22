@@ -8,6 +8,29 @@
 <meta itemprop="name" content="@lang('default.description')">
 <meta itemprop="description" content="{{strip_tags($title)}}">
 @section('maincontent')
+			@if(!is_Null($marquee))
+			<marquee>
+			@foreach ($marquee as $quee )
+				@if ($loop->count != 1) 
+					@if ($loop->first)
+						<div style="display: contents;color: rgb(255, 217, 0)" class="rs-appinfo"> 		
+					@endif
+
+					@if ($loop->index ==1)
+					<a href="http://{{$quee }}" target="_blank">{{$quee}}</a>
+					@else
+					{{$quee}}	
+					@endif
+
+					@if ($loop->last)
+						</div> 
+					@endif
+				@else
+				<div class="rs-appinfo">{{$quee}}</div> 
+				@endif
+			@endforeach
+			</marquee>
+			@endif
 			@if ($device == 'ios' || $device == 'android')
 			<div id="rs-digg-box2"  style="float: left; width: 100%; padding-top:10px; height: auto;">
 				<h5 style="COLOR: #ccc; font-weight: bold;">热门影片</h5>

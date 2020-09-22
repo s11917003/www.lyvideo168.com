@@ -128,6 +128,7 @@ return [
     'web_name' => env('APP_Web_Name', '857video.com'),
     'env_machine' => env('APP_ENV_MACHINE', 'linux'),
     'web_type' => env('web_type', 1),
+    'webAccountText' => env('APP_webAccountText', '乐博帐号'),
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

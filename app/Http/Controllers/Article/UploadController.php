@@ -8,6 +8,7 @@ use App\Model\PostsArticle;
 use App\Model\PostsDetail;
 use App\Model\PostsCategory;
 use App\Model\PostsTag;
+use App\Model\Footer;
 use App\Model\PostsTagRelationships;
  
 // use Pbmedia\LaravelFFMpeg\FFMpegFacade  as FFMpeg;
@@ -125,9 +126,9 @@ class UploadController extends Controller {
 						$Marquee="";
  						if($img_info[0] > $img_info[1]) { //橫向
 							//$Marquee  = "w-tw-w/15*mod(t\,20)";
-							$Marquee="w-mod(max(t-15\,-15)*(w+tw)/16\,(w+tw))";
+							$Marquee="w-mod(max(t-18\,-18)*(w+tw)/19\,(w+tw))";
 							if (strlen($watermark) >=40) {
-								$Marquee="w-mod(max(t-20\,-20)*(w+tw)/21\,(w+tw))";
+								$Marquee="w-mod(max(t-28\,-28)*(w+tw)/29\,(w+tw))";
 							}
 							$fontsize  = 24;
 							if($img_info[1] >=720) {
@@ -136,9 +137,9 @@ class UploadController extends Controller {
 								$fontsize  = 70;
 							}
 						} else {
-							$Marquee="w-mod(max(t-10\,-10)*(w+tw)/11\,(w+tw))";
-							if (strlen($watermark) >=30) {
-								$Marquee="w-mod(max(t-20\,-20)*(w+tw)/21\,(w+tw))";
+							$Marquee="w-mod(max(t-13\,-13)*(w+tw)/14\,(w+tw))";
+							if (strlen($watermark) >=25) {
+								$Marquee="w-mod(max(t-25\,-25)*(w+tw)/26\,(w+tw))";
 							}
 						
 							if($img_info[0] >=720) {

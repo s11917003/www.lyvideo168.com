@@ -133,6 +133,9 @@
 						<a class="nav-link" href="/article/post">上传影片</a>
 					</li>
 					@endif
+					<li class="nav-item">
+						<a class="nav-link" href="/userInfo">用戶资讯</a>
+					</li>
 					@endif
 					<li class="nav-item">
 						<a class="nav-link" href="/tag/hot">热门</a>

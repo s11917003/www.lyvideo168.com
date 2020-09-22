@@ -8,14 +8,17 @@ use App\Model\PostsArticle;
 use App\Model\PostsCategory;
 use App\Model\PostsDetail;
 use App\Model\PostsTag;
+use App\Model\Users;
 use App\Model\PostsDigg;
 use App\Model\AdDetailBanner;
 use App\Model\Device;
+use App\Model\Footer;
+use App\Model\AdTag;
 use App\Model\Announcement;
 use App\Model\PostsTagRelationships;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use App\Lib\User;
+//  use App\Lib\User;
 use App\Lib\Utils;
 use Cookie;
 use Carbon\Carbon;
@@ -61,16 +64,36 @@ class IndexController extends Controller {
 	    $tagarr = [1,2,4,10,11];
 		$relate = PostsTagRelationships::with('article')->whereIn('post_tag_id', $tagarr)->where('status',1)->groupBy('post_id')->inRandomOrder()->limit(10)->get();	 		
 	
-
 		$relate1 = $relate;
 		$posts1 = $posts;
 		$adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(3)->get();
 		$adHalf = AdDetailBanner::inRandomOrder()->where('type', 'half')->where('status',1)->limit(1)->get();
 		$adFloat = AdDetailBanner::inRandomOrder()->where('type', 'float')->where('status',1)->first();
 		$announcement =Announcement::inRandomOrder()->where('status',1)->first();
-	 
+		$marquee =Announcement::inRandomOrder()->where('status',2)->first();
+		$hot = PostsDetail::with('hot')->orderBy('count_view', 'desc')->Paginate(10, null, 1, $page);
+		$footer =footer::all();	 
+		$adTag = AdTag::where('status',1)->get();
 		$now = date('Y-m-d H:i:s');
 		$adlog = [];
+
+	 
+		foreach ($adDetail as  $key => $ad) {
+			if($ad->play_url){
+				$tagArr =  explode(',', $ad->play_url);
+  	            $tagData = [];	
+				foreach ($tagArr  as $tagA) {
+					foreach ($adTag as $tag) {
+						if($tag->id == $tagA){
+							$tagData[] = $tag;	
+							break;
+						}
+					}
+				}
+				$adDetail[$key]['tagData'] = $tagData;
+			}
+		}
+	
 		if($adFloat){
 			$log =  ['ad_id' => $adFloat->id ,'actiontype' =>0,'updated_at'=>$now] ;
 			$adlog[]  = $log;
@@ -84,7 +107,7 @@ class IndexController extends Controller {
 				
 			}
 		}
-
+		
 		if(count($posts1) >0){
 			foreach ($adDetail as $ad) {
 				$log =  ['ad_id' => $ad->id ,'actiontype' =>0,'updated_at'=>$now] ;
@@ -99,13 +122,19 @@ class IndexController extends Controller {
 		if($announcement){
 			$announcementArr = explode(':', $announcement->text);
 		}
+		$marqueeArr = [];
+		if($marquee){
+			$marqueeArr = explode(':', $marquee->text);
+		}
 		
 		if(count($adlog) >0){
 			DB::table('ad_detail_banner_log')->insert($adlog);
 		}
-	
+		 
+	 
 		return  view('app_rwd.index.default', [
 			'adHalf'=>$adHalf,
+			'footer'=>$footer,
 			'adFloat' => $adFloat,
 			'category'=>$category,
 			'posts'=>$posts1,
@@ -114,8 +143,11 @@ class IndexController extends Controller {
 			'device' => $device,
 			'relate' => $relate1,
 			'loadmore' => true,
+			'hot' => $hot,
+			'marquee' => $marqueeArr,
 			'announcement' => $announcementArr,
 			'path' =>  env('APP_URL').'app/public',		
+			'adTag' => $adTag,
 		]);
 	}
 	 
@@ -144,6 +176,7 @@ class IndexController extends Controller {
 	 
 		//suggest post
 		$tags = PostsTagRelationships::where('post_id', $id)->get();
+		$footer =footer::all();;	
 		//var_dump($tags);
 		$tagarr = [];
 		foreach ($tags as $tag) {
@@ -156,9 +189,12 @@ class IndexController extends Controller {
 		
 		$adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(2)->get();
 		$adHalf = AdDetailBanner::inRandomOrder()->where('type', 'half')->where('status',1)->limit(1)->get();
-		
+		$marquee =Announcement::inRandomOrder()->where('status',2)->first();
 	
-		
+		$marqueeArr = [];
+		if($marquee){
+			$marqueeArr = explode(':', $marquee->text);
+		}
 		$status = 0;
 		$adlog = [];
 		if (Auth::check()) {
@@ -187,17 +223,19 @@ class IndexController extends Controller {
 		if(count($adlog) >0){
 			DB::table('ad_detail_banner_log')->insert($adlog);
 		}
-	
+	 
 		if($article) {
 			$device = Utils::chkdevice();
 			return view('app_rwd.index.pview',[
 				// 'ad'=>$adDetail,
+				'footer'=>$footer,
 				'adHalf'=>$adHalf, 
 				'post'=>$article,
 				'device' => $device,
 				'relate' => $relate,
 				'postsDetail' => $postsDetail,
 				'status' => $status,
+				'marquee' => $marqueeArr,
 			]);
 		} else {
 			//沒有文章跳轉
@@ -305,8 +343,9 @@ class IndexController extends Controller {
 		$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->with('commentsGod')->where('cate_id', $cats->id)->where('status', 1)->where('covered', 1)->orderBy('id', 'desc')->Paginate(12, null, 1, $page);
 		$lastPage = $posts->lastPage();
 		$currentPage = $posts->currentPage();
-				
+		$footer =footer::all();;		
 		return  view('app_rwd.index.default_cat', [
+			'footer'=>$footer,
 			'category'=>$category,
 			'posts'=>$posts,
 			'lastPage' => $lastPage,
@@ -338,7 +377,14 @@ class IndexController extends Controller {
 		$adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(2)->get();
 		$lastPage = $posts->lastPage();
 		$currentPage = $posts->currentPage();
-		 
+		$footer =footer::all();
+		$marquee =Announcement::inRandomOrder()->where('status',2)->first();
+	
+		$marqueeArr = [];
+		if($marquee){
+			$marqueeArr = explode(':', $marquee->text);
+		}
+	
 		$adlog = [];
 		$now = date('Y-m-d H:i:s');
 		if(count($posts) >0){
@@ -358,12 +404,14 @@ class IndexController extends Controller {
 			$device = Utils::chkdevice();
 			return view('app_rwd.index.default_hot',[
 				'post'=> $article,
+				'footer'=>$footer,
 				'lastPage' => $lastPage,
 				'currentPage' => $currentPage,
 				'device' => $device,
 				'posts'=> $posts,
 				'title'=> '热门影片',
 				'tag' => 'hot',
+				'marquee' => $marqueeArr,
 			]);
 		} else {
 			//沒有文章跳轉
@@ -384,13 +432,18 @@ class IndexController extends Controller {
 		}		
 		
 		$posts = PostsTagRelationships::with('article')->with('hot')->where('post_tag_id', $tag)->where('status', 1)->orderBy('post_id', 'desc')->Paginate(10, null, 1, $page);
-		
+		$footer =footer::all();
 		//$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->with('commentsGod')->where('cate_id', $cats->id)->where('status', 1)->orderBy('id', 'desc')->Paginate(10, null, 1, $page);
 		$lastPage = $posts->lastPage();
 		$currentPage = $posts->currentPage();
 
 		$adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(2)->get();
-	 
+		$marquee =Announcement::inRandomOrder()->where('status',2)->first();
+	
+		$marqueeArr = [];
+		if($marquee){
+			$marqueeArr = explode(':', $marquee->text);
+		}
 	 
 		$now = date('Y-m-d H:i:s');
 		$adlog = [];
@@ -414,13 +467,15 @@ class IndexController extends Controller {
 		$device = Utils::chkdevice();
 		return  view('app_rwd.index.default_tag', [
 			'post'=> $article,
+			'footer'=>$footer,
 			'posts'=>$posts,
 			'lastPage' => $lastPage,
 			'currentPage' => $currentPage,
 			'device' => $device,
 			// 'relate' => $relate,
 			'tag' => $tags->id,
-			'title' => $tags->name
+			'title' => $tags->name,
+			'marquee' => $marqueeArr,
 		]);	
 		
 	}	
@@ -439,12 +494,17 @@ class IndexController extends Controller {
 		->orderBy('id', 'desc')
 		->Paginate(12, null, 1, $page);
 
-
+		$footer =footer::all();;
 		//$adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(2)->get();
 		$lastPage = $posts->lastPage();
 		$currentPage = $posts->currentPage();
 		 
-
+		$marquee =Announcement::inRandomOrder()->where('status',2)->first();
+	
+		$marqueeArr = [];
+		if($marquee){
+			$marqueeArr = explode(':', $marquee->text);
+		}
 		// $now = date('Y-m-d H:i:s');
 		// if(count($posts) >0){
 		// 	foreach ($adDetail as $ad) {
@@ -463,6 +523,7 @@ class IndexController extends Controller {
 			//return $posts;
 			$device = Utils::chkdevice();
 			return view('app_rwd.index.default_search',[
+				'footer'=>$footer,
 				'post'=> $article,
 				'search'=>$search,
 				'lastPage' => $lastPage,
@@ -471,6 +532,7 @@ class IndexController extends Controller {
 				'posts'=> $posts,
 				'title'=> '搜尋',
 				'tag' => 'search',
+				'marquee' => $marqueeArr,
 			]);
 		} else {
 			//沒有文章跳轉
@@ -513,6 +575,117 @@ class IndexController extends Controller {
 			'device' => $device,
 			'postArticle' => true
 		]);
+	}
+	public function updateUser(Request $request){
+		if (Auth::check()) {
+			// 這個使用者已經登入...
+
+
+
+		
+			$user  = Auth::User();
+			if ($user) {
+				$column = '';
+				$value ='';
+				if($request->nick_name) {
+					$column ='nick_name';
+					$value = $request->nick_name;
+
+				
+				} else if($request->aaccount) {
+					$column ='aaccount';
+					$value = $request->aaccount;
+					
+				 
+				} else if ($request->wechat ) {
+					$column ='wechat';
+					$value = $request->wechat;
+				}
+				 
+
+			 
+				Users::where('login_account','test002@gmail.com')->update( [ $column => $value ] );
+				return response()->json(['nick_name' =>$request->nick_name,'aaccount' => $request->aaccount,'wechat' => $request->wechat,'match',$match ]);
+				 
+				
+			}
+		} else {
+			return response()->json(['count_digg' => 1, 'status' => 1,'login' => false]);
+		}
+
+	}
+	public function userInfo(Request $request){
+		if (Auth::check()) {
+			// 這個使用者已經登入...
+			$user  = Auth::User();
+			if ($user) {
+				$id = intval($request->id);
+ 
+				$postsDigg =PostsDigg::where('user_id',$user->user_id)->orderBy('post_id', 'desc')->pluck('post_id');
+				$footer =footer::all();	 
+				$category = PostsCategory::all();
+
+
+				$posts  = [];
+				if($postsDigg) {
+					$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->where('cate_id', 3)->where('status', 1)->whereIn('id', $postsDigg)->where('covered', 1)->orderBy('id', 'desc')->get();
+				}
+
+				 
+				$device = Utils::chkdevice();
+				return view('app_rwd.index.user_info',[
+						// 'post'=> $article,
+						'footer'=>$footer,
+						// 'lastPage' => $lastPage,
+						// 'currentPage' => $currentPage,
+						'device' => $device,
+						 'posts'=> $posts,   
+						'title'=> '用戶资讯',
+						 'user'=>$user,
+						// 'marquee' => $marqueeArr,
+					]);
+				 
+				 
+				
+				$status = 0;
+				if($postsDigg) {
+					$status = $postsDigg['status'];
+				   if ($status == 1){ //有讚
+						PostsDetail::find($id)->decrement('count_digg');
+				   } else if ($status == 2){ //有倒讚
+						$postsDetail = PostsDetail::find($id);
+						$postsDetail->increment('count_digg');
+						$postsDetail->decrement('count_bury');
+					 
+				   } else {
+						PostsDetail::find($id)->increment('count_digg');
+				   }
+				} else {
+					PostsDetail::find($id)->increment('count_digg');
+
+					$Digg = new PostsDigg;
+					$Digg->user_id = $user->user_id;
+					$Digg->post_id = $id;
+					$Digg->status = 1;
+					$Digg->save();
+				}
+
+				if($status != 1) {
+					$status = 1;
+					PostsDigg::where('user_id',$user->user_id)->where('post_id',$id)->update( [ 'status' => 1 ] );
+				} else {
+					$status = 0;
+					PostsDigg::where('user_id',$user->user_id)->where('post_id',$id)->update( [ 'status' => 0 ] );
+				}
+
+				$postsDetail = PostsDetail::find($id);
+				return response()->json(['count_digg' => $postsDetail['count_digg'],'count_bury' => $postsDetail['count_bury'], 'status' => $status,'login' => true]);
+			}
+		} else {
+			header("Location:/");
+			return; 
+		}
+
 	}
 
 	public function postpageNew() {

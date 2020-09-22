@@ -20,7 +20,32 @@ No.1 @lang('default.title')，带你升天带你飞，频繁更新片片精彩�
 		<div id="rs-content">
 		@endif
 	
+		@if(!is_Null($marquee))
+		<marquee>
+		@foreach ($marquee as $quee )
+			@if ($loop->count != 1) 
+				@if ($loop->first)
+					<div style="display: contents;color: rgb(255, 217, 0)" class="rs-appinfo"> 		
+				@endif
+
+				@if ($loop->index ==1)
+				<a href="http://{{$quee }}" target="_blank">{{$quee}}</a>
+				@else
+				{{$quee}}	
+				@endif
+
+				@if ($loop->last)
+					</div> 
+				@endif
+			@else
+			<div class="rs-appinfo">{{$quee}}</div> 
+			@endif
+		@endforeach
+		</marquee>
+		@endif
+		 
 		@php ($i = 0) 
+		
 		<div class="container" style="width:100%;   padding-right: 0px; padding-left: 3px;">
 	 
 		@foreach ($posts as $post) 
@@ -145,7 +170,14 @@ No.1 @lang('default.title')，带你升天带你飞，频繁更新片片精彩�
 			
 			</div>	
 			<div id="rs-digg-box2" style="float: left; width: 100%;     padding-top: 0px; overflow: visible;">
-					<p><a href="{{$post->web_url}}"  target="_blank" class='rs-digg-box2-tag'>AD</a></p>
+				@if ($post->tagData)
+					@foreach ($post->tagData as $tagData) 
+					<p><a href="{{$tagData->href}}"  target="_blank" class='rs-digg-box2-tag'>{{$tagData->tag}}</a></p>
+					@endforeach
+				@else 
+				<p><a href="{{$post->web_url}}"  target="_blank" class='rs-digg-box2-tag'>AD</a></p>
+				@endif
+				
 			</div>
 			@endif
 						</div>
