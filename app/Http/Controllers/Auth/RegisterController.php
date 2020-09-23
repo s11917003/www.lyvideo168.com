@@ -65,10 +65,10 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'nick_name' => $data['name'].'1111',
+            'nick_name' => $data['name'],
             'user_type' => 0,
-            'wechat' => 111111,
-            'aaccount' => 2222222,
+            'wechat' => $data['wechat'],
+            'aaccount' => $data['aaccount'],
             'login_account' =>  $data['email'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
