@@ -31,7 +31,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('aaccount') ? ' has-error' : '' }}">
-                            <h7 for="aaccount" class="control-label">{{config('app.webAccountText')}}会员号</h7>
+                            <h7 for="aaccount" class="control-label">{{config('app.webAccountText')}}会员号</h7> <h7 style='color: red;'>*必填</h7> 
 
                             <div class="">
                                 <input id="aaccount" type="text" class="form-control" name="aaccount" value="{{ old('aaccount') }}" required>
@@ -45,7 +45,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('wechat') ? ' has-error' : '' }}">
-                            <h7 for="weChat" class="control-label">@lang('default.wechat')</h7>
+                            <h7 for="weChat" class="control-label">@lang('default.wechat')</h7> <h7 style='color: red;'>*必填</h7> 
 
                             <div class="">
                                 <input id="wechat" type="text" class="form-control" name="wechat" value="{{ old('wechat') }}" required>

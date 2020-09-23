@@ -152,7 +152,6 @@
 					if(id==1){
 						nick_name = $('#inputbox'+id).val()
 						nick_name =  	nick_name.replace(/\s*/g,"");
-						alert(nick_name)
 					} else if(id==2) {
 						aaccount =$('#inputbox'+id).val()
 						if (regExp.test(aaccount)){
