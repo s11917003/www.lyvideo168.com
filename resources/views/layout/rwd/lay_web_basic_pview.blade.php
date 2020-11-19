@@ -18,12 +18,20 @@
 	}
 </style>
 <!-- If you'd like to support IE8 -->
-<script src="/js/videojs-ie8.min.js"></script>
-<script src="/js/video.js"></script>
+<!-- <script src="/js/videojs-ie8.min.js"></script> -->
+<!-- <script src="/js/video.js"></script> -->
+<script src="https://vjs.zencdn.net/7.3.0/video.min.js"></script>
+<!-- <script src="//cdn.sc.gl/videojs-hotkeys/latest/videojs.hotkeys.min.js"></script> -->
+<link href="https://vjs.zencdn.net/7.3.0/video-js.min.css" rel="stylesheet">
+<script  type="module">
+import videojsPreviewThumbnails from 'https://cdn.skypack.dev/videojs-preview-thumbnails';
+</script>
+<script src="/js/videojs-thumbnails/videojs.thumbnails.js"></script>
+<!-- <script src="/js/videojs-thumbnails/videojs.thumbnails.js"></script> -->
 <script src="/js/videojs-contrib-hls.js"></script>
 <script src="/js/videojs-contrib-ads.js"></script>
 <script defer src="/js/fontawesome-all.js"></script>
-<script src="/js/jquery-3.3.1.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="/js/function.js"></script>
 <script type="text/javascript" src="/js/jquery.lazyload.js"></script>
 <script type="text/javascript" src="/js/jquery.visible.js"></script>

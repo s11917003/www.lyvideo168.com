@@ -57,23 +57,119 @@
 			<div class="rs-contentname">{{$post->userInfo->nick_name}}<br>{{ Carbon\Carbon::parse($post->created_time)->format('m-d H:i:s') }}</div> -->
 			<div class="rs-contentword">
 					<div style="position: relative">
-
-						<video id='av-video' width="600" height="264" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered" poster="{{asset('storage'.$post->cover_img)}}" controls>
-						  <source
-						     src="/getvideo/{{$post->id}}"
-						     type="application/x-mpegURL">
-						</video>
+						<video id="av-video" data-setup="{}" width="600" height="264" class="video-js vjs-default-skin vjs-fluid vjs-show-big-play-button-on-pause vjs-fill vjs-16-9 vjs-big-play-centered" poster="{{asset('storage'.$post->cover_img)}}" controls>
+						<source 
+						src="/getvideo/{{$post->id}}"
+						type="application/x-mpegURL">
+					</video>
 						<script>
-						var player = videojs('av-video',{
-								html5: {
-									hls: {
+							// var player = videojs('my-player',{
+							// 	html5: {
+							// 		hls: {
+							// 	          overrideNative: true  
+							// 	    },
+							// 		nativeVideoTracks: false,
+							// 		nativeAudioTracks: false,
+							// 		nativeTextTracks: false
+							// 	}
+							// });
+							 window.onload = function () {
+				var player = videojs( 'av-video',{
+                	hls: {
 								          overrideNative: true  
 								    },
 									nativeVideoTracks: false,
 									nativeAudioTracks: false,
-									nativeTextTracks: false
-								}
-							});
+									
+                controls : true,
+                techOrder : [ 'html5' ],
+                controlslist : 'nodownload',
+                language : "zh-Hant",
+				preload : 'auto',
+				// type:"application/x-mpegURL",
+				// sources:"/getvideo/{{$post->id}}",
+                // sources : 'https://d2zihajmogu5jn.cloudfront.net/elephantsdream/hls/ed_hd.m3u8',
+             
+                controlBar : {
+                    name : 'ControlBar',
+                    children : [
+                        {name: "PlayToggle"},
+                        {name: "ProgressControl"},
+                        {name: "DurationDisplay"},
+                        {name: "MuteToggle"},
+                        {name: "VolumeControl"},
+					
+
+					 
+					   {name: "currentTimeDisplay"},
+                        
+				 
+						{name: "FullscreenToggle"},
+                    ]
+                }
+            },function () {
+				this.initialPreviewThumbnail({
+					 sprite_url:"{{ asset('storage/upvideo/'.$post->folder.'/thumbnails.jpg') }}",
+					//;    /js/videojs-thumbnails/output-180x120-thumb.jpg',
+                    second:6,
+                    sprite_x_count:30000,
+                    thumbnail_width:160,
+					thumbnail_height:90,
+				
+					preview_window_top :-90,
+					// hook_move  :function (event) {
+					// 	console.log( 'ready to play' );
+					// 	this.player.controlBar.currentTimeDisplay.el_.innerHTML =  'ready to play';
+
+                    // }
+                    // preview_window_border_color:'green'
+                });
+                
+
+                this.hotkeys({
+                    keyup : function(event){
+						console.log( 'ready to play' );
+                        if( event.code=="Space" ) {
+                            if( this.paused() ) this.play();
+                            else this.pause();
+                        }
+                    },
+                    keydown : function (event) {
+						console.log( 'ready to play' );
+                        if( event.code=="ArrowRight" )this.currentTime(Math.floor(this.currentTime())+10);
+                        if( event.code=="ArrowLeft" )this.currentTime(Math.floor(this.currentTime())-10);
+                        if( event.code=="ArrowUp" )this.volume(this.volume()+0.1);
+                        if( event.code=="ArrowDown" )this.volume(this.volume()-0.1);
+                    }
+                });
+                console.log( 'ready to play' );
+			});
+			
+			const SeekBar = videojs.getComponent('SeekBar');
+			SeekBar.prototype.getPercent = function getPercent() {
+				const time = this.player_.currentTime()
+				const percent = time / this.player_.duration()
+				return percent >= 1 ? 1 : percent
+			}
+			SeekBar.prototype.handleMouseMove = function QQQQ(event) {
+				console.log( 'ready to play1111111' );
+				let newTime = this.calculateDistance(event) * this.player_.duration()
+    if (newTime === this.player_.duration()) {
+        newTime = newTime - 0.1
+    }
+    this.player_.currentTime(newTime);
+    this.update();
+    let currentTime = player.currentTime();
+    let minutes = Math.floor(currentTime / 60);   
+    let seconds = Math.floor(currentTime - minutes * 60)
+    let x = minutes < 10 ? "0" + minutes : minutes;
+    let y = seconds < 10 ? "0" + seconds : seconds;
+    let format = x + ":" + y;
+    player.controlBar.currentTimeDisplay.el_.innerHTML = format;
+			}
+							 }
+        
+					 
 						</script>
 			        </div>					
 			</div>
@@ -212,7 +308,7 @@
 				@endphp
 				-->
 				@endforeach			
-				<div style="clear: both"></div>
+ 				<div style="clear: both"></div>
 			</div>
 			@else
 			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px; height: auto;">
