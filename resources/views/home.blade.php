@@ -8,6 +8,7 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
+                    <example></example>
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
@@ -16,8 +17,10 @@
                     {{Auth::User()}}
                     You are logged in!
                 </div>
+             
             </div>
         </div>
     </div>
 </div>
+
 @endsection

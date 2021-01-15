@@ -7,6 +7,5 @@ class Announcement extends Modeli
     protected $table = 'announcement';
     protected $fillable = [];
     protected $primaryKey = 'id';
-    public $timestamps = false;
-    
+    public $timestamps = false; 
 }

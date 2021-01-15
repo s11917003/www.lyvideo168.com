@@ -224,5 +224,8 @@ Route::post('/api/user/update', 'Member\AppOpenidController@infoupdate');
 
 
 Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', function () {
+//     return view('home');
+// });
+// // Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'SpaController@index');

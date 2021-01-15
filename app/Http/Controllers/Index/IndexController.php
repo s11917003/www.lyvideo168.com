@@ -579,10 +579,6 @@ class IndexController extends Controller {
 	public function updateUser(Request $request){
 		if (Auth::check()) {
 			// 這個使用者已經登入...
-
-
-
-		
 			$user  = Auth::User();
 			if ($user) {
 				$column = '';
