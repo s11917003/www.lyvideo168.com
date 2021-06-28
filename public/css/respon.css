@@ -2576,5 +2576,35 @@ label {
 
 	padding: 5px;
 }
+.movie-gallery {
+    background-color: #fff;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    padding-right: 5px;
+}
+.movie-gallery .movie-gallery-wrapper {
+    margin-left: 10px;
+    max-height: 572px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
 
+
+.movie-gallery-wrapper a {
+	width: 23%;
+	max-height: 180px;
+	margin-bottom: 10px;
+	display: inline-block;
+	background-size: cover!important;
+	overflow: hidden;
+	margin-right: 10px;
+  }
+
+.movie-gallery-wrapper img {
+    max-width: 100%;
+    margin-top: 3px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+}
  

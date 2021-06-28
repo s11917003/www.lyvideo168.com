@@ -21,7 +21,7 @@
 	
 		<div id="rs-content-left-box" class="rs-content-left-box1">
 	
-			@if(!is_Null($marquee))
+			<!-- @if(!is_Null($marquee))
 			<marquee>
 			@foreach ($marquee as $quee )
 				@if ($loop->count != 1) 
@@ -43,25 +43,30 @@
 				@endif
 			@endforeach
 			</marquee>
-			@endif
-			<div 	style="BACKGROUND-COLOR: #000;  height: 80px;width:100%;">
+			@endif -->
+			<!-- <div 	style="BACKGROUND-COLOR: #000;  height: 80px;width:100%;">
 				<a href="{{$adHalf[0]->web_url}}"  target="_blank">
 					<div data-id='{{$adHalf[0]->id}}' class="adClick"   style="overflow: hidden; background-repeat: no-repeat;   background-position: 50% 50%; background-size: contain;height: 100%;width:100%;background-image: url('{{  asset('storage/'.$adHalf[0]->bg_img)}}');" >
 					</div>
 				</a>
-			</div>
+			</div> -->
 		</div>
 	
 		<div id="rs-content-left-box" class="rs-content-left-box1">
 			<!-- <div class="rs-contentpics" style="background: url({{$post->userInfo->avatar}}) no-repeat top center; background-size:50px"><a href="/p/{{$post->id}}"></a></div>
 			<div class="rs-contentname">{{$post->userInfo->nick_name}}<br>{{ Carbon\Carbon::parse($post->created_time)->format('m-d H:i:s') }}</div> -->
-			<div class="rs-contentword">
-					<div style="position: relative">
+			<div class="row">
+					<div class="container-fluid" style="DISPLAY: inline-flex;">
+						@if ($device == 'ios' || $device == 'android')
+						<div class="col-xs-12 col-sm-8 col-md-8 mdm-big" >
+						@else
+						<div class="col-xs-12 col-sm-8 col-md-8 mdm-big" >
+						@endif
 						<video id="av-video" data-setup="{}" width="600" height="264" class="video-js vjs-default-skin vjs-fluid vjs-show-big-play-button-on-pause vjs-fill vjs-16-9 vjs-big-play-centered" poster="{{asset('storage'.$post->cover_img)}}" controls>
 						<source 
 						src="/getvideo/{{$post->id}}"
 						type="application/x-mpegURL">
-					</video>
+						</video>
 						<script>
 							// var player = videojs('my-player',{
 							// 	html5: {
@@ -171,26 +176,69 @@
         
 					 
 						</script>
+
+						</div>
+						<div class="col-xs-12 col-sm-4 col-md-4 mdm-small">
+							<div class="mdm-small">
+								<div class="mdm-info">
+								<h1 class="m-title">100TV-404 </h1>
+								<div class="table-responsive">
+								<table class="table">
+								<tbody>
+								<tr>
+								<td>DVD ID</td>
+								<td>100TV-404</td>
+								</tr>
+								<tr>
+								<td>Release Date</td>
+								<td>2021-06-28</td>
+								</tr>
+								<tr>
+								<td>Runtime</td>
+								<td>17 min</td>
+								</tr>
+								<tr>
+								<td>Director</td>
+								<td><a href="" title="----">----</a></td>
+								</tr>
+								<tr>
+								<td>Studio</td>
+								<td><a href="http://www.javmovie.com/ja/studio/hyakkin-tv-4255.html" title="HyakkinTV">HyakkinTV</a></td>
+								</tr>
+								<tr>
+								<td>Label</td>
+								<td><a href="" title="HyakkinTV">HyakkinTV</a></td>
+								</tr>
+								<tr>
+								<td>Actress</td>
+								<td class="list-actress">
+								<a href="http://www.javmovie.com/ja/actress/nana-ayano-45.html" title="彩乃なな">彩乃なな</a>
+								</td>
+								</tr>
+								<tr>
+								<td>Genre</td>
+								<td class="list-genre">
+								<a href="http://www.javmovie.com/ja/genre/ass-lover-5.html" title="尻フェチ">尻フェチ</a>
+								<a href="http://www.javmovie.com/ja/genre/featured-actress-6.html" title="単体作品">単体作品</a>
+								<a href="http://www.javmovie.com/ja/genre/hi-def-7.html" title="ハイビジョン">ハイビジョン</a>
+								</td>
+								</tr>
+								</tbody>
+								</table>
+								</div>
+								</div>
+								</div>
+						</div>
 			        </div>					
 			</div>
 			
-			<!-- JuicyAds v3.0
-			@if ($device == 'ios' || $device == 'android')
-
-			@else
-			<div id="rs-digg-box2" style="float: left; width: 100%; height: 95px; text-align: center">
-				<script type="text/javascript" data-cfasync="false" async src="https://adserver.juicyads.com/js/jads.js"></script>
-				<ins id="697695" data-width="728" data-height="102"></ins>
-				<script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':697695});</script>
-			</div>
-			@endif
-			JuicyAds END -->
+	
 			<div id="rs-digg-box2">
 				<div class="rs-digg-left"     style="float: left; width: auto; padding: 0px 3px;">
 					<div class="" id='post-digg-{{$post->id}}' data-id='post-digg-{{$post->id}}'><i class=""></i><span> {{$postsDetail->count_view}} views</span></span></div>
 				</div>
 				<div class="rs-digg-right orange5"   style="margin:0;">
-					@if ($status == 1)
+					<!-- @if ($status == 1)
 						<div class="rs-digg like rs-digg-click" id='post-digg-thumbs-up' data-id='{{$post->id}}'><i class="fas fa-thumbs-up fa-w-16"></i><span> {{$postsDetail->count_digg}} </span></span></div>
 						<div class="rs-digg like " id='post-digg-thumbs-down' data-id='{{$post->id}}'><i class="fas fa-thumbs-down"></i><span> {{$postsDetail->count_bury}} </span></div>
 					@elseif ($status == 2)
@@ -199,10 +247,41 @@
 					@else  
 						<div class="rs-digg like" id='post-digg-thumbs-up' data-id='{{$post->id}}'><i class="fas fa-thumbs-up fa-w-16"></i><span> {{$postsDetail->count_digg}} </span></span></div>
 						<div class="rs-digg like" id='post-digg-thumbs-down' data-id='{{$post->id}}'><i class="fas fa-thumbs-down"></i><span> {{$postsDetail->count_bury}} </span></div>
-					@endif
+					@endif -->
+					<a href="#commentList" class="load_modal_login btn btn-download"><i class="fa fa-download"></i>Download</a>
+					<a class="load_modal_login btn btn-bookmark" action="http://www.javmovie.com/favorite/390057"><i class="fa fa-plus"></i> <span>Favorite</span></a>
+					<a class="load_modal_login btn btn-report">Correction</a>
 				</div>
 			</div>
+			<div class="col-md-12 layout-left-big">
+				<div class="row">
+				<div class="col-md-12">
+				<div class="detail-wrapper player-detail">
+				
+				<div class="clearfix"></div>
+				<div class="movie-gallery">
+				<div class="movie-gallery-wrapper">
+				<a class="example-image-link" href="http://media.javmovie.com/post/100tv00404jp-1.jpg" data-lightbox="100TV-404-gallery" data-title="Click the right half of the image to move forward.">
+				<img class="example-image" src="http://media.javmovie.com/post/100tv00404jp-1.jpg" alt="">
+				</a>
+				<a class="example-image-link" href="http://media.javmovie.com/post/100tv00404jp-2.jpg" data-lightbox="100TV-404-gallery" data-title="Click the right half of the image to move forward.">
+				<img class="example-image" src="http://media.javmovie.com/post/100tv00404jp-2.jpg" alt="">
+				</a>
+				<a class="example-image-link" href="http://media.javmovie.com/post/100tv00404jp-3.jpg" data-lightbox="100TV-404-gallery" data-title="Click the right half of the image to move forward.">
+				<img class="example-image" src="http://media.javmovie.com/post/100tv00404jp-3.jpg" alt="">
+				</a>
+				<a class="example-image-link" href="http://media.javmovie.com/post/100tv00404jp-4.jpg" data-lightbox="100TV-404-gallery" data-title="Click the right half of the image to move forward.">
+				<img class="example-image" src="http://media.javmovie.com/post/100tv00404jp-4.jpg" alt="">
+				</a>
+				<a class="example-image-link" href="http://media.javmovie.com/post/100tv00404jp-5.jpg" data-lightbox="100TV-404-gallery" data-title="Click the right half of the image to move forward.">
+				<img class="example-image" src="http://media.javmovie.com/post/100tv00404jp-5.jpg" alt="">
+				</a>
+				</div>
+				</div>
 			
+			
+		
+			</div>
 			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px;">
 				<h2   style="overflow: hidden;overflow: hidden;text-overflow: ellipsis;color:#f90;"><a href="javascript:void(0)"  style="FONT-SIZE: 18PX;">{{$post->title}}</a></h2>
 			</div>
@@ -213,15 +292,7 @@
 					@endforeach
 				@endif
 			</div>
-			<!-- JuicyAds v3.0
-			@if ($device == 'ios' || $device == 'android')
-			<div id="rs-digg-box2" style="float: left; width: 100%; height: 280px; background-color: #cecece; text-align: center">
-					<script type="text/javascript" data-cfasync="false" async src="https://adserver.juicyads.com/js/jads.js"></script>
-					<ins id="697681" data-width="300" data-height="262"></ins>
-					<script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':697681});</script>
-			</div>
-			@endif
-			JuicyAds END-->
+		
 			
 			@if ($device == 'ios' || $device == 'android')
 			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px; height: AUTO;">
@@ -343,8 +414,8 @@
 		
 						</a>
 					</div>
-					@else
-					<div poster=""   data-id='{{$re->id}}' class="adClick video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:70%;   padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
+					@else 
+					<div poster=""   class="adClick video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:70%;   padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
 						<a href="{{$re->web_url}}"  target="_blank">
 							<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
 														vertical-align: middle;
@@ -366,8 +437,7 @@
 														background-image: url('{{ asset('storage/'.$re->bg_img)}}');" 
 													>
 							</div>
-							<!-- <img src="{{ asset('storage'.$re->article['tb_img']) }}" style="width: 300px;"> -->
-							<div style="font-size: 8;    line-height: 16px;letter-spacing: 1px;     word-break: break-all;padding-top: 5px;">{{$re->campaign_name}}</div>
+							<div style="font-size: 8;    line-height: 16px;letter-spacing: 1px;     word-break: break-all;padding-top: 5px;">{{ $re->campaign_name }}</div>
 		
 						</a>
 					</div>
