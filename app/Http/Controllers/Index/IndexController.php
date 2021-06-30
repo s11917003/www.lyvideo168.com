@@ -16,6 +16,8 @@ use App\Model\Footer;
 use App\Model\AdTag;
 use App\Model\Announcement;
 use App\Model\PostsTagRelationships;
+use App\Model\Video;
+use App\Model\Video_actress_name;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 //  use App\Lib\User;
@@ -167,9 +169,25 @@ class IndexController extends Controller {
 			header("Location:/");
 			return ;
 		}
-		
-
-
+		$video = Video::where('id', 1)->first();
+		$video_with_actress = Video::query();
+	
+		if($video['actress']){
+			$actressNameArray = explode(",", $video['actress']);
+			foreach ($actressNameArray as $key => $name) {
+				$video_with_actress->orWhere('actress', 'like', '%'.$name.'%');
+				$Video_actress_name = Video_actress_name::where('sub_name', 'like', '%'.$name.'%')->value('name');
+				if($Video_actress_name) {
+					$actressNameArray[$key] = $Video_actress_name;
+					$video_with_actress->orWhere('actress', 'like', '%'.$Video_actress_name.'%');
+				}
+			}
+			$video_with_actress = $video_with_actress->distinct()->get();
+			$video['actress'] = implode(",", $actressNameArray);
+		}
+		if($video['thumbnail_img']){
+			$video['thumbnail_img'] = explode("@",$video['thumbnail_img']);
+		}
 		//add pv;
 		PostsDetail::find($id)->increment('count_view');
 		$postsDetail = PostsDetail::find($id);
@@ -181,7 +199,6 @@ class IndexController extends Controller {
 		$tagarr = [];
 		foreach ($tags as $tag) {
 			$tagarr[] = $tag['post_tag_id'];
-
 		}
 	
 		//$relate = \DB::table('posts_tag_relationships')->whereIn('post_tag_id', $tagarr)->groupBy('post_id')->inRandomOrder()->limit(6)->get();
@@ -236,6 +253,8 @@ class IndexController extends Controller {
 				'postsDetail' => $postsDetail,
 				'status' => $status,
 				'marquee' => $marqueeArr,
+				'video' => $video,
+				'video_with_actress' => $video_with_actress,
 			]);
 		} else {
 			//沒有文章跳轉

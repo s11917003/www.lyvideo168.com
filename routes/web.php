@@ -38,8 +38,6 @@ Route::get('/{id?}', 'Index\IndexController@index')->where('id', '[0-9]+');//走
 
 // Route::group(['middleware' => 'web'], function () {
    	Route::auth();
-
-
 	Route::get('login', 'Auth\LoginController@index')->name('login');
 	Route::post('loginPost', 'Auth\LoginController@loggedIn');
 	Route::get('homeIndex','Auth\LoginController@home')->middleware('auth');

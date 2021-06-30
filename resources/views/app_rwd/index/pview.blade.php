@@ -62,11 +62,12 @@
 						@else
 						<div class="col-xs-12 col-sm-8 col-md-8 mdm-big" >
 						@endif
-						<video id="av-video" data-setup="{}" width="600" height="264" class="video-js vjs-default-skin vjs-fluid vjs-show-big-play-button-on-pause vjs-fill vjs-16-9 vjs-big-play-centered" poster="{{asset('storage'.$post->cover_img)}}" controls>
+						<video id="av-video" data-setup="{}" width="600" height="264" class="video-js vjs-default-skin vjs-fluid vjs-show-big-play-button-on-pause vjs-fill vjs-16-9 vjs-big-play-centered" poster="{{$video->cover_img}}" controls>
 						<source 
-						src="/getvideo/{{$post->id}}"
-						type="application/x-mpegURL">
+						src="{{$video->video_url}}"
+						type="video/mp4">
 						</video>
+						<!-- /video id="samplevideo_html5_api" class="vjs-tech" preload="auto" tabindex="-1" autoplay="" src="https://awscc3001.r18.com/litevideo/freepv/d/dva/dvaj518/dvaj518_dmb_w.mp4"><source src="https://awscc3001.r18.com/litevideo/freepv/d/dva/dvaj518/dvaj518_sm_w.mp4" type="video/mp4" res="240" label="300 Kbps"><source src="https://awscc3001.r18.com/litevideo/freepv/d/dva/dvaj518/dvaj518_dm_w.mp4" type="video/mp4" res="480" label="1000 Kbps"><source src="https://awscc3001.r18.com/litevideo/freepv/d/dva/dvaj518/dvaj518_dmb_w.mp4" type="video/mp4" res="720" label="1500 Kbps"><p class="vjs-no-js">Your browser does not support the video tag.</p></video> -->
 						<script>
 							// var player = videojs('my-player',{
 							// 	html5: {
@@ -157,11 +158,10 @@
 				return percent >= 1 ? 1 : percent
 			}
 			SeekBar.prototype.handleMouseMove = function QQQQ(event) {
-				console.log( 'ready to play1111111' );
 				let newTime = this.calculateDistance(event) * this.player_.duration()
-    if (newTime === this.player_.duration()) {
-        newTime = newTime - 0.1
-    }
+			if (newTime === this.player_.duration()) {
+				newTime = newTime - 0.1
+    		}
     this.player_.currentTime(newTime);
     this.update();
     let currentTime = player.currentTime();
@@ -181,17 +181,17 @@
 						<div class="col-xs-12 col-sm-4 col-md-4 mdm-small">
 							<div class="mdm-small">
 								<div class="mdm-info">
-								<h1 class="m-title">100TV-404 </h1>
+								<h4 class="m-title">{{ $video->title }}</h4>
 								<div class="table-responsive">
 								<table class="table">
 								<tbody>
 								<tr>
 								<td>DVD ID</td>
-								<td>100TV-404</td>
+								<td>{{ $video->dvd_id }}</td>
 								</tr>
 								<tr>
 								<td>Release Date</td>
-								<td>2021-06-28</td>
+								<td>{{ $video->release_date }}</td>
 								</tr>
 								<tr>
 								<td>Runtime</td>
@@ -199,7 +199,7 @@
 								</tr>
 								<tr>
 								<td>Director</td>
-								<td><a href="" title="----">----</a></td>
+								<td><a href="" title="----">{{ $video->director }}</a></td>
 								</tr>
 								<tr>
 								<td>Studio</td>
@@ -207,12 +207,12 @@
 								</tr>
 								<tr>
 								<td>Label</td>
-								<td><a href="" title="HyakkinTV">HyakkinTV</a></td>
+								<td><a href="" title="HyakkinTV">{{ $video->label }}</a></td>
 								</tr>
 								<tr>
 								<td>Actress</td>
 								<td class="list-actress">
-								<a href="http://www.javmovie.com/ja/actress/nana-ayano-45.html" title="彩乃なな">彩乃なな</a>
+								<a href="http://www.javmovie.com/ja/actress/nana-ayano-45.html" title="彩乃なな">{{ $video->actress }}</a>
 								</td>
 								</tr>
 								<tr>
@@ -253,50 +253,48 @@
 					<a class="load_modal_login btn btn-report">Correction</a>
 				</div>
 			</div>
+			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px;">
+				<h5   style="overflow: hidden;overflow: hidden;text-overflow: ellipsis;color:#f90;">
+					@if ($video->description)		
+					{{$video->description}}
+					@else
+					{{$video->title}}
+					@endif
+				</h5>
+			</div>
 			<div class="col-md-12 layout-left-big">
 				<div class="row">
+				@if ($video->thumbnail_img)	
 				<div class="col-md-12">
-				<div class="detail-wrapper player-detail">
-				
-				<div class="clearfix"></div>
-				<div class="movie-gallery">
-				<div class="movie-gallery-wrapper">
-				<a class="example-image-link" href="http://media.javmovie.com/post/100tv00404jp-1.jpg" data-lightbox="100TV-404-gallery" data-title="Click the right half of the image to move forward.">
-				<img class="example-image" src="http://media.javmovie.com/post/100tv00404jp-1.jpg" alt="">
-				</a>
-				<a class="example-image-link" href="http://media.javmovie.com/post/100tv00404jp-2.jpg" data-lightbox="100TV-404-gallery" data-title="Click the right half of the image to move forward.">
-				<img class="example-image" src="http://media.javmovie.com/post/100tv00404jp-2.jpg" alt="">
-				</a>
-				<a class="example-image-link" href="http://media.javmovie.com/post/100tv00404jp-3.jpg" data-lightbox="100TV-404-gallery" data-title="Click the right half of the image to move forward.">
-				<img class="example-image" src="http://media.javmovie.com/post/100tv00404jp-3.jpg" alt="">
-				</a>
-				<a class="example-image-link" href="http://media.javmovie.com/post/100tv00404jp-4.jpg" data-lightbox="100TV-404-gallery" data-title="Click the right half of the image to move forward.">
-				<img class="example-image" src="http://media.javmovie.com/post/100tv00404jp-4.jpg" alt="">
-				</a>
-				<a class="example-image-link" href="http://media.javmovie.com/post/100tv00404jp-5.jpg" data-lightbox="100TV-404-gallery" data-title="Click the right half of the image to move forward.">
-				<img class="example-image" src="http://media.javmovie.com/post/100tv00404jp-5.jpg" alt="">
-				</a>
+					<div class="detail-wrapper player-detail">
+						<div class="clearfix"></div>
+						<div class="movie-gallery">
+							<div class="movie-gallery-wrapper">
+								@foreach ($video->thumbnail_img as $thumbnail_img)
+								<a class="example-image-link" href="{{ $thumbnail_img }}" data-lightbox="100TV-404-gallery" data-title="Click the right half of the image to move forward.">
+									<img class="example-image" src="{{ $thumbnail_img }}" alt="">
+								</a>
+								@endforeach			
+								
+							</div>
+						</div>
+					</div>
 				</div>
+				@endif
 				</div>
-			
-			
-		
 			</div>
-			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px;">
-				<h2   style="overflow: hidden;overflow: hidden;text-overflow: ellipsis;color:#f90;"><a href="javascript:void(0)"  style="FONT-SIZE: 18PX;">{{$post->title}}</a></h2>
-			</div>
-			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px;">
+			<!-- <div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px;">
 				@if ($post->tag)
 					@foreach ($post->tag as $tag)
 					<p><a href="/tag/{{$tag->tagname->id}}" target="_blank" class="rs-digg-box2-tag">{{$tag->tagname->name}}</a></p>
 					@endforeach
 				@endif
-			</div>
+			</div> -->
 		
 			
 			@if ($device == 'ios' || $device == 'android')
 			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px; height: AUTO;">
-				<h5 class="recommend">推荐影片</h5>
+				<h5 class="recommend">You may also like</h5>
 				<!--
 				@php
 				$i = 0
@@ -383,12 +381,12 @@
 			</div>
 			@else
 			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px; height: auto;">
-				<h5 class="recommend">推荐影片</h5>
-				@foreach ($relate as $re)
+				<h5 class="recommend" >You may also like</h5>
+				@foreach ($video_with_actress as $video_actress)
 				<div style="float: left;padding: 10px; width: 230px; height: 230px; margin: 5px; overflow: hidden">
-					@if (is_Null($re->isAd))
-					<div poster="" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:70%;    padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
-						<a href="/p/{{$re->post_id}}">
+					<div poster=""   class="adClick video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	
+					style="height:70%;   padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
+						<a href="http://google.com"  target="_blank">
 							<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
 														vertical-align: middle;
 														background-repeat: no-repeat;
@@ -406,42 +404,12 @@
 														 WIDTH: 100%;
 														MARGIN: 0PX 5PX 0 5PX;
 														BACKGROUND-COLOR: #000;
-														background-image: url('{{ asset('storage'.$re->article['tb_img'])}}');" 
+														background-image: url('{{ $video_actress->cover_img }}');" 
 													>
 							</div>
-							<!-- <img src="{{ asset('storage'.$re->article['tb_img']) }}" style="width: 300px;"> -->
-							<div style="font-size: 8;    line-height: 16px;letter-spacing: 1px;     word-break: break-all;padding-top: 5px;">{{$re->article['title']}}</div>
-		
+							<div style="font-size: 8;    line-height: 16px;letter-spacing: 1px;     word-break: break-all;padding-top: 5px;">{{$video_actress->title  }}</div>
 						</a>
 					</div>
-					@else 
-					<div poster=""   class="adClick video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:70%;   padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
-						<a href="{{$re->web_url}}"  target="_blank">
-							<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
-														vertical-align: middle;
-														background-repeat: no-repeat;
-														background-position: 50% 50%;
-														background-size: contain;
-														cursor: pointer;
-														margin: 0;
-														padding: 0;
-														position: relative;
-														top: 0PX;
-														right: 0;
-														bottom: 0;
-														left: 0;
-														height: 100%;  
-														 WIDTH: 100%;
-														MARGIN: 0PX 5PX 0 5PX;
-														BACKGROUND-COLOR: #000;
-														background-image: url('{{ asset('storage/'.$re->bg_img)}}');" 
-													>
-							</div>
-							<div style="font-size: 8;    line-height: 16px;letter-spacing: 1px;     word-break: break-all;padding-top: 5px;">{{ $re->campaign_name }}</div>
-		
-						</a>
-					</div>
-				 	@endif
 				</div>
 				@endforeach
 				<div style="clear: both"></div>
@@ -535,6 +503,12 @@
 			}
 		});	
 	})
+	window.onload = function() {
+
+		console.log('window.onload')
+
+		console.log('{{ $video->actress }}')
+	};
 </script>
 <script src='/js/comm.js?r=@php echo uniqid(); @endphp' async=""></script>
 @stop
