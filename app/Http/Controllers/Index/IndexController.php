@@ -3,7 +3,9 @@ namespace App\Http\Controllers\Index;
 use App\Http\Controllers\Controller;
 use Illuminate\Pagination;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use App\Model\PostsArticle;
 use App\Model\PostsCategory;
 use App\Model\PostsDetail;
@@ -18,6 +20,8 @@ use App\Model\Announcement;
 use App\Model\PostsTagRelationships;
 use App\Model\Video;
 use App\Model\Video_actress_name;
+use App\Model\Video_tag_relations;
+use App\Model\Video_tag;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 //  use App\Lib\User;
@@ -169,10 +173,19 @@ class IndexController extends Controller {
 			header("Location:/");
 			return ;
 		}
-		$video = Video::where('id', 1)->first();
+
+		$viedo_id = 8;
+		$video = Video::where('id', $viedo_id)->first();
 		$video_with_actress = Video::query();
-	
+		$video_tag =  Video_tag_relations::where('video_id',8)->with('tagName')->get();
+		 
 		if($video['actress']){
+		// 	$url =  'https://www.caribbeancom.com/moviepages/070221-001/images/s/001.jpg';
+		// 	$contents = file_get_contents($url);
+		// //	var_dump($contents);
+		// 	$name = 'test';//從url取得檔名
+			
+			// var_dump(file_put_contents('test1.jpg', $contents));
 			$actressNameArray = explode(",", $video['actress']);
 			foreach ($actressNameArray as $key => $name) {
 				$video_with_actress->orWhere('actress', 'like', '%'.$name.'%');
@@ -186,7 +199,51 @@ class IndexController extends Controller {
 			$video['actress'] = implode(",", $actressNameArray);
 		}
 		if($video['thumbnail_img']){
+
 			$video['thumbnail_img'] = explode("@",$video['thumbnail_img']);
+			$path = 'lothumbnail_img/'.$video['id'].'/';
+		
+			$video['thumbnail_img_router'] = $video['thumbnail_img'];
+			if(!is_dir($path)){
+				$flag = mkdir($path,0777,true);
+			}
+			$img_path = [];
+			foreach ($video['thumbnail_img']  as $key => $url) {
+				//判斷是否存在 不存在則寫入
+				$filename = $video['video_id'].'_'.($key+1).'.jpg';
+				$isExists = File::exists(public_path($path.$filename));	
+				$img_path[] = $path.$filename;
+				if($isExists){
+					continue;
+				} else {
+					$contents = file_get_contents($url);
+					file_put_contents($path.$filename,	$contents);   
+				}
+			
+			}
+
+			$video['thumbnail_img_router'] = 	$img_path;
+			
+			// $image = new \Imagick( $img );
+			// $imageprops = $image->getImageGeometry();
+			// if ($imageprops['width'] <= 200 && $imageprops['height'] <= 200) {
+			// 	// don't upscale
+			// } else {
+			// 	$image->resizeImage(200,200, \imagick::FILTER_LANCZOS, 0.9, true);
+			// }
+			
+			// file_put_contents($img, $image);
+			// $disk = \Storage::disk('gcs');
+			// $disk->putFileAs($data->folder, new File($img), $urlexplo[6].'-tb' . '.jpeg' , 'public');
+			// unlink($img);
+			
+			// //更新db
+			// $p = PostsArticle::find($data->id);
+			// $p->tb_img = 'https://source.gporn.cc'. $data->folder . '/' . $urlexplo[6].'-tb' . '.jpeg';
+			// $p->save();
+
+
+
 		}
 		//add pv;
 		PostsDetail::find($id)->increment('count_view');
@@ -255,6 +312,7 @@ class IndexController extends Controller {
 				'marquee' => $marqueeArr,
 				'video' => $video,
 				'video_with_actress' => $video_with_actress,
+				'video_tag' => $video_tag,
 			]);
 		} else {
 			//沒有文章跳轉

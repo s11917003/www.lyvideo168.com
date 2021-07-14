@@ -69,6 +69,8 @@ Route::get('/getvideo/{id}', 'Index\GetVideoController@index');
 // //getvideo
 Route::get('/clickAd/{id}', 'Index\IndexController@clickAd')->where('id', '[0-9]+');
 Route::get('/videoinfo', 'Index\IndexController@videoinfo');
+
+Route::get('/csv', 'Api\CsvController@geCsv');
 //交換連結
 // Route::get('/linkex', 'Service\PageController@linkexchange');
 

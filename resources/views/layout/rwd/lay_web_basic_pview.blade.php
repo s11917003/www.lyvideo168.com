@@ -123,7 +123,7 @@ import videojsPreviewThumbnails from 'https://cdn.skypack.dev/videojs-preview-th
 		
 	</div>
 	@endif
-
+	@yield('Carousel')
 	 
 	<!-- Footer 開始 -->
 	@include('layout.rwd.lay_web_footer')

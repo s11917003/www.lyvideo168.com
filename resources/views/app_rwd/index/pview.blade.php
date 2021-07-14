@@ -20,7 +20,9 @@
 	<div id="">  
 	
 		<div id="rs-content-left-box" class="rs-content-left-box1">
-	
+			<h2 class="title is-4">
+				<strong>{{ $video->title }}</strong>
+			  </h2>
 			<!-- @if(!is_Null($marquee))
 			<marquee>
 			@foreach ($marquee as $quee )
@@ -56,7 +58,7 @@
 			<!-- <div class="rs-contentpics" style="background: url({{$post->userInfo->avatar}}) no-repeat top center; background-size:50px"><a href="/p/{{$post->id}}"></a></div>
 			<div class="rs-contentname">{{$post->userInfo->nick_name}}<br>{{ Carbon\Carbon::parse($post->created_time)->format('m-d H:i:s') }}</div> -->
 			<div class="row">
-					<div class="container-fluid" style="DISPLAY: inline-flex;">
+					<div class="container-fluid" style="DISPLAY: contents;">
 						@if ($device == 'ios' || $device == 'android')
 						<div class="col-xs-12 col-sm-8 col-md-8 mdm-big" >
 						@else
@@ -181,7 +183,7 @@
 						<div class="col-xs-12 col-sm-4 col-md-4 mdm-small">
 							<div class="mdm-small">
 								<div class="mdm-info">
-								<h4 class="m-title">{{ $video->title }}</h4>
+								<!-- <h4 class="m-title">{{ $video->title }}</h4> -->
 								<div class="table-responsive">
 								<table class="table">
 								<tbody>
@@ -207,7 +209,14 @@
 								</tr>
 								<tr>
 								<td>Label</td>
-								<td><a href="" title="HyakkinTV">{{ $video->label }}</a></td>
+								<td>
+									<!-- <a href="" title="HyakkinTV">{{ $video->label }}</a> -->
+									@if ($video_tag)
+										@foreach ($video_tag as $tag )
+										<a class="rs-digg-box2-tag pr-2 pl-2 ml-1" >{{$tag->tagName['zh'] }} </a>
+										@endforeach	
+									@endif
+								</td>
 								</tr>
 								<tr>
 								<td>Actress</td>
@@ -223,6 +232,7 @@
 								<a href="http://www.javmovie.com/ja/genre/hi-def-7.html" title="ハイビジョン">ハイビジョン</a>
 								</td>
 								</tr>
+								
 								</tbody>
 								</table>
 								</div>
@@ -264,15 +274,17 @@
 			</div>
 			<div class="col-md-12 layout-left-big">
 				<div class="row">
-				@if ($video->thumbnail_img)	
+				 
+				 
+				@if ($video->thumbnail_img_router)	
 				<div class="col-md-12">
 					<div class="detail-wrapper player-detail">
 						<div class="clearfix"></div>
 						<div class="movie-gallery">
 							<div class="movie-gallery-wrapper">
-								@foreach ($video->thumbnail_img as $thumbnail_img)
-								<a class="example-image-link" href="{{ $thumbnail_img }}" data-lightbox="100TV-404-gallery" data-title="Click the right half of the image to move forward.">
-									<img class="example-image" src="{{ $thumbnail_img }}" alt="">
+								@foreach ($video->thumbnail_img_router as $thumbnail_img)
+								<a class="example-image-link" href="{{ url($thumbnail_img) }}" data-lightbox="100TV-404-gallery" data-title="Click the right half of the image to move forward.">
+									<img class="example-image" src="{{  asset($thumbnail_img)}}" alt="">
 								</a>
 								@endforeach			
 								
@@ -301,11 +313,10 @@
 				@endphp
 				-->
 				
-				@foreach ($relate as $re)
+				@foreach ($video_with_actress as $video_actress)
 				<div style="padding: 10px; width: 70%; height: 200px; margin: 5px;  overflow: hidden; text-align: center;margin: 0px auto;">
-					@if (is_Null($re->isAd))
-					<div poster="" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:70%;    padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
-						<a href="/p/{{$re->post_id}}">
+					<div poster="" data-id='{{$video_actress->id}}' class="adClick video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:70%;    padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
+						<a href="http://google1.com"  target="_blank">
 							<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
 														vertical-align: middle;
 														background-repeat: no-repeat;
@@ -323,59 +334,15 @@
 														 WIDTH: 100%;
 														MARGIN: 0PX 5PX 0 5PX;
 														BACKGROUND-COLOR: #000;
-														background-image: url('{{ asset('storage'.$re->article['tb_img'])}}');" 
-													>
-							</div>
-							<div style="font-size: 8;padding-top: 5px;">{{$re->article['title']}}</div>
-		
-						</a>
-					</div>
-					@else
-					<div poster="" data-id='{{$re->id}}' class="adClick video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:70%;    padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
-						<a href="{{$re->web_url}}"  target="_blank">
-							<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
-														vertical-align: middle;
-														background-repeat: no-repeat;
-														background-position: 50% 50%;
-														background-size: contain;
-														cursor: pointer;
-														margin: 0;
-														padding: 0;
-														position: relative;
-														top: 0PX;
-														right: 0;
-														bottom: 0;
-														left: 0;
-														height: 100%;  
-														 WIDTH: 100%;
-														MARGIN: 0PX 5PX 0 5PX;
-														BACKGROUND-COLOR: #000;
-														background-image: url('{{ asset('storage/'.$re->bg_img)}}');" 
+														background-image: url('{{ $video_actress->cover_img }}');" 
 													>
 													
 							</div>
-							<div style="font-size: 8;     line-height: 16px;letter-spacing: 1px;      word-break: break-all;padding-top: 5px;">{{$re->campaign_name}}</div>
+							<div style="font-size: 8;     line-height: 16px;letter-spacing: 1px;      word-break: break-all;padding-top: 5px;">{{$video_actress->title  }}</div>
 		
 						</a>
 					</div>
-					@endif
 				</div>
-				
-				<!-- JuicyAds v3.0
-				@if ($i % 3 == 1)
-				<div style="float: left;padding: 10px; width: 100%; height: 100px; margin: 5px; background: #f1f1f1; overflow: hidden; text-align: center">
-					<script type="text/javascript" data-cfasync="false" async src="https://adserver.juicyads.com/js/jads.js"></script>
-					<ins id="697690" data-width="300" data-height="112"></ins>
-					<script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':697690});</script>					
-				</div>	
-				@endif
-				JuicyAds END -->
-				
-				<!--
-				@php
-					$i++
-				@endphp
-				-->
 				@endforeach			
  				<div style="clear: both"></div>
 			</div>
@@ -386,7 +353,7 @@
 				<div style="float: left;padding: 10px; width: 230px; height: 230px; margin: 5px; overflow: hidden">
 					<div poster=""   class="adClick video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	
 					style="height:70%;   padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
-						<a href="http://google.com"  target="_blank">
+						<a href="/zh/XXXXXXXXXXXXXXXXXXXXXXXX/{{$video->video_id}}-{{ $video->actress}}"  target="_blank">
 							<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
 														vertical-align: middle;
 														background-repeat: no-repeat;
@@ -417,12 +384,51 @@
 			@endif					
 		</div>		
 	</div>
+
 	<!-- Content 左側 結束 -->
 	<!-- Content 右側 開始 -->
 	<!-- RightSideBox -->
 	<!-- Content 右側 結束 -->	
-@stop
+@stop	
+@section('Carousel2')
+<div id="myCarousel" class="carousel slide" style="    position: fixed;top:0;left:0;width:100%;height:100%" data-ride="carousel">
+		<!-- Indicators -->
+		<ol class="carousel-indicators">
+		  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		  <li data-target="#myCarousel" data-slide-to="1"></li>
+		  <li data-target="#myCarousel" data-slide-to="2"></li>
+		</ol>
+	
+		<!-- Wrapper for slides -->
+		<div class=" position-absolute carousel-inner">
+		  <div class="item active">
+			<img src="https://www.caribbeancom.com/moviepages/070221-001/images/l/002.jpg" alt="Los Angeles" style="width:100%;">
+		  </div>
+	
+		  <div class="item">
+			<img src="https://www.caribbeancom.com/moviepages/070221-001/images/l/002.jpg" alt="Chicago" style="width:100%;">
+		  </div>
+		
+		  <div class="item">
+			<img src="https://www.caribbeancom.com/moviepages/070221-001/images/l/002.jpg" alt="New york" style="width:100%;">
+		  </div>
+		</div>
+	
+		<!-- Left and right controls -->
+		<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+		  <span class="glyphicon glyphicon-chevron-left"></span>
+		  <span class="sr-only">Previous</span>
+		</a>
+		<a class="right carousel-control" href="#myCarousel" data-slide="next">
+		  <span class="glyphicon glyphicon-chevron-right"></span>
+		  <span class="sr-only">Next</span>
+		</a>
+	  </div>
+	  @stop	
 @section('footscript')
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer>
   {lang: 'zh-TW'}
 </script>
