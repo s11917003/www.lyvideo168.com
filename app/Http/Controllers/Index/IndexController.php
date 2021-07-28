@@ -28,9 +28,11 @@ use Illuminate\Support\Facades\Redirect;
 use App\Lib\Utils;
 use Cookie;
 use Carbon\Carbon;
+use Intervention\Image\Facades\Image;
 class IndexController extends Controller {	
 	
-	public function index($page = 1) {
+	protected $language = ['zh'=>1 ,'en'=>2 ,'jp'=>3];
+ 	public function index($page = 1) {
 
        	// $value = @$_COOKIE['appdl'];
 	   	// if($value == true) {
@@ -166,7 +168,200 @@ class IndexController extends Controller {
 			'posts' => $posts
 		]);
 	}
+
 	
+	
+	public function image(Request $image, $img) {
+	//	$img = '070221-001#羽海野まお#1.jpg';
+	
+		$video_id = explode("$",$img)[0];
+	
+		$path = 'thumbnail_img/'.$video_id .'/';
+		$image = $path.$img.'.jpg';
+        abort_if(
+            ! \Storage::disk('public')->exists($image),
+            404,
+            "The file doesn't exist. Check the path."
+        );
+		return response()->file(\Storage::disk('public')->path($image));
+		// $contents =  \Storage::disk('public')->path($image);
+		// return 	$contents ;
+		//  return Image::make(storage_path('/app/public/' .$image))->response();
+
+	}
+	public function postview1(Request $request, $lang, $id) {
+	
+		$video_id = explode("$",$id)[0];
+	
+	//	return response()->json(['video' => isset($this->language[$lang])]);
+	 
+		if(!isset($this->language[$lang])) {
+			//abort(404);
+			header("Location:/");
+			return ;
+		}
+	
+		$webLangIndex = $this->language[$lang];
+
+ 
+		$video = Video::where(['video_id'=>$video_id,'video_lang'=>$webLangIndex])->first();
+
+	 
+		if(!$video) {
+			header("Location:/");
+			return ;
+		}
+		$video_tag =  Video_tag_relations::where('video_id',$video_id)->with('tagName')->get();
+	
+		$video_with_actress = [];
+		if($video['actress']){ 
+			$actressNameArray = explode("@", $video['actress']);
+			
+			$queryAcrtressName = [];
+			foreach ($actressNameArray as $key => $name) {
+				$queryAcrtressName[] = $name;
+				
+				$Video_actress_name = Video_actress_name::where('sub_name', 'like', '%'.$name.'%')->value('name');//找女優 對應表
+				if($Video_actress_name) {
+
+					$queryAcrtressName[] = $$Video_actress_name;
+					$actressNameArray[$key] = $Video_actress_name;//改成常用的名字
+					
+				}
+			}
+			var_dump(count($queryAcrtressName));
+			return;
+			
+			if(count($queryAcrtressName)==0){ //沒有女優
+				$video_with_actress = [];
+				$video['actress'] ='';
+			} else {
+				$video_with_actress = Video::query();
+				$video_with_actress->where(function($query) use($queryAcrtressName){
+					foreach($queryAcrtressName as $name){
+						$query->orWhere('actress', 'LIKE', '%'.$name.'%');
+					}
+					});
+				
+				$video_with_actress->where('video_id','!=',$video_id);
+				$video_with_actress = $video_with_actress->distinct()->get();
+				$video['actress'] = implode("&", $actressNameArray);
+			}
+		
+		}
+		if($video['thumbnail_img']){
+			$video['thumbnail_img'] = explode("@",$video['thumbnail_img']);
+			$path = 'thumbnail_img/'.$video['video_id'].'/';
+			$video['thumbnail_img_router'] = $video['thumbnail_img'];
+			if(!is_dir($path)){
+				$flag = mkdir($path,0777,true);
+			}
+			$img_path = [];
+			foreach ($video['thumbnail_img']  as $key => $url) {
+				//判斷是否存在 不存在則寫入
+				$filename = $video['video_id'].'$'.$video['actress'].'$'.($key+1).'.jpg';
+				$isExists = \Storage::disk('public')->exists($path.$filename);	
+				$img_path[] = $filename;
+				if($isExists){
+					continue;
+				} else {
+					$contents = file_get_contents($url);
+					\Storage::disk('public')->put($path.$filename,$contents);
+					//file_put_contents('../storage/'.$path.$filename,	$contents);   
+				}
+			}
+			$video['thumbnail_img_router'] = 	$img_path;
+		}
+		//add pv;
+		// PostsDetail::find($id)->increment('count_view');
+		// $postsDetail = PostsDetail::find($id);
+	 
+		//suggest post
+		// $tags = PostsTagRelationships::where('post_id', $id)->get();
+		$footer =footer::all();;	
+		//var_dump($tags);
+		$tagarr = [];
+		// foreach ($tags as $tag) {
+		// 	$tagarr[] = $tag['post_tag_id'];
+		// }
+	
+		//$relate = \DB::table('posts_tag_relationships')->whereIn('post_tag_id', $tagarr)->groupBy('post_id')->inRandomOrder()->limit(6)->get();
+		// $relate = PostsTagRelationships::with('article')->where('post_id','!=', $id)->whereIn('post_tag_id', $tagarr)->where('status',1)->groupBy('post_id')->inRandomOrder()->limit(10)->get();	 		
+		
+		// $adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(2)->get();
+		// $adHalf = AdDetailBanner::inRandomOrder()->where('type', 'half')->where('status',1)->limit(1)->get();
+		// $marquee =Announcement::inRandomOrder()->where('status',2)->first();
+	
+		// $marqueeArr = [];
+		// if($marquee){
+		// 	$marqueeArr = explode(':', $marquee->text);
+		// }
+		// $status = 0;
+		// $adlog = [];
+		// if (Auth::check()) {
+		// 	$user  = Auth::User();
+		// 	if ($user) {
+		// 		$postsDigg = PostsDigg::where('user_id',$user->user_id)->where('post_id',$id)->first();
+		// 		$status = $postsDigg['status'];
+		// 	}
+		// }
+		// $now = date('Y-m-d H:i:s');
+		// if(count($relate) >0){
+		// 	foreach ($adDetail as $ad) {
+		// 		$log =  ['ad_id' => $ad->id ,'actiontype' =>0,'updated_at'=>$now] ;
+		// 		$adlog[]  = $log;;
+		// 		$ad->isAd  = true;
+		// 		$this->array_insert($relate,rand(0,count($relate)-1),$ad);
+		// 	}
+		// }
+
+		// foreach ($adDetail as $ad) {
+		// 	$log =  ['ad_id' => $ad->id ,'actiontype' =>0,'updated_at'=>$now] ;
+		// 	$adlog[]  = $log;;
+		// 	$ad->isAd  = true;
+		// }
+		
+		// if(count($adlog) >0){
+		// 	DB::table('ad_detail_banner_log')->insert($adlog);
+		// }
+
+
+	
+		// 英	<title>{影片ID} | {女優英文名}：Watch Free Video【JavDic  censored, uncensored and amateur japanese porn】</title>
+		// 中	<title>{日文影片名稱} | {女優日文名}：線上免費試看【JavDic  有碼・無碼・素人 - 日本A片資料庫】</title>
+		// 日	<title>{日文影片名稱} | {女優日文名}：無料エロ動画【JavDic  修正あり・無修正・素人 - エロ動画まとめ】</title>
+		
+		$tagName = [];
+		foreach ($video_tag as $tag ) {
+			$tagName[] = $tag->tagName['zh'];
+		}
+							 
+					
+		$title  = $video['video_id'].'|'.$video['actress'].'無料エロ動画【JavDic  '. implode(",", $tagName).'】';
+		$url = $video['video_id'].'|'.$video['actress'];
+		if($video) {
+			$device = Utils::chkdevice();
+			return view('app_rwd.index.pview',[
+				// 'ad'=>$adDetail,
+				'footer'=>$footer,
+				//'adHalf'=>$adHalf, 
+				//'post'=>$article,
+				'device' => $device,
+				//'relate' => $relate,
+				//'postsDetail' => $postsDetail,
+				//'status' => $status,
+				//'marquee' => $marqueeArr,
+				'video' => $video, 							//主影片
+				'video_with_actress' => $video_with_actress,//相關女優
+				'video_tag' => $video_tag,					//標籤
+				'title' =>  $title  						//影片title
+			]);
+		} else {
+			//沒有文章跳轉
+			echo '沒有文章';
+		}
+
+	}
 	public function postview(Request $request, $id) {
 		$article = $this->show_api($id);
 		if(!$article) {
@@ -177,7 +372,7 @@ class IndexController extends Controller {
 		$viedo_id = 8;
 		$video = Video::where('id', $viedo_id)->first();
 		$video_with_actress = Video::query();
-		$video_tag =  Video_tag_relations::where('video_id',8)->with('tagName')->get();
+		$video_tag =  Video_tag_relations::where('video_id',$viedo_id)->with('tagName')->get();
 		 
 		if($video['actress']){
 		// 	$url =  'https://www.caribbeancom.com/moviepages/070221-001/images/s/001.jpg';
@@ -196,12 +391,12 @@ class IndexController extends Controller {
 				}
 			}
 			$video_with_actress = $video_with_actress->distinct()->get();
-			$video['actress'] = implode(",", $actressNameArray);
+			$video['actress'] = implode("&", $actressNameArray);
 		}
 		if($video['thumbnail_img']){
 
 			$video['thumbnail_img'] = explode("@",$video['thumbnail_img']);
-			$path = 'lothumbnail_img/'.$video['id'].'/';
+			$path = 'thumbnail_img/'.$video['video_id'].'/';
 		
 			$video['thumbnail_img_router'] = $video['thumbnail_img'];
 			if(!is_dir($path)){
@@ -210,18 +405,18 @@ class IndexController extends Controller {
 			$img_path = [];
 			foreach ($video['thumbnail_img']  as $key => $url) {
 				//判斷是否存在 不存在則寫入
-				$filename = $video['video_id'].'_'.($key+1).'.jpg';
-				$isExists = File::exists(public_path($path.$filename));	
-				$img_path[] = $path.$filename;
+				$filename = $video['video_id'].'$'.$video['actress'].'$'.($key+1).'.jpg';
+				$isExists = \Storage::disk('public')->exists($path.$filename);	
+				$img_path[] = $filename;
 				if($isExists){
 					continue;
 				} else {
 					$contents = file_get_contents($url);
-					file_put_contents($path.$filename,	$contents);   
+					\Storage::disk('public')->put($path.$filename,$contents);
+					//file_put_contents('../storage/'.$path.$filename,	$contents);   
 				}
 			
 			}
-
 			$video['thumbnail_img_router'] = 	$img_path;
 			
 			// $image = new \Imagick( $img );
@@ -297,7 +492,21 @@ class IndexController extends Controller {
 		if(count($adlog) >0){
 			DB::table('ad_detail_banner_log')->insert($adlog);
 		}
-	 
+
+
+	
+		// 英	<title>{影片ID} | {女優英文名}：Watch Free Video【JavDic  censored, uncensored and amateur japanese porn】</title>
+		// 中	<title>{日文影片名稱} | {女優日文名}：線上免費試看【JavDic  有碼・無碼・素人 - 日本A片資料庫】</title>
+		// 日	<title>{日文影片名稱} | {女優日文名}：無料エロ動画【JavDic  修正あり・無修正・素人 - エロ動画まとめ】</title>
+		
+		$tagName = [];
+		foreach ($video_tag as $tag ) {
+			$tagName[] = $tag->tagName['zh'];
+		}
+							 
+					
+		$title  = $video['video_id'].'|'.$video['actress'].'無料エロ動画【JavDic  '. implode(",", $tagName).'】';
+		$url = $video['video_id'].'|'.$video['actress'];
 		if($article) {
 			$device = Utils::chkdevice();
 			return view('app_rwd.index.pview',[
@@ -310,9 +519,10 @@ class IndexController extends Controller {
 				'postsDetail' => $postsDetail,
 				'status' => $status,
 				'marquee' => $marqueeArr,
-				'video' => $video,
-				'video_with_actress' => $video_with_actress,
-				'video_tag' => $video_tag,
+				'video' => $video, 							//主影片
+				'video_with_actress' => $video_with_actress,//相關女優
+				'video_tag' => $video_tag,					//標籤
+				'title' =>  $title  						//影片title
 			]);
 		} else {
 			//沒有文章跳轉

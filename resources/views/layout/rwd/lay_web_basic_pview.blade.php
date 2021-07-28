@@ -36,7 +36,7 @@ import videojsPreviewThumbnails from 'https://cdn.skypack.dev/videojs-preview-th
 <script type="text/javascript" src="/js/jquery.lazyload.js"></script>
 <script type="text/javascript" src="/js/jquery.visible.js"></script>
 <script src="/js/popper.min.js"></script>
-<script<script src="/js/bootstrap-4.0.0.js"></script>
+<script src="/js/bootstrap-4.0.0.js"></script>
 <script>
 	$(function(){
 		$.ajaxSetup({

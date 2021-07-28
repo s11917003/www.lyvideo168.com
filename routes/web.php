@@ -43,7 +43,10 @@ Route::get('/{id?}', 'Index\IndexController@index')->where('id', '[0-9]+');//走
 	Route::get('homeIndex','Auth\LoginController@home')->middleware('auth');
 	Route::get('logout', 'Auth\LoginController@logout');
 
+
+	Route::get('/{img}.jpg', 'Index\IndexController@image');
 	Route::get('/p/{id}', 'Index\IndexController@postview')->where('id', '[0-9]+');
+	Route::get('{lang}/testview/{id}', 'Index\IndexController@postview1');
 	// Route::get('/category/{cat}/{id?}', 'Index\IndexController@category')->where('cat', '[A-Za-z]+')->where('id', '[0-9]+'); 
 	Route::get('/tag/{id}/{page?}', 'Index\IndexController@tag')->where('id', '[0-9]+');
 	Route::get('/tag/hot/{page?}', 'Index\IndexController@hot');

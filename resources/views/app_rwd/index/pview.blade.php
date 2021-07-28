@@ -1,18 +1,16 @@
 @extends('layout.rwd.lay_web_basic_pview')
 @section('title')
-@php echo mb_substr(strip_tags($post->title) , 0 , 25, 'UTF-8'); @endphp
+{{--  @php echo mb_substr(strip_tags($post->title) , 0 , 25, 'UTF-8'); @endphp --}}
 @stop
 @section('des')
-{{strip_tags($post->title)}}
+ 
 @stop
 @section('topscript')
-<meta itemprop="name" content="@lang('default.description')">
+{{-- <meta itemprop="name" content="@lang('default.description')">
 <meta itemprop="description" content="{{strip_tags($post->title)}}">
-<meta name="csrf-token" content="{{ csrf_token() }}" />
+<meta name="csrf-token" content="{{ csrf_token() }}" /> --}}
 <script>
-	var postid = '{{$post->id}}';
-	var postnick = '{{$post->userInfo->nick_name}}';
-	var nick = postnick
+	 
 </script>
 @stop
 @section('maincontent')
@@ -21,9 +19,10 @@
 	
 		<div id="rs-content-left-box" class="rs-content-left-box1">
 			<h2 class="title is-4">
-				<strong>{{ $video->title }}</strong>
+			 	{{--<strong>{{ $title }}</strong>--}}
+				 <strong> {{$video->title}}</strong>
 			  </h2>
-			<!-- @if(!is_Null($marquee))
+			  {{-- @if(!is_Null($marquee))
 			<marquee>
 			@foreach ($marquee as $quee )
 				@if ($loop->count != 1) 
@@ -45,18 +44,18 @@
 				@endif
 			@endforeach
 			</marquee>
-			@endif -->
-			<!-- <div 	style="BACKGROUND-COLOR: #000;  height: 80px;width:100%;">
+			@endif--}}
+			{{-- <div 	style="BACKGROUND-COLOR: #000;  height: 80px;width:100%;">
 				<a href="{{$adHalf[0]->web_url}}"  target="_blank">
 					<div data-id='{{$adHalf[0]->id}}' class="adClick"   style="overflow: hidden; background-repeat: no-repeat;   background-position: 50% 50%; background-size: contain;height: 100%;width:100%;background-image: url('{{  asset('storage/'.$adHalf[0]->bg_img)}}');" >
 					</div>
 				</a>
-			</div> -->
+			</div> --}}
 		</div>
 	
 		<div id="rs-content-left-box" class="rs-content-left-box1">
-			<!-- <div class="rs-contentpics" style="background: url({{$post->userInfo->avatar}}) no-repeat top center; background-size:50px"><a href="/p/{{$post->id}}"></a></div>
-			<div class="rs-contentname">{{$post->userInfo->nick_name}}<br>{{ Carbon\Carbon::parse($post->created_time)->format('m-d H:i:s') }}</div> -->
+			{{-- <div class="rs-contentpics" style="background: url({{$post->userInfo->avatar}}) no-repeat top center; background-size:50px"><a href="/p/{{$post->id}}"></a></div>
+			<div class="rs-contentname">{{$post->userInfo->nick_name}}<br>{{ Carbon\Carbon::parse($post->created_time)->format('m-d H:i:s') }}</div>--}}
 			<div class="row">
 					<div class="container-fluid" style="DISPLAY: contents;">
 						@if ($device == 'ios' || $device == 'android')
@@ -95,7 +94,7 @@
                 language : "zh-Hant",
 				preload : 'auto',
 				// type:"application/x-mpegURL",
-				// sources:"/getvideo/{{$post->id}}",
+				{{-- sources:"/getvideo/{{$post->id}}",--}}
                 // sources : 'https://d2zihajmogu5jn.cloudfront.net/elephantsdream/hls/ed_hd.m3u8',
              
                 controlBar : {
@@ -117,7 +116,7 @@
                 }
             },function () {
 				this.initialPreviewThumbnail({
-					 sprite_url:"{{ asset('storage/upvideo/'.$post->folder.'/thumbnails.jpg') }}",
+					 sprite_url:"{{ asset('storage/upvideo/aa/thumbnails.jpg') }}",
 					//;    /js/videojs-thumbnails/output-180x120-thumb.jpg',
                     second:6,
                     sprite_x_count:30000,
@@ -221,7 +220,7 @@
 								<tr>
 								<td>Actress</td>
 								<td class="list-actress">
-								<a href="http://www.javmovie.com/ja/actress/nana-ayano-45.html" title="彩乃なな">{{ $video->actress }}</a>
+								<a href="http://www.javmovie.com/ja/actress/nana-ayano-45.html" title="{{ $video->actress }}">{{ $video->actress }}</a>
 								</td>
 								</tr>
 								<tr>
@@ -245,10 +244,10 @@
 	
 			<div id="rs-digg-box2">
 				<div class="rs-digg-left"     style="float: left; width: auto; padding: 0px 3px;">
-					<div class="" id='post-digg-{{$post->id}}' data-id='post-digg-{{$post->id}}'><i class=""></i><span> {{$postsDetail->count_view}} views</span></span></div>
+					<div class="" id='post-digg-1' data-id='post-digg-1'><i class=""></i><span> test views</span></span></div>
 				</div>
 				<div class="rs-digg-right orange5"   style="margin:0;">
-					<!-- @if ($status == 1)
+					{{-- @if ($status == 1)
 						<div class="rs-digg like rs-digg-click" id='post-digg-thumbs-up' data-id='{{$post->id}}'><i class="fas fa-thumbs-up fa-w-16"></i><span> {{$postsDetail->count_digg}} </span></span></div>
 						<div class="rs-digg like " id='post-digg-thumbs-down' data-id='{{$post->id}}'><i class="fas fa-thumbs-down"></i><span> {{$postsDetail->count_bury}} </span></div>
 					@elseif ($status == 2)
@@ -257,7 +256,7 @@
 					@else  
 						<div class="rs-digg like" id='post-digg-thumbs-up' data-id='{{$post->id}}'><i class="fas fa-thumbs-up fa-w-16"></i><span> {{$postsDetail->count_digg}} </span></span></div>
 						<div class="rs-digg like" id='post-digg-thumbs-down' data-id='{{$post->id}}'><i class="fas fa-thumbs-down"></i><span> {{$postsDetail->count_bury}} </span></div>
-					@endif -->
+					@endif --}}
 					<a href="#commentList" class="load_modal_login btn btn-download"><i class="fa fa-download"></i>Download</a>
 					<a class="load_modal_login btn btn-bookmark" action="http://www.javmovie.com/favorite/390057"><i class="fa fa-plus"></i> <span>Favorite</span></a>
 					<a class="load_modal_login btn btn-report">Correction</a>
@@ -295,13 +294,13 @@
 				@endif
 				</div>
 			</div>
-			<!-- <div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px;">
+			{{-- <div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px;">
 				@if ($post->tag)
 					@foreach ($post->tag as $tag)
 					<p><a href="/tag/{{$tag->tagname->id}}" target="_blank" class="rs-digg-box2-tag">{{$tag->tagname->name}}</a></p>
 					@endforeach
 				@endif
-			</div> -->
+			</div>  --}}
 		
 			
 			@if ($device == 'ios' || $device == 'android')
@@ -353,7 +352,7 @@
 				<div style="float: left;padding: 10px; width: 230px; height: 230px; margin: 5px; overflow: hidden">
 					<div poster=""   class="adClick video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	
 					style="height:70%;   padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
-						<a href="/zh/XXXXXXXXXXXXXXXXXXXXXXXX/{{$video->video_id}}-{{ $video->actress}}"  target="_blank">
+						<a href="/jp/testview/{{$video_actress->video_id}}${{ $video_actress->actress}}"  target="_blank">
 							<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
 														vertical-align: middle;
 														background-repeat: no-repeat;
@@ -362,7 +361,7 @@
 														cursor: pointer;
 														margin: 0;
 														padding: 0;
-														position: relative;
+														position: relativ林昶佐e;
 														top: 0PX;
 														right: 0;
 														bottom: 0;
