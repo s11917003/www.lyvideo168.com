@@ -8,7 +8,7 @@
 <meta itemprop="name" content="@lang('default.description')">
 <meta itemprop="description" content="{{strip_tags($title)}}">
 @section('maincontent')
-			@if(!is_Null($marquee))
+			<!-- @if(!is_Null($marquee))
 			<marquee>
 			@foreach ($marquee as $quee )
 				@if ($loop->count != 1) 
@@ -30,7 +30,7 @@
 				@endif
 			@endforeach
 			</marquee>
-			@endif
+			@endif-->
 			@if ($device == 'ios' || $device == 'android')
 			<div id="rs-digg-box2"  style="float: left; width: 100%; padding-top:10px; height: auto;">
 				<h5 style="COLOR: #ccc; font-weight: bold;">搜寻结果 : {{$search}}</h5>
@@ -109,44 +109,8 @@
 					<h5 style="COLOR: #ccc; font-weight: bold;">搜寻结果 : {{$search}}</h5>
 					@foreach ($posts as $post)
 					<div id="rs-article-box" style="block-size:unset; float:left;padding: 10px;  overflow: hidden;  ">
-						@if (is_Null($post->isAd))
-						<a href="/p/{{$post->id}}">
-							<!-- <img id="rs-article-box-img" src="{{ asset('storage'.$post->hot['tb_img']) }}"  >
-							<label style="padding: 5px 0px 0px 0px;Display: inline-block;  overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{$post->hot['title']}}</label>
-							<div style="font-size: 8px; padding-top: 0px;">{{$post->count_view}}次观看</div> -->
-							<div poster="" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" height="200px" width="600" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
-								<div class="vjs-poster" tabindex="-1" aria-disabled="false" 
-									style="display: inline-block;
-									vertical-align: middle;
-									background-repeat: no-repeat;
-									background-position: 50% 50%;
-									background-size: contain;
-									cursor: pointer;
-									margin: 0;
-									padding: 0;
-									position: absolute;
-									height:100%;
-									right: 0;
-									bottom: 0;
-									left: 0;
-									top: 0;
-									MARGIN: 0PX 0PX 0 0PX;
-									BACKGROUND-COLOR: #000;
-									background-image: url('{{ asset('storage'.$post->tb_img)}}');"  
-									>
-								 
-								</div>
-								
-							</div>
-							<label style="cursor: pointer; padding: 10px 0px 0px 0px;Display: inline-block;  overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{$post->title}}</label>
-							
-						</a>
-						<div style="font-size: 8px; padding-top: 0px;COLOR: #fff;">{{$post['detail']->count_view}}次观看</div>
-						@else
-						<a href="{{$post->web_url}}" data-id='{{$post->id}}' class="adClick"   target="_blank"> 
-							<!-- <img id="rs-article-box-img" src="{{ asset('storage'.$post->hot['tb_img']) }}"  >
-							<label style="padding: 5px 0px 0px 0px;Display: inline-block;  overflow: hidden;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{$post->hot['title']}}</label>
-							<div style="font-size: 8px; padding-top: 0px;">{{$post->count_view}}次观看</div> -->
+					 			 	
+						<a href="/p/{{$post->id}}" data-id='{{$post->id}}' class="adClick"   target="_blank"> 
 							<div poster="" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" height="200px" width="600" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
 								<div class="vjs-poster" tabindex="-1" aria-disabled="false" 
 									style="display: inline-block;
@@ -174,7 +138,7 @@
 							
 						</a>
 						<div style="font-size: 8px; padding-top: 0px;COLOR: #fff;  opacity: 0;">．</div>
-						@endif
+						 
 					</div>
 					@endforeach
 					<div style="clear: both"></div>

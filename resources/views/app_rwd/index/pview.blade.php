@@ -212,7 +212,7 @@
 									<!-- <a href="" title="HyakkinTV">{{ $video->label }}</a> -->
 									@if ($video_tag)
 										@foreach ($video_tag as $tag )
-										<a class="rs-digg-box2-tag pr-2 pl-2 ml-1" >{{$tag->tagName['zh'] }} </a>
+										<a class="rs-digg-box2-tag pr-2 pl-2 ml-1" >{{$tag->tagName }} </a>
 										@endforeach	
 									@endif
 								</td>
@@ -379,6 +379,39 @@
 				</div>
 				@endforeach
 				<div style="clear: both"></div>
+
+				<h5 class="recommend" >You may also like</h5>
+				@foreach ($video_relation as $video_tag)
+				<div style="float: left;padding: 10px; width: 230px; height: 230px; margin: 5px; overflow: hidden">
+					<div poster=""   class="adClick video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	
+					style="height:70%;   padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
+						<a href="/jp/testview/{{$video_tag->video_id}}${{ $video_tag->actress}}"  target="_blank">
+							<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
+														vertical-align: middle;
+														background-repeat: no-repeat;
+														background-position: 50% 50%;
+														background-size: contain;
+														cursor: pointer;
+														margin: 0;
+														padding: 0;
+														position: relativ林昶佐e;
+														top: 0PX;
+														right: 0;
+														bottom: 0;
+														left: 0;
+														height: 100%;  
+														 WIDTH: 100%;
+														MARGIN: 0PX 5PX 0 5PX;
+														BACKGROUND-COLOR: #000;
+														background-image: url('{{ $video_tag->cover_img }}');" 
+													>
+							</div>
+							<div style="font-size: 8;    line-height: 16px;letter-spacing: 1px;     word-break: break-all;padding-top: 5px;">{{$video_tag->title  }}</div>
+						</a>
+					</div>
+				</div>
+				@endforeach
+				<div style="clear: both"></div>
 			</div>
 			@endif					
 		</div>		
@@ -512,7 +545,7 @@
 
 		console.log('window.onload')
 
-		console.log('{{ $video->actress }}')
+		console.log('{{ $video_relation }}')
 	};
 </script>
 <script src='/js/comm.js?r=@php echo uniqid(); @endphp' async=""></script>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use illuminate\database\eloquent\collection;
 use App\Model\PostsArticle;
 use App\Model\PostsCategory;
 use App\Model\PostsDetail;
@@ -190,20 +191,14 @@ class IndexController extends Controller {
 
 	}
 	public function postview1(Request $request, $lang, $id) {
-	
 		$video_id = explode("$",$id)[0];
-	
-	//	return response()->json(['video' => isset($this->language[$lang])]);
-	 
 		if(!isset($this->language[$lang])) {
 			//abort(404);
 			header("Location:/");
 			return ;
 		}
-	
+		//主影片DATA
 		$webLangIndex = $this->language[$lang];
-
- 
 		$video = Video::where(['video_id'=>$video_id,'video_lang'=>$webLangIndex])->first();
 
 	 
@@ -212,7 +207,6 @@ class IndexController extends Controller {
 			return ;
 		}
 		$video_tag =  Video_tag_relations::where('video_id',$video_id)->with('tagName')->get();
-	
 		$video_with_actress = [];
 		if($video['actress']){ 
 			$actressNameArray = explode("@", $video['actress']);
@@ -223,15 +217,11 @@ class IndexController extends Controller {
 				
 				$Video_actress_name = Video_actress_name::where('sub_name', 'like', '%'.$name.'%')->value('name');//找女優 對應表
 				if($Video_actress_name) {
-
 					$queryAcrtressName[] = $$Video_actress_name;
 					$actressNameArray[$key] = $Video_actress_name;//改成常用的名字
-					
 				}
 			}
-			var_dump(count($queryAcrtressName));
-			return;
-			
+		 
 			if(count($queryAcrtressName)==0){ //沒有女優
 				$video_with_actress = [];
 				$video['actress'] ='';
@@ -249,6 +239,7 @@ class IndexController extends Controller {
 			}
 		
 		}
+		//預覽圖片
 		if($video['thumbnail_img']){
 			$video['thumbnail_img'] = explode("@",$video['thumbnail_img']);
 			$path = 'thumbnail_img/'.$video['video_id'].'/';
@@ -272,89 +263,37 @@ class IndexController extends Controller {
 			}
 			$video['thumbnail_img_router'] = 	$img_path;
 		}
-		//add pv;
-		// PostsDetail::find($id)->increment('count_view');
-		// $postsDetail = PostsDetail::find($id);
-	 
-		//suggest post
-		// $tags = PostsTagRelationships::where('post_id', $id)->get();
+	
 		$footer =footer::all();;	
-		//var_dump($tags);
-		$tagarr = [];
-		// foreach ($tags as $tag) {
-		// 	$tagarr[] = $tag['post_tag_id'];
-		// }
-	
-		//$relate = \DB::table('posts_tag_relationships')->whereIn('post_tag_id', $tagarr)->groupBy('post_id')->inRandomOrder()->limit(6)->get();
-		// $relate = PostsTagRelationships::with('article')->where('post_id','!=', $id)->whereIn('post_tag_id', $tagarr)->where('status',1)->groupBy('post_id')->inRandomOrder()->limit(10)->get();	 		
-		
-		// $adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(2)->get();
-		// $adHalf = AdDetailBanner::inRandomOrder()->where('type', 'half')->where('status',1)->limit(1)->get();
-		// $marquee =Announcement::inRandomOrder()->where('status',2)->first();
-	
-		// $marqueeArr = [];
-		// if($marquee){
-		// 	$marqueeArr = explode(':', $marquee->text);
-		// }
-		// $status = 0;
-		// $adlog = [];
-		// if (Auth::check()) {
-		// 	$user  = Auth::User();
-		// 	if ($user) {
-		// 		$postsDigg = PostsDigg::where('user_id',$user->user_id)->where('post_id',$id)->first();
-		// 		$status = $postsDigg['status'];
-		// 	}
-		// }
-		// $now = date('Y-m-d H:i:s');
-		// if(count($relate) >0){
-		// 	foreach ($adDetail as $ad) {
-		// 		$log =  ['ad_id' => $ad->id ,'actiontype' =>0,'updated_at'=>$now] ;
-		// 		$adlog[]  = $log;;
-		// 		$ad->isAd  = true;
-		// 		$this->array_insert($relate,rand(0,count($relate)-1),$ad);
-		// 	}
-		// }
 
-		// foreach ($adDetail as $ad) {
-		// 	$log =  ['ad_id' => $ad->id ,'actiontype' =>0,'updated_at'=>$now] ;
-		// 	$adlog[]  = $log;;
-		// 	$ad->isAd  = true;
-		// }
-		
-		// if(count($adlog) >0){
-		// 	DB::table('ad_detail_banner_log')->insert($adlog);
-		// }
-
-
-	
 		// 英	<title>{影片ID} | {女優英文名}：Watch Free Video【JavDic  censored, uncensored and amateur japanese porn】</title>
 		// 中	<title>{日文影片名稱} | {女優日文名}：線上免費試看【JavDic  有碼・無碼・素人 - 日本A片資料庫】</title>
 		// 日	<title>{日文影片名稱} | {女優日文名}：無料エロ動画【JavDic  修正あり・無修正・素人 - エロ動画まとめ】</title>
 		
+		//標籤
 		$tagName = [];
 		foreach ($video_tag as $tag ) {
-			$tagName[] = $tag->tagName['zh'];
+			$tagName[] = $tag->tagName[$lang];
+			$tag->tagName = $tag->tagName[$lang];
 		}
-							 
-					
+
+		////相關標籤影片
+		$randTag  = Video_tag_relations::where('video_id',$video->id)->inRandomOrder()->first();
+	 	$video_relation = Video::where('video_lang',$webLangIndex)->with(['tagRelations'])->whereHas('tagRelations', function($q) use ($randTag) { $q->where('tag_id', '=', $randTag->tag_id); })->limit(10)->get();		
+		 
+		
 		$title  = $video['video_id'].'|'.$video['actress'].'無料エロ動画【JavDic  '. implode(",", $tagName).'】';
 		$url = $video['video_id'].'|'.$video['actress'];
 		if($video) {
 			$device = Utils::chkdevice();
 			return view('app_rwd.index.pview',[
-				// 'ad'=>$adDetail,
 				'footer'=>$footer,
-				//'adHalf'=>$adHalf, 
-				//'post'=>$article,
 				'device' => $device,
-				//'relate' => $relate,
-				//'postsDetail' => $postsDetail,
-				//'status' => $status,
-				//'marquee' => $marqueeArr,
 				'video' => $video, 							//主影片
 				'video_with_actress' => $video_with_actress,//相關女優
 				'video_tag' => $video_tag,					//標籤
-				'title' =>  $title  						//影片title
+				'title' =>  $title  ,						//影片title
+				'video_relation' => $video_relation 		//相關標籤
 			]);
 		} else {
 			//沒有文章跳轉
@@ -770,17 +709,31 @@ class IndexController extends Controller {
     {
         //
     }
-    public function searchVideo($search ='',$page = 1){
-	
-
+    public function searchVideo($search ='',$page = 1, $lang = 'en'){
 		$article = $this->show_api(1);
+
+		$webLangIndex = $this->language[$lang];
+		$whereArr = [];	
+		DB::enableQueryLog();
+		$Video_actress_name = Video_actress_name::where('sub_name', 'like', '%'.strtoupper($search).'%')->pluck('name')->all();//找女優 對應表
+	
+		$video = Video::whereRaw("UPPER(title) LIKE '%". strtoupper($search)."%'");
+		if(count($Video_actress_name) > 0) {
+			$video->orwhere(function ($query) use($Video_actress_name) {
+				for ($i = 0; $i < count($Video_actress_name); $i++){
+				   $query->orwhere('actress', 'like',  '%' . $Video_actress_name[$i] .'%');
+				}      
+		   });
+		}
+		$video = $video->where(['video_lang'=>$webLangIndex])->get();
+		 
+		DB::enableQueryLog();
 		$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->with('commentsGod')
 		->where('cate_id', 3)->where('status', 1)->where('covered', 1)
 		->whereRaw("UPPER(title) LIKE '%". strtoupper($search)."%'")
 		// ->where('title','like', '%'.$search.'%')
 		->orderBy('id', 'desc')
 		->Paginate(12, null, 1, $page);
-
 		$footer =footer::all();;
 		//$adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(2)->get();
 		$lastPage = $posts->lastPage();
@@ -805,18 +758,18 @@ class IndexController extends Controller {
 		// if(count($adlog) >0){
 		// 	DB::table('ad_detail_banner_log')->insert($adlog);
 		// }
-		 
+	 
 		if($posts) {
 			//return $posts;
 			$device = Utils::chkdevice();
 			return view('app_rwd.index.default_search',[
+				'posts'=> $posts,
 				'footer'=>$footer,
 				'post'=> $article,
 				'search'=>$search,
 				'lastPage' => $lastPage,
 				'currentPage' => $currentPage,
-				'device' => $device,
-				'posts'=> $posts,
+				'device' => $device,		 
 				'title'=> '搜尋',
 				'tag' => 'search',
 				'marquee' => $marqueeArr,
