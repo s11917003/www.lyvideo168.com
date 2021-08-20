@@ -337,7 +337,7 @@
 													>
 													
 							</div>
-							<div style="font-size: 8;     line-height: 16px;letter-spacing: 1px;      word-break: break-all;padding-top: 5px;">{{$video_actress->title  }}</div>
+							<div style="font-size: 8;     line-height: 16px;letter-spacing: 1px;      word-break: break-all;padding-top: 150px;">{{$video_actress->title  }}</div>
 		
 						</a>
 					</div>
@@ -373,7 +373,7 @@
 														background-image: url('{{ $video_actress->cover_img }}');" 
 													>
 							</div>
-							<div style="font-size: 8;    line-height: 16px;letter-spacing: 1px;     word-break: break-all;padding-top: 5px;">{{$video_actress->title  }}</div>
+							<div style="font-size: 8;    line-height: 16px;letter-spacing: 1px;     word-break: break-all;padding-top: 150px;">{{$video_actress->title  }}</div>
 						</a>
 					</div>
 				</div>
@@ -391,7 +391,7 @@
 														background-repeat: no-repeat;
 														background-position: 50% 50%;
 														background-size: contain;
-														cursor: pointer;
+														cursor: pointer; 
 														margin: 0;
 														padding: 0;
 														position: relativ林昶佐e;
@@ -400,13 +400,13 @@
 														bottom: 0;
 														left: 0;
 														height: 100%;  
-														 WIDTH: 100%;
+														WIDTH: 100%;
 														MARGIN: 0PX 5PX 0 5PX;
 														BACKGROUND-COLOR: #000;
 														background-image: url('{{ $video_tag->cover_img }}');" 
 													>
 							</div>
-							<div style="font-size: 8;    line-height: 16px;letter-spacing: 1px;     word-break: break-all;padding-top: 5px;">{{$video_tag->title  }}</div>
+							<div style="font-size: 8;    line-height: 16px;letter-spacing: 1px;     word-break: break-all;padding-top: 150px;">{{$video_tag->title  }}</div>
 						</a>
 					</div>
 				</div>

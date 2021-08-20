@@ -44,15 +44,17 @@ Route::get('/{id?}', 'Index\IndexController@index')->where('id', '[0-9]+');//走
 	Route::get('logout', 'Auth\LoginController@logout');
 
 
-	Route::get('/{img}.jpg', 'Index\IndexController@image');
-	Route::get('/p/{id}', 'Index\IndexController@postview')->where('id', '[0-9]+');
-	Route::get('{lang}/testview/{id}', 'Index\IndexController@postview1');
+
+	Route::get('/p/{id}', 'Index\IndexController@postview')->where('id', '[0-9]+');ㄙ
 	// Route::get('/category/{cat}/{id?}', 'Index\IndexController@category')->where('cat', '[A-Za-z]+')->where('id', '[0-9]+'); 
 	Route::get('/tag/{id}/{page?}', 'Index\IndexController@tag')->where('id', '[0-9]+');
 	Route::get('/tag/hot/{page?}', 'Index\IndexController@hot');
-	Route::post('thumbsup', 'Index\IndexController@thumbsup');
-	Route::post('thumbsdown', 'Index\IndexController@thumbsdown');
-	Route::get('/search/{search}/{page?}/', 'Index\IndexController@searchVideo')->where('page', '[0-9]+');
+	// Route::post('thumbsup', 'Index\IndexController@thumbsup');
+	// Route::post('thumbsdown', 'Index\IndexController@thumbsdown');
+
+	Route::get('/{img}.jpg', 'Index\IndexController@image');    //圖片
+	Route::get('{lang}/testview/{id}', 'Index\IndexController@postview1');  //文章
+	Route::get('/search/{search}/{page?}/', 'Index\IndexController@searchVideo')->where('page', '[0-9]+');   //搜尋
 
 	// Route::get('/tag/{id}/{page?}', 'Index\IndexController@tag')->where('id', '[0-9]+');
 // });
