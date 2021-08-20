@@ -3,13 +3,14 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Rap2hpoutre\FastExcel\FastExcel;
-use App\Model\AdLaunch;
-use App\Model\AdDetailBanner;
+// use App\Model\AdLaunch;
+// use App\Model\AdDetailBanner;
 use App\Model\Video;
 use App\Model\Video_tag_relations;
 use App\Model\Video_tag;
 use App\Model\PackageInfo;
-use PDO;
+use Exception;
+// use PDO;
 
 class CsvController extends Controller {
 	public function geCsv(Request $request) {
@@ -28,35 +29,34 @@ class CsvController extends Controller {
 			'2' => ['1','1','zh','zh/censored/fanza/'],
 			'3' => ['3','1','jp@jp2@jp3','jp/censored/fanza/'],
 
-			// '4' => ['jp','uncensored','jp/uncensored/1/'],
-			// '5' => ['jp','uncensored','jp/uncensored/2/'],
-			// '6' => ['jp','uncensored','jp/uncensored/3/'],
-			// '6' => ['jp','uncensored','jp/uncensored/4/'],
-			// '6' => ['jp','uncensored','jp/uncensored/5/'],
+			'4' => ['3','3','jp@jp2@jp3','jp/uncensored/1/'],
+			'5' => ['3','3','jp@jp2@jp3','jp/uncensored/2/'],
+			'6' => ['3','3','jp@jp2@jp3','jp/uncensored/3/'],
+			'7' => ['3','3','jp@jp2@jp3','jp/uncensored/4/'],
+			'8' => ['3','3','jp@jp2@jp3','jp/uncensored/5/'],
 
-			// '7' => ['en','uncensored','en/uncensored/1/'],
-			// '8' => ['en','uncensored','en/uncensored/2/'],
-			// '9' => ['en','uncensored','en/uncensored/3/'],
-			// '10' => ['en','uncensored','en/uncensored/4/'],
-			// '11' => ['en','uncensored','en/uncensored/5/'],
-		 	// '12' => ['en','uncensored','jp/censored/mgstage/'],
+			'9' => ['2','3','en','en/uncensored/1/'],
+			'10' => ['2','3','en','en/uncensored/2/'],
+			'11' => ['2','3','en','en/uncensored/3/'],
+			'12' => ['2','3','en','en/uncensored/4/'],
+			'13' => ['2','3','en','en/uncensored/5/'],
+		 	'14' => ['3','2','jp@jp2@jp3','jp/censored/mgstage/'],
 		];
 	
 	
 	
 		$data = [];	
 		$tagData = [];
-		foreach ($pathArray as $_index => $_item) {
+		foreach ($pathArray as $_item) {
 			$fp = @fopen($filePath.$_item[3].$fileName, "r");
 		//$fp = @fopen($filePath.$fileName, "r");
 	
-	 var_dump($fp);
+		//有找到檔案
 		if($fp) {
 			$collection = (new FastExcel)->import($filePath.$_item[3].$fileName);
 			$video_id = Video::orderby('id', 'desc')->first()->id;
 			foreach ($collection as $index => $item) {
-				
-				if( $index <= 12){
+				if( $index <= 2000000000) {
 					$data[] =  [ 
 								// 'id' => $video_id + ($index+1),
 								'video_id'=> $item['影片ID'],
@@ -81,8 +81,8 @@ class CsvController extends Controller {
 						try{
 							$videoExists = Video::where(['video_id'=> $item['影片ID'],'video_lang'=>$_item[0]])->first();
 
-						 
-							if(!$videoExists){
+							//該筆已經有在資料庫了
+							if(!$videoExists) {
 								$newVideoId = Video::insertGetId( [   //寫入video
 									// 'id' => $video_id + ($index+1),
 									'video_id'=> $item['影片ID'],
@@ -110,14 +110,14 @@ class CsvController extends Controller {
 									$colunmName  = explode("@", $_item[2]);
 									foreach ($tagArray as $tagItme) {
 										$video_tag = Video_tag::query();
-										foreach ($colunmName as $key => $colunm) {
+										foreach ($colunmName as $colunm) {
 											$video_tag->orWhere($colunm,'like','%'.$tagItme.'%');									 
 										}
-										$tag = $video_tag->first(); //這行
+										$tag = $video_tag->first(); //第一筆
 										if($tag){
 											$tagData[] = ['video_id'=> $newVideoId, 'tag_id' => $tag->id];
 										}
-									}	
+									}	 
 								}
 							}
 							
@@ -132,12 +132,28 @@ class CsvController extends Controller {
 			
 			}
 		}
-		if($tagData)
-		Video_tag_relations::insert($tagData);  
-
+		//加入不在資料庫的  影片標籤關聯
+		if($tagData){
+			$_tagData = [];
+			foreach ($tagData as $index => $item) {
+				try{
+					$_tagData[] =  $item;
+					if($index % 999 == 0 || ($index == count($tagData)-1) ){
+						Video_tag_relations::insert($_tagData);  
+						$_tagData = [];
+					}
+				} catch (\Exception $e) {
+					dd($e->getMessage()); 
+				}
+				
+			
+			}
+			
+		}
+		
 		return response()->json([
-			'data'=> $data,
-			'tagData'=> $tagData
+			'data'=> count($data),
+			'tagData'=> count($tagData)
 		]);
 	
 	}

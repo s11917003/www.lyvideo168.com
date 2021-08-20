@@ -709,7 +709,7 @@ class IndexController extends Controller {
     {
         //
     }
-    public function searchVideo($search ='',$page = 1, $lang = 'en'){
+    public function searchVideo($search ='',$page = 1, $lang = 'jp'){
 		$article = $this->show_api(1);
 
 		$webLangIndex = $this->language[$lang];
@@ -726,7 +726,9 @@ class IndexController extends Controller {
 		   });
 		}
 		$video = $video->where(['video_lang'=>$webLangIndex])->get();
-		 
+
+
+		var_dump( DB::getQueryLog());
 		DB::enableQueryLog();
 		$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->with('commentsGod')
 		->where('cate_id', 3)->where('status', 1)->where('covered', 1)
@@ -740,7 +742,7 @@ class IndexController extends Controller {
 		$currentPage = $posts->currentPage();
 		 
 		$marquee =Announcement::inRandomOrder()->where('status',2)->first();
-	
+		var_dump($video);
 		$marqueeArr = [];
 		if($marquee){
 			$marqueeArr = explode(':', $marquee->text);
@@ -773,6 +775,7 @@ class IndexController extends Controller {
 				'title'=> '搜尋',
 				'tag' => 'search',
 				'marquee' => $marqueeArr,
+				'videos'=> $video,
 			]);
 		} else {
 			//沒有文章跳轉
