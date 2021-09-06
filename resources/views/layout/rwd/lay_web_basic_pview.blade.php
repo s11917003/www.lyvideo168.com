@@ -10,6 +10,7 @@
 <link href="/css/bootstrap-4.0.0.css" rel="stylesheet">
 <link href="/css/video-js.css" rel="stylesheet">
 <link href="/css/videojs-contrib-ads.css" rel="stylesheet">
+<link rel="stylesheet" href="/css/category-list.css">
 <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
 <style>
 	.video-js {
@@ -31,12 +32,15 @@ import videojsPreviewThumbnails from 'https://cdn.skypack.dev/videojs-preview-th
 <script src="/js/videojs-contrib-hls.js"></script>
 <script src="/js/videojs-contrib-ads.js"></script>
 <script defer src="/js/fontawesome-all.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="/js/function.js"></script>
-<script type="text/javascript" src="/js/jquery.lazyload.js"></script>
+<!-- <script type="text/javascript" src="/js/jquery.lazyload.js"></script> -->
 <script type="text/javascript" src="/js/jquery.visible.js"></script>
 <script src="/js/popper.min.js"></script>
-<script src="/js/bootstrap-4.0.0.js"></script>
+<!-- <script src="/js/bootstrap-4.0.0.js"></script> -->
+<script src="/js/main.js"></script>
+<script src="/js/select.js"></script>
 <script>
 	$(function(){
 		$.ajaxSetup({
@@ -100,13 +104,9 @@ import videojsPreviewThumbnails from 'https://cdn.skypack.dev/videojs-preview-th
 @else 
 	<body id="rs-body" class="rs-body1" >
 @endif
-<!-- JuicyAds PopUnders v3 Start -->
-<!--
-<script type="text/javascript" src="https://js.juicyads.com/jp.php?c=3474y213t244u4q2q28443b494&u=http%3A%2F%2Fwww.juicyads.rocks"></script>
--->
-<!-- JuicyAds PopUnders v3 End -->		
+ 
 	<!-- HEADER 開始 -->
-	@include('layout.rwd.lay_web_header',['postArticle'=>false])
+	@include('layout.rwd.lay_video_header')
 	<!-- HEADER 結束 -->
  
 	@if (config('app.web_type') == 1)
@@ -126,7 +126,7 @@ import videojsPreviewThumbnails from 'https://cdn.skypack.dev/videojs-preview-th
 	@yield('Carousel')
 	 
 	<!-- Footer 開始 -->
-	@include('layout.rwd.lay_web_footer')
+	@include('layout.rwd.lay_video_footer')
 	<!-- Footer 結束 -->
 	@yield('footscript')
 </body>

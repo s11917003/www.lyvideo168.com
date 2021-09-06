@@ -662,22 +662,22 @@ function dropreply(id) {
 	}
 }
 
-var ssid = $('#rs-content-left-box').data('id');
-	$(window).on('scroll',function(){
-	$("div #rs-content-left-box").each(function(){
-		if($(this).visible()) {
-			 datashow = $(this).data('show')
-			if(datashow == false ) {
-			//if(getElementViewTop(this)) {
-			//console.log(getElementViewTop(this))
-				console.log($(this).data('id')+'曝光紀錄1次')
-				$(this).data('show', true);
-							 //}
-			}						 
-		}
-	});
+// var ssid = $('#rs-content-left-box').data('id');
+// 	$(window).on('scroll',function(){
+// 	$("div #rs-content-left-box").each(function(){
+// 		if($(this).visible()) {
+// 			 datashow = $(this).data('show')
+// 			if(datashow == false ) {
+// 			//if(getElementViewTop(this)) {
+// 			//console.log(getElementViewTop(this))
+// 				console.log($(this).data('id')+'曝光紀錄1次')
+// 				$(this).data('show', true);
+// 							 //}
+// 			}						 
+// 		}
+// 	});
 				
-})
+// })
 
 
 function getElementViewTop(element){

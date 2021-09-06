@@ -3840,7 +3840,7 @@ tbody.collapse.show {
   border-radius: 0 0.25rem 0.25rem 0;
 }
 
-.nav {
+/* .nav {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3849,7 +3849,7 @@ tbody.collapse.show {
   padding-left: 0;
   margin-bottom: 0;
   list-style: none;
-}
+} */
 
 .nav-link {
   display: block;
