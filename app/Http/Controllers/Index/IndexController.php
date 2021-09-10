@@ -205,7 +205,7 @@ class IndexController extends Controller {
 		if(!$video) {
 			header("Location:/");
 			return ;
-		}
+		} 
 		$video_tag =  Video_tag_relations::where('video_id',$video_id)->with('tagName')->get();
 		$video_with_actress = [];
 		if($video['actress']){ 
