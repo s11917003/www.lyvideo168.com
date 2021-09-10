@@ -120,7 +120,7 @@
 															cursor: pointer;
 															margin: 0;
 															padding: 0;
-															position: relativ林昶佐e;
+															position: relative;
 															top: 0PX;
 															right: 0;
 															bottom: 0;

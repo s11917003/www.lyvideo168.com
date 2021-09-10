@@ -8,9 +8,9 @@
 	font-family: Arial, "微軟正黑體";
 	font-weight: bolder;
 
-	background-color:#1c1e21;
+	/* background-color:#1c1e21; */
 	padding-top: 58px;
-	color: #999;
+	/* color: #999; */
 
 }
 /* #rs-body.rs-body1 #rs-maintop ,#rs-body.rs-body1 #rs-maintop .bg-dark ,#rs-body.rs-body1 #rs-maintop .rs-logo a,#rs-body.rs-body1 #rs-maintop .rs-logo {
@@ -31,8 +31,9 @@ a , div {
 }
 .recommend {
 	font-weight: bold;
+	FONT-SIZE: 18PX;
 	/*color: #BBB;*/
-	    text-align: center;
+	/* text-align: center; */
 }
 /*div {
 	padding:10px;
@@ -413,7 +414,7 @@ transform: translateX(0rem);
 	overflow:hidden;
 	width:1350px;
 	margin:0px auto;
-	padding:0 15px 0 15px;
+	padding:80px 15px 0 15px;
 }
 #rs-main-content1 {
 	overflow:hidden;
@@ -623,6 +624,14 @@ transform: translateX(0rem);
 	/* padding:8px 0; */
 	margin-bottom:1px;
 }
+#rs-content-left-box .title{
+	margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+    line-height: 1.5;
+	color: black;
+
+}
 
 .avdb-left-box {
 	float: left;
@@ -822,7 +831,9 @@ transform: translateX(0rem);
 #rs-digg-box2 p {
 	float: left;
 	font-size: 0.8rem;
-	padding-left: 5px;
+	/* padding-left: 5px; */
+	font-size: 16px;
+	line-height: 1rem;;
 	margin-bottom: 0px;
 }
  
@@ -1454,6 +1465,7 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 		width:1030px;
 		padding:0px;
 		overflow: hidden;
+		padding:80px 15px 0 15px;
 	}
 
 	#rs-content-left {
@@ -1474,6 +1486,7 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 		width:800px;
 		padding:0px;
 		overflow: hidden;
+		padding:80px 15px 0 15px;
 	}
 
 	#rs-content-left {
@@ -1496,6 +1509,7 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 		width:95%;
 		padding:0px;
 		overflow: hidden;
+		padding:80px 15px 0 15px;
 	}
 	#rs-content-left {
 		float:left;
@@ -2579,9 +2593,9 @@ label {
 .movie-gallery {
     background-color: #fff;
     margin-top: 10px;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px;
     padding: 10px;
-    padding-right: 5px;
+    padding-right: 5px; */
 }
 .movie-gallery .movie-gallery-wrapper {
     margin-left: 10px;
@@ -2592,7 +2606,7 @@ label {
 
 
 .movie-gallery-wrapper a {
-	width: 23%;
+	width: 11%;
 	max-height: 180px;
 	margin-bottom: 10px;
 	display: inline-block;
@@ -2607,4 +2621,129 @@ label {
     margin-right: 3px;
     margin-bottom: 3px;
 }
+
+.star {
+	display: flex;
+	align-items: center;
+}
+.star::after {
+	content: attr(data-star);
+	display: inline-block;
+	font-weight: bold;
+	font-family: Arial;
+	line-height: 16px;
+}
+.star__item {
+	position: relative;
+	margin-right: 8px;
+	width: 16px;
+	height: 16px;
+}
+.star__item-front {
+	position: absolute;
+	display: none;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	color: var(--primary-color);
+	overflow: hidden;
+}
+.star__item-back {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	color: #ededed;
+}
+.star__item--active > .star__item-front {
+	display: block;
+}
+.star__item--half > .star__item-front {
+	width: 50%;
+}
+
+.playBtn {
+	float: left;
+    /* margin-top: 0.5rem;
+    margin-bottom: 1rem; */
+}
+.playBtn a {
+	position: relative;
+    /* margin-bottom: 1rem; */
+    display: block;
+    color: #fff;
+    width: 10.5rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+    line-height: 2rem;
+    text-align: center;
+    letter-spacing: 4px;
+    border-radius: 1.25rem;
+    background-color: var(--button-background);
+    box-shadow: 2px 2px 0px var(--button-shadow);
+}
+.playBtn a svg {
+	position: absolute;
+    left: 0.375rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.5rem;
+    height: 1.5rem;
+}
+.playBtn a svg .i_played1 {
+	fill: var(--button-shadow);
+}
+.playBtn a svg .i_played2 {
+	fill: none;
+}
+.playBtn a svg .i_played2, .playBtn a svg .i_played3 {
+	stroke: #fff;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-width: 0.75px;
+}
+.playBtn a svg .i_played3 {
+	fill: #fff;
+}
+.playBtn a span {
+	position: relative;
+    left: 0.625rem;
+    display: inline-block;
+}
+
+.videoTitle {
+	font-size: 16px;
+	font-weight: bold;
+    line-height: 16px;
+    letter-spacing: 1px;
+    word-break: break-all;
+    padding-top: 150px;
+    white-space: nowrap;
+    /* overflow: hidden; */
+    width: 100%;
+    text-overflow: ellipsis;
+}
+
+.videoInfo {
+ 
+    letter-spacing: 1px;
+    width: 100%;
+    color: black;
+    text-align: center;
+
+	font-size: 16px;
+    font-weight: bold;
+    color: var(--text-color);
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    overflow: hidden;
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+
+
  
