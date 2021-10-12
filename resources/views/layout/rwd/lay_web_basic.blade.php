@@ -8,10 +8,10 @@
 <meta name="description" content="@yield('des')">
 <link href="/css/respon.css" rel="stylesheet" type="text/css">
 <link href="/css/bootstrap-4.0.0.css" rel="stylesheet">
-<!--
 <link href="/css/video-js.css" rel="stylesheet">
-<link href="/js/videojs-contrib-ads.css" rel="stylesheet">
--->
+<link href="/css/index.css" rel="stylesheet" type="text/css">
+<link href="/css/videojs-contrib-ads.css" rel="stylesheet">
+<link rel="stylesheet" href="/css/category-list.css">
 <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
 <style>
 	.video-js {
@@ -20,15 +20,28 @@
 	}
 </style>
 <!-- If you'd like to support IE8 -->
-<script src="/js/video.js"></script>
+<!-- <script src="/js/videojs-ie8.min.js"></script> -->
+<!-- <script src="/js/video.js"></script> -->
+<script src="https://vjs.zencdn.net/7.3.0/video.min.js"></script>
+<!-- <script src="//cdn.sc.gl/videojs-hotkeys/latest/videojs.hotkeys.min.js"></script> -->
+<link href="https://vjs.zencdn.net/7.3.0/video-js.min.css" rel="stylesheet">
+<script  type="module">
+import videojsPreviewThumbnails from 'https://cdn.skypack.dev/videojs-preview-thumbnails';
+</script>
+<script src="/js/videojs-thumbnails/videojs.thumbnails.js"></script>
+<!-- <script src="/js/videojs-thumbnails/videojs.thumbnails.js"></script> -->
 <script src="/js/videojs-contrib-hls.js"></script>
+<script src="/js/videojs-contrib-ads.js"></script>
 <script defer src="/js/fontawesome-all.js"></script>
-<script src="/js/jquery-3.3.1.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="/js/function.js"></script>
-<script type="text/javascript" src="/js/jquery.lazyload.js"></script>
+<!-- <script type="text/javascript" src="/js/jquery.lazyload.js"></script> -->
 <script type="text/javascript" src="/js/jquery.visible.js"></script>
 <script src="/js/popper.min.js"></script>
-<script src="/js/bootstrap-4.0.0.js"></script>
+<!-- <script src="/js/bootstrap-4.0.0.js"></script> -->
+<script src="/js/main.js"></script>
+<script src="/js/select.js"></script>
 <script>
 	$(function(){
 		$.ajaxSetup({
@@ -57,22 +70,20 @@
 		// $('[data-toggle="offcanvas"]').on('click', function () {
 		// 	$('.offcanvas-collapse').toggleClass('open')
 		// 	$('#nav-link-mask').toggle()
-			
 		//   })
-		// $('[data-toggle="dropdown"]').on('click', function () {
+		//  $('[data-toggle="dropdown"]').on('click', function () {
 		// 	if ($('.dropdown-menu').hasClass( "show" ) ) {
 		// 		$('.dropdown-menu').removeClass('show');
 		// 		return;
 		// 	}
     	// 	$('.dropdown-menu').toggleClass('show')
-		// })
+		// })		 
 	});
 	
 	function cccccount() {
-		//console.log('+++')
+		console.log('+++')
 	}
-
-	
+	 
 </script>
 {!! Analytics::render() !!}
 
@@ -89,44 +100,40 @@
 </script>
 @yield('topscript')
 </head>
-@if (config('app.web_type') == 1)
-	<body id="rs-body">
-@else 
-	<body id="rs-body" class="rs-body1" >
-@endif
-<!-- JuicyAds PopUnders v3 Start -->
-<!--
-<script type="text/javascript" src="https://js.juicyads.com/jp.php?c=3474y213t244u4q2q28443b494&u=http%3A%2F%2Fwww.juicyads.rocks"></script>
--->
-<!-- JuicyAds PopUnders v3 End -->
-	<!-- HEADER 開始 -->
- 
-	@include('layout.rwd.lay_web_header',['postArticle'=>false])
- 
 
+	<body id="rs-body">
+
+ 
+	<!-- HEADER 開始 -->
+	@include('layout.rwd.lay_video_header')
 	<!-- HEADER 結束 -->
-	<!-- NAV選項區域 開始 -->
+	<div id="rs-main-content"  style='padding-bottom:5rem;'> 
+		<div class="search" style='top: 0rem;'>
+			<div class="search__content">
+			<input type="search">
+			</div>
+			<div class="search__btn">
+			<button>搜尋</button>
+			<i class="i_search">
+				<svg class="svg" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 23.84 23.84">
+				<g>
+					<circle class="cls-1" cx="11.03" cy="11.03" r="10.03"></circle>
+					<line class="cls-1" x1="18.22" y1="18.22" x2="22.84" y2="22.84"></line>
+				</g>
+				</svg>
+			</i>
+			</div>
+		</div>
+		<main style="padding-top: 0rem;"> 
+			@include('layout.rwd.lay_web_right_video')
+			@yield('maincontent')
+		</main>
+	</div>
+	@yield('Carousel')
 	 
-	<!-- NAV選項區域 結束 -->
-	
-		@if (config('app.web_type') == 1)
-		<div id="rs-main-content"> 
-			@include('layout.rwd.lay_web_rightcul')
-			@yield('maincontent')
-		</div>
-		@else 
-		<div id="rs-main-content1"> 
-			@include('layout.rwd.lay_web_left_sidebar')
-			@yield('maincontent')
-			@include('layout.rwd.lay_web_right_sidebar')
-		</div>
-		@endif
-	
 	<!-- Footer 開始 -->
-	@include('layout.rwd.lay_web_footer')
+	@include('layout.rwd.lay_video_footer')
 	<!-- Footer 結束 -->
 	@yield('footscript')
-
-	@yield('footscript1')
 </body>
 </html>

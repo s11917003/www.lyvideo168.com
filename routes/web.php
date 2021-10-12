@@ -26,7 +26,7 @@ Route::get('rd/genacc', 'Rd\RdController@genacc');
 // Route::group(['prefix' => ''], function($router) {
   	// Route::get('/warning', 'Auth\AuthAgeController@warning');//首頁  
 // });
-Route::get('/{id?}', 'Index\IndexController@index')->where('id', '[0-9]+');//走分頁
+// Route::get('/{id?}', 'Index\IndexController@index')->where('id', '[0-9]+');//走分頁
 // Route::get('/getmore/{id?}', 'Index\IndexController@loadmore');//影片 JSON 格式
 
 //文章內頁
@@ -54,6 +54,8 @@ Route::get('/{id?}', 'Index\IndexController@index')->where('id', '[0-9]+');//走
 
 	Route::get('/{img}.jpg', 'Index\IndexController@image');    //圖片
 	Route::get('{lang}/testview/{id}', 'Index\IndexController@postview1');  //文章
+	Route::get('/', 'Index\IndexController@index');  //文章
+	Route::get('/category', 'Index\IndexController@category');  //文章
 	Route::get('/search/{search}/{page?}/', 'Index\IndexController@searchVideo')->where('page', '[0-9]+');   //搜尋
 
 	// Route::get('/tag/{id}/{page?}', 'Index\IndexController@tag')->where('id', '[0-9]+');

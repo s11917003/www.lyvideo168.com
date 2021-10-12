@@ -33,132 +33,132 @@ use Intervention\Image\Facades\Image;
 class IndexController extends Controller {	
 	
 	protected $language = ['zh'=>1 ,'en'=>2 ,'jp'=>3];
- 	public function index($page = 1) {
+ 	// public function index($page = 1) {
 
-       	// $value = @$_COOKIE['appdl'];
-	   	// if($value == true) {
-		//    	header('Location:/event/app/en');
-		//    	return ;
-	   	// }
+    //    	// $value = @$_COOKIE['appdl'];
+	//    	// if($value == true) {
+	// 	//    	header('Location:/event/app/en');
+	// 	//    	return ;
+	//    	// }
 
 
-       	// $value = @$_COOKIE['agevarify'];
-	   	// if($value != true) {
-		//    	header('Location:/warning');
-		//    	return ;
-	   	// }   	
+    //    	// $value = @$_COOKIE['agevarify'];
+	//    	// if($value != true) {
+	// 	//    	header('Location:/warning');
+	// 	//    	return ;
+	//    	// }   	
 		   
-		$device = Utils::chkdevice();
-		$value = @$_COOKIE['appdl'];
-	   	if($value != true) {
-			Cookie::make('appdl',true,180);
-			$deviveArr  =['web' =>1 ,'android'=>2,'ios'=>3];
+	// 	$device = Utils::chkdevice();
+	// 	$value = @$_COOKIE['appdl'];
+	//    	if($value != true) {
+	// 		Cookie::make('appdl',true,180);
+	// 		$deviveArr  =['web' =>1 ,'android'=>2,'ios'=>3];
 		 
-		   if(is_Null($deviveArr[$device])){	 
-			$d = Device::find(4);
-			$d->count +=1;
-			$d->save();
-		   } else { 
-			$d = Device::find($deviveArr[$device]);
-			$d->count +=1;
-			$d->save();
-		   }
-	   	} 
-	 	$category = PostsCategory::all();
-		$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->with('commentsGod')->where('cate_id', 3)->where('status', 1)->where('covered', 1)->orderBy('id', 'desc')->Paginate(21, null, 1, $page);
+	// 	   if(is_Null($deviveArr[$device])){	 
+	// 		$d = Device::find(4);
+	// 		$d->count +=1;
+	// 		$d->save();
+	// 	   } else { 
+	// 		$d = Device::find($deviveArr[$device]);
+	// 		$d->count +=1;
+	// 		$d->save();
+	// 	   }
+	//    	} 
+	//  	$category = PostsCategory::all();
+	// 	$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->with('commentsGod')->where('cate_id', 3)->where('status', 1)->where('covered', 1)->orderBy('id', 'desc')->Paginate(21, null, 1, $page);
 	 
-		$lastPage = $posts->lastPage();
-		$currentPage = $posts->currentPage();
+	// 	$lastPage = $posts->lastPage();
+	// 	$currentPage = $posts->currentPage();
 	    
-	    $tagarr = [1,2,4,10,11];
-		$relate = PostsTagRelationships::with('article')->whereIn('post_tag_id', $tagarr)->where('status',1)->groupBy('post_id')->inRandomOrder()->limit(10)->get();	 		
+	//     $tagarr = [1,2,4,10,11];
+	// 	$relate = PostsTagRelationships::with('article')->whereIn('post_tag_id', $tagarr)->where('status',1)->groupBy('post_id')->inRandomOrder()->limit(10)->get();	 		
 	
-		$relate1 = $relate;
-		$posts1 = $posts;
-		$adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(3)->get();
-		$adHalf = AdDetailBanner::inRandomOrder()->where('type', 'half')->where('status',1)->limit(1)->get();
-		$adFloat = AdDetailBanner::inRandomOrder()->where('type', 'float')->where('status',1)->first();
-		$announcement =Announcement::inRandomOrder()->where('status',1)->first();
-		$marquee =Announcement::inRandomOrder()->where('status',2)->first();
-		$hot = PostsDetail::with('hot')->orderBy('count_view', 'desc')->Paginate(10, null, 1, $page);
-		$footer =footer::all();	 
-		$adTag = AdTag::where('status',1)->get();
-		$now = date('Y-m-d H:i:s');
-		$adlog = [];
+	// 	$relate1 = $relate;
+	// 	$posts1 = $posts;
+	// 	$adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(3)->get();
+	// 	$adHalf = AdDetailBanner::inRandomOrder()->where('type', 'half')->where('status',1)->limit(1)->get();
+	// 	$adFloat = AdDetailBanner::inRandomOrder()->where('type', 'float')->where('status',1)->first();
+	// 	$announcement =Announcement::inRandomOrder()->where('status',1)->first();
+	// 	$marquee =Announcement::inRandomOrder()->where('status',2)->first();
+	// 	$hot = PostsDetail::with('hot')->orderBy('count_view', 'desc')->Paginate(10, null, 1, $page);
+	// 	$footer =footer::all();	 
+	// 	$adTag = AdTag::where('status',1)->get();
+	// 	$now = date('Y-m-d H:i:s');
+	// 	$adlog = [];
 
 	 
-		foreach ($adDetail as  $key => $ad) {
-			if($ad->play_url){
-				$tagArr =  explode(',', $ad->play_url);
-  	            $tagData = [];	
-				foreach ($tagArr  as $tagA) {
-					foreach ($adTag as $tag) {
-						if($tag->id == $tagA){
-							$tagData[] = $tag;	
-							break;
-						}
-					}
-				}
-				$adDetail[$key]['tagData'] = $tagData;
-			}
-		}
+	// 	foreach ($adDetail as  $key => $ad) {
+	// 		if($ad->play_url){
+	// 			$tagArr =  explode(',', $ad->play_url);
+  	//             $tagData = [];	
+	// 			foreach ($tagArr  as $tagA) {
+	// 				foreach ($adTag as $tag) {
+	// 					if($tag->id == $tagA){
+	// 						$tagData[] = $tag;	
+	// 						break;
+	// 					}
+	// 				}
+	// 			}
+	// 			$adDetail[$key]['tagData'] = $tagData;
+	// 		}
+	// 	}
 	
-		if($adFloat){
-			$log =  ['ad_id' => $adFloat->id ,'actiontype' =>0,'updated_at'=>$now] ;
-			$adlog[]  = $log;
-		}
-		if(count($relate1) >0){
-			foreach ($adHalf as $ad) {
-				$log =  ['ad_id' => $ad->id ,'actiontype' =>0,'updated_at'=>$now] ;
-				$adlog[]  = $log;
-				$ad->isAd  = true;
-				$this->array_insert($relate1,rand(0,count($relate1)-1),$ad);
+	// 	if($adFloat){
+	// 		$log =  ['ad_id' => $adFloat->id ,'actiontype' =>0,'updated_at'=>$now] ;
+	// 		$adlog[]  = $log;
+	// 	}
+	// 	if(count($relate1) >0){
+	// 		foreach ($adHalf as $ad) {
+	// 			$log =  ['ad_id' => $ad->id ,'actiontype' =>0,'updated_at'=>$now] ;
+	// 			$adlog[]  = $log;
+	// 			$ad->isAd  = true;
+	// 			$this->array_insert($relate1,rand(0,count($relate1)-1),$ad);
 				
-			}
-		}
+	// 		}
+	// 	}
 		
-		if(count($posts1) >0){
-			foreach ($adDetail as $ad) {
-				$log =  ['ad_id' => $ad->id ,'actiontype' =>0,'updated_at'=>$now] ;
-				$adlog[]  = $log;;
-				$ad->isAd  = true;
-				$this->array_insert($posts1,rand(0,count($posts1)-1),$ad);
-			}
-		}
+	// 	if(count($posts1) >0){
+	// 		foreach ($adDetail as $ad) {
+	// 			$log =  ['ad_id' => $ad->id ,'actiontype' =>0,'updated_at'=>$now] ;
+	// 			$adlog[]  = $log;;
+	// 			$ad->isAd  = true;
+	// 			$this->array_insert($posts1,rand(0,count($posts1)-1),$ad);
+	// 		}
+	// 	}
 
 	 
-		$announcementArr = [];
-		if($announcement){
-			$announcementArr = explode(':', $announcement->text);
-		}
-		$marqueeArr = [];
-		if($marquee){
-			$marqueeArr = explode(':', $marquee->text);
-		}
+	// 	$announcementArr = [];
+	// 	if($announcement){
+	// 		$announcementArr = explode(':', $announcement->text);
+	// 	}
+	// 	$marqueeArr = [];
+	// 	if($marquee){
+	// 		$marqueeArr = explode(':', $marquee->text);
+	// 	}
 		
-		if(count($adlog) >0){
-			DB::table('ad_detail_banner_log')->insert($adlog);
-		}
+	// 	if(count($adlog) >0){
+	// 		DB::table('ad_detail_banner_log')->insert($adlog);
+	// 	}
 		 
 	 
-		return  view('app_rwd.index.default', [
-			'adHalf'=>$adHalf,
-			'footer'=>$footer,
-			'adFloat' => $adFloat,
-			'category'=>$category,
-			'posts'=>$posts1,
-			'lastPage' =>  $lastPage,
-			'currentPage' => $currentPage,
-			'device' => $device,
-			'relate' => $relate1,
-			'loadmore' => true,
-			'hot' => $hot,
-			'marquee' => $marqueeArr,
-			'announcement' => $announcementArr,
-			'path' =>  env('APP_URL').'app/public',		
-			'adTag' => $adTag,
-		]);
-	}
+	// 	return  view('app_rwd.index.default', [
+	// 		'adHalf'=>$adHalf,
+	// 		'footer'=>$footer,
+	// 		'adFloat' => $adFloat,
+	// 		'category'=>$category,
+	// 		'posts'=>$posts1,
+	// 		'lastPage' =>  $lastPage,
+	// 		'currentPage' => $currentPage,
+	// 		'device' => $device,
+	// 		'relate' => $relate1,
+	// 		'loadmore' => true,
+	// 		'hot' => $hot,
+	// 		'marquee' => $marqueeArr,
+	// 		'announcement' => $announcementArr,
+	// 		'path' =>  env('APP_URL').'app/public',		
+	// 		'adTag' => $adTag,
+	// 	]);
+	// }
 	 
 	public function loadmore($page = 2) {
 		$category = PostsCategory::all();
@@ -190,17 +190,38 @@ class IndexController extends Controller {
 		//  return Image::make(storage_path('/app/public/' .$image))->response();
 
 	}
+	public function index() {
+		$video1 = Video::where(['cate_id'=>1])->orderBy('id', 'desc')->limit(16)->get();	
+		$video2 = Video::where(['cate_id'=>2])->orderBy('id', 'desc')->limit(16)->get();		
+		$video3 = Video::where(['cate_id'=>3])->orderBy('id', 'desc')->limit(16)->get();	
+		$video4 = Video::where(['cate_id'=>4])->orderBy('id', 'desc')->limit(16)->get();	
+
+
+		return view('app_rwd.index.index',[
+			'video1' => $video1,
+			'video2' => $video2,
+			'video3' => $video3,
+			'video4' => $video4,
+		]);
+
+	 
+
+	}
 	public function postview1(Request $request, $lang, $id) {
+	
 		$video_id = explode("$",$id)[0];
+	 
 		if(!isset($this->language[$lang])) {
 			//abort(404);
+		
 			header("Location:/");
 			return ;
 		}
+	
 		//主影片DATA
 		$webLangIndex = $this->language[$lang];
 		$video = Video::where(['video_id'=>$video_id,'video_lang'=>$webLangIndex])->first();
-
+	
 	 
 		if(!$video) {
 			header("Location:/");
@@ -251,16 +272,22 @@ class IndexController extends Controller {
 			foreach ($video['thumbnail_img']  as $key => $url) {
 				//判斷是否存在 不存在則寫入
 				$filename = $video['video_id'].'$'.$video['actress'].'$'.($key+1).'.jpg';
+			
 				$isExists = \Storage::disk('public')->exists($path.$filename);	
+
+			
 				$img_path[] = $filename;
 				if($isExists){
 					continue;
 				} else {
+
+					return $url;
 					$contents = file_get_contents($url);
 					\Storage::disk('public')->put($path.$filename,$contents);
 					//file_put_contents('../storage/'.$path.$filename,	$contents);   
 				}
 			}
+		
 			$video['thumbnail_img_router'] = 	$img_path;
 		}
 	
@@ -555,96 +582,98 @@ class IndexController extends Controller {
 	    $article = PostsArticle::with('detail')->with('tag')->with('userInfo')->where('id',$id)->where('status', 1)->first();
 	    return $article;
 	}
-	
-	//分類
-	public function category($cat, $page = 1) {
-		
-		$category = PostsCategory::all();
-		$cats = PostsCategory::where('name_en', $cat)->first();
-		if($cats == null) {
-			header("Location:/");
-			return ;
-		}		
-		
-		$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->with('commentsGod')->where('cate_id', $cats->id)->where('status', 1)->where('covered', 1)->orderBy('id', 'desc')->Paginate(12, null, 1, $page);
-		$lastPage = $posts->lastPage();
-		$currentPage = $posts->currentPage();
-		$footer =footer::all();;		
-		return  view('app_rwd.index.default_cat', [
-			'footer'=>$footer,
-			'category'=>$category,
-			'posts'=>$posts,
-			'lastPage' => $lastPage,
-			'currentPage' => $currentPage,
-			'cate' => $cats->name_en
-		]);	
+	public function category() {
+		return view('app_rwd.index.category');
 	}
-	//熱門
-	public function hot($page = 1) {
-		$article = $this->show_api(1);
+	//分類
+	// public function category($cat, $page = 1) {
+		
+	// 	$category = PostsCategory::all();
+	// 	$cats = PostsCategory::where('name_en', $cat)->first();
+	// 	if($cats == null) {
+	// 		header("Location:/");
+	// 		return ;
+	// 	}		
+		
+	// 	$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->with('commentsGod')->where('cate_id', $cats->id)->where('status', 1)->where('covered', 1)->orderBy('id', 'desc')->Paginate(12, null, 1, $page);
+	// 	$lastPage = $posts->lastPage();
+	// 	$currentPage = $posts->currentPage();
+	// 	$footer =footer::all();;		
+	// 	return  view('app_rwd.index.default_cat', [
+	// 		'footer'=>$footer,
+	// 		'category'=>$category,
+	// 		'posts'=>$posts,
+	// 		'lastPage' => $lastPage,
+	// 		'currentPage' => $currentPage,
+	// 		'cate' => $cats->name_en
+	// 	]);	
+	// }
+	// //熱門
+	// public function hot($page = 1) {
+	// 	$article = $this->show_api(1);
 	 
 		
-		// //add pv;
-		// PostsDetail::find($id)->increment('count_view');
+	// 	// //add pv;
+	// 	// PostsDetail::find($id)->increment('count_view');
 		   	 		
-		// //suggest post
-		// $tags = PostsTagRelationships::where('post_id', $id)->get();
-		// //var_dump($tags);
-		// $tagarr = [];
-		// foreach ($tags as $tag) {
-		// 	$tagarr[] = $tag['post_tag_id'];
+	// 	// //suggest post
+	// 	// $tags = PostsTagRelationships::where('post_id', $id)->get();
+	// 	// //var_dump($tags);
+	// 	// $tagarr = [];
+	// 	// foreach ($tags as $tag) {
+	// 	// 	$tagarr[] = $tag['post_tag_id'];
 
-		// }
+	// 	// }
 		
-		//$relate = \DB::table('posts_tag_relationships')->whereIn('post_tag_id', $tagarr)->groupBy('post_id')->inRandomOrder()->limit(6)->get();
-		// $relate = PostsTagRelationships::with('article')->where('post_id','!=', $id)->whereIn('post_tag_id', $tagarr)->where('status',1)->groupBy('post_id')->inRandomOrder()->limit(14)->get();	 		
+	// 	//$relate = \DB::table('posts_tag_relationships')->whereIn('post_tag_id', $tagarr)->groupBy('post_id')->inRandomOrder()->limit(6)->get();
+	// 	// $relate = PostsTagRelationships::with('article')->where('post_id','!=', $id)->whereIn('post_tag_id', $tagarr)->where('status',1)->groupBy('post_id')->inRandomOrder()->limit(14)->get();	 		
 		
-		$posts = PostsDetail::with('hot')->orderBy('count_view', 'desc')->Paginate(10, null, 1, $page);
-		$adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(2)->get();
-		$lastPage = $posts->lastPage();
-		$currentPage = $posts->currentPage();
-		$footer =footer::all();
-		$marquee =Announcement::inRandomOrder()->where('status',2)->first();
+	// 	$posts = PostsDetail::with('hot')->orderBy('count_view', 'desc')->Paginate(10, null, 1, $page);
+	// 	$adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(2)->get();
+	// 	$lastPage = $posts->lastPage();
+	// 	$currentPage = $posts->currentPage();
+	// 	$footer =footer::all();
+	// 	$marquee =Announcement::inRandomOrder()->where('status',2)->first();
 	
-		$marqueeArr = [];
-		if($marquee){
-			$marqueeArr = explode(':', $marquee->text);
-		}
+	// 	$marqueeArr = [];
+	// 	if($marquee){
+	// 		$marqueeArr = explode(':', $marquee->text);
+	// 	}
 	
-		$adlog = [];
-		$now = date('Y-m-d H:i:s');
-		if(count($posts) >0){
-			foreach ($adDetail as $ad) {
-				$log =  ['ad_id' => $ad->id ,'actiontype' =>0,'updated_at'=>$now] ;
-				$adlog[]  = $log;;
-				$ad->isAd  = true;
-				$this->array_insert($posts,rand(0,count($posts)-1),$ad);
-			}
-		}
+	// 	$adlog = [];
+	// 	$now = date('Y-m-d H:i:s');
+	// 	if(count($posts) >0){
+	// 		foreach ($adDetail as $ad) {
+	// 			$log =  ['ad_id' => $ad->id ,'actiontype' =>0,'updated_at'=>$now] ;
+	// 			$adlog[]  = $log;;
+	// 			$ad->isAd  = true;
+	// 			$this->array_insert($posts,rand(0,count($posts)-1),$ad);
+	// 		}
+	// 	}
 
-		if(count($adlog) >0){
-			DB::table('ad_detail_banner_log')->insert($adlog);
-		}
+	// 	if(count($adlog) >0){
+	// 		DB::table('ad_detail_banner_log')->insert($adlog);
+	// 	}
 		 
-		if($posts) {
-			$device = Utils::chkdevice();
-			return view('app_rwd.index.default_hot',[
-				'post'=> $article,
-				'footer'=>$footer,
-				'lastPage' => $lastPage,
-				'currentPage' => $currentPage,
-				'device' => $device,
-				'posts'=> $posts,
-				'title'=> '热门影片',
-				'tag' => 'hot',
-				'marquee' => $marqueeArr,
-			]);
-		} else {
-			//沒有文章跳轉
-			echo '沒有文章';
-			header("Location:/"); 
-		}
-	}
+	// 	if($posts) {
+	// 		$device = Utils::chkdevice();
+	// 		return view('app_rwd.index.default_hot',[
+	// 			'post'=> $article,
+	// 			'footer'=>$footer,
+	// 			'lastPage' => $lastPage,
+	// 			'currentPage' => $currentPage,
+	// 			'device' => $device,
+	// 			'posts'=> $posts,
+	// 			'title'=> '热门影片',
+	// 			'tag' => 'hot',
+	// 			'marquee' => $marqueeArr,
+	// 		]);
+	// 	} else {
+	// 		//沒有文章跳轉
+	// 		echo '沒有文章';
+	// 		header("Location:/"); 
+	// 	}
+	// }
 	//標籤
 	public function tag($tag, $page = 1) {
 		$article = $this->show_api(1);

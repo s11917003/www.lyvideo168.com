@@ -75,8 +75,8 @@
 	</div>
 	<div style="height:60px;"></div>
 	<!-- Footer 開始 -->
-	@include('layout.web.lay_web_footer')
+	<!-- @include('layout.web.lay_web_footer') -->
 	<!-- Footer 結束 -->
-	@yield('footscript')
+	<!-- @yield('footscript') -->
 </body>
 </html>
