@@ -213,7 +213,6 @@ class IndexController extends Controller {
 	 
 		if(!isset($this->language[$lang])) {
 			//abort(404);
-		
 			header("Location:/");
 			return ;
 		}
@@ -260,6 +259,8 @@ class IndexController extends Controller {
 			}
 		
 		}
+		
+	
 		//預覽圖片
 		if($video['thumbnail_img']){
 			$video['thumbnail_img'] = explode("@",$video['thumbnail_img']);
@@ -281,13 +282,13 @@ class IndexController extends Controller {
 					continue;
 				} else {
 
-					return $url;
+				 
 					$contents = file_get_contents($url);
 					\Storage::disk('public')->put($path.$filename,$contents);
 					//file_put_contents('../storage/'.$path.$filename,	$contents);   
 				}
 			}
-		
+		 
 			$video['thumbnail_img_router'] = 	$img_path;
 		}
 	
@@ -303,7 +304,7 @@ class IndexController extends Controller {
 			$tagName[] = $tag->tagName[$lang];
 			$tag->tagName = $tag->tagName[$lang];
 		}
-
+	 
 		////相關標籤影片
 		$randTag  = Video_tag_relations::where('video_id',$video->id)->inRandomOrder()->first();
 	 	$video_relation = Video::where('video_lang',$webLangIndex)->with(['tagRelations'])->whereHas('tagRelations', function($q) use ($randTag) { $q->where('tag_id', '=', $randTag->tag_id); })->limit(10)->get();		
@@ -584,6 +585,16 @@ class IndexController extends Controller {
 	}
 	public function category() {
 		return view('app_rwd.index.category');
+	}
+	public function categoryPost(Request $request) {
+
+		 
+		$video_ids =  Video_tag_relations::whereIn('tag_id',$request->tag)->Paginate(20, null, 1, $request->page)->pluck('id')->toArray();
+		$video = Video::whereIn('id', $video_ids)->get();
+
+		return  response()->json(['video_ids' => $video_ids, 'video' =>$video ]);
+		return $video ;
+
 	}
 	//分類
 	// public function category($cat, $page = 1) {
