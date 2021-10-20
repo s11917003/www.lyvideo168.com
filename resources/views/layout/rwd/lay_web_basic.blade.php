@@ -10,6 +10,8 @@
 <link href="/css/bootstrap-4.0.0.css" rel="stylesheet">
 <link href="/css/video-js.css" rel="stylesheet">
 <link href="/css/index.css" rel="stylesheet" type="text/css">
+<link href="/css/search-list.css" rel="stylesheet" type="text/css">
+<link href="/css/list.css" rel="stylesheet" type="text/css">
 <link href="/css/videojs-contrib-ads.css" rel="stylesheet">
 <link rel="stylesheet" href="/css/category-list.css">
 <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />

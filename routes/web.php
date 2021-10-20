@@ -57,7 +57,8 @@ Route::get('rd/genacc', 'Rd\RdController@genacc');
 	Route::get('/', 'Index\IndexController@index');  //文章
 	Route::get('/category', 'Index\IndexController@category');  //文章
 	Route::post('/category', 'Index\IndexController@categoryPost');  //文章
-	Route::get('/search/{search}/{page?}/', 'Index\IndexController@searchVideo')->where('page', '[0-9]+');   //搜尋
+	Route::get('/search/{search}/{page?}/', 'Index\IndexController@search')->where('page', '[0-9]+');   //搜尋
+	Route::post('/search', 'Index\IndexController@searchVideo');  //搜尋
 
 	// Route::get('/tag/{id}/{page?}', 'Index\IndexController@tag')->where('id', '[0-9]+');
 // });
