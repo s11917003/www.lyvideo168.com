@@ -746,12 +746,18 @@ class IndexController extends Controller {
 	public function destroy($id)
     {
         //
+
     }
-    public function searchVideo($search ='',$page = 1, $lang = 'jp'){
-		$article = $this->show_api(1);
+
+	public function search($search ='',$page = 1, $lang = 'jp'){
+		return view('app_rwd.index.search',['search'=>$search]);
+	}
+
+    public function searchVideo(Request $request){
+		$lang = $request->lang = 'jp';
+		$search = $request->search;
 
 		$webLangIndex = $this->language[$lang];
-		$whereArr = [];	
 		DB::enableQueryLog();
 		$Video_actress_name = Video_actress_name::where('sub_name', 'like', '%'.strtoupper($search).'%')->pluck('name')->all();//找女優 對應表
 	
@@ -763,66 +769,8 @@ class IndexController extends Controller {
 				}      
 		   });
 		}
-		$video = $video->where(['video_lang'=>$webLangIndex])->get();
-
-
-		var_dump( DB::getQueryLog());
-		DB::enableQueryLog();
-		$posts = PostsArticle::with('detail')->with('tag')->with('userInfo')->with('commentsGod')
-		->where('cate_id', 3)->where('status', 1)->where('covered', 1)
-		->whereRaw("UPPER(title) LIKE '%". strtoupper($search)."%'")
-		// ->where('title','like', '%'.$search.'%')
-		->orderBy('id', 'desc')
-		->Paginate(12, null, 1, $page);
-		$footer =footer::all();;
-		//$adDetail = AdDetailBanner::inRandomOrder()->where('type', 'video')->where('status',1)->limit(2)->get();
-		$lastPage = $posts->lastPage();
-		$currentPage = $posts->currentPage();
-		 
-		$marquee =Announcement::inRandomOrder()->where('status',2)->first();
-		var_dump($video);
-		$marqueeArr = [];
-		if($marquee){
-			$marqueeArr = explode(':', $marquee->text);
-		}
-		// $now = date('Y-m-d H:i:s');
-		// if(count($posts) >0){
-		// 	foreach ($adDetail as $ad) {
-		// 		$log =  ['ad_id' => $ad->id ,'actiontype' =>0,'updated_at'=>$now] ;
-		// 		$adlog[]  = $log;;
-		// 		$ad->isAd  = true;
-		// 		$this->array_insert($posts,rand(0,count($posts)-1),$ad);
-		// 	}
-		// }
-
-		// if(count($adlog) >0){
-		// 	DB::table('ad_detail_banner_log')->insert($adlog);
-		// }
-	 
-		if($posts) {
-			//return $posts;
-			$device = Utils::chkdevice();
-			return view('app_rwd.index.default_search',[
-				'posts'=> $posts,
-				'footer'=>$footer,
-				'post'=> $article,
-				'search'=>$search,
-				'lastPage' => $lastPage,
-				'currentPage' => $currentPage,
-				'device' => $device,		 
-				'title'=> '搜尋',
-				'tag' => 'search',
-				'marquee' => $marqueeArr,
-				'videos'=> $video,
-			]);
-		} else {
-			//沒有文章跳轉
-			echo '沒有文章';
-			header("Location:/"); 
-		}
-
- 
- 
+		$video = $video->where(['video_lang'=>$webLangIndex])->Paginate(12);
+	 	return  response()->json(['video' =>$video,  'pagination' => (string)$video->links("pagination::bootstrap-4"), ]);
     }
 	public function postpage() {
 		/*
