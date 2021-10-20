@@ -587,12 +587,10 @@ class IndexController extends Controller {
 		return view('app_rwd.index.category');
 	}
 	public function categoryPost(Request $request) {
+		$video_ids =  Video_tag_relations::whereIn('tag_id',$request->tag)->pluck('id')->toArray();
+		$video = Video::select('*')->whereIn('id', $video_ids)->Paginate(36) ;
 
-		 
-		$video_ids =  Video_tag_relations::whereIn('tag_id',$request->tag)->Paginate(20, null, 1, $request->page)->pluck('id')->toArray();
-		$video = Video::whereIn('id', $video_ids)->get();
-
-		return  response()->json(['video_ids' => $video_ids, 'video' =>$video ]);
+		return  response()->json(['video_ids' => $video_ids, 'video' =>$video,  'pagination' => (string)$video->links("pagination::bootstrap-4"), ]);
 		return $video ;
 
 	}

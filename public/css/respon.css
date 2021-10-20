@@ -1404,23 +1404,34 @@ ul.pagination {
 ul.pagination li {display: inline;}
 
 ul.pagination li a {
-    color: #cdacac;
+    /* color: #cdacac;
     float: left;
     padding: 4px 8px;
     text-decoration: none;
     transition: background-color .3s;
     border: 1px solid #ddd;
     margin: 0 4px;
-	font-size:13px;
+	font-size:13px; */
 }
+.page-item.active .page-link {
+		
+	background-color: #b5b9bd;
+	border-color: #b5b9bd;
+}
+	
 
+
+.page-link {
+	color:#b5b9bd; ;
+	background-color: #b5b9bd;
+}
 ul.pagination li a.active {
     background-color:#F8730C;
     color:#fff;
     border: 1px solid #F8730C;
 }
 
-ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+ul.pagination li a:hover:not(.active) {background-color: #ddd;color:#b5b9bd; ;}
 /*** 分頁 結尾 ***/
 
 
@@ -1809,13 +1820,13 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 	
 	ul.pagination li a {
 		/* color: black; */
-		float: left;
+		/* float: left;
 		padding: 8px 12px;
 		text-decoration: none;
 		transition: background-color .3s;
 		border: 1px solid #ddd;
 		margin: 0 4px;
-		font-size:13px;
+		font-size:13px; */
 	}
 	
 	ul.pagination li a.active {
@@ -2462,16 +2473,24 @@ label {
 	ul.pagination li {display: inline;}
 	
 	ul.pagination li a {
-		color: #cdacac;
+		/* color: #cdacac;
 		float: left;
 		padding: 4px 8px;
 		text-decoration: none;
 		transition: background-color .3s;
 		border: 1px solid #ddd;
 		margin: 0 2px;
-		font-size:13px;
+		font-size:13px; */
 	}
-
+	.page-item.active .page-link {
+		
+		background-color: #b5b9bd;
+		border-color: #b5b9bd;
+	}
+		
+	.page-link {
+		background-color: #b5b9bd;
+	}
 	/* ul.pagination li a .act{
 		color: #ee0202;
 	 

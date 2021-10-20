@@ -128,6 +128,7 @@ import videojsPreviewThumbnails from 'https://cdn.skypack.dev/videojs-preview-th
 			@include('layout.rwd.lay_web_right_video')
 			@yield('maincontent')
 		</main>
+		@yield('pagination')
 	</div>
 	@yield('Carousel')
 	 
