@@ -17,8 +17,9 @@ class Video_actress extends Modeli
      public function actressRelations() {
         return $this->hasMany('App\Model\Video_actress_relations','actress_id','id');
     }
-      //關聯videoTag
-      public function wiki() {
+    //關聯videoTag
+    public function wiki() {
         return $this->hasOne('App\Model\Video_actress_data','JapaneseName','JapaneseName1');
     }
+   
 }

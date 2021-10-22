@@ -61,6 +61,7 @@ Route::get('rd/genacc', 'Rd\RdController@genacc');
 	Route::post('/search', 'Index\IndexController@searchVideo');  //搜尋
 	Route::get('/actress_list', 'Index\IndexController@actress');  //女優清單
 	Route::post('/actress_list', 'Index\IndexController@actressList');  //女優清單
+	Route::get('/actress/{id}', 'Index\IndexController@actressPage');  //女優主頁面
 	// Route::get('/tag/{id}/{page?}', 'Index\IndexController@tag')->where('id', '[0-9]+');
 // });
 //發文頁面

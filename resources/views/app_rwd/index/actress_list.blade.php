@@ -50,7 +50,7 @@
 						<figure><img src="/img/Pictures/`+item.JapaneseName1+`_coverphoto.jpg"></figure>
 						<div class="female-list__item-info-info">
 						<h5>`+item.JapaneseName1+`</h5>
-						<div class="show">出演影片：`+item.JapaneseName1+`</div>
+						<div class="show">出演影片：`+item.actress_relations_count+`</div>
 						</div>
 						</a>`;
 						

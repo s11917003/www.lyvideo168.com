@@ -22,6 +22,7 @@ use App\Model\PostsTagRelationships;
 use App\Model\Video;
 use App\Model\Video_actress_name;
 use App\Model\Video_actress;
+use App\Model\Video_actress_relations;
 use App\Model\Video_tag_relations;
 use App\Model\Video_tag;
 use Illuminate\Support\Facades\Auth;
@@ -754,7 +755,7 @@ class IndexController extends Controller {
 		return view('app_rwd.index.search',['search'=>$search]);
 	}
 
-    public function searchVideo(Request $request){
+    public function searchVideo(Request $request){  //修改
 		$lang = $request->lang = 'jp';
 		$search = $request->search;
 
@@ -781,6 +782,17 @@ class IndexController extends Controller {
 		$video_actress = Video_actress::withCount(['actressRelations','wiki'])->Paginate(96);// 女優table;
 	 
 		return  response()->json(['video_actress' =>$video_actress,  'pagination' => (string)$video_actress->links("pagination::bootstrap-4") ]);
+    }
+	public function actressPage(Int $id) {
+		$actress = Video_actress::where('id',$id)->with('wiki')->first();// 女優table;
+	
+		if(!$actress) {
+			//abort(404);
+			header("Location:/");
+			return ;
+		}
+		$count  = Video_actress_relations::where('actress_id',$id)->count();// 女優table;
+		return  view('app_rwd.index.actress',['actress'=>$actress,'count'=>$count]);
     }
 	public function postpage() {
 		/*
