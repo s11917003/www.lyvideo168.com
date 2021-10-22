@@ -59,7 +59,8 @@ Route::get('rd/genacc', 'Rd\RdController@genacc');
 	Route::post('/category', 'Index\IndexController@categoryPost');  //文章
 	Route::get('/search/{search}/{page?}/', 'Index\IndexController@search')->where('page', '[0-9]+');   //搜尋
 	Route::post('/search', 'Index\IndexController@searchVideo');  //搜尋
-
+	Route::get('/actress_list', 'Index\IndexController@actress');  //女優清單
+	Route::post('/actress_list', 'Index\IndexController@actressList');  //女優清單
 	// Route::get('/tag/{id}/{page?}', 'Index\IndexController@tag')->where('id', '[0-9]+');
 // });
 //發文頁面

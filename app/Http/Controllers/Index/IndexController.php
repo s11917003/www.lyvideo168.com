@@ -21,6 +21,7 @@ use App\Model\Announcement;
 use App\Model\PostsTagRelationships;
 use App\Model\Video;
 use App\Model\Video_actress_name;
+use App\Model\Video_actress;
 use App\Model\Video_tag_relations;
 use App\Model\Video_tag;
 use Illuminate\Support\Facades\Auth;
@@ -771,6 +772,15 @@ class IndexController extends Controller {
 		}
 		$video = $video->where(['video_lang'=>$webLangIndex])->Paginate(12);
 	 	return  response()->json(['video' =>$video,  'pagination' => (string)$video->links("pagination::bootstrap-4"), ]);
+    }
+	public function actress() {
+		return view('app_rwd.index.actress_list');
+    }
+	public function actressList(Request $request) {
+	 
+		$video_actress = Video_actress::withCount(['actressRelations','wiki'])->Paginate(96);// 女優table;
+	 
+		return  response()->json(['video_actress' =>$video_actress,  'pagination' => (string)$video_actress->links("pagination::bootstrap-4") ]);
     }
 	public function postpage() {
 		/*

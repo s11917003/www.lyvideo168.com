@@ -8,10 +8,12 @@ use Rap2hpoutre\FastExcel\FastExcel;
 use App\Model\Video;
 use App\Model\Video_tag_relations;
 use App\Model\Video_tag;
+use App\Model\Video_actress;
+use App\Model\Video_actress_relations;
 use App\Model\PackageInfo;
 use Exception;
 // use PDO;
-
+use Illuminate\Support\Facades\DB;
 class CsvController extends Controller {
 	public function geCsv(Request $request) {
 		set_time_limit(0);
@@ -81,8 +83,9 @@ class CsvController extends Controller {
 						try{
 							$videoExists = Video::where(['video_id'=> $item['影片ID'],'video_lang'=>$_item[0]])->first();
 
-							//該筆已經有在資料庫了
+							//該筆不在資料庫了
 							if(!$videoExists) {
+								continue;
 								$newVideoId = Video::insertGetId( [   //寫入video
 									// 'id' => $video_id + ($index+1),
 									'video_id'=> $item['影片ID'],
@@ -119,7 +122,39 @@ class CsvController extends Controller {
 										}
 									}	 
 								}
-							}
+								if($newVideoId){ 
+									$actressData = [];
+							 
+									$video = Video::where(['video_id'=> $item['影片ID'],'video_lang'=>$_item[0]])->first();
+									$id = $video->id;
+									$actress = $video->actress;
+									if($video->actress){ 
+										$actressArr = explode('@',$actress);
+										foreach ($actressArr as $actressItme) {
+											DB::enableQueryLog();
+											if($actressItme){ 
+												$actress_id = Video_actress::where('ChineseName1', $actressItme)
+												->orwhere('ChineseName2', $actressItme)
+												->orwhere('ChineseName3', $actressItme)
+												->orwhere('JapaneseName1', $actressItme)
+												->orwhere('JapaneseName2', $actressItme)
+												->orwhere('JapaneseName3', $actressItme)
+												->orwhere('JapaneseName4', $actressItme)
+												->orwhere('JapaneseName5', $actressItme)
+												->first();
+
+												if($actress_id) {
+													$actressData[] = ['video_id'=> $id, 'actress_id' => $actress_id->id];
+												}
+											}	
+										}
+										if($actressData){
+											Video_actress_relations::insert($actressData);  
+										}
+									}
+								}
+									
+							}  
 							
 						} catch (\Illuminate\Database\QueryException $ex) {
 							 dd($ex->getMessage()); 

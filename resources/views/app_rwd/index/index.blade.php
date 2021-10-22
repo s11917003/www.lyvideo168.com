@@ -108,6 +108,6 @@
 
 		console.log('window.onload')
 
-	 
+	}
 </script>
 @stop

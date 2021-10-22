@@ -11,6 +11,8 @@
 <link href="/css/video-js.css" rel="stylesheet">
 <link href="/css/index.css" rel="stylesheet" type="text/css">
 <link href="/css/search-list.css" rel="stylesheet" type="text/css">
+<link href="/css/female-list.css" rel="stylesheet" type="text/css">
+<link href="/css/female-detail.css" rel="stylesheet" type="text/css">
 <link href="/css/list.css" rel="stylesheet" type="text/css">
 <link href="/css/videojs-contrib-ads.css" rel="stylesheet">
 <link rel="stylesheet" href="/css/category-list.css">
