@@ -103,6 +103,25 @@
 @section('footscript')
 </script>
 <script>
+ 
+    $('[data-tab]').on('click', '.news-tab__title', function () {
+      const idx = $(this).index();
+      $('[data-tab]')
+        .find('.news-tab__title')
+        .removeClass('news-tab__title--active');
+      $('[data-tab]')
+        .find('.news-tab__content')
+        .removeClass('news-tab__content--active');
+
+      $(this).addClass('news-tab__title--active');
+      $('[data-tab]')
+        .find('.news-tab__content')
+        .eq(idx)
+        .addClass('news-tab__content--active');
+    });
+
+    
+   
 
 	window.onload = function() {
 

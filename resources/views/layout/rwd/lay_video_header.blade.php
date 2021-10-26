@@ -5,7 +5,7 @@
 		<div class="header__block">
 		  <a href="javascript:void(0);" class="hamburger" title="MENU"><span></span></a>
 		  <div class="logo">
-			<a href="index.html">
+			<a href="/">
 			  <svg class="logo__svg" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 156.01 60.55">
 				<g data-name="logo">
 				  <path class="logo-primary" d="M4.74,30.09H16.38L13.48,40.6a3.33,3.33,0,0,0-.13,1.95q.24.57,1.23.57A2.39,2.39,0,0,0,16,42.7a2.22,2.22,0,0,0,.79-1.21l.24-.89L28.26,0H40.6L29.32,40.9q-1.92,7-4.79,8.78T12.27,51.47q-8.8,0-10.61-1.84t.1-8.73Z"></path>
@@ -91,19 +91,13 @@
 		
 	  </header>
 	  <nav>
-		<ul class="nav" style="position: fixed;
-		z-index: 9;
-		top: 100px;
-		left: 0;
-		width: 100%;
-		height: 1.875rem;
-		text-align: center;
-		background-color: var(--primary-color)">
+		<ul class="nav" style=" ">
 		  <li><a href="ranking-item-list.html">有　碼</a></li>
-		  <li><a href="#">無　碼</a></li>
+		  <li><a href="#">無　碼</a></li><div class="
+		  "></div>
 		  <li><a href="#">素　人</a></li>
-		  <li><a href="category-list.html">類　別</a></li>
-		  <li><a href="female-list.html">女　優</a></li>
+		  <li><a href="/category">類　別</a></li>
+		  <li><a href="/actress_list.html">女　優</a></li>
 		  <li><a href="ranking-list.html">排行榜</a></li>
 		</ul>
 	  
@@ -173,34 +167,97 @@
 	  </div>
 	  
 	  </nav>
- 
-	  <script>
-		(function ($) {
-		  // star
-		  const $star = $('.star');
-		  const starNum = $star.data('star');
-	  
-		  $star.children().each((i, e) => {
-			if (i < starNum) {
-			  $(e).addClass('star__item--active');
-			  if (!Number.isInteger(starNum) && i === Math.floor(starNum)) {
-				$(e).addClass('star__item--half');
-			  }
-			}
-		  });
-	  
-		  // more
-		  const $topicCont = $('.topic__about p');
-		  const $topicContMore = $('.topic__about-more');
-		  if ($topicCont.height() > 72) {
-			$topicCont.addClass('active');
-			$topicContMore.show().on('click', function () {
-			  $topicCont.toggleClass('active');
-			  $topicContMore.find('.i-arrow').toggleClass('active');
-			});
-		  } else {
-			$topicContMore.hide();
-		  }
-		})(jQuery);
-	  </script>
+	  <div class="search" >
+		<div class="search__content">
+		<input type="search">
+		</div>
+		<div class="search__btn">
+		<button>搜尋</button>
+		<i class="i_search">
+			<svg class="svg" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 23.84 23.84">
+			<g>
+				<circle class="cls-1" cx="11.03" cy="11.03" r="10.03"></circle>
+				<line class="cls-1" x1="18.22" y1="18.22" x2="22.84" y2="22.84"></line>
+			</g>
+			</svg>
+		</i>
+		</div>
+	</div>
+<script>
+(function ($) {
+	// star
+	const $star = $('.star');
+	const starNum = $star.data('star');
+	$('.hamburger').click(function(){
+		$('.hamburger').toggleClass('active')
+		$('body nav').toggleClass('active')
+	});
+
+	$('#search').click(function(){
+		$('.search ').toggleClass('active')
+		
+	});
+	$('#setting').click(function(){
+		$('.setting ').toggleClass('active')
+		
+	});
+
+	$('#lang').click(function(){
+		$('#lang label').toggleClass('active')
+		$('#lang ul').toggle() 
+		
+	});
+
+	$('#lang ul li').click(function(){
+		$('#lang label span').text($(this).find('span').text())
+		$('#lang label img').attr('src',  $(this).find('img').attr('src')   )
+	});
+	$("#switch-slider").click(function(){
+		var checkis = $(this).is(":checked");
+		console.log(checkis)
+		if(checkis){
+			$('html').addClass('is-dark')
+			$('body').addClass('is-dark')
+			return;
+		}
+		$('html').removeClass('is-dark')
+		$('body').removeClass('is-dark')
+	});
+
+	$star.children().each((i, e) => {
+	if (i < starNum) {
+			$(e).addClass('star__item--active');
+		if (!Number.isInteger(starNum) && i === Math.floor(starNum)) {
+			$(e).addClass('star__item--half');
+		}
+	}
+	});
+
+	// more
+	const $topicCont = $('.topic__about p');
+	const $topicContMore = $('.topic__about-more');
+	if ($topicCont.height() > 72) {
+	$topicCont.addClass('active');
+	$topicContMore.show().on('click', function () {
+		$topicCont.toggleClass('active');
+		$topicContMore.find('.i-arrow').toggleClass('active');
+	});
+	} else {
+		$topicContMore.hide();
+	}
+})(jQuery);
+</script>
+<style>
+	.search {
+	 
+		top: 5rem;
+	}
+	@media (max-width: 640px){
+		.search.active {
+			transform: scaleY(1) translateX(-50%);
+			top: 7rem;
+		}
+	}
+
+</style>
 	  

@@ -17,8 +17,8 @@
 <link href="/css/videojs-contrib-ads.css" rel="stylesheet">
 <link rel="stylesheet" href="/css/category-list.css">
 <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
- 
- 
+<script src="js/main.js"></script>
+<script src="js/select.js"></script>
 <script src="https://vjs.zencdn.net/7.3.0/video.min.js"></script>
  
 <link href="https://vjs.zencdn.net/7.3.0/video-js.min.css" rel="stylesheet">
@@ -57,6 +57,7 @@ import videojsPreviewThumbnails from 'https://cdn.skypack.dev/videojs-preview-th
 		</main>
 		@yield('pagination')
 	</div>
+	@yield('footer')
 	@yield('footscript')
 </body>
 </html>

@@ -52,15 +52,41 @@
 	</div>
   </div>
 @stop	
-@section('pagination')
-<!-- <div class="row pt-4"></div>
-	<div class="col">
-		<div id='pagination' class="pagination   d-flex justify-content-center"></div>
-	</div>
-</div> -->
-@stop		
+@section('footer')
+<div class='actress_footer'style='
+'>
+	<p style=''>
+	  {{ $actress->wiki->APA }}
+	</p>
+	<p style=''>
+	  This article uses material from the Wikipedia article   <a href="{{ $actress->wiki->Wiki_Link }}">{{ $actress->wiki->wiki_name }}</a>, 
+	  <br>which is released under the Creative Commons Attribution-Share-Alike License 3.0
+	 
+	</p>
+</div>
+@stop	
 @section('footscript')
 <style>
+.actress_footer {
+	padding: 8rem 3rem 0 3rem;
+	text-align: center;
+	color: #000;
+	background: inherit;
+	font-size: 0.625rem;
+
+}
+.actress_footer p{
+	line-height: 1.5;
+    padding-bottom: 1rem;
+	margin: 0 auto;
+	width: 60%;
+    word-break: break-all;
+}
+@media screen and (max-width: 480px){
+.actress_footer p{
+	width: 90%;
+}
+}
 textarea {
 	font-weight: bold;
     
