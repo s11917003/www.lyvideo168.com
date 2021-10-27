@@ -53,8 +53,7 @@
   </div>
 @stop	
 @section('footer')
-<div class='actress_footer'style='
-'>
+<div class='actress_footer'style=''>
 	<p style=''>
 	  {{ $actress->wiki->APA }}
 	</p>

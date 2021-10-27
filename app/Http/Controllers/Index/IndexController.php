@@ -308,6 +308,7 @@ class IndexController extends Controller {
 		foreach ($video_tag as $tag ) {
 			$tagName[] = $tag->tagName[$lang];
 			$tag->tagName = $tag->tagName[$lang];
+			$tag->tagID = $tag->tagName['id'];
 		}
 	 
 		////相關標籤影片
@@ -589,15 +590,45 @@ class IndexController extends Controller {
 	    return $article;
 	}
 	public function category() {
-		return view('app_rwd.index.category');
+		return view('app_rwd.index.category',[ 'category'=>[0]]);
 	}
 	public function categoryPost(Request $request) {
+		if(!isset( $request->tag)){
+			return false;
+		}
+		$sourece_array = [];
+		if(in_array("all", $request->tag)){
+			$video = Video::select('*')->Paginate(36) ;
+			return  response()->json(['video' =>$video,  'pagination' => (string)$video->links("pagination::bootstrap-4"), ]);
+		} else {
+			if( in_array('censored_f',$request->tag)){
+				$sourece_array[] =1;
+			}
+			if( in_array('censored_p',$request->tag)){
+				$sourece_array[] =2;
+			}
+			if( in_array('uncensored',$request->tag)){
+				$sourece_array[] =3;
+			}
+			if( in_array('FC2',$request->tag)){
+				$sourece_array[] = 4;
+			}
+		}
+ 
+
+		 
 		$video_ids =  Video_tag_relations::whereIn('tag_id',$request->tag)->pluck('id')->toArray();
-		$video = Video::select('*')->whereIn('id', $video_ids)->Paginate(36) ;
+ 
 
-		return  response()->json(['video_ids' => $video_ids, 'video' =>$video,  'pagination' => (string)$video->links("pagination::bootstrap-4"), ]);
-		return $video ;
-
+		$tag = $request->tag;
+		 $video = Video::select('*')->whereHas('tagRelations', function($q) use ($tag){
+   						 $q->whereIn('tag_id',$tag);
+		})->orWhere(function ($query) use ($sourece_array) {
+			$query->whereIn('cate_id',$sourece_array);
+		})->Paginate(36) ;
+ 
+		return  response()->json([  'video' =>$video,  'pagination' => (string)$video->links("pagination::bootstrap-4"), ]);
+		
 	}
 	//分類
 	// public function category($cat, $page = 1) {

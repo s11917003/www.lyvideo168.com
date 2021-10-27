@@ -20,15 +20,11 @@
 	<div class="category category--open">
 	  <div class="category__title">來源</div>
 	  <ul id='category_source' class="category__tags">
-		<li name="all" class="category__tags-item"><a href="#">全部</a></li>
-		<li name="censored_f" class="category__tags-item"><a href="#">有碼 - FANZA</a></li>
-		<li name="censored_p" class="category__tags-item category__tags-item--active">
-		  <a href="#">有碼 - PRESTIGE</a>
-		</li>
-		<li name="uncensored"  class="category__tags-item category__tags-item--active">
-		  <a href="#">無碼</a>
-		</li>
-		<li name="FC2" class="category__tags-item"><a href="#">FC2</a></li>
+		<li name="all" class="category__tags-item category__tags-item--active"><a href="#">全部</a></li>
+		<li name="censored_f" class="category__tags-item category__tags-item--active"><a href="#">有碼 - FANZA</a></li>
+		<li name="censored_p" class="category__tags-item category__tags-item--active "> <a href="#">有碼 - PRESTIGE</a> </li>
+		<li name="uncensored"  class="category__tags-item category__tags-item--active "> <a href="#">無碼</a> </li>
+		<li name="FC2" class="category__tags-item category__tags-item--active"><a href="#">FC2</a></li>
 	  </ul>
 	  <div class="category__more category_source_more" style="display: none;"><a href="#"><span>更多</span> <i class="i-arrow active"></i></a></div>
 	</div>
@@ -48,9 +44,9 @@
 	  <div class="category__title">角色</div>
 	  <ul  id="category_role"  class="category__tags">
 		<li name="2" class="category__tags-item"><a href="#">美少女</a></li>
-		<li name="38" class="category__tags-item category__tags-item--active"><a href="#">女高中生</a></li>
+		<li name="38" class="category__tags-item"><a href="#">女高中生</a></li>
 		<li name="8" class="category__tags-item"><a href="#">女大學生</a></li>
-		<li name="15" class="category__tags-item category__tags-item--active"><a href="#">辣妹</a></li>
+		<li name="15" class="category__tags-item"><a href="#">辣妹</a></li>
 		<li name="22" class="category__tags-item"><a href="#">人妻</a></li>
 		<li name="49" class="category__tags-item"><a href="#">少婦</a></li>
 		<li name="24" class="category__tags-item"><a href="#">熟女</a></li>
@@ -82,7 +78,7 @@
 	<div class="category category--open">
 	  <div class="category__title">玩法</div>
 	  <ul id="category_play" class="category__tags">
-		<li name="95" class="category__tags-item"><a href="#">乳交</a></li>
+		<li name="203" class="category__tags-item"><a href="#">乳交</a></li>
 		<li name="155" class="category__tags-item"><a href="#">母乳</a></li>
 		<li name="154" class="category__tags-item"><a href="#">口交</a></li>
 		<li name="162" class="category__tags-item"><a href="#">深喉嚨</a></li>
@@ -139,6 +135,8 @@
 				data:{tag,page},
 				success:function(result){
 					$("#video_list").empty();
+
+					console.log(result.video)
 					result.video.data.forEach(function(item){
 						video = `<a href="/jp/testview/`+item.video_id+`$`+item.actress+`" class="list__item">
 						<figure><img src="`  +item.cover_img+  `"></figure>
@@ -168,34 +166,63 @@
 		}
 		arr =[]
 		$('.category__tags').find('li').each(function(){
-				if($(this).hasClass('category__tags-item--active')) {
-					
-					arr.push($(this).attr('name'))
-				}
-			});
+			if($(this).hasClass('category__tags-item--active')) {
+				
+				arr.push($(this).attr('name'))
+			}
+		});
 		 sendAjax(arr,page);
 		
 		
 	}
-
+	function getSearchParams(k){
+		var p={};
+		location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(s,k,v){p[k]=v})
+		return k?p[k]:p;
+	}
 	function cate_cilck(e){
-		
+	 
 		$(e).click(function(){
 			arr =[]
-			if($(this).attr('name') =='all'){
-				$('#category_source li').removeClass('category__tags-item--active')
-				$('#category_source li').addClass('category__tags-item--active')
+			if($.inArray($(this).attr('name'), ['all','censored_f','censored_p','uncensored','FC2'])!=-1){
+				console.log(3)
+				if($(this).attr('name') == 'all' ){
+					console.log(4)
+					if(!$(this).hasClass('category__tags-item--active')){ //要全選
+						$("li[name=all]").addClass('category__tags-item--active')
+						$("li[name=censored_f]").addClass('category__tags-item--active')
+						$("li[name=censored_p]").addClass('category__tags-item--active')
+						$("li[name=uncensored]").addClass('category__tags-item--active')
+						$("li[name=FC2]").addClass('category__tags-item--active')
+					} else {//要全選取消
+						console.log(1)
+					}
+				} else {
+						if($(this).hasClass('category__tags-item--active')) {
+							$(this).removeClass('category__tags-item--active')
+							$("li[name=all]").removeClass('category__tags-item--active')
+						} else {
+							$(this).addClass('category__tags-item--active')
+						}
+						var all =true;
+						['censored_f','censored_p','uncensored','FC2'].forEach(function(value){
+							if(! $("li[name="+value+"]").hasClass('category__tags-item--active')){
+								all = false
+							}
+						});
+						if(all)
+							$("li[name=all]").addClass('category__tags-item--active')
+				}
 			} else {
 				if($(this).hasClass('category__tags-item--active')) {
 					$(this).removeClass('category__tags-item--active')
 				} else {
 					$(this).addClass('category__tags-item--active')
 				}
-			
 			}
+	 
 			$('.category__tags').find('li').each(function(){
 				if($(this).hasClass('category__tags-item--active')) {
-					
 					arr.push($(this).attr('name'))
 				}
 			
@@ -210,46 +237,54 @@
 	function checkMoreBtm(e){
 		var arr = ["source","form","role","figure","play","clothing"];
 		for (let i=0; i<arr.length; i++) {
-
-			console.log("#"+arr[i])
+ 
 			if ($("#category_"+arr[i]).prop('scrollWidth') <= $("#category_"+arr[i]).width() ) {
-				console.log(1)
+			 
 				$(".category_"+arr[i]+"_more").hide()
 			} else {
-				console.log(2)
+				 
 				$(".category_"+arr[i]+"_more").show()
 			}
 		}
 	}
+	 
 	$(window).resize(function() {
-
-		console.log('resize')
 		 checkMoreBtm() 
 	});
 	window.onload = function() {
-		$('li a').attr("href","javascript:void(0);");
-
+		cate = getSearchParams('cate');
+		findCate = false 
+		if(cate){
+			cateArr = cate.split(',');
+			cateArr.forEach(function(value){
+				if($("li[name="+value+"]").length){
+					findCate = true 
+				}
+				$("li[name="+value+"]").addClass('category__tags-item--active')
+				$("li[name=all]").removeClass('category__tags-item--active')
+				$("li[name=censored_f]").removeClass('category__tags-item--active')
+				$("li[name=censored_p]").removeClass('category__tags-item--active')
+				$("li[name=uncensored]").removeClass('category__tags-item--active')
+				$("li[name=FC2]").removeClass('category__tags-item--active')
+			});
+		}
+		console.log(findCate)
+		arr =[]
+		$('.category__tags').find('li').each(function(){
+			if($(this).hasClass('category__tags-item--active')) {
+				arr.push($(this).attr('name'))
+			}
+		});
+		sendAjax(arr,1);
 		checkMoreBtm() 
-		$('#category_source').find('li').each(function(){
-			cate_cilck(this)
-		});
-		$('#category_form').find('li').each(function(){
-			cate_cilck(this)
-		});
-		$('#category_role').find('li').each(function(){
-			cate_cilck(this)
-		});
-		$('#category_figure').find('li').each(function(){
-			cate_cilck(this)
-		});
-		$('#category_play').find('li').each(function(){
-			cate_cilck(this)
-		});
-		$('#category_clothing').find('li').each(function(){
-			cate_cilck(this)
+		
+		$('.category').find('li').each(function(){
+			
+			cate_cilck(this);
 		});
 		console.log('window.onload')
 
 	}
 </script>
 @stop
+ 
