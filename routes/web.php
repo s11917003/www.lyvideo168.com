@@ -36,7 +36,7 @@ Route::get('rd/genacc', 'Rd\RdController@genacc');
 // Route::get('/pt/{id}', 'Index\IndexController@postviewtest')->where('id', '[0-9]+');
 // Route::get('/pv/{id}', 'Index\IndexController@postviewapp')->where('id', '[0-9]+');
 
-// Route::group(['middleware' => 'web'], function () {
+  Route::group(['middleware' => 'web'], function () {
    	Route::auth();
 	Route::get('login', 'Auth\LoginController@index')->name('login');
 	Route::post('loginPost', 'Auth\LoginController@loggedIn');
@@ -63,7 +63,9 @@ Route::get('rd/genacc', 'Rd\RdController@genacc');
 	Route::post('/actress_list', 'Index\IndexController@actressList');  //女優清單
 	Route::get('/actress/{id}', 'Index\IndexController@actressPage');  //女優主頁面
 	// Route::get('/tag/{id}/{page?}', 'Index\IndexController@tag')->where('id', '[0-9]+');
-// });
+
+	Route::post('/language', 'Index\IndexController@lang')->name('lang');//切換語系
+});
 //發文頁面
 Route::group(['middleware' => ['auth:web']], function () {
 			Route::get('/userInfo', 'Index\IndexController@userInfo');
@@ -82,6 +84,7 @@ Route::get('/clickAd/{id}', 'Index\IndexController@clickAd')->where('id', '[0-9]
 Route::get('/videoinfo', 'Index\IndexController@videoinfo');
 
 Route::get('/csv', 'Api\CsvController@geCsv');
+
 //交換連結
 // Route::get('/linkex', 'Service\PageController@linkexchange');
 

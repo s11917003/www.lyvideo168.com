@@ -15,6 +15,13 @@
 <link href="/css/videojs-contrib-ads.css" rel="stylesheet">
 <link rel="stylesheet" href="/css/category-list.css">
 <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-MC5Q58D');
+</script>
+<!-- End Google Tag Manager -->
 <style>
 	.video-js {
 		$primary-background-color: #fa0;
@@ -41,9 +48,8 @@ import videojsPreviewThumbnails from 'https://cdn.skypack.dev/videojs-preview-th
 <!-- <script type="text/javascript" src="/js/jquery.lazyload.js"></script> -->
 <script type="text/javascript" src="/js/jquery.visible.js"></script>
 <script src="/js/popper.min.js"></script>
-<!-- <script src="/js/bootstrap-4.0.0.js"></script> -->
-<script src="/js/main.js"></script>
-<script src="/js/select.js"></script>
+<!-- <script src="/js/main.js"></script>
+<script src="/js/select.js"></script> -->
 <script>
 	$(function(){
 		$.ajaxSetup({
@@ -51,54 +57,6 @@ import videojsPreviewThumbnails from 'https://cdn.skypack.dev/videojs-preview-th
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		}
 		});
-		$('.adClick').on('click',function(){
-			var id =  $(this).attr("data-id") 
-			console.log('id'+id)
-
-			$.ajax({
-				type:"get",
-				url:"/clickAd/"+id,
-				success:function(result){
-					// var address = result['address'];
-					// console.log(address);
-					// window.location.href = address;
-				}
-			});	
-
-		})	
-		$(".rs-contentword img").lazyload({
-			load : cccccount
-		});
-		// $('[data-toggle="offcanvas"]').on('click', function () {
-		// 	$('.offcanvas-collapse').toggleClass('open')
-		// 	$('#nav-link-mask').toggle()
-		//   })
-		//  $('[data-toggle="dropdown"]').on('click', function () {
-		// 	if ($('.dropdown-menu').hasClass( "show" ) ) {
-		// 		$('.dropdown-menu').removeClass('show');
-		// 		return;
-		// 	}
-    	// 	$('.dropdown-menu').toggleClass('show')
-		// })		 
-	});
-	
-	function cccccount() {
-		console.log('+++')
-	}
-	 
-</script>
-{!! Analytics::render() !!}
-
-<script>
-@if(Session::has('USER'))
-	var user_id = '{{ Session::get('USER')['USER_ID']}}'
-	var user_acc = '{{ Session::get('USER')['LOGIN_ACCOUNT']}}'
-	ga('set', 'userId', user_id)
-@else
-	var user_id = ''
-	var user_acc = ''
-@endif
-	var crc = ''
 </script>
 @yield('topscript')
 </head>
@@ -133,4 +91,9 @@ import videojsPreviewThumbnails from 'https://cdn.skypack.dev/videojs-preview-th
 	<!-- Footer 結束 -->
 	@yield('footscript')
 </body>
+ 
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MC5Q58D"
+height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+ 
 </html>

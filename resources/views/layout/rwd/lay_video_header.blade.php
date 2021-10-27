@@ -43,16 +43,16 @@
 			<li class="lang" data-title="選擇語言">
 			  <!-- bind select.js -->
 			  <div id="lang">
-				<label for=""><img src="/svg/tw.svg" alt=""><span>中文</span></label>
+				<label for=""><img src="/svg/tw.svg" alt=""><span>{{ __('ui.'.app()->getLocale())  }}</span></label>
 				<ul>
 				  <li data-val="tw">
-					<img src="/svg/tw.svg" alt=""><span>中文</span>
+					<img src="/svg/tw.svg" alt=""><span>{{__('ui.tw')}}</span>
 				  </li>
 				  <li data-val="en">
-					<img src="/svg/en.svg" alt=""><span>English</span>
+					<img src="/svg/en.svg" alt=""><span>{{__('ui.en')}}</span>
 				  </li>
 				  <li data-val="jp">
-					<img src="/svg/jp.svg" alt=""><span>日本語</span>
+					<img src="/svg/jp.svg" alt=""><span>{{__('ui.jp')}}</span>
 				  </li>
 				</ul>
 			  </div>
@@ -90,16 +90,15 @@
 		</div>
 		
 	  </header>
-	  <nav>
-		<ul class="nav" style=" ">
-		  <li><a href="ranking-item-list.html">有　碼</a></li>
-		  <li><a href="#">無　碼</a></li><div class="
-		  "></div>
-		  <li><a href="#">素　人</a></li>
-		  <li><a href="/category">類　別</a></li>
-		  <li><a href="/actress_list.html">女　優</a></li>
-		  <li><a href="ranking-list.html">排行榜</a></li>
-		</ul>
+	  <nav class="active"> 
+		<ul class="nav">
+			<li><a href="ranking-item-list.html">有　碼</a></li>
+			<li><a href="#">無　碼</a></li>
+			<li><a href="#">素　人</a></li>
+			<li><a href="category.html">類　別</a></li>
+			<li><a href="actress_list.html">女　優</a></li>
+			<li><a href="ranking-list.html">排行榜</a></li>
+		  </ul>
 	  
 		<!-- 只有mobile 才會顯示 -->
 		<div class="keyword">
@@ -191,26 +190,44 @@
 	$('.hamburger').click(function(){
 		$('.hamburger').toggleClass('active')
 		$('body nav').toggleClass('active')
+	 
 	});
 
 	$('#search').click(function(){
 		$('.search ').toggleClass('active')
-		
+	 
 	});
 	$('#setting').click(function(){
 		$('.setting ').toggleClass('active')
-		
 	});
 
 	$('#lang').click(function(){
 		$('#lang label').toggleClass('active')
 		$('#lang ul').toggle() 
-		
 	});
 
 	$('#lang ul li').click(function(){
 		$('#lang label span').text($(this).find('span').text())
 		$('#lang label img').attr('src',  $(this).find('img').attr('src')   )
+
+		console.log($(this).attr('data-val'))
+		// return;
+		$.ajax({
+			headers: {'X-CSRF-TOKEN': "{{ csrf_token() }}"},
+			data : {
+				_token: "{{ csrf_token() }}",
+				lang:$(this).attr('data-val'),
+
+			},
+			type:"POST",
+			url:"/language",
+			dataType:"json",
+			success:function(result){
+				if(result){
+					location.reload();
+				}
+			}
+		});
 	});
 	$("#switch-slider").click(function(){
 		var checkis = $(this).is(":checked");
@@ -249,7 +266,6 @@
 </script>
 <style>
 	.search {
-	 
 		top: 5rem;
 	}
 	@media (max-width: 640px){

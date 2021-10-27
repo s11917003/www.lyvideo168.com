@@ -14,24 +14,7 @@
 </script>
 @stop
 @section('maincontent')
-	<div class="search" style="top:0rem;">
-		<div class="search__content">
-		<input type="search">
-		</div>
-		<div class="search__btn">
-		<button>搜尋</button>
-		<i class="i_search">
-			<svg class="svg" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 23.84 23.84">
-			<g>
-				<circle class="cls-1" cx="11.03" cy="11.03" r="10.03"></circle>
-				<line class="cls-1" x1="18.22" y1="18.22" x2="22.84" y2="22.84"></line>
-			</g>
-			</svg>
-		</i>
-		</div>
-	</div>
-
-	
+	 
 
 	<!-- Content 左側 開始 -->
 	<div id="">  

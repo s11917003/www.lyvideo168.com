@@ -31,6 +31,9 @@ use Illuminate\Support\Facades\Redirect;
 use App\Lib\Utils;
 use Cookie;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
+ 
+use Illuminate\Support\Facades\App;
 use Intervention\Image\Facades\Image;
 class IndexController extends Controller {	
 	
@@ -1083,5 +1086,15 @@ class IndexController extends Controller {
 	 
 		return response()->json(['status' => 1,'address' => $ad->web_url]);
 	}
+
+	public function lang(Request $request)
+    {
+        if($request->lang == 'en' || $request->lang == 'tw'|| $request->lang == 'jp'){
+            Session::put('locale', $request->lang );
+            App::setLocale($request->lang);
+            return json_encode(true);
+        }
+		return json_encode(false);
+    }
 	
 }
