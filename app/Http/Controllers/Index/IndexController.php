@@ -215,54 +215,49 @@ class IndexController extends Controller {
 	public function postview1(Request $request, $lang, $id) {
 	
 		$video_id = explode("$",$id)[0];
-	 
+		
 		if(!isset($this->language[$lang])) {
-			//abort(404);
-			header("Location:/");
-			return ;
+			return redirect()->to('/')->send();
 		}
 	
 		//主影片DATA
 		$webLangIndex = $this->language[$lang];
+ 
+		// DB::enableQueryLog
 		$video = Video::where(['video_id'=>$video_id,'video_lang'=>$webLangIndex])->first();
 	
-	 
+	
 		if(!$video) {
-			header("Location:/");
-			return ;
-		} 
-		$video_tag =  Video_tag_relations::where('video_id',$video_id)->with('tagName')->get();
-		$video_with_actress = [];
-		if($video['actress']){ 
-			$actressNameArray = explode("@", $video['actress']);
-			
-			$queryAcrtressName = [];
-			foreach ($actressNameArray as $key => $name) {
-				$queryAcrtressName[] = $name;
-				
-				$Video_actress_name = Video_actress_name::where('sub_name', 'like', '%'.$name.'%')->value('name');//找女優 對應表
-				if($Video_actress_name) {
-					$queryAcrtressName[] = $$Video_actress_name;
-					$actressNameArray[$key] = $Video_actress_name;//改成常用的名字
-				}
-			}
 		 
-			if(count($queryAcrtressName)==0){ //沒有女優
-				$video_with_actress = [];
-				$video['actress'] ='';
-			} else {
-				$video_with_actress = Video::query();
-				$video_with_actress->where(function($query) use($queryAcrtressName){
-					foreach($queryAcrtressName as $name){
-						$query->orWhere('actress', 'LIKE', '%'.$name.'%');
-					}
-					});
-				
-				$video_with_actress->where('video_id','!=',$video_id);
-				$video_with_actress = $video_with_actress->distinct()->get();
-				$video['actress'] = implode("&", $actressNameArray);
-			}
+			return redirect()->to('/')->send();
+			 
+		} 
+ 
+ 		$video_tag =  Video_tag_relations::where('video_id',$video->id)->with('tagName')->get();
+	
+		$video_with_actress = [];
+	
+		if($video['actress']){ 
+			$Video_actress = Video_actress_relations::select('*')->with('tagRelations')->where('video_id', $video->id)->get();//找女優 對應表
 		
+			$actress = [];
+			$actressName = [];
+			$actressData= []; 
+			foreach($Video_actress as $data){
+				$actress[] = $data->actress_id;
+				$actressName[]  = $data->tagRelations->JapaneseName1;
+
+				$actressData[] = ['id' => $data->actress_id , 'name' =>  $data->tagRelations->JapaneseName1];
+			}
+
+			$Video_actress_relations = Video_actress_relations::select('*')->whereIn('actress_id', $actress)->pluck('id')->toArray();;//找女優相關
+			$video_with_actress = Video::whereIn('id', $Video_actress_relations)->where('video_lang',$webLangIndex)->limit(20)->get();
+		 
+			if(count($actressName)>0){
+				$video['actress'] =  implode("&", $actressName); 
+			}
+
+			$video['actressData'] = $actressData;
 		}
 		
 	
@@ -305,17 +300,18 @@ class IndexController extends Controller {
 		
 		//標籤
 		$tagName = [];
+	 
 		foreach ($video_tag as $tag ) {
 			$tagName[] = $tag->tagName[$lang];
 			$tag->tagName = $tag->tagName[$lang];
-			$tag->tagID = $tag->tagName['id'];
+		 
 		}
-	 
+		 
 		////相關標籤影片
 		$randTag  = Video_tag_relations::where('video_id',$video->id)->inRandomOrder()->first();
 	 	$video_relation = Video::where('video_lang',$webLangIndex)->with(['tagRelations'])->whereHas('tagRelations', function($q) use ($randTag) { $q->where('tag_id', '=', $randTag->tag_id); })->limit(10)->get();		
 		 
-		
+	
 		$title  = $video['video_id'].'|'.$video['actress'].'無料エロ動画【JavDic  '. implode(",", $tagName).'】';
 		$url = $video['video_id'].'|'.$video['actress'];
 		if($video) {
@@ -326,7 +322,7 @@ class IndexController extends Controller {
 				'video' => $video, 							//主影片
 				'video_with_actress' => $video_with_actress,//相關女優
 				'video_tag' => $video_tag,					//標籤
-				'title' =>  $title  ,						//影片title
+				'title' =>  $title,						//影片title
 				'video_relation' => $video_relation 		//相關標籤
 			]);
 		} else {

@@ -256,8 +256,11 @@
 									</td>		
 								</tr>
 								<tr>
-									<td class="list-actress" colspan =2>
-									<a href="http://www.javmovie.com/ja/actress/nana-ayano-45.html" title="{{ $video->actress }}">{{ $video->actress }}</a>
+									<td class="" colspan>
+										@foreach ($video->actressData as $data )
+												<a href='/actress/{{ $data["id"]}}'  >{{ $data['name'] }}</a>
+										@endforeach	
+									
 									</td>
 								</tr>
 								<tr>
@@ -266,7 +269,7 @@
 										<!-- <a href="" title="HyakkinTV">{{ $video->label }}</a> -->
 										@if ($video_tag)
 											@foreach ($video_tag as $tag )
-											<a class="rs-digg-box2-tag pr-2 pl-2 ml-1" >{{$tag->tagName }} </a>
+											<a href="/category?cate={{  $tag->tag_id   }}" class="  m-2 pl-2 ml-1" >{{$tag->tagName }} </a>
 											@endforeach	
 										@endif
 									</td>
@@ -296,9 +299,9 @@
 								<tr>
 								<td>Genre</td>
 								<td class="list-genre">
-								<a href="http://www.javmovie.com/ja/genre/ass-lover-5.html" title="尻フェチ">尻フェチ</a>
-								<a href="http://www.javmovie.com/ja/genre/featured-actress-6.html" title="単体作品">単体作品</a>
-								<a href="http://www.javmovie.com/ja/genre/hi-def-7.html" title="ハイビジョン">ハイビジョン</a>
+									<a href="http://www.javmovie.com/ja/genre/ass-lover-5.html" title="尻フェチ">尻フェチ</a>
+									<a href="http://www.javmovie.com/ja/genre/featured-actress-6.html" title="単体作品">単体作品</a>
+									<a href="http://www.javmovie.com/ja/genre/hi-def-7.html" title="ハイビジョン">ハイビジョン</a>
 								</td>
 								</tr>
 								<tr>
@@ -458,7 +461,7 @@
 			@else
 			
 			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px; height: auto;">
-				
+				@if (count($video_with_actress) >0 )
 				<h5 class="recommend" >You may also like</h5>
 				@foreach ($video_with_actress as $video_actress)
 				<div style="float: left;padding: 10px; width: 230px; height: 230px; margin: 5px; overflow: hidden">
@@ -484,17 +487,18 @@
 														BACKGROUND-COLOR: #000;
 														background-image: url('{{ $video_actress->cover_img }}');" 
 													>
-							</div>
-							<div class='videoTitle'>{{$video_actress->title}}</div>
-						 
-							<p class='videoInfo'>【{{$video_actress->dvd_id}}】</p>
-							<p class='videoInfo'>{{$video_actress->release_date}}</p>
+							
+								<div class='videoTitle'>{{$video_actress->title}}</div>
+							
+								<p class='videoInfo'>【{{$video_actress->dvd_id}}】</p>
+								<p class='videoInfo'>{{$video_actress->release_date}}</p> 
+						</div>
 						</a>
 					</div>
 				</div>
 				@endforeach
 				<div style="clear: both"></div>
-
+				@endif
 				<h5 class="recommend" >You may also like</h5>
 				@foreach ($video_relation as $video_tag)
 				<div style="float: left;padding: 10px; width: 230px; height: 230px; margin: 5px; overflow: hidden">
@@ -520,10 +524,11 @@
 														BACKGROUND-COLOR: #000;
 														background-image: url('{{ $video_tag->cover_img }}');" 
 													>
+						
+								<div class='videoTitle'>{{$video_tag->title}}</div>
+								<p class='videoInfo'>【{{$video_tag->dvd_id}}】</p>
+								<p class='videoInfo'>{{$video_tag->release_date}}</p>
 							</div>
-							<div class='videoTitle'>{{$video_tag->title}}</div>
-							<p class='videoInfo'>【{{$video_tag->dvd_id}}】</p>
-							<p class='videoInfo'>{{$video_tag->release_date}}</p>
 						</a>
 					</div>
 				</div>
