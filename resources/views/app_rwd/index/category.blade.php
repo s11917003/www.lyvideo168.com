@@ -60,7 +60,7 @@
 	<div class="category category--open">
 	  <div class="category__title">身材</div>
 	  <ul   id="category_figure" class="category__tags">
-		<li name="38" class="category__tags-item"><a href="#">美乳</a></li>
+		<li name="51" class="category__tags-item"><a href="#">美乳</a></li>
 		<li name="53" class="category__tags-item"><a href="#">巨乳</a></li>
 		<li name="52" class="category__tags-item"><a href="#">巨臀</a></li>
 		<li name="57" class="category__tags-item"><a href="#">肉系女孩</a></li>
@@ -106,7 +106,13 @@
 	  </ul>
 	  <div class="category__more category_clothing_more" style="display: none;"><a href="#"><span>更多</span> <i class="i-arrow"></i></a></div>
 	</div>
-
+	<div id ="custom" class="category category--open" style='display: none;'>
+		<div class="category__title">自訂</div>
+			<ul id="category_clothing" class="category__tags">
+			 
+			</ul>
+	  	<div class="category__more category_clothing_more" style="display: none;"><a href="#"><span>更多</span> <i class="i-arrow"></i></a></div>
+	</div>
 	<div class="list">
 		<div class="list__wrap" style="width: 100%;"> 
 		  <div  id="video_list"  class="list">
@@ -135,8 +141,21 @@
 				data:{tag,page},
 				success:function(result){
 					$("#video_list").empty();
+					console.log(result.secondary_tag)
+					if(result.secondary_tag) {
+						$("#custom").find('ul').empty()
+						$('#custom').show();
+					 
+						result.secondary_tag.forEach(function(item){
+							$('#custom').find('ul').append(`<li name="`+ item.id+`" class="category__tags-item `+ (item.check && 'category__tags-item--active')   +`"><a href="javascript:void(0);">`+ item.jp+`</a></li>`)
+						 
+						});
 
-					console.log(result.video)
+						$('#custom').find('li').each(function(){
+							cate_cilck(this);
+						});
+
+					} 
 					result.video.data.forEach(function(item){
 						video = `<a href="/jp/testview/`+item.video_id+`$`+item.actress+`" class="list__item">
 						<figure><img src="`  +item.cover_img+  `"></figure>
@@ -146,6 +165,7 @@
 						<div class="date">`  +item.release_date+  `</div>
 						</div>
 						</a>`
+					
 						$("#video_list").append(video)
 						var newString = result['pagination'].replace(/href="(.*?)"/ig, "href=\"javascript:void(0)\" onclick=\"tablePagination\(`$1`\)\"");
                 		$('#pagination').html(newString);
@@ -253,7 +273,8 @@
 	});
 	window.onload = function() {
 		cate = getSearchParams('cate');
-		findCate = false 
+		findCate = false;
+		arr =[]
 		if(cate){
 			cateArr = cate.split(',');
 			cateArr.forEach(function(value){
@@ -266,20 +287,24 @@
 				$("li[name=censored_p]").removeClass('category__tags-item--active')
 				$("li[name=uncensored]").removeClass('category__tags-item--active')
 				$("li[name=FC2]").removeClass('category__tags-item--active')
+					arr.push(value)
 			});
+
+		
 		}
-		console.log(findCate)
-		arr =[]
+ 
 		$('.category__tags').find('li').each(function(){
 			if($(this).hasClass('category__tags-item--active')) {
 				arr.push($(this).attr('name'))
 			}
 		});
+
+		 
 		sendAjax(arr,1);
 		checkMoreBtm() 
 		
 		$('.category').find('li').each(function(){
-			
+			$(this).find('a').attr("href","javascript:void(0);");
 			cate_cilck(this);
 		});
 		console.log('window.onload')

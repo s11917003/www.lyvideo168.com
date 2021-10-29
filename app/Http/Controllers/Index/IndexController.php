@@ -595,7 +595,16 @@ class IndexController extends Controller {
 		$sourece_array = [];
 		if(in_array("all", $request->tag)){
 			$video = Video::select('*')->Paginate(36) ;
-			return  response()->json(['video' =>$video,  'pagination' => (string)$video->links("pagination::bootstrap-4"), ]);
+			$secondary_tag = \Session::get('secondary_tag');
+			$Video_tag_screen = Video_tag::whereIn('id',  explode(",", $secondary_tag))->get();
+			foreach ($Video_tag_screen as $tag) {
+				$tag['check'] = true;
+				if(!in_array((string)$tag->id,$request->tag)){  
+					$tag['check'] = false;
+				
+				 } 
+			} 
+			return  response()->json([ 'secondary_tag' => $Video_tag_screen ,'video' =>$video,  'pagination' => (string)$video->links("pagination::bootstrap-4"), ]);
 		} else {
 			if( in_array('censored_f',$request->tag)){
 				$sourece_array[] =1;
@@ -611,11 +620,41 @@ class IndexController extends Controller {
 			}
 		}
  
-
+		$secondary_tag = \Session::get('secondary_tag');
+	 
+		if($secondary_tag){
+			$secondary_tag  = explode(",", $secondary_tag);
+		} else {
+			$secondary_tag  = [];
 		 
-		$video_ids =  Video_tag_relations::whereIn('tag_id',$request->tag)->pluck('id')->toArray();
- 
+		}
+       
+		$Video_tag = Video_tag::whereIn('id',$request->tag)->get();
+	
+		foreach ($Video_tag as $tag) {
+			if($tag->main_tag !=1 ){ //自訂
+				 if(!in_array((string)$tag->id,$secondary_tag)){ //未存進SESSIOM
+					array_push($secondary_tag, $tag->id);
+				}
+			}
+	  	}
 
+		$Video_tag_screen = Video_tag::whereIn('id',$secondary_tag)->get();
+		foreach ($Video_tag_screen as $tag) {
+			$tag['check'] = true;
+			if(!in_array((string)$tag->id,$request->tag)){  
+				$tag['check'] = false;
+			
+			 } 
+			 
+	  	}
+		if(count($secondary_tag)>0){
+			\Session::put('secondary_tag', '');
+			\Session::put('secondary_tag', implode(",",$secondary_tag));
+		}
+			
+	 
+	
 		$tag = $request->tag;
 		 $video = Video::select('*')->whereHas('tagRelations', function($q) use ($tag){
    						 $q->whereIn('tag_id',$tag);
@@ -623,7 +662,7 @@ class IndexController extends Controller {
 			$query->whereIn('cate_id',$sourece_array);
 		})->Paginate(36) ;
  
-		return  response()->json([  'video' =>$video,  'pagination' => (string)$video->links("pagination::bootstrap-4"), ]);
+		return  response()->json([ 'secondary_tag' => $Video_tag_screen , 'video' =>$video,  'pagination' => (string)$video->links("pagination::bootstrap-4"), ]);
 		
 	}
 	//分類

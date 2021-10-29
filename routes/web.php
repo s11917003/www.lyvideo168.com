@@ -68,9 +68,9 @@ Route::get('rd/genacc', 'Rd\RdController@genacc');
 });
 //發文頁面
 Route::group(['middleware' => ['auth:web']], function () {
-			Route::get('/userInfo', 'Index\IndexController@userInfo');
-			Route::get('/article/post', 'Index\IndexController@postpage');
-			Route::post('/updateUser', 'Index\IndexController@updateUser');
+	Route::get('/userInfo', 'Index\IndexController@userInfo');
+	Route::get('/article/post', 'Index\IndexController@postpage');
+	Route::post('/updateUser', 'Index\IndexController@updateUser');
 });
 //發文
 Route::post('/upload/request', 'Article\UploadController@store');
