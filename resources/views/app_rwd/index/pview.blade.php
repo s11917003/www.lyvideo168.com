@@ -500,6 +500,7 @@
 				<div style="clear: both"></div>
 				@endif
 				<h5 class="recommend" >You may also like</h5>
+				@if(count($video_relation) > 0) 
 				@foreach ($video_relation as $video_tag)
 				<div style="float: left;padding: 10px; width: 230px; height: 230px; margin: 5px; overflow: hidden">
 					<div poster=""   class="adClick video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	
@@ -533,6 +534,7 @@
 					</div>
 				</div>
 				@endforeach
+				@endif
 				<div style="clear: both"></div>
 			</div>
 			@endif					
@@ -667,7 +669,7 @@
 
 		console.log('window.onload')
 
-		console.log('{{ $video_relation }}')
+ 
 	};
 </script>
 <script src='/js/comm.js?r=@php echo uniqid(); @endphp' async=""></script>

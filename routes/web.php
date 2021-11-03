@@ -56,7 +56,8 @@ Route::get('rd/genacc', 'Rd\RdController@genacc');
 	Route::get('{lang}/testview/{id}', 'Index\IndexController@postview1');  //文章
 	Route::get('/', 'Index\IndexController@index');  //文章
 	Route::get('/category', 'Index\IndexController@category');  //文章
-	Route::post('/category', 'Index\IndexController@categoryPost');  //文章
+	Route::post('/category', 'Index\IndexController@categoryPost');  //
+	Route::post('/category/cancel', 'Index\IndexController@categoryCancel');  //取消自定分類
 	Route::get('/search/{search}/{page?}/', 'Index\IndexController@search')->where('page', '[0-9]+');   //搜尋
 	Route::post('/search', 'Index\IndexController@searchVideo');  //搜尋
 	Route::get('/actress_list', 'Index\IndexController@actress');  //女優清單
@@ -68,9 +69,9 @@ Route::get('rd/genacc', 'Rd\RdController@genacc');
 });
 //發文頁面
 Route::group(['middleware' => ['auth:web']], function () {
-			Route::get('/userInfo', 'Index\IndexController@userInfo');
-			Route::get('/article/post', 'Index\IndexController@postpage');
-			Route::post('/updateUser', 'Index\IndexController@updateUser');
+	Route::get('/userInfo', 'Index\IndexController@userInfo');
+	Route::get('/article/post', 'Index\IndexController@postpage');
+	Route::post('/updateUser', 'Index\IndexController@updateUser');
 });
 //發文
 Route::post('/upload/request', 'Article\UploadController@store');

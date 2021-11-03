@@ -2764,5 +2764,25 @@ label {
 	margin-bottom: 0.5rem;
 }
 
+.cancel{
 
+	padding-right: 8px;
+    padding-left: 4px;
+    display: block;
+    line-height: 1.8;
+
+    color: var(--tags-text);
+    background: var(--tags-background);
+ 
+    margin-right: 5px;
+ 	border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  
+}
+.cancel.category__tags-item--active {
+	display: block;
+    color: #fff;
+    background: var(--primary-color);
+
+}
  
