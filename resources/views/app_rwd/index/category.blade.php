@@ -108,8 +108,7 @@
 	</div>
 	<div id ="custom" class="category category--open" style='display: none;'>
 		<div class="category__title">自訂</div>
-			<ul id="category_clothing" style="display:inline-flex;" class="category__tags">
-			 
+			<ul id="category_clothing" class="category__tags">
 			</ul>
 	  	<div class="category__more category_clothing_more" style="display: none;"><a href="#"><span>更多</span> <i class="i-arrow"></i></a></div>
 	</div>
@@ -165,6 +164,7 @@
 						});
 
 					 
+
 
 					} 
 					result.video.data.forEach(function(item){
