@@ -894,18 +894,27 @@ class IndexController extends Controller {
 
 		$webLangIndex = $this->language[$lang];
 		DB::enableQueryLog();
-		$Video_actress_name = Video_actress_name::where('sub_name', 'like', '%'.strtoupper($search).'%')->pluck('name')->all();//找女優 對應表
-	
-		$video = Video::whereRaw("UPPER(title) LIKE '%". strtoupper($search)."%'");
-		if(count($Video_actress_name) > 0) {
-			$video->orwhere(function ($query) use($Video_actress_name) {
-				for ($i = 0; $i < count($Video_actress_name); $i++){
-				   $query->orwhere('actress', 'like',  '%' . $Video_actress_name[$i] .'%');
-				}      
-		   });
-		}
-		$video = $video->where(['video_lang'=>$webLangIndex])->Paginate(12);
-	 	return  response()->json(['video' =>$video,  'pagination' => (string)$video->links("pagination::bootstrap-4"), ]);
+		$Video_actress_id = Video_actress::where('JapaneseName1', 'like', '%'.strtoupper($search).'%')
+		->orWhere('ChineseName1', 'like', '%'.strtoupper($search).'%')
+		->orWhere('ChineseName2', 'like', '%'.strtoupper($search).'%')
+		->orWhere('ChineseName3', 'like', '%'.strtoupper($search).'%')
+		->orWhere('JapaneseName2', 'like', '%'.strtoupper($search).'%')
+		->orWhere('JapaneseName3', 'like', '%'.strtoupper($search).'%')
+		->orWhere('JapaneseName4', 'like', '%'.strtoupper($search).'%')
+		->orWhere('JapaneseName5', 'like', '%'.strtoupper($search).'%')
+		->orWhere('JapaneseName6', 'like', '%'.strtoupper($search).'%')
+		->orWhere('JapaneseName7', 'like', '%'.strtoupper($search).'%')
+		->orWhere('JapaneseName8', 'like', '%'.strtoupper($search).'%')
+		->pluck('id')->toArray();//找女優 對應表
+		// var_dump( DB::getQueryLog());
+		$videoIDs =Video_actress_relations::whereIn('actress_id',$Video_actress_id)->limit(10000)->pluck('id')->toArray();// 女優table;
+
+		$videos = Video::where('video_lang',$webLangIndex)->where(function($query) use ($videoIDs,$search) {
+			$query->whereIn('id', $videoIDs)
+				  ->orWhere('title', 'like', '%'.strtoupper($search).'%');
+		})->Paginate(48);//  video table;
+		
+	 	return  response()->json(['video' =>$videos,  'pagination' => (string)$videos->links("pagination::bootstrap-4"), ]);
     }
 	public function actress() {
 		return view('app_rwd.index.actress_list');

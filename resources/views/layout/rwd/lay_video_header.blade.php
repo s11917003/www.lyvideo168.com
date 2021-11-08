@@ -168,7 +168,11 @@
 	  </nav>
 	  <div class="search" >
 		<div class="search__content">
+		@if(Route::currentRouteName()  == 'search')
+		<input type="search" value='{{$search}}'>
+		@else
 		<input type="search">
+		@endif
 		</div>
 		<div class="search__btn">
 		<button>搜尋</button>
@@ -191,6 +195,10 @@
 		$('.hamburger').toggleClass('active')
 		$('body nav').toggleClass('active')
 	 
+	});
+
+	$('.search__btn').click(function(){
+		window.location = '/search/'+	$('.search__content input').val();
 	});
 
 	$('#search').click(function(){
