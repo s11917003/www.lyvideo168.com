@@ -12,6 +12,8 @@
 
 <link href="/css/index.css" rel="stylesheet" type="text/css">
 <link href="/css/search-list.css" rel="stylesheet" type="text/css">
+
+<link href="/css/ranking-list.css" rel="stylesheet" type="text/css">
 <link href="/css/female-list.css" rel="stylesheet" type="text/css">
 <link href="/css/female-detail.css" rel="stylesheet" type="text/css">
 <script src="js/main.js"></script>

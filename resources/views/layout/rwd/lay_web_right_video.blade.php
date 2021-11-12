@@ -56,8 +56,8 @@
 	<div class="keyword__content">
 	  <h4 class="keyword__content-title">AV排行榜</h4>
 	  <ul class="keyword__content-list">
-		<li><a href="#">每週排行榜</a></li>
-		<li><a href="#">每月排行榜</a></li>
+		<li><a href="/rank/1">每週排行榜</a></li>
+		<li><a href="/rank/2">每月排行榜</a></li>
 	  </ul>
 	</div>
   </div>

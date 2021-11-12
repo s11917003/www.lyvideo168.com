@@ -180,7 +180,8 @@ nav .keyword { display: none; }
 
 #gotop .btn:after { transform: translate(-50%, -50%) rotate(45deg); margin-left: 4px; }
 
-html, body { position: relative; -webkit-text-size-adjust: 100%; font-family: 'Noto Sans TC', 'Arial', '\5FAE\8EDF\6B63\9ED1\9AD4', '\65B0\7D30\660E\9AD4', 'sans-serif'; color: var(--text-color); background: var(--background-color); font-size: 16px; transition: 300ms ease color; overflow-x: hidden; }
+html, body { position: relative; -webkit-text-size-adjust: 100%; font-family: 'Noto Sans TC', 'Arial', '\5FAE\8EDF\6B63\9ED1\9AD4',
+ '\65B0\7D30\660E\9AD4', 'sans-serif'; color: var(--text-color); background: var(--background-color); font-size: 16px; transition: 300ms ease color; overflow-x: hidden; }
 
 html *, body * { box-sizing: border-box; }
 
@@ -276,7 +277,7 @@ main { display: flex; max-width: 1440px; margin: 0 auto; padding: 8.125rem 1rem 
 
 .ranking__title { width: 100%; padding: 0 1rem; line-height: 40px; font-size: 24px; font-weight: bold; color: #fff; background-color: var(--ranking-title-background); }
 
-.ranking__board { margin-top: 16px; }
+.ranking__board { margin-bottom: 16px; }
 
 .ranking__board-item { display: inline-block; }
 

@@ -1625,6 +1625,7 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;color:#b5b9bd; ;}
 		width:95%;
 		padding:0px;
 		overflow: hidden;
+		padding:80px 15px 0 15px;
 	}
 	#rs-content-left {
 		width:100%;

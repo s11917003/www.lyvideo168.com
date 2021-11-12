@@ -25,6 +25,7 @@ use App\Model\Video_actress;
 use App\Model\Video_actress_relations;
 use App\Model\Video_tag_relations;
 use App\Model\Video_tag;
+use App\Model\Video_rank;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 //  use App\Lib\User;
@@ -936,6 +937,21 @@ class IndexController extends Controller {
 		$count  = Video_actress_relations::where('actress_id',$id)->count();// 女優table;
 		return  view('app_rwd.index.actress',['actress'=>$actress,'count'=>$count]);
     }
+	public function rankPage(Int $type) {
+		if($type!='1' && $type!='2')
+			abort(404);
+		$fanza = Video_rank::where('video_source','fanza')->where('type',$type)->where('video_lang',3)->with('video')->orderBy('rank')->limit(9)->get();
+		$prestige = Video_rank::where('video_source','mgstage')->where('type',$type)->where('video_lang',3)->with('video')->orderBy('rank')->limit(9)->get();
+		$uncensored = Video_rank::where('video_source','uncensored')->where('type',$type)->where('video_lang',3)->with('video')->orderBy('rank')->limit(9)->get();
+		$amateur = Video_rank::where('video_source','amateur')->where('type',$type)->where('video_lang',3)->with('video')->orderBy('rank')->limit(9)->get();
+		
+		return view('app_rwd.index.rank',['type'=> $type ,
+		'fanza'=>$fanza,
+		'prestige'=>$prestige,
+		'uncensored'=>$uncensored,
+		'amateur'=>$amateur,
+		]);
+	}
 	public function postpage() {
 		/*
 	    $u = new User();
