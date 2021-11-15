@@ -952,6 +952,35 @@ class IndexController extends Controller {
 		'amateur'=>$amateur,
 		]);
 	}
+	public function rankListPage(string $cate) {
+		if( !in_array($cate,['fanza','prestige','uncensored','amateur'])){
+			abort(404);
+		}
+	
+		$post = Video_rank::where('video_source',$cate)->where('type',1)->where('video_lang',3)->with('video')->orderBy('rank')->get();
+		$post1 = Video_rank::where('video_source',$cate)->where('type',2)->where('video_lang',3)->with('video')->orderBy('rank')->get();
+		
+		return view('app_rwd.index.list',[
+		'cate'=>$cate,
+		'video'=>$post,
+		'video1'=>$post1,
+		]);
+	}
+	public function all(string $cate) {
+		if( !in_array($cate,['fanza','prestige','uncensored','amateur'])){
+			abort(404);
+		}
+		return view('app_rwd.index.list',['cate'=>$cate]);
+	}
+	public function allList(Request $request) { 
+
+		$key = array_search($request->category,['fanza','prestige','uncensored','amateur']);
+		if ($key !== false) {
+			$post = Video::where(['cate_id'=>$key+1])->orderBy('id', 'desc')->Paginate(36);
+			return  response()->json(['status'=>true,'video' =>$post,  'pagination' => (string)$post->links("pagination::bootstrap-4") ]);
+		}
+		return  response()->json(['status'=>false]);
+	}
 	public function postpage() {
 		/*
 	    $u = new User();

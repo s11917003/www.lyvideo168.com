@@ -64,7 +64,11 @@ Route::get('rd/genacc', 'Rd\RdController@genacc');
 	Route::post('/actress_list', 'Index\IndexController@actressList');  //女優清單
 	Route::get('/actress/{id}', 'Index\IndexController@actressPage');  //女優主頁面
 	// Route::post('/rank', 'Index\IndexController@actressList');  //女優清單
-	Route::get('/rank/{type}', 'Index\IndexController@rankPage'); 
+	Route::get('/rank/{type}', 'Index\IndexController@rankPage');
+	Route::get('/rank-list/{cate}', 'Index\IndexController@rankListPage')->name('rank-list');
+	Route::get('/all/{cate}', 'Index\IndexController@all')->name('all');    //分類大項
+	Route::post('/all', 'Index\IndexController@allList');    //分類大項
+
 	// Route::get('/tag/{id}/{page?}', 'Index\IndexController@tag')->where('id', '[0-9]+');
 
 	Route::post('/language', 'Index\IndexController@lang')->name('lang');//切換語系
