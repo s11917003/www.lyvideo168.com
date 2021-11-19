@@ -17,7 +17,7 @@
 
 <div class="container">
 	<div class="search-result">
-		<p class="search-result__title">搜索結果</p>
+		<p class="search-result__title">{{__('ui.search_result')}}</p>
 		<!-- <ul class="search-result__board">
 		  <li class="search-result__board-item"><a href="#">照相關度排列</a></li>
 		  <li class="search-result__board-item search-result__board-item--active"> <a href="#">照發行日期排列</a> </li>
@@ -46,7 +46,7 @@
 	function sendAjax(search,page){
 		$.ajax({
 				type:"POST",
-				url:"/search",
+				url:"/{{$lang}}/search",
 				dataType:"json",
 				data:{page,search},
 				success:function(result){

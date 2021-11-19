@@ -37,37 +37,39 @@ Route::get('rd/genacc', 'Rd\RdController@genacc');
 // Route::get('/pv/{id}', 'Index\IndexController@postviewapp')->where('id', '[0-9]+');
 
   Route::group(['middleware' => 'web'], function () {
-   	Route::auth();
-	Route::get('login', 'Auth\LoginController@index')->name('login');
-	Route::post('loginPost', 'Auth\LoginController@loggedIn');
-	Route::get('homeIndex','Auth\LoginController@home')->middleware('auth');
-	Route::get('logout', 'Auth\LoginController@logout');
+   	// Route::auth();
+	// Route::get('login', 'Auth\LoginController@index')->name('login');
+	// Route::post('loginPost', 'Auth\LoginController@loggedIn');
+	// Route::get('homeIndex','Auth\LoginController@home')->middleware('auth');
+	// Route::get('logout', 'Auth\LoginController@logout');
 
 
 
-	Route::get('/p/{id}', 'Index\IndexController@postview')->where('id', '[0-9]+');
+	//Route::get('/p/{id}', 'Index\IndexController@postview')->where('id', '[0-9]+');
 	// Route::get('/category/{cat}/{id?}', 'Index\IndexController@category')->where('cat', '[A-Za-z]+')->where('id', '[0-9]+'); 
-	Route::get('/tag/{id}/{page?}', 'Index\IndexController@tag')->where('id', '[0-9]+');
-	Route::get('/tag/hot/{page?}', 'Index\IndexController@hot');
+	//Route::get('/tag/{id}/{page?}', 'Index\IndexController@tag')->where('id', '[0-9]+');
+	//Route::get('/tag/hot/{page?}', 'Index\IndexController@hot');
 	// Route::post('thumbsup', 'Index\IndexController@thumbsup');
 	// Route::post('thumbsdown', 'Index\IndexController@thumbsdown');
 
 	Route::get('/{img}.jpg', 'Index\IndexController@image');    //圖片
 	Route::get('{lang}/testview/{id}', 'Index\IndexController@postview1');  //文章
-	Route::get('/', 'Index\IndexController@index');  //文章
-	Route::get('/category', 'Index\IndexController@category');  //文章
-	Route::post('/category', 'Index\IndexController@categoryPost');  //
-	Route::post('/category/cancel', 'Index\IndexController@categoryCancel');  //取消自定分類
-	Route::get('/search/{search}/{page?}/', 'Index\IndexController@search')->where('page', '[0-9]+')->name('search');   //搜尋
-	Route::post('/search', 'Index\IndexController@searchVideo');  //搜尋
+	Route::get('/', 'Index\IndexController@home_index');  //HOME
+	Route::get('/{lang}/home', 'Index\IndexController@index');  //HOME
+	Route::get('/{lang}/category', 'Index\IndexController@category');  //文章
+	Route::post('/{lang}/category', 'Index\IndexController@categoryPost');  //
+	Route::post('/{lang}/category/cancel', 'Index\IndexController@categoryCancel');  //取消自定分類
+	
 	Route::get('/actress_list', 'Index\IndexController@actress');  //女優清單
 	Route::post('/actress_list', 'Index\IndexController@actressList');  //女優清單
 	Route::get('/actress/{id}', 'Index\IndexController@actressPage');  //女優主頁面
-	// Route::post('/rank', 'Index\IndexController@actressList');  //女優清單
-	Route::get('/rank/{type}', 'Index\IndexController@rankPage');
-	Route::get('/rank-list/{cate}', 'Index\IndexController@rankListPage')->name('rank-list');
-	Route::get('/all/{cate}', 'Index\IndexController@all')->name('all');    //分類大項
-	Route::post('/all', 'Index\IndexController@allList');    //分類大項
+
+	Route::get('/{lang}/search/{search}/{page?}/', 'Index\IndexController@search')->where('page', '[0-9]+')->name('search');   //搜尋
+	Route::post('/{lang}/search', 'Index\IndexController@searchVideo');  //搜尋
+	Route::get('/{lang}/rank/{type}', 'Index\IndexController@rankPage');
+	Route::get('/{lang}/rank-list/{cate}', 'Index\IndexController@rankListPage')->name('rank-list');
+	Route::get('/{lang}/all/{cate}', 'Index\IndexController@all')->name('all');    //分類大項
+	Route::post('/{lang}/all', 'Index\IndexController@allList');    //分類大項
 
 	// Route::get('/tag/{id}/{page?}', 'Index\IndexController@tag')->where('id', '[0-9]+');
 

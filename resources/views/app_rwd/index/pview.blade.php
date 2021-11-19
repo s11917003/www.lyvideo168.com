@@ -467,7 +467,7 @@
 				<div style="float: left;padding: 10px; width: 230px; height: 230px; margin: 5px; overflow: hidden">
 					<div poster=""   class="adClick video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	
 					style="height:70%;   padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
-						<a href="/jp/testview/{{$video_actress->video_id}}${{ $video_actress->actress}}"  target="_blank">
+						<a href="/{{$lang}}/testview/{{$video_actress->video_id}}${{ $video_actress->actress}}"  target="_blank">
 							<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
 														vertical-align: middle;
 														background-repeat: no-repeat;
@@ -505,7 +505,7 @@
 				<div style="float: left;padding: 10px; width: 230px; height: 230px; margin: 5px; overflow: hidden">
 					<div poster=""   class="adClick video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	
 					style="height:70%;   padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
-						<a href="/jp/testview/{{$video_tag->video_id}}${{ $video_tag->actress}}"  target="_blank">
+						<a href="/{{$lang}}/testview/{{$video_tag->video_id}}${{ $video_tag->actress}}"  target="_blank">
 							<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
 														vertical-align: middle;
 														background-repeat: no-repeat;
@@ -586,7 +586,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer> -->
-  {lang: 'zh-TW'}
 </script>
 <script>
 	$('#closead').on('click',function(){

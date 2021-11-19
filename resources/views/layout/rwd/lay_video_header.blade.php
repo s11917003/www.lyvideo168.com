@@ -88,16 +88,16 @@
 			</li>
 		  </ul>
 		</div>
-		
+	 
 	  </header>
 	  <nav class="active"> 
 		<ul class="nav">
-			<li><a href="ranking-item-list.html">有　碼</a></li>
-			<li><a href="#">無　碼</a></li>
-			<li><a href="#">素　人</a></li>
-			<li><a href="category.html">類　別</a></li>
-			<li><a href="actress_list.html">女　優</a></li>
-			<li><a href="ranking-list.html">排行榜</a></li>
+			<li><a href="/{{$lang}}/all/censored">{{__('ui.title.censored')}}</a></li>
+			<li><a href="/{{$lang}}/all/uncensored">{{__('ui.title.uncensored')}}</a></li>
+			<li><a href="/{{$lang}}/all/amateur">{{__('ui.title.amateur')}}</a></li>
+			<li><a href="/{{$lang}}/category">{{__('ui.title.category')}}</a></li>
+			<li><a href="/actress_list">{{__('ui.title.actress')}}</a></li>
+			<li><a href="/{{$lang}}/rank/1">{{__('ui.title.rank')}}</a></li>
 		  </ul>
 	  
 		<!-- 只有mobile 才會顯示 -->
@@ -157,10 +157,10 @@
 		  </ul>
 		</div>
 		<div class="keyword__content">
-		  <h4 class="keyword__content-title">AV排行榜</h4>
+		  <h4 class="keyword__content-title">{{__('ui.rank.rank_title')}}</h4>
 		  <ul class="keyword__content-list">
-			<li><a href="/rank/1">每週排行榜</a></li>
-			<li><a href="/rank/2">每月排行榜</a></li>
+			<li><a href="/{{$lang}}/rank/1">{{__('ui.rank.week')}}</a></li>
+			<li><a href="/{{$lang}}/rank/2">{{__('ui.rank.month')}}</a></li>
 		  </ul>
 		</div>
 	  </div>
@@ -198,7 +198,7 @@
 	});
 
 	$('.search__btn').click(function(){
-		window.location = '/search/'+	$('.search__content input').val();
+		window.location = '/{{$lang}}/search/'+	$('.search__content input').val()+'/1';
 	});
 
 	$('#search').click(function(){

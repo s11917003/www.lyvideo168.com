@@ -135,7 +135,7 @@
 	function sendAjax(tag,page){
 		$.ajax({
 				type:"POST",
-				url:"/category",
+				url:"/{{$lang}}/category",
 				dataType:"json",
 				data:{tag,page},
 				success:function(result){
@@ -227,7 +227,7 @@
 			$("#video_list").empty();
 			$.ajax({
 				type:"POST",
-				url:"/category/cancel",
+				url:"/{{$lang}}/category/cancel",
 				dataType:"json",
 				data:{tag:arr,customTag:id,page:1},
 				success:function(result){

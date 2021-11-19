@@ -17,10 +17,10 @@
 
 <div class="container">
 	@if(Route::currentRouteName()  == 'rank-list')
-	<div class="container__header">排行榜一覽</div>
+	<div class="container__header">{{__('ui.rank.rank_title')}}</div>
 	<ul class="ranking__board">
-		<li class="ranking__board-item week  ranking__board-item--active"><a  href="javascript:void(0)">每週排行榜</a></li>
-		<li class="ranking__board-item month"><a href="javascript:void(0)">每月排行榜</a></li>
+		<li class="ranking__board-item week  ranking__board-item--active"><a  href="javascript:void(0)">{{__('ui.rank.week')}}</a></li>
+		<li class="ranking__board-item month"><a href="javascript:void(0)">{{__('ui.rank.month')}}</a></li>
 	</ul>
  
 	<!-- 有碼 FANZA -->
@@ -29,7 +29,7 @@
 		<div class="list__wrap week">
 			<div class="list">
 				@foreach ($video as $post)
-					<a href="/jp/testview/{{$post->video->video_id}}${{$post->video->actress}}"  target="_blank" class="list__item">
+					<a href="/{{$lang}}/testview/{{$post->video->video_id}}${{$post->video->actress}}"  target="_blank" class="list__item">
 					<p class="list__num">Top {{$post->rank}}.</p>
 					<figure><img src="{{$post->video->cover_img}}"></figure>
 					<div class="list__item-info">
@@ -43,10 +43,10 @@
 		
 		</div>
 
-		<div class="list__wrap month">
+		<div class="list__wrap month" style="display: none;">
 			<div class="list">
 				@foreach ($video1 as $post)
-					<a href="/jp/testview/{{$post->video->video_id}}${{$post->video->actress}}"  target="_blank" class="list__item">
+					<a href="/{{$lang}}/testview/{{$post->video->video_id}}${{$post->video->actress}}"  target="_blank" class="list__item">
 					<p class="list__num">Top {{$post->rank}}.</p>
 					<figure><img src="{{$post->video->cover_img}}"></figure>
 					<div class="list__item-info">
@@ -113,14 +113,14 @@
 		function sendAjax(category,page){
 		$.ajax({
 				type:"POST",
-				url:"/all",
+				url:"/{{$lang}}/all",
 				dataType:"json",
 				data:{category,page},
 				success:function(result){
 						console.log(result)	
 						if(result.status =true){
 							result.video.data.forEach(function(item){
-								video = `<a href="/jp/testview/`+item.video_id+`$`+item.actress+`" class="list__item">
+								video = `<a href="/{{$lang}}/testview/`+item.video_id+`$`+item.actress+`" class="list__item">
 								<figure><img src="`  +item.cover_img+  `"></figure>
 								<div class="list__item-info">
 								<h5>`  +item.video_id+  `</h5>

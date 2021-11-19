@@ -16,15 +16,15 @@
 @section('maincontent')
 
 <div class="container">
-	<div class="container__header">排行榜一覽</div>
+	<div class="container__header">{{__('ui.rank.rank_title')}}</div>
 	<ul class="ranking__board">
-		<li class="ranking__board-item  @if($type==1) ranking__board-item--active @endif "><a href="/rank/1">每週排行榜</a></li>
-		<li class="ranking__board-item 	@if($type==2) ranking__board-item--active @endif"><a href="/rank/2">每月排行榜</a></li>
+		<li class="ranking__board-item  @if($type==1) ranking__board-item--active @endif "><a href="/{{$lang}}/rank/1">{{__('ui.rank.week')}}</a></li>
+		<li class="ranking__board-item 	@if($type==2) ranking__board-item--active @endif"><a href="/{{$lang}}/rank/2">{{__('ui.rank.month')}}</a></li>
 		
 	  </ul>
 	<!-- 有碼 FANZA -->
 	<div class="ranking">
-	  <p class="ranking__title">有碼 FANZA</p>
+	  <p class="ranking__title">{{__('ui.title.censored')}} FANZA</p>
 	 
 	  <div class="list__wrap">
 		<div class="list">
@@ -46,7 +46,7 @@
 
 	<!-- 有碼 Prestige -->
 	<div class="ranking">
-	  <p class="ranking__title">有碼 Prestige</p>
+	  <p class="ranking__title">{{__('ui.title.censored')}} Prestige</p>
 	  
 	  <div class="list__wrap">
 		<div class="list">
@@ -68,7 +68,7 @@
 
 	<!-- 無碼 -->
 	<div class="ranking">
-	  <p class="ranking__title">無碼</p>
+	  <p class="ranking__title">{{__('ui.title.uncensored')}}</p>
 	   
 	  <div class="list__wrap">
 		<div class="list">
@@ -90,7 +90,7 @@
 
 	<!-- 素人 -->
 	<div class="ranking">
-	  <p class="ranking__title">素人</p>
+	  <p class="ranking__title">{{__('ui.title.amateur')}}</p>
  
 	  <div class="list__wrap">
 		<div class="list">

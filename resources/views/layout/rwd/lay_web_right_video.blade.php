@@ -54,10 +54,10 @@
 	  </ul>
 	</div>
 	<div class="keyword__content">
-	  <h4 class="keyword__content-title">AV排行榜</h4>
+	  <h4 class="keyword__content-title">{{__('ui.rank.rank_title')}}</h4>
 	  <ul class="keyword__content-list">
-		<li><a href="/rank/1">每週排行榜</a></li>
-		<li><a href="/rank/2">每月排行榜</a></li>
+		<li><a href="/{{$lang}}/rank/1">{{__('ui.rank.week')}}</a></li>
+		<li><a href="/{{$lang}}/rank/2">{{__('ui.rank.month')}}</a></li>
 	  </ul>
 	</div>
   </div>
