@@ -269,7 +269,7 @@
 										<!-- <a href="" title="HyakkinTV">{{ $video->label }}</a> -->
 										@if ($video_tag)
 											@foreach ($video_tag as $tag )
-											<a href="/category?cate={{  $tag->tag_id   }}" class="  m-2 pl-2 ml-1" >{{$tag->tagName }} </a>
+											<a href="/{{$lang}}/category?cate={{  $tag->tag_id   }}" class="  m-2 pl-2 ml-1" >{{$tag->tagName }} </a>
 											@endforeach	
 										@endif
 									</td>
@@ -288,14 +288,14 @@
 								</tr>
 								<tr>
 								<td>Director</td>
-								<td><a href="" title="----">{{ $video->director }}</a></td>
+								<td>{{ $video->director }}</td>
 								</tr>
 								<tr>
 								<td>Studio</td>
-								<td><a href="http://www.javmovie.com/ja/studio/hyakkin-tv-4255.html" title="HyakkinTV">HyakkinTV</a></td>
+								<td>{{ $video->studio }}</td>
 								</tr>
 								
-								
+<!-- 								
 								<tr>
 								<td>Genre</td>
 								<td class="list-genre">
@@ -303,11 +303,11 @@
 									<a href="http://www.javmovie.com/ja/genre/featured-actress-6.html" title="単体作品">単体作品</a>
 									<a href="http://www.javmovie.com/ja/genre/hi-def-7.html" title="ハイビジョン">ハイビジョン</a>
 								</td>
-								</tr>
+								</tr> -->
 								<tr>
 									<td colspan =2>
 										<div class='playBtn' >
-											<a href="#">
+											<a  href="{{ url($url) }}">
 												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.98 31.98">
 												<g>
 													<circle class="i_played1" cx="15.99" cy="15.99" r="15.99"></circle>
@@ -323,7 +323,7 @@
 								<tr >
 									<td colspan =2>
 										<div class='playBtn' >
-											<a href="#">
+											<a  href="{{ url($url) }}">
 												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.98 31.98">
 												<g>
 													<circle class="i_played1" cx="15.99" cy="15.99" r="15.99"></circle>

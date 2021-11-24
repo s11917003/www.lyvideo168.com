@@ -223,7 +223,7 @@ class IndexController extends Controller {
 		if( !in_array($lang,['zh','en','jp'])){
 			abort(404);
 		}
-		$webLangIndex = $this->language[$lang];
+ 
 		//主影片DATA
 		$webLangIndex = $this->language[$lang];
  
@@ -232,9 +232,7 @@ class IndexController extends Controller {
 	
 	
 		if(!$video) {
-		 
 			return redirect()->to('/')->send();
-			 
 		} 
  
  		$video_tag =  Video_tag_relations::where('video_id',$video->id)->with('tagName')->get();
@@ -322,10 +320,20 @@ class IndexController extends Controller {
 
 		
 		$title  = $video['video_id'].'|'.$video['actress'].'無料エロ動画【JavDic  '. implode(",", $tagName).'】';
-		$url = $video['video_id'].'|'.$video['actress'];
+		$url ='';
+
+		//生成頁面連結
+		if($video['cate_id'] == 1){ //fanzy r18
+			$url =  'https://media.r18.com/track/MjM3Mi4xLjEuMS4wLjAuMC4wLjA/videos/vod/movies/detail/-/id='.$video['video_id'] .'/';
+		} else if ($video['cate_id'] == 2){
+			$url =  'https://www.mgstage.com/product/product_detail/'.$video['video_id'].'/?aff=JAQD55TL3ANYC8C2Y3CZZHBAZY';
+		} else if ($video['cate_id'] == 4){
+			$url =  'https://adult.contents.fc2.com/aff.php?aid='.$video['video_id'].'&affuid=TXpjMU5qTTFPREU9';
+		}
 		if($video) {
 			$device = Utils::chkdevice();
 			return view('app_rwd.index.pview',[
+				'url' => $url,
 				'footer'=>$footer,
 				'device' => $device,
 				'video' => $video, 							//主影片
@@ -727,7 +735,6 @@ class IndexController extends Controller {
 			$tag['check'] = true;
 			if(!in_array((string)$tag->id,$request->tag)){  
 				$tag['check'] = false;
-			
 			 } 
 			 
 	  	}

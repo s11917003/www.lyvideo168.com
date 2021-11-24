@@ -16,101 +16,101 @@
 @section('maincontent')
 
 <div class="container">
-	<div class="container__header">類別搜尋</div>
+	<div class="container__header">{{__('ui.Category_Search')}}</div>
 	<div class="category category--open">
-	  <div class="category__title">來源</div>
+	  <div class="category__title">{{__('ui.tag.Source')}}</div>
 	  <ul id='category_source' class="category__tags">
-		<li name="all" class="category__tags-item category__tags-item--active"><a href="#">全部</a></li>
-		<li name="censored_f" class="category__tags-item category__tags-item--active"><a href="#">有碼 - FANZA</a></li>
-		<li name="censored_p" class="category__tags-item category__tags-item--active "> <a href="#">有碼 - PRESTIGE</a> </li>
-		<li name="uncensored"  class="category__tags-item category__tags-item--active "> <a href="#">無碼</a> </li>
-		<li name="FC2" class="category__tags-item category__tags-item--active"><a href="#">FC2</a></li>
+		<li name="all" class="category__tags-item category__tags-item--active"><a href="#">ALL</a></li>
+		<li name="censored_f" class="category__tags-item category__tags-item--active"><a href="#">{{__('ui.title.censored')}} - FANZA</a></li>
+		<li name="censored_p" class="category__tags-item category__tags-item--active "> <a href="#">{{__('ui.title.censored')}} - PRESTIGE</a> </li>
+		<li name="uncensored"  class="category__tags-item category__tags-item--active "> <a href="#">{{__('ui.title.uncensored')}}</a> </li>
+		<li name="FC2" class="category__tags-item category__tags-item--active"><a href="#">{{__('ui.title.amateur')}}</a></li>
 	  </ul>
-	  <div class="category__more category_source_more" style="display: none;"><a href="#"><span>更多</span> <i class="i-arrow active"></i></a></div>
+	  <div class="category__more category_source_more" style="display: none;"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow active"></i></a></div>
 	</div>
 
 	<div class="category category--open">
-	  <div class="category__title">形式</div>
+	  <div class="category__title">{{__('ui.tag.Form')}}</div>
 	  <ul id="category_form" class="category__tags">
-		<li name="217" class="category__tags-item"><a href="#">高畫質</a></li>
-		<li name="236" class="category__tags-item"><a href="#">VR 專用</a></li>
-		<li name="112" class="category__tags-item"><a href="#">女優作品</a></li>
-		<li name="211" class="category__tags-item"><a href="#">出道作品</a></li>
+		<li name="217" class="category__tags-item"><a href="#">{{__('ui.tag.HiDef')}}</a></li>
+		<li name="236" class="category__tags-item"><a href="#">{{__('ui.tag.VRExclusive')}}</a></li>
+		<li name="112" class="category__tags-item"><a href="#">{{__('ui.tag.Featured_Actress')}}</a></li>
+		<li name="211" class="category__tags-item"><a href="#">{{__('ui.tag.Debut')}}</a></li>
 	  </ul> 
-	  <div class="category__more category_form_more" style="display: none;"><a href="#"><span>更多</span> <i class="i-arrow active"></i></a></div>
+	  <div class="category__more category_form_more" style="display: none;"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow active"></i></a></div>
 	</div>
 
 	<div class="category category--open">
-	  <div class="category__title">角色</div>
+	  <div class="category__title">{{__('ui.tag.Role')}}</div>
 	  <ul  id="category_role"  class="category__tags">
-		<li name="2" class="category__tags-item"><a href="#">美少女</a></li>
-		<li name="38" class="category__tags-item"><a href="#">女高中生</a></li>
-		<li name="8" class="category__tags-item"><a href="#">女大學生</a></li>
-		<li name="15" class="category__tags-item"><a href="#">辣妹</a></li>
-		<li name="22" class="category__tags-item"><a href="#">人妻</a></li>
-		<li name="49" class="category__tags-item"><a href="#">少婦</a></li>
-		<li name="24" class="category__tags-item"><a href="#">熟女</a></li>
-		<li name="93" class="category__tags-item"><a href="#">素人</a></li>
+		<li name="2" class="category__tags-item"><a href="#">{{__('ui.tag.Beautiful_Girl')}}</a></li>
+		<li name="38" class="category__tags-item"><a href="#">{{__('ui.tag.School_Girl')}}</a></li>
+		<li name="8" class="category__tags-item"><a href="#">{{__('ui.tag.College_Girl')}}</a></li>
+		<li name="15" class="category__tags-item"><a href="#">{{__('ui.tag.Gal')}}</a></li>
+		<li name="22" class="category__tags-item"><a href="#">{{__('ui.tag.Married_Woman')}}</a></li>
+		<li name="49" class="category__tags-item"><a href="#">{{__('ui.tag.Young_Wife')}}</a></li>
+		<li name="24" class="category__tags-item"><a href="#">{{__('ui.tag.Mature_Woman')}}</a></li>
+		<li name="93" class="category__tags-item"><a href="#">{{__('ui.tag.Amateur')}}</a></li>
 		<!-- <li name="vr" class="category__tags-item"><a href="#">OL</a></li> -->
-		<li name="14" class="category__tags-item"><a href="#">女老師</a></li>
+		<li name="14" class="category__tags-item"><a href="#">{{__('ui.tag.Female_Teacher')}}</a></li>
 	  </ul>
-	  <div class="category__more category_role_more" style="display: none;"><a href="#"><span>更多</span> <i class="i-arrow active"></i></a></div>
+	  <div class="category__more category_role_more" style="display: none;"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow active"></i></a></div>
 	</div>
 
 	<div class="category category--open">
-	  <div class="category__title">身材</div>
+	  <div class="category__title">{{__('ui.tag.figure')}}</div>
 	  <ul   id="category_figure" class="category__tags">
-		<li name="51" class="category__tags-item"><a href="#">美乳</a></li>
-		<li name="53" class="category__tags-item"><a href="#">巨乳</a></li>
-		<li name="52" class="category__tags-item"><a href="#">巨臀</a></li>
-		<li name="57" class="category__tags-item"><a href="#">肉系女孩</a></li>
-		<li name="64" class="category__tags-item"><a href="#">苗條</a></li>
-		<li name="67" class="category__tags-item"><a href="#">高挑</a></li>
-		<li name="63" class="category__tags-item"><a href="#">小隻馬</a></li>
-		<li name="65" class="category__tags-item"><a href="#">貧乳</a></li>
-		<li name="69" class="category__tags-item"><a href="#">迷你系</a></li>
-		<li name="137" class="category__tags-item"><a href="#">白虎</a></li>
-		<li name="95" class="category__tags-item"><a href="#">美臀癖</a></li>
+		<li name="51" class="category__tags-item"><a href="#">{{__('ui.tag.Beautiful_Tits')}}</a></li>
+		<li name="53" class="category__tags-item"><a href="#">{{__('ui.tag.Big_Tits')}}</a></li>
+		<li name="52" class="category__tags-item"><a href="#">{{__('ui.tag.Big_Asses')}}</a></li>
+		<li name="57" class="category__tags-item"><a href="#">{{__('ui.tag.Chubby')}}</a></li>
+		<li name="64" class="category__tags-item"><a href="#">{{__('ui.tag.Slender')}}</a></li>
+		<li name="67" class="category__tags-item"><a href="#">{{__('ui.tag.Tall_Girl')}}</a></li>
+		<li name="63" class="category__tags-item"><a href="#">{{__('ui.tag.Petite')}}</a></li>
+		<li name="65" class="category__tags-item"><a href="#">{{__('ui.tag.Small_Tits')}}</a></li>
+		<li name="69" class="category__tags-item"><a href="#">{{__('ui.tag.Youthful')}}</a></li>
+		<li name="137" class="category__tags-item"><a href="#">{{__('ui.tag.Shaved_Pussy')}}</a></li>
+		<li name="95" class="category__tags-item"><a href="#">{{__('ui.tag.Ass_Lover')}}</a></li>
 	  </ul>
-	  <div class="category__more category_figure_more" style="display: none;"><a href="#"><span>更多</span> <i class="i-arrow active"></i></a></div>
+	  <div class="category__more category_figure_more" style="display: none;"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow active"></i></a></div>
 	</div>
 
 	<div class="category category--open">
-	  <div class="category__title">玩法</div>
+	  <div class="category__title">{{__('ui.tag.playing')}}</div>
 	  <ul id="category_play" class="category__tags">
-		<li name="203" class="category__tags-item"><a href="#">乳交</a></li>
-		<li name="155" class="category__tags-item"><a href="#">母乳</a></li>
-		<li name="154" class="category__tags-item"><a href="#">口交</a></li>
-		<li name="162" class="category__tags-item"><a href="#">深喉嚨</a></li>
-		<li name="172" class="category__tags-item"><a href="#">足交</a></li>
-		<li name="169" class="category__tags-item"><a href="#">顏射</a></li>
-		<li name="160" class="category__tags-item"><a href="#">吞精</a></li>
-		<li name="159" class="category__tags-item"><a href="#">內射</a></li>
-		<li name="175" class="category__tags-item"><a href="#">打飛機‧打手槍</a></li>
-		<li name="197" class="category__tags-item"><a href="#">高潮噴水</a></li>
+		<li name="203" class="category__tags-item"><a href="#">{{__('ui.tag.Titty_Fuck')}}</a></li>
+		<li name="155" class="category__tags-item"><a href="#">{{__('ui.tag.Breast_Milk')}}</a></li>
+		<li name="154" class="category__tags-item"><a href="#">{{__('ui.tag.Blowjob')}}</a></li>
+		<li name="162" class="category__tags-item"><a href="#">{{__('ui.tag.Deep_Throat')}}</a></li>
+		<li name="172" class="category__tags-item"><a href="#">{{__('ui.tag.Footjob')}}</a></li>
+		<li name="169" class="category__tags-item"><a href="#">{{__('ui.tag.Facial')}}</a></li>
+		<li name="160" class="category__tags-item"><a href="#">{{__('ui.tag.Cum_Swallowing')}}</a></li>
+		<li name="159" class="category__tags-item"><a href="#">{{__('ui.tag.Creampie')}}</a></li>
+		<li name="175" class="category__tags-item"><a href="#">{{__('ui.tag.Handjob')}}</a></li>
+		<li name="197" class="category__tags-item"><a href="#">{{__('ui.tag.Squirting')}}</a></li>
 	  </ul>
-	  <div class="category__more category_play_more" style="display: none;"><a href="#"><span>更多</span> <i class="i-arrow"></i></a></div>
+	  <div class="category__more category_play_more" style="display: none;"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow"></i></a></div>
 	</div>
 
 	<div class="category category--open">
-		<div class="category__title">服裝</div>
+		<div class="category__title">{{__('ui.tag.Clothing')}}</div>
 	  <ul id="category_clothing" class="category__tags">
-		<li name="103" class="category__tags-item"><a href="#">Cosplay</a></li>
-		<li name="84" class="category__tags-item"><a href="#">絲襪</a></li>
-		<li name="90" class="category__tags-item"><a href="#">制服</a></li>
-		<li name="75" class="category__tags-item"><a href="#">女運動褲 ‧ 布魯馬</a></li>
-		<li name="86" class="category__tags-item"><a href="#">史庫水</a></li>
-		<li name="76" class="category__tags-item"><a href="#">和服 ‧ 浴衣</a></li>
-		<li name="88" class="category__tags-item"><a href="#">泳衣</a></li>
-		<li name="59" class="category__tags-item"><a href="javascript:void(0);">眼鏡</a></li>
+		<li name="103" class="category__tags-item"><a href="#">{{__('ui.tag.Cosplay')}}</a></li>
+		<li name="84" class="category__tags-item"><a href="#">{{__('ui.tag.Pantyhose')}}</a></li>
+		<li name="90" class="category__tags-item"><a href="#">{{__('ui.tag.Uniform')}}</a></li>
+		<li name="75" class="category__tags-item"><a href="#">{{__('ui.tag.Gym_Clothes')}}</a></li>
+		<li name="86" class="category__tags-item"><a href="#">{{__('ui.tag.School_Swimsuits')}}</a></li>
+		<li name="76" class="category__tags-item"><a href="#">{{__('ui.tag.KIMONO')}}</a></li>
+		<li name="88" class="category__tags-item"><a href="#">{{__('ui.tag.Swimsuits')}}</a></li>
+		<li name="59" class="category__tags-item"><a href="javascript:void(0);">{{__('ui.tag.Glasses')}}</a></li>
 	  </ul>
-	  <div class="category__more category_clothing_more" style="display: none;"><a href="#"><span>更多</span> <i class="i-arrow"></i></a></div>
+	  <div class="category__more category_clothing_more" style="display: none;"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow"></i></a></div>
 	</div>
 	<div id ="custom" class="category category--open" style='display: none;'>
-		<div class="category__title">自訂</div>
+		<div class="category__title">{{__('ui.tag.Custom')}}</div>
 			<ul id="category_clothing" class="category__tags">
 			</ul>
-	  	<div class="category__more category_clothing_more" style="display: none;"><a href="#"><span>更多</span> <i class="i-arrow"></i></a></div>
+	  	<div class="category__more category_clothing_more" style="display: none;"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow"></i></a></div>
 	</div>
 	<div class="list">
 		<div class="list__wrap" style="width: 100%;"> 
@@ -149,7 +149,7 @@
 						}
 						result.secondary_tag.forEach(function(item){
 							$('#custom').find('ul').append(`<li style="display:inline-flex; margin-right: 0px;"  name="`+ item.id+`" class="category__tags-item `+ (item.check && 'category__tags-item--active')   +`">
-								<a style="    border-top-right-radius: 0px;border-bottom-right-radius: 0px; padding-right: 0px;" href="javascript:void(0);">`+ item.jp+`
+								<a style="    border-top-right-radius: 0px;border-bottom-right-radius: 0px; padding-right: 0px;" href="javascript:void(0);">`+ item['{{$lang}}']+`
 							
 								</a>
 								<div onclick="cancelCustomCate(`+item.id+`)" class="cancel `+ (item.check && 'category__tags-item--active')  +`"><i class="fas fa-times"></i></div>
