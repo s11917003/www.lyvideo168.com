@@ -43,7 +43,16 @@
 			<li class="lang" data-title="選擇語言">
 			  <!-- bind select.js -->
 			  <div id="lang">
-				<label for=""><img src="/svg/tw.svg" alt=""><span>{{ __('ui.'.app()->getLocale())  }}</span></label>
+				<label for=""><img src="/svg/tw.svg" alt="">
+					@if (App::isLocale('en'))
+					<span>{{__('ui.en')}}</span>
+					@elseif (App::isLocale('jp'))
+					<span>{{__('ui.jp')}}</span>
+					@elseif (App::isLocale('zh'))
+					<span>{{__('ui.tw')}}</span>
+					@endif
+				 
+				</span></label>
 				<ul>
 				  <li data-val="tw">
 					<img src="/svg/tw.svg" alt=""><span>{{__('ui.tw')}}</span>

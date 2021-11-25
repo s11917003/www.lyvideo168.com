@@ -4,6 +4,7 @@ return [
     'jp' => 'Japanese',
     'en' => 'English',
     'more' => 'more',
+    'new' => 'New releases',
     'title' =>[
         'censored' => 'censored',
         'uncensored' => 'uncensored',
@@ -75,4 +76,7 @@ return [
         'Clothing' => 'Clothing',
         'Custom' => 'Custom',
     ],
+    'meta' =>[
+        'keywords' => 'sample video, japanese porn,',
+    ]
 ];

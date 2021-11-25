@@ -5,6 +5,7 @@ return [
     'en' => '英語',
     'jp' => '日本語',
     'more' => 'more',
+    'new' => '新しいリリース',
     'title' =>[
         'censored' => '修正あり',
         'uncensored' => '無修正あり',
@@ -76,4 +77,7 @@ return [
         'Clothing' => '衣類',
         'Custom' => 'カスタム',
     ],
+    'meta' =>[
+        'keywords' => '無料, エロ動画',
+    ]
 ];

@@ -204,10 +204,10 @@ class IndexController extends Controller {
 			abort(404);
 		}
 		$webLangIndex = $this->language[$lang];
-		$video1 = Video::where(['cate_id'=>1])->orderBy('id', 'desc')->limit(16)->get();	
-		$video2 = Video::where(['cate_id'=>2])->orderBy('id', 'desc')->limit(16)->get();		
-		$video3 = Video::where(['cate_id'=>3])->orderBy('id', 'desc')->limit(16)->get();	
-		$video4 = Video::where(['cate_id'=>4])->orderBy('id', 'desc')->limit(16)->get();	
+		$video1 = Video::where(['cate_id'=>1,'video_lang'=>$webLangIndex])->orderBy('id', 'desc')->limit(16)->get();	
+		$video2 = Video::where(['cate_id'=>2,'video_lang'=>$webLangIndex])->orderBy('id', 'desc')->limit(16)->get();		
+		$video3 = Video::where(['cate_id'=>3,'video_lang'=>$webLangIndex])->orderBy('id', 'desc')->limit(16)->get();	
+		$video4 = Video::where(['cate_id'=>4,'video_lang'=>$webLangIndex])->orderBy('id', 'desc')->limit(16)->get();	
 		return view('app_rwd.index.index',[
 			'video1' => $video1,
 			'video2' => $video2,
@@ -215,6 +215,17 @@ class IndexController extends Controller {
 			'video4' => $video4,
 			'lang'=>$lang
 		]);
+	}
+	public function curl_get_contents($url)
+	{
+		$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
+	$html = curl_exec($ch);
+	$data = curl_exec($ch);
+	curl_close($ch);
+	return $data;
 	}
 	public function postview1(Request $request, $lang, $id) {
 	
@@ -283,10 +294,16 @@ class IndexController extends Controller {
 				if($isExists){
 					continue;
 				} else {
-
-				 
-					$contents = file_get_contents($url);
-					\Storage::disk('public')->put($path.$filename,$contents);
+					$ch = curl_init();
+					curl_setopt($ch, CURLOPT_URL, $url);
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+					curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
+					$html = curl_exec($ch);
+					$data = curl_exec($ch);
+					curl_close($ch);
+					 
+					//$contents = file_get_contents($url);
+					\Storage::disk('public')->put($path.$filename,$data);
 					//file_put_contents('../storage/'.$path.$filename,	$contents);   
 				}
 			}

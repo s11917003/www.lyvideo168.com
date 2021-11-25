@@ -1,9 +1,52 @@
 @extends('layout.rwd.lay_web_basic_pview')
 @section('title')
-{{--  @php echo mb_substr(strip_tags($post->title) , 0 , 25, 'UTF-8'); @endphp --}}
+@php
+		$actress = '';
+		foreach ($video->actressData as $data ) {
+			$actress .=  $data['name'].',';
+		}  
+		$locale = App::getLocale(); 
+		if ($locale == 'en') {
+			echo $video->video_id.' | '.$actress.'：Watch Free Video【JavDic  censored, uncensored and amateur japanese porn】';
+		} else if ($locale == 'jp') {
+			echo $video->title.' | '.$actress.'：線上免費試看【JavDic  有碼・無碼・素人 - 日本A片資料庫】';
+		} else if($locale == 'zh') {
+			echo $video->title.' | '.$actress.'：無料エロ動画【JavDic  修正あり・無修正・素人 - エロ動画まとめ】'; 
+		}
+		@endphp
 @stop
 @section('des')
- 
+	@php
+		$actress = '';
+		foreach ($video->actressData as $data ) {
+			$actress .=  $data['name'].',';
+		}  
+		$locale = App::getLocale(); 
+		if ($locale == 'en') {
+			echo 'Watch and enjoy for free‐ 【'.$video->title.'】, a japanese porn by 【'.$actress.'】on Javdic, covering all censored - uncensored - amateur Japanese porn';
+		} else if ($locale == 'jp') {
+			echo '無料エロ動画視聴 - '.$video->title.',  '.$actress.' 出演 - JavDic  修正あり・無修正・素人 を網羅し、キーワードとタグを絞り込んで、すぐお気に入りのエロ動画を見れる！';
+		} else if($locale == 'zh') {
+			echo '免費線上看 '.$video->title.',  '.$actress.' 主演 - Javdic橫跨DMM, Prestige, 加勒比海, HEYZO, 一本道, FC2  全面蒐羅日本A片資源  絕對找的到您喜歡的那一片!'; 
+		}
+
+	@endphp
+@stop
+@section('keywords')
+	@php 
+	$actress = '';
+	foreach ($video->actressData as $data ) {
+		$actress .=  $data['name'].',';
+	}  
+	$tags ='';
+	if ($video_tag){
+		 foreach ($video_tag as $tag ) {
+			$tags .=  $tag->tagName.',';
+		}  
+	}
+	echo  $actress,$video->video_id,$tags,__('ui.meta.keywords'); 
+	
+	@endphp
 @stop
 @section('topscript')
 {{-- <meta itemprop="name" content="@lang('default.description')">

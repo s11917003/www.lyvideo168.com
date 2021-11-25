@@ -4,6 +4,7 @@ return [
     'jp' => '英文',
     'en' => '日文',
     'more' => '更多',
+    'new' => '每日最新影片',
     'title' =>[
         'censored' => '有　碼',
         'uncensored' => '無　碼',
@@ -76,4 +77,7 @@ return [
         'Custom' => '自訂',
         
     ],
+    'meta' =>[
+        'keywords' => '線上看, 日本A片',
+    ]
 ];

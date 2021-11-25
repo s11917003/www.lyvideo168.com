@@ -17,20 +17,20 @@
 
 	
   <div class="container">
-	<div class="container__header">每日最新影片</div>
+	<div class="container__header">{{ __('ui.new')}}</div>
 	<div class="news" data-tab="">
 	  <ul class="news-tab__header">
-		<li class="news-tab__title news-tab__title--active">有碼 FANZE</li>
-		<li class="news-tab__title">有碼 Prestige</li>
-		<li class="news-tab__title">無碼</li>
-		<li class="news-tab__title">素人</li>
+		<li class="news-tab__title news-tab__title--active">{{__('ui.title.censored')}} FANZE</li>
+		<li class="news-tab__title">{{__('ui.title.censored')}} Prestige</li>
+		<li class="news-tab__title">{{__('ui.title.uncensored')}}</li>
+		<li class="news-tab__title">{{__('ui.title.amateur')}}</li>
 	  </ul>
 	  <div class="news-tab__content news-tab__content--active">
-		<div class="news__title">有碼 FANZE</div>
+		<div class="news__title">{{__('ui.title.censored')}} FANZE</div>
 		<div class="news__list list">  
 		@foreach ($video1 as $video)
  
-		<a href="/jp/testview/{{$video->video_id}}${{ $video->actress}}"  target="_blank" class="list__item">
+		<a href="/{{$lang}}/testview/{{$video->video_id}}${{ $video->actress}}"  target="_blank" class="list__item">
 			<figure><img src="{{ $video->cover_img }}"></figure>
 			<div class="list__item-info">
 			<h5>{{$video->title}}</h5>
@@ -43,12 +43,12 @@
 		</div>
 	  </div>
 	  <div class="news-tab__content">
-		<div class="news__title">有碼 Prestige</div>
+		<div class="news__title">{{__('ui.title.censored')}} Prestige</div>
 		<div class="news__list list">
 		  
 			@foreach ($video2 as $video)
  
-			<a href="/jp/testview/{{$video->video_id}}${{ $video->actress}}"  target="_blank" class="list__item">
+			<a href="/{{$lang}}/testview/{{$video->video_id}}${{ $video->actress}}"  target="_blank" class="list__item">
 				<figure><img src="{{ $video->cover_img }}"></figure>
 				<div class="list__item-info">
 				<h5>{{$video->title}}</h5>
@@ -60,11 +60,11 @@
 		</div>
 	  </div>
 	  <div class="news-tab__content">
-		<div class="news__title">無碼</div>
+		<div class="news__title">{{__('ui.title.uncensored')}}</div>
 		<div class="news__list list">
 			@foreach ($video3 as $video)
  
-			<a href="/jp/testview/{{$video->video_id}}${{ $video->actress}}"  target="_blank" class="list__item">
+			<a href="/{{$lang}}/testview/{{$video->video_id}}${{ $video->actress}}"  target="_blank" class="list__item">
 				<figure><img src="{{ $video->cover_img }}"></figure>
 				<div class="list__item-info">
 				<h5>{{$video->title}}</h5>
@@ -78,12 +78,12 @@
 		</div>
 	  </div>
 	  <div class="news-tab__content">
-		<div class="news__title">素人</div>
+		<div class="news__title">{{__('ui.title.amateur')}}</div>
 		<div class="news__list list">
 		  
 			@foreach ($video4 as $video)
  
-			<a href="/jp/testview/{{$video->video_id}}${{ $video->actress}}"  target="_blank" class="list__item">
+			<a href="/{{$lang}}/testview/{{$video->video_id}}${{ $video->actress}}"  target="_blank" class="list__item">
 				<figure><img src="{{ $video->cover_img }}"></figure>
 				<div class="list__item-info">
 				<h5>{{$video->title}}</h5>
