@@ -80,7 +80,7 @@ return [
     'meta' =>[
         'keywords' => '無料, エロ動画',
     ],
-    'actresses_list' => '女優一覧',
+    'actresses_list' => 'AV女優一覧',
     'Starring' => '出演作品',
     'actress_page' => [
         'videos' => '本の出演作品',

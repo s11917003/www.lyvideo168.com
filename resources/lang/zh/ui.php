@@ -80,7 +80,7 @@ return [
     'meta' =>[
         'keywords' => '線上看, 日本A片',
     ],
-    'actresses_list' => '女優列表',
+    'actresses_list' => 'AV女優列表',
     'Starring' => '出演影片',
     'actress_page' => [
         'videos' => '影片',

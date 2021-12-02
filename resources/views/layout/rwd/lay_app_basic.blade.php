@@ -10,7 +10,7 @@
 <link href="/css/bootstrap-4.0.0.css" rel="stylesheet">
 <link href="/css/video-js.css" rel="stylesheet">
 <link href="/css/videojs-contrib-ads.css" rel="stylesheet">
-<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/logo.png" type="image/x-icon" />
 <script src="/js/jquery-3.3.1.js"></script>
 <script src="/js/video.js"></script>
 <script src="/js/videojs-contrib-hls.js"></script>

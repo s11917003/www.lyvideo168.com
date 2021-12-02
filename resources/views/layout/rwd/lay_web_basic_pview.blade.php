@@ -15,7 +15,7 @@
 <link href="/css/list.css" rel="stylesheet" type="text/css">
 <link href="/css/videojs-contrib-ads.css" rel="stylesheet">
 <link rel="stylesheet" href="/css/category-list.css">
-<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/logo.png" type="image/x-icon" />
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
