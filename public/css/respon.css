@@ -2786,4 +2786,10 @@ label {
     background: var(--primary-color);
 
 }
- 
+
+.page-item {
+
+	line-height: 1rem;
+    height: 3rem;
+    border: 0px;
+}

@@ -79,5 +79,15 @@ return [
     ],
     'meta' =>[
         'keywords' => '線上看, 日本A片',
-    ]
+    ],
+    'actresses_list' => '女優列表',
+    'Starring' => '出演影片',
+    'actress_page' => [
+        'videos' => '影片',
+        'read_more' => '閱讀更多',
+        'source' => '來源',
+        'tags' => '類型',
+        'collapse' => '收起'
+    ],
+
 ];

@@ -6,6 +6,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <title>@yield('title')</title>
 <meta name="description" content="@yield('des')">
+<meta name="keywords" content="@yield('keywords')">
 <link href="/css/respon.css" rel="stylesheet" type="text/css">
 <link href="/css/bootstrap-4.0.0.css" rel="stylesheet">
 <link href="/css/video-js.css" rel="stylesheet">

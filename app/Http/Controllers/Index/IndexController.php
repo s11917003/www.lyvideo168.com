@@ -964,6 +964,8 @@ class IndexController extends Controller {
 	 	return  response()->json(['video' =>$videos,  'pagination' => (string)$videos->links("pagination::bootstrap-4"), ]);
     }
 	public function actress() {
+		\Session::put('locale', 'jp');
+		App::setLocale('jp');
 		return view('app_rwd.index.actress_list');
     }
 	public function actressList(Request $request) {
@@ -974,7 +976,8 @@ class IndexController extends Controller {
     }
 	public function actressPage(Int $id) {
 		$actress = Video_actress::where('id',$id)->with('wiki')->first();// 女優table;
-	
+		\Session::put('locale', 'jp');
+		App::setLocale('jp');
 		if(!$actress) {
 			//abort(404);
 			header("Location:/");

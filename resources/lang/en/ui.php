@@ -78,5 +78,15 @@ return [
     ],
     'meta' =>[
         'keywords' => 'sample video, japanese porn,',
-    ]
+    ],
+    'actresses_list' => 'ACTRESSES LIST',
+    'Starring' => 'Starring Videos',
+    'actress_page' => [
+        'videos' => 'Videos',
+        'read_more' => 'READ MORE',
+        'source' => 'Source',
+        'tags' => 'Tags',
+        'collapse' => 'Collapse'
+    ],
+
 ];

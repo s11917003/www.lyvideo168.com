@@ -4,7 +4,7 @@ return [
     'tw' => '中国語',
     'en' => '英語',
     'jp' => '日本語',
-    'more' => 'more',
+    'more' => '展開',
     'new' => '新しいリリース',
     'title' =>[
         'censored' => '修正あり',
@@ -79,5 +79,14 @@ return [
     ],
     'meta' =>[
         'keywords' => '無料, エロ動画',
-    ]
+    ],
+    'actresses_list' => '女優一覧',
+    'Starring' => '出演作品',
+    'actress_page' => [
+        'videos' => '本の出演作品',
+        'read_more' => 'もっと見る',
+        'source' => '動画元',
+        'tags' => 'タグ',
+        'collapse' => '折り畳み'
+    ],
 ];

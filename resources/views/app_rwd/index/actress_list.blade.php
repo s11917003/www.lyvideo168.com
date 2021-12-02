@@ -14,7 +14,7 @@
 @section('maincontent')
 
 <div class="container">
-	<div class="container__header">女優列表</div>
+	<div class="container__header">{{__('ui.actresses_list')}}</div>
 	<div class="famale">
 		
 		<div class="female-list">	 
@@ -50,7 +50,7 @@
 						<figure><img src="/img/Pictures/`+item.JapaneseName1+`_coverphoto.jpg"></figure>
 						<div class="female-list__item-info-info">
 						<h5>`+item.JapaneseName1+`</h5>
-						<div class="show">出演影片：`+item.actress_relations_count+`</div>
+						<div class="show">{{__('ui.Starring')}}：`+item.actress_relations_count+`</div>
 						</div>
 						</a>`;
 						

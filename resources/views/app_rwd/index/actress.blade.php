@@ -1,9 +1,18 @@
 @extends('layout.rwd.lay_web_basic_temp')
 @section('title')
-{{--  @php echo mb_substr(strip_tags($post->title) , 0 , 25, 'UTF-8'); @endphp --}}
+@php
+echo $actress->JapaneseName1.'：線上免費試看【JavDic  有碼・無碼・素人 - 日本A片資料庫】';
+@endphp
 @stop
 @section('des')
- 
+	@php
+		echo '無料エロ動画視聴 - '.$actress->JapaneseName1.' - JavDic  修正あり・無修正・素人 を網羅し、キーワードとタグを絞り込んで、すぐお気に入りのエロ動画を見れる！';
+	@endphp
+@stop
+@section('keywords')
+	@php 
+		echo  $actress->JapaneseName1,__('ui.meta.keywords'); 
+	@endphp
 @stop
 @section('topscript')
 {{-- <meta itemprop="name" content="@lang('default.description')">
@@ -11,10 +20,11 @@
 <meta name="csrf-token" content="{{ csrf_token() }}" /> --}}
   
 @stop
+
 @section('maincontent')
 <div class="artist">
 	<div class="artist__content">
-	  <figure><img src="/img/Pictures/{{$actress->JapaneseName1  }}_coverphoto.jpg"></figure>
+	  <figure><img src="/img/Pictures/{{$actress->JapaneseName1}}_coverphoto.jpg"></figure>
 	  <div class="artist__content-info">
 		<div class="artist__content-name">{{ $actress->JapaneseName1 }}</div>
 		<div class="artist__content-moveie">
@@ -28,13 +38,13 @@
 			<li>{{ $actress->JapaneseName4 }}</li>
 			<li>{{ $actress->JapaneseName5 }}</li>
 		  </ul>
-		  <p>{{ $count }}部影片</p>
+		  <p>{{ $count }} {{__('ui.actress_page.videos')}}</p>
 		</div>
 		<div class="artist__content-link">
 		  <a class="i-twitter" href="{{$actress->Twitter  }}">
 			<img src="svg/twitter-brands.svg" alt="">
 			<span>Twitter</span></a>
-		  <a class="i-instagram" href="{{$actress->Twitter  }}"><img src="svg/instagram-brands.svg" alt=""><span>Instagram</span></a>
+		  <a class="i-instagram" href="{{$actress->Instagram  }}"><img src="svg/instagram-brands.svg" alt=""><span>Instagram</span></a>
 		</div>
 		<div class="artist__content-about" style="height:100%">
 			<textarea style="height:auto;width:100%">
@@ -47,7 +57,7 @@
 	  <p class="active">
 		{{ $actress->wiki->Contents }}</p>
 	  <div class="artist__about-more">
-		<i class="i-arrow"></i><span>閱讀更多</span><i class="i-arrow"></i>
+		<i class="i-arrow"></i><span>{{__('ui.actress_page.read_more')}}</span><i class="i-arrow"></i>
 	  </div>
 	</div>
   </div>
