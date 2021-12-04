@@ -89,4 +89,18 @@ return [
         'tags' => 'タグ',
         'collapse' => '折り畳み'
     ],
+    'video_view' =>[
+        'DVD_ID' => '品番',
+        'Release_Date'  => '配信開始日',
+        'Runtime' => '収録時間',
+        'Director'  => '監督',
+        'Studio' => 'メーカー',
+        'Label'  => 'レーベル',
+        'Series' => 'シリーズ',
+        'WATCH_FREE_SAMPLE'  => '無料視聴',
+        'WATCH_FULL_VIDEO'  => 'フル動画を見る',
+        'VIDEO_INTRODUCTION'  => '商品紹介',
+        'STARRING' => '同じAV女優はこちらの作品にも出演',
+        'LIKE' => 'この動画が好きな人はこちらの動画も好き',
+    ],
 ];

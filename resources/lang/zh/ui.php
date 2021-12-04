@@ -89,5 +89,19 @@ return [
         'tags' => '類型',
         'collapse' => '收起'
     ],
+    'video_view' =>[
+        'DVD_ID' => '番號',
+        'Release_Date'  => '發行日',
+        'Runtime' => '時長',
+        'Director'  => '導演',
+        'Studio' => '片商',
+        'Label'  => '廠牌',
+        'Series' => '系列',
+        'WATCH_FREE_SAMPLE'  => '試播影片',
+        'WATCH_FULL_VIDEO'  => '觀看全片',
+        'VIDEO_INTRODUCTION'  => '影片介紹',
+        'STARRING' => '同女優出演',
+        'LIKE' => '類似影片',
+    ],
 
 ];

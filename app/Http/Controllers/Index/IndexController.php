@@ -337,13 +337,26 @@ class IndexController extends Controller {
 
 		
 		$title  = $video['video_id'].'|'.$video['actress'].'無料エロ動画【JavDic  '. implode(",", $tagName).'】';
-		$url ='';
+		$video_status = false;
+		$url = $video['video_url'];
+		$array = @get_headers($url);
+		if(!empty($array)){
+			$string = $array[0];
+			// 404 for error, 200 for no error
+			if(strpos($string, "200")) {
+				$video_status = true;
+			} 
+		 }
+		
 
+		$url ='';
 		//生成頁面連結
 		if($video['cate_id'] == 1){ //fanzy r18
 			$url =  'https://media.r18.com/track/MjM3Mi4xLjEuMS4wLjAuMC4wLjA/videos/vod/movies/detail/-/id='.$video['video_id'] .'/';
 		} else if ($video['cate_id'] == 2){
 			$url =  'https://www.mgstage.com/product/product_detail/'.$video['video_id'].'/?aff=JAQD55TL3ANYC8C2Y3CZZHBAZY';
+		} else if ($video['cate_id'] == 3){
+			$url =  'https://click.dtiserv2.com/Direct/900'.str_pad(intval($video['uncensored_code']),3,"0",STR_PAD_LEFT).'999-'.$video['uncensored_code'].'-198346/moviepages/'.$video['video_id'].'/index.html';
 		} else if ($video['cate_id'] == 4){
 			$url =  'https://adult.contents.fc2.com/aff.php?aid='.$video['video_id'].'&affuid=TXpjMU5qTTFPREU9';
 		}
@@ -354,6 +367,7 @@ class IndexController extends Controller {
 				'footer'=>$footer,
 				'device' => $device,
 				'video' => $video, 							//主影片
+				'video_status' => $video_status, 			//影片狀態
 				'video_with_actress' => $video_with_actress,//相關女優
 				'video_tag' => $video_tag,					//標籤
 				'title' =>  $title,						//影片title

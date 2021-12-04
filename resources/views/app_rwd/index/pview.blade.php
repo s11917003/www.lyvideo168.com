@@ -2,9 +2,11 @@
 @section('title')
 @php
 		$actress = '';
+		if(!is_null($video->actressData)){
 		foreach ($video->actressData as $data ) {
 			$actress .=  $data['name'].',';
 		}  
+		}
 		$locale = App::getLocale(); 
 		if ($locale == 'en') {
 			echo $video->video_id.' | '.$actress.'：Watch Free Video【JavDic  censored, uncensored and amateur japanese porn】';
@@ -18,9 +20,11 @@
 @section('des')
 	@php
 		$actress = '';
+		if(!is_null($video->actressData)){
 		foreach ($video->actressData as $data ) {
 			$actress .=  $data['name'].',';
 		}  
+		}
 		$locale = App::getLocale(); 
 		if ($locale == 'en') {
 			echo 'Watch and enjoy for free‐ 【'.$video->title.'】, a japanese porn by 【'.$actress.'】on Javdic, covering all censored - uncensored - amateur Japanese porn';
@@ -35,9 +39,11 @@
 @section('keywords')
 	@php 
 	$actress = '';
+	if(!is_null($video->actressData)){
 	foreach ($video->actressData as $data ) {
 		$actress .=  $data['name'].',';
 	}  
+	} 
 	$tags ='';
 	if ($video_tag){
 		 foreach ($video_tag as $tag ) {
@@ -48,14 +54,8 @@
 	
 	@endphp
 @stop
-@section('topscript')
-{{-- <meta itemprop="name" content="@lang('default.description')">
-<meta itemprop="description" content="{{strip_tags($post->title)}}">
-<meta name="csrf-token" content="{{ csrf_token() }}" /> --}}
-<script>
 	 
-</script>
-@stop
+	 
 @section('maincontent')
 	 
 
@@ -64,43 +64,11 @@
 	
 		<div id="rs-content-left-box" class="rs-content-left-box1">
 			<h2 class="title is-4">
-			 	{{--<strong>{{ $title }}</strong>--}}
 				 <strong> {{$video->title}}</strong>
 			  </h2>
-			  {{-- @if(!is_Null($marquee))
-			<marquee>
-			@foreach ($marquee as $quee )
-				@if ($loop->count != 1) 
-					@if ($loop->first)
-						<div style="display: contents;color: rgb(255, 217, 0)" class="rs-appinfo"> 		
-					@endif
-	
-					@if ($loop->index ==1)
-					<a href="http://{{$quee }}" target="_blank">{{$quee}}</a>
-					@else
-					{{$quee}}	
-					@endif
-	
-					@if ($loop->last)
-						</div> 
-					@endif
-				@else
-				<div class="rs-appinfo">{{$quee}}</div> 
-				@endif
-			@endforeach
-			</marquee>
-			@endif--}}
-			{{-- <div 	style="BACKGROUND-COLOR: #000;  height: 80px;width:100%;">
-				<a href="{{$adHalf[0]->web_url}}"  target="_blank">
-					<div data-id='{{$adHalf[0]->id}}' class="adClick"   style="overflow: hidden; background-repeat: no-repeat;   background-position: 50% 50%; background-size: contain;height: 100%;width:100%;background-image: url('{{  asset('storage/'.$adHalf[0]->bg_img)}}');" >
-					</div>
-				</a>
-			</div> --}}
 		</div>
 	
 		<div id="rs-content-left-box" class="rs-content-left-box1">
-			{{-- <div class="rs-contentpics" style="background: url({{$post->userInfo->avatar}}) no-repeat top center; background-size:50px"><a href="/p/{{$post->id}}"></a></div>
-			<div class="rs-contentname">{{$post->userInfo->nick_name}}<br>{{ Carbon\Carbon::parse($post->created_time)->format('m-d H:i:s') }}</div>--}}
 			<div class="row">
 					<div class="container-fluid" style="DISPLAY: contents;">
 						@if ($device == 'ios' || $device == 'android')
@@ -108,10 +76,12 @@
 						@else
 						<div class="col-xs-12 col-sm-8 col-md-8 mdm-big" >
 						@endif
-						<video id="av-video" data-setup="{}" width="600" height="264" class="video-js vjs-default-skin vjs-fluid vjs-show-big-play-button-on-pause vjs-fill vjs-16-9 vjs-big-play-centered" poster="{{$video->cover_img}}" controls>
-						<source 
-						src="{{$video->video_url}}"
-						type="video/mp4">
+						<video id="av-video" data-setup="{}" width="600" height="264" class="video-js vjs-default-skin vjs-fluid vjs-show-big-play-button-on-pause vjs-fill vjs-16-9 vjs-big-play-centered " poster="{{$video->cover_img}}" controls>
+							@if ($video_status)
+							<source 
+							src="{{$video->video_url}}"
+							type="video/mp4">
+							@endif
 						</video>
 						<!-- /video id="samplevideo_html5_api" class="vjs-tech" preload="auto" tabindex="-1" autoplay="" src="https://awscc3001.r18.com/litevideo/freepv/d/dva/dvaj518/dvaj518_dmb_w.mp4"><source src="https://awscc3001.r18.com/litevideo/freepv/d/dva/dvaj518/dvaj518_sm_w.mp4" type="video/mp4" res="240" label="300 Kbps"><source src="https://awscc3001.r18.com/litevideo/freepv/d/dva/dvaj518/dvaj518_dm_w.mp4" type="video/mp4" res="480" label="1000 Kbps"><source src="https://awscc3001.r18.com/litevideo/freepv/d/dva/dvaj518/dvaj518_dmb_w.mp4" type="video/mp4" res="720" label="1500 Kbps"><p class="vjs-no-js">Your browser does not support the video tag.</p></video> -->
 						<script>
@@ -125,7 +95,9 @@
 							// 		nativeTextTracks: false
 							// 	}
 							// });
+						
 							 window.onload = function () {
+							
 				var player = videojs( 'av-video',{
                 	hls: {
 								          overrideNative: true  
@@ -189,7 +161,11 @@
                         if( event.code=="ArrowDown" )this.volume(this.volume()-0.1);
                     }
                 });
-                console.log( 'ready to play' );
+				 
+				@if (!$video_status)
+					$('.vjs-big-play-button').hide();
+				@endif
+				
 			});
 			
 			const SeekBar = videojs.getComponent('SeekBar');
@@ -214,7 +190,9 @@
     player.controlBar.currentTimeDisplay.el_.innerHTML = format;
 			}
 							 }
-        
+			function playToggle() {
+				videojs( 'av-video').play();
+			}
 					 
 						</script>
 
@@ -300,9 +278,11 @@
 								</tr>
 								<tr>
 									<td class="" colspan>
+										@if(!is_null($video->actressData))
 										@foreach ($video->actressData as $data )
 												<a href='/actress/{{ $data["id"]}}'  >{{ $data['name'] }}</a>
 										@endforeach	
+										@endif
 									
 									</td>
 								</tr>
@@ -318,23 +298,23 @@
 									</td>
 								</tr>					 
 								<tr>
-								<td>DVD ID</td>
+								<td>{{__('ui.video_view.DVD_ID')}}</td>
 								<td>{{ $video->dvd_id }}</td>
 								</tr>
 								<tr>
-								<td>Release Date</td>
+								<td>{{__('ui.video_view.Release_Date')}}</td>
 								<td>{{ $video->release_date }}</td>
 								</tr>
 								<tr>
-								<td>Runtime</td>
+								<td>{{__('ui.video_view.Runtime')}}</td>
 								<td>17 min</td>
 								</tr>
 								<tr>
-								<td>Director</td>
+								<td>{{__('ui.video_view.Director')}}</td>
 								<td>{{ $video->director }}</td>
 								</tr>
 								<tr>
-								<td>Studio</td>
+								<td>{{__('ui.video_view.Studio')}}</td>
 								<td>{{ $video->studio }}</td>
 								</tr>
 								
@@ -347,10 +327,11 @@
 									<a href="http://www.javmovie.com/ja/genre/hi-def-7.html" title="ハイビジョン">ハイビジョン</a>
 								</td>
 								</tr> -->
+								@if ($video_status)
 								<tr>
 									<td colspan =2>
 										<div class='playBtn' >
-											<a  href="{{ url($url) }}">
+											<a  href="javascript:void(0)" onClick="playToggle()">
 												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.98 31.98">
 												<g>
 													<circle class="i_played1" cx="15.99" cy="15.99" r="15.99"></circle>
@@ -358,11 +339,12 @@
 													<path class="i_played3" d="M20.45,15.92l-7-4.06a.09.09,0,0,0-.13.07v8.12a.09.09,0,0,0,.13.07l7-4.06A.08.08,0,0,0,20.45,15.92Z"></path>
 												</g>
 												</svg>
-												<span>試播影片</span>
+												<span>{{__('ui.video_view.WATCH_FREE_SAMPLE')}}</span>
 											</a>
 										</div>
 									</td>
 								</tr>
+								@endif
 								<tr >
 									<td colspan =2>
 										<div class='playBtn' >
@@ -374,7 +356,7 @@
 													<path class="i_played3" d="M20.45,15.92l-7-4.06a.09.09,0,0,0-.13.07v8.12a.09.09,0,0,0,.13.07l7-4.06A.08.08,0,0,0,20.45,15.92Z"></path>
 												</g>
 												</svg>
-												<span>觀看全片</span>
+												<span>{{__('ui.video_view.WATCH_FULL_VIDEO')}}</span>
 											</a>
 										</div>
 									</td>
@@ -437,20 +419,13 @@
 				@endif
 				</div>
 			</div>
-			{{-- <div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px;">
-				@if ($post->tag)
-					@foreach ($post->tag as $tag)
-					<p><a href="/tag/{{$tag->tagname->id}}" target="_blank" class="rs-digg-box2-tag">{{$tag->tagname->name}}</a></p>
-					@endforeach
-				@endif
-			</div>  --}}
 
 
 			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px;">
 				<h5   style="overflow: hidden;overflow: hidden;text-overflow: ellipsis;margin: 0.5rem 0;line-height: 1.8;">
-					<b>影片介紹：</b>
+					<b>{{__('ui.video_view.VIDEO_INTRODUCTION')}}：</b>
 				</h5>
-				<p>
+				<p style="margin: 0.5rem 1rem; line-height: 1.8;">
 					@if ($video->description)		
 					{{$video->description}}
 					@else
@@ -461,7 +436,7 @@
 			
 			@if ($device == 'ios' || $device == 'android')
 			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px; height: AUTO;">
-				<h5 class="recommend">You may also like</h5>
+				<h5 class="recommend">{{__('ui.video_view.STARRING')}}</h5>
 				<!--
 				@php
 				$i = 0
@@ -505,7 +480,7 @@
 			
 			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px; height: auto;">
 				@if (count($video_with_actress) >0 )
-				<h5 class="recommend" >You may also like</h5>
+				<h5 class="recommend" >{{__('ui.video_view.STARRING')}}</h5>
 				@foreach ($video_with_actress as $video_actress)
 				<div style="float: left;padding: 10px; width: 230px; height: 230px; margin: 5px; overflow: hidden">
 					<div poster=""   class="adClick video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	
@@ -542,7 +517,7 @@
 				@endforeach
 				<div style="clear: both"></div>
 				@endif
-				<h5 class="recommend" >You may also like</h5>
+				<h5 class="recommend" >{{__('ui.video_view.LIKE')}}</h5>
 				@if(count($video_relation) > 0) 
 				@foreach ($video_relation as $video_tag)
 				<div style="float: left;padding: 10px; width: 230px; height: 230px; margin: 5px; overflow: hidden">
@@ -589,41 +564,7 @@
 	<!-- RightSideBox -->
 	<!-- Content 右側 結束 -->	
 @stop	
-@section('Carousel2')
-<div id="myCarousel" class="carousel slide" style="    position: fixed;top:0;left:0;width:100%;height:100%" data-ride="carousel">
-		<!-- Indicators -->
-		<ol class="carousel-indicators">
-		  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-		  <li data-target="#myCarousel" data-slide-to="1"></li>
-		  <li data-target="#myCarousel" data-slide-to="2"></li>
-		</ol>
-	
-		<!-- Wrapper for slides -->
-		<div class=" position-absolute carousel-inner">
-		  <div class="item active">
-			<img src="https://www.caribbeancom.com/moviepages/070221-001/images/l/002.jpg" alt="Los Angeles" style="width:100%;">
-		  </div>
-	
-		  <div class="item">
-			<img src="https://www.caribbeancom.com/moviepages/070221-001/images/l/002.jpg" alt="Chicago" style="width:100%;">
-		  </div>
-		
-		  <div class="item">
-			<img src="https://www.caribbeancom.com/moviepages/070221-001/images/l/002.jpg" alt="New york" style="width:100%;">
-		  </div>
-		</div>
-	
-		<!-- Left and right controls -->
-		<a class="left carousel-control" href="#myCarousel" data-slide="prev">
-		  <span class="glyphicon glyphicon-chevron-left"></span>
-		  <span class="sr-only">Previous</span>
-		</a>
-		<a class="right carousel-control" href="#myCarousel" data-slide="next">
-		  <span class="glyphicon glyphicon-chevron-right"></span>
-		  <span class="sr-only">Next</span>
-		</a>
-	  </div>
-	  @stop	
+
 @section('footscript')
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -641,78 +582,8 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-	 
-	$('#post-digg-thumbs-up').on('click',function(){
-		// if($("#post-digg-thumbs-up").hasClass('rs-digg-click')) {
-		// console.log('hasClass')
-		// 	return
-		// }
-		var id =  $(this).attr("data-id") 
-		$.ajax({
-			type:"POST",
-			url:"/thumbsup",
-			dataType:"json",
-			data:{id:id},
-			success:function(result){
-				
-				var status = result['status']
-				var loginstatus = result['login']
-				var count_digg = result['count_digg']
-				var count_bury = result['count_bury']
-				if(!loginstatus || loginstatus == false ) {
-					window.location.href = '/login'
-					return
-				}
-				$("#post-digg-thumbs-down span").html(' '+count_bury+' ');
-				$("#post-digg-thumbs-up span").html(' '+count_digg+' ');
-				$("#post-digg-thumbs-down").removeClass('rs-digg-click');
-				$("#post-digg-thumbs-up").removeClass('rs-digg-click');
-				if(status == 1 ) {
-					$("#post-digg-thumbs-up").addClass('rs-digg-click');
-				}
-				
-				
-			}
-		});	
-	})
 
-	$('#post-digg-thumbs-down').on('click',function(){
-		// if($("#post-digg-thumbs-down").hasClass('rs-digg-click')) {
-		// console.log('hasClass')
-		// 	return
-		// }
-		var id =  $(this).attr("data-id") 
-		$.ajax({
-			type:"POST",
-			url:"/thumbsdown",
-			dataType:"json",
-			data:{id:id},
-			success:function(result){
-				var status = result['status']
-				var loginstatus = result['login']
-				var count_digg = result['count_digg']
-				var count_bury = result['count_bury']
-				if(!loginstatus || loginstatus == false ) {
-					window.location.href = '/login'
-					return
-				}
-				$("#post-digg-thumbs-down span").html(' '+count_bury+' ');
-				$("#post-digg-thumbs-up span").html(' '+count_digg+' ');
-				$("#post-digg-thumbs-up ").removeClass('rs-digg-click');
-				$("#post-digg-thumbs-down").removeClass('rs-digg-click');
-				if(status == 2 ) {
-					$("#post-digg-thumbs-down").addClass('rs-digg-click');
-				}
-				
-			}
-		});	
-	})
-	window.onload = function() {
 
-		console.log('window.onload')
-
- 
-	};
 </script>
-<script src='/js/comm.js?r=@php echo uniqid(); @endphp' async=""></script>
+
 @stop

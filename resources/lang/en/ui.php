@@ -88,5 +88,18 @@ return [
         'tags' => 'Tags',
         'collapse' => 'Collapse'
     ],
-
+    'video_view' =>[
+        'DVD_ID' => 'DVD ID',
+        'Release_Date'  => 'Release Date',
+        'Runtime' => 'Runtime',
+        'Director'  => 'Director',
+        'Studio' => 'Studio',
+        'Label'  => 'Label',
+        'Series' => 'Series',
+        'WATCH_FREE_SAMPLE'  => 'WATCH FREE SAMPLE',
+        'WATCH_FULL_VIDEO'  => 'WATCH FULL VIDEO',
+        'VIDEO_INTRODUCTION'  => 'VIDEO INTRODUCTION',
+        'STARRING' => 'ACTRESS(ES) ALSO STARRING IN',
+        'LIKE' => 'YOU MAY ALSO LIKE',
+    ],
 ];
