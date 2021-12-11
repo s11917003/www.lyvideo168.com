@@ -48,16 +48,19 @@ import videojsPreviewThumbnails from 'https://cdn.skypack.dev/videojs-preview-th
 <script src="/js/function.js"></script>
 <!-- <script type="text/javascript" src="/js/jquery.lazyload.js"></script> -->
 <script type="text/javascript" src="/js/jquery.visible.js"></script>
-<script src="/js/popper.min.js"></script>
+<!-- <script src="/js/popper.min.js"></script> -->
 <!-- <script src="/js/main.js"></script>
 <script src="/js/select.js"></script> -->
+
+<script src="/js/lib/dmm.js"></script>
 <script>
-	$(function(){
+	$(function() {
 		$.ajaxSetup({
 		headers: {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		}
 		});
+	});
 </script>
 @yield('topscript')
 </head>

@@ -78,7 +78,7 @@
 						@endif
 						<video id="av-video" data-setup="{}" width="600" height="264" class="video-js vjs-default-skin vjs-fluid vjs-show-big-play-button-on-pause vjs-fill vjs-16-9 vjs-big-play-centered " poster="{{$video->cover_img}}" controls>
 							@if ($video_status)
-							<source 
+							<source  id="av-video-source" 
 							src="{{$video->video_url}}"
 							type="video/mp4">
 							@endif
@@ -128,7 +128,7 @@
                 }
             },function () {
 				this.initialPreviewThumbnail({
-					 sprite_url:"{{ asset('storage/upvideo/aa/thumbnails.jpg') }}",
+					//  sprite_url:"{{ asset('storage/upvideo/aa/thumbnails.jpg') }}",
 					//;    /js/videojs-thumbnails/output-180x120-thumb.jpg',
                     second:6,
                     sprite_x_count:30000,
@@ -307,7 +307,7 @@
 								</tr>
 								<tr>
 								<td>{{__('ui.video_view.Runtime')}}</td>
-								<td>17 min</td>
+								<td id='Runtime' ></td>
 								</tr>
 								<tr>
 								<td>{{__('ui.video_view.Director')}}</td>
@@ -348,7 +348,7 @@
 								<tr >
 									<td colspan =2>
 										<div class='playBtn' >
-											<a  href="{{ url($url) }}">
+											<a id = 'goToURL'  href="{{ url($url) }}">
 												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.98 31.98">
 												<g>
 													<circle class="i_played1" cx="15.99" cy="15.99" r="15.99"></circle>
@@ -583,7 +583,57 @@
         }
     });
 
+	window.onload = function() {	
+		videoId = '{{$video->video_id}}';
+		console.log('window.onload {{$video->video_id}}'  )
 
+
+				// client新規作成
+	
+		var client = new dmm.Client({
+			api_id: "hW63FdKybRxHq5tmA2Zk",
+			affiliate_id: "Javdic-990"
+		});
+		var options = {site: "DMM.R18",keyword:videoId}
+
+		client.product(options, function (err, data) {
+			console.log(data);
+			if(data.items.length > 0){
+				volume  = data.items[0].volume
+				URL  = data.items[0].URL
+
+				console.log(volume);
+
+				console.log(URL);
+
+				$('#Runtime').html(volume+ ' min')
+				$("#goToURL").attr("href",URL);
+			}
+
+			// if(data.items.length > 0){
+			// 	for (const [key, value] of Object.entries(data.items[0].sampleMovieURL)) {
+ 
+			// 		if(key.indexOf('size_')  >=0){
+			// 			console.log(value);
+			// 			var videoSourceElm = $('#av-video-source')
+			// 			videoSourceElm.src = value;
+			// 			var player = videojs( 'av-video')
+			// 			console.log(player.src);
+			// 			player.src({
+			// 				src:value,
+			// 				type: 'video/mp4'/*video type*/
+			// 			});
+			// 			player.load();
+			// 			break;
+			// 		}
+   
+			// }
+			
+			// }
+		
+		});
+		 
+	}
 </script>
 
 @stop
