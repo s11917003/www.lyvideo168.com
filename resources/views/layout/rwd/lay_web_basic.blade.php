@@ -109,3 +109,41 @@ import videojsPreviewThumbnails from 'https://cdn.skypack.dev/videojs-preview-th
 	height="0" width="0" style="display:none;visibility:hidden"></iframe>
 	</noscript>
 </html>
+<script>
+$(function(){
+		$.ajax({
+				type:"POST",
+				url:"/{{$lang}}/popular",
+				dataType:"json",
+				success:function(result){
+					$(".actress_popular_list").empty();
+					$(".tag_popular_list").empty();
+					result.video_actress_popular.forEach(element => {
+						let name = ''
+						if('{{$lang}}' == 'zh' && element.ChineseName1)  {
+							name = element.ChineseName1
+						} else {
+							name = element.JapaneseName1
+						}
+						actress =	`<li><a href="/{{$lang}}/actress/`+element.id+`"   class="female-list__item">`+name+`</a></li>`;
+						$(".actress_popular_list").append(actress)
+					});
+					result.tag_actress_popular.forEach(element => {
+						let tag = ''
+						if('{{$lang}}' == 'zh')  {
+							tag = element.zh
+						} else if('{{$lang}}' == 'en')  {
+							tag = element.en
+						} else  {
+							tag = element.jp
+						}
+						actress =	`<li><a href="/{{$lang}}/category?cate=`+element.id+`"   class="female-list__item">`+tag+`</a></li>`;
+						$(".tag_popular_list").append(actress)
+					});
+					$(".actress_popular_list").append(`<li class="keyword__more"><a href="/{{$lang}}/actress_list">{{__('ui.more')}} &gt;&gt;</a></li>`)
+					$(".tag_popular_list").append(`<li class="keyword__more"><a href="/{{$lang}}/category">{{__('ui.more')}} &gt;&gt;</a></li>`)
+					 
+				}
+			});	
+});
+</script>

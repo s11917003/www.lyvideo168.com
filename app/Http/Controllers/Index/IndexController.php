@@ -208,6 +208,9 @@ class IndexController extends Controller {
 		$video2 = Video::where(['cate_id'=>2,'video_lang'=>$webLangIndex])->orderBy('id', 'desc')->limit(16)->get();		
 		$video3 = Video::where(['cate_id'=>3,'video_lang'=>$webLangIndex])->orderBy('id', 'desc')->limit(16)->get();	
 		$video4 = Video::where(['cate_id'=>4,'video_lang'=>$webLangIndex])->orderBy('id', 'desc')->limit(16)->get();	
+
+
+	 
 		return view('app_rwd.index.index',[
 			'video1' => $video1,
 			'video2' => $video2,
@@ -215,6 +218,17 @@ class IndexController extends Controller {
 			'video4' => $video4,
 			'lang'=>$lang
 		]);
+	}
+	public function popular($lang) {
+		if( !in_array($lang,['zh','en','jp'])){
+			abort(404);
+		}
+		$webLangIndex = $this->language[$lang];
+
+		$video_actress_popular = Video_actress::whereIn('id',[2,3,4,5,10,11,12,13])->get();// 女優table;
+		$tag_actress_popular = Video_tag::whereIn('id',[2,14,22,24,93,38,8,28,17,51,53,87])->get();
+		return  response()->json([ 'video_actress_popular' => $video_actress_popular,'tag_actress_popular' => $tag_actress_popular]);
+		
 	}
 	public function curl_get_contents($url)
 	{
@@ -977,10 +991,13 @@ class IndexController extends Controller {
 		
 	 	return  response()->json(['video' =>$videos,  'pagination' => (string)$videos->links("pagination::bootstrap-4"), ]);
     }
-	public function actress() {
-		\Session::put('locale', 'jp');
-		App::setLocale('jp');
-		return view('app_rwd.index.actress_list');
+	public function actress($lang) {
+		if( !in_array($lang,['zh','en','jp'])){
+			abort(404);
+		}
+		$webLangIndex = $this->language[$lang];
+	
+		return view('app_rwd.index.actress_list',['lang'=>$lang]);
     }
 	public function actressList(Request $request) {
 	 
@@ -994,8 +1011,8 @@ class IndexController extends Controller {
 		}
 		$webLangIndex = $this->language[$lang];
 		$actress = Video_actress::where('id',$id)->with('wiki')->first();// 女優table;
-		\Session::put('locale', 'jp');
-		App::setLocale('jp');
+		// \Session::put('locale', 'jp');
+		// App::setLocale('jp');
 		if(!$actress) {
 			//abort(404);
 			header("Location:/");

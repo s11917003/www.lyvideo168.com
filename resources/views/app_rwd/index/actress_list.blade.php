@@ -1,4 +1,4 @@
-@extends('layout.rwd.lay_web_basic_temp')
+@extends('layout.rwd.lay_web_basic')
 @section('title')
 {{--  @php echo mb_substr(strip_tags($post->title) , 0 , 25, 'UTF-8'); @endphp --}}
 @stop
@@ -38,18 +38,24 @@
 		$.ajax({
 				headers: {'X-CSRF-TOKEN': "{{ csrf_token() }}"},
 				type:"POST",
-				url:"/actress_list",
+				url:"/{{$lang}}/actress_list",
 				dataType:"json",
 				data:{page},
 				success:function(result){
 					$(".female-list").empty();
 					if(result.video_actress){
-						
+					
 						result.video_actress.data.forEach(function(item){
-					video =	`<a href="/actress/`+item.id+`"   class="female-list__item">
+						let name = ''
+						if('{{$lang}}' == 'zh' && item.ChineseName1)  {
+							name = item.ChineseName1
+						} else {
+							name = item.JapaneseName1
+						}
+					video =	`<a href="/{{$lang}}/actress/`+item.id+`"   class="female-list__item">
 						<figure><img src="/img/Pictures/`+item.JapaneseName1+`_coverphoto.jpg"></figure>
 						<div class="female-list__item-info-info">
-						<h5>`+item.JapaneseName1+`</h5>
+						<h5>`+name+`</h5>
 						<div class="show">{{__('ui.Starring')}}：`+item.actress_relations_count+`</div>
 						</div>
 						</a>`;

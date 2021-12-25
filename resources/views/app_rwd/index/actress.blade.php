@@ -1,4 +1,4 @@
-@extends('layout.rwd.lay_web_basic_temp')
+@extends('layout.rwd.lay_web_basic')
 @section('title')
 @php
 echo $actress->JapaneseName1.'：線上免費試看【JavDic  有碼・無碼・素人 - 日本A片資料庫】';

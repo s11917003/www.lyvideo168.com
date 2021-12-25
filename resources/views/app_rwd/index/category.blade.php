@@ -133,6 +133,7 @@
 <script>
 	var arr =[]
 	function sendAjax(tag,page){
+
 		$.ajax({
 				type:"POST",
 				url:"/{{$lang}}/category",
@@ -377,7 +378,6 @@
 			}
 		});
 
-		 
 		sendAjax(arr,1);
 		checkMoreBtm() 
 		
@@ -385,8 +385,6 @@
 			$(this).find('a').attr("href","javascript:void(0);");
 			cate_cilck(this);
 		});
-		console.log('window.onload')
-
 	}
 </script>
 @stop

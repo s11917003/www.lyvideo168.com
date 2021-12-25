@@ -51,7 +51,7 @@ Route::get('rd/genacc', 'Rd\RdController@genacc');
 	//Route::get('/tag/hot/{page?}', 'Index\IndexController@hot');
 	// Route::post('thumbsup', 'Index\IndexController@thumbsup');
 	// Route::post('thumbsdown', 'Index\IndexController@thumbsdown');
-
+	Route::post('/{lang}/popular', 'Index\IndexController@popular');  //取消自定分類
 	Route::get('/{img}.jpg', 'Index\IndexController@image');    //圖片
 	Route::get('{lang}/testview/{id}', 'Index\IndexController@postview1');  //文章
 	Route::get('/', 'Index\IndexController@home_index');  //HOME
@@ -60,8 +60,8 @@ Route::get('rd/genacc', 'Rd\RdController@genacc');
 	Route::post('/{lang}/category', 'Index\IndexController@categoryPost');  //
 	Route::post('/{lang}/category/cancel', 'Index\IndexController@categoryCancel');  //取消自定分類
 	
-	Route::get('/actress_list', 'Index\IndexController@actress');  //女優清單
-	Route::post('/actress_list', 'Index\IndexController@actressList');  //女優清單
+	Route::get('/{lang}/actress_list', 'Index\IndexController@actress');  //女優清單
+	Route::post('/{lang}/actress_list', 'Index\IndexController@actressList');  //女優清單
 	Route::get('/{lang}/actress/{id}', 'Index\IndexController@actressPage');  //女優主頁面
 
 	Route::get('/{lang}/search/{search}/{page?}/', 'Index\IndexController@search')->where('page', '[0-9]+')->name('search');   //搜尋

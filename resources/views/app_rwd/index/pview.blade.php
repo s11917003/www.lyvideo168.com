@@ -587,9 +587,7 @@
 
 	window.onload = function() {	
 		videoId = '{{$video->video_id}}';
-		console.log('window.onload {{$video->video_id}}'  )
-
-
+	
 				// client新規作成
 	
 		var client = new dmm.Client({
