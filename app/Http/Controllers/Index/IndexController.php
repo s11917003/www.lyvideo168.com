@@ -954,7 +954,7 @@ class IndexController extends Controller {
 		}
 		$search = $request->search;
 		$webLangIndex = $this->language[$lang];
-		DB::enableQueryLog();
+		// DB::enableQueryLog();
 		$Video_actress_id = Video_actress::where('JapaneseName1', 'like', '%'.strtoupper($search).'%')
 		->orWhere('ChineseName1', 'like', '%'.strtoupper($search).'%')
 		->orWhere('ChineseName2', 'like', '%'.strtoupper($search).'%')
@@ -988,7 +988,11 @@ class IndexController extends Controller {
 	 
 		return  response()->json(['video_actress' =>$video_actress,  'pagination' => (string)$video_actress->links("pagination::bootstrap-4") ]);
     }
-	public function actressPage(Int $id) {
+	public function actressPage($lang,Int $id) {
+		if( !in_array($lang,['zh','en','jp'])){
+			abort(404);
+		}
+		$webLangIndex = $this->language[$lang];
 		$actress = Video_actress::where('id',$id)->with('wiki')->first();// 女優table;
 		\Session::put('locale', 'jp');
 		App::setLocale('jp');
@@ -997,8 +1001,18 @@ class IndexController extends Controller {
 			header("Location:/");
 			return ;
 		}
-		$count  = Video_actress_relations::where('actress_id',$id)->count();// 女優table;
-		return  view('app_rwd.index.actress',['actress'=>$actress,'count'=>$count]);
+		
+		// $count  = Video_actress_relations::where('actress_id',$id)->count();// 女優table;
+		$videoIds  = Video_actress_relations::where('actress_id',$id)->pluck('video_id')->toArray();
+	
+		$videos_relation = Video::where('video_lang',$webLangIndex)->whereIn('id', $videoIds)->inRandomOrder()->limit(20)->get();//  video table;
+		
+		return  view('app_rwd.index.actress',[
+			'actress'=>$actress,
+			'count'=>count($videoIds),
+			'videos_relation' => $videos_relation,//相關女優
+			'lang'=>$lang
+		]);
     }
 	public function rankPage(string $lang,Int $type) {
 		if($type!='1' && $type!='2')

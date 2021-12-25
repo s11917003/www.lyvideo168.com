@@ -442,7 +442,8 @@
 				$i = 0
 				@endphp
 				-->
-				
+				@if (count($video_with_actress) >0 )
+				<h5 class="recommend" >{{__('ui.video_view.STARRING')}}</h5>
 				@foreach ($video_with_actress as $video_actress)
 				<div style="padding: 10px; width: 70%; height: 200px; margin: 5px;  overflow: hidden; text-align: center;margin: 0px auto;">
 					<div poster="" data-id='{{$video_actress->id}}' class="adClick video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:70%;    padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
@@ -475,6 +476,7 @@
 				</div>
 				@endforeach			
  				<div style="clear: both"></div>
+				 @endif
 			</div>
 			@else
 			
