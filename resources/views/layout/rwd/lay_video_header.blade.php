@@ -99,13 +99,13 @@
 		</div>
 	 
 	  </header>
-	  <nav class="active"> 
+	  <nav class=""> 
 		<ul class="nav">
 			<li><a href="/{{$lang}}/all/censored">{{__('ui.title.censored')}}</a></li>
 			<li><a href="/{{$lang}}/all/uncensored">{{__('ui.title.uncensored')}}</a></li>
 			<li><a href="/{{$lang}}/all/amateur">{{__('ui.title.amateur')}}</a></li>
 			<li><a href="/{{$lang}}/category">{{__('ui.title.category')}}</a></li>
-			<li><a href="/{{$lang}}actress_list">{{__('ui.title.actress')}}</a></li>
+			<li><a href="/{{$lang}}/actress_list">{{__('ui.title.actress')}}</a></li>
 			<li><a href="/{{$lang}}/rank/1">{{__('ui.title.rank')}}</a></li>
 		  </ul>
 	  

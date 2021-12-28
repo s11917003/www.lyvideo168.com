@@ -112,7 +112,7 @@
 			</ul>
 	  	<div class="category__more category_clothing_more" style="display: none;"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow"></i></a></div>
 	</div>
-	<div class="list">
+	<div class="list" style=" display: inline;">
 		<div class="list__wrap" style="width: 100%;"> 
 		  <div  id="video_list"  class="list">
 		  </div>

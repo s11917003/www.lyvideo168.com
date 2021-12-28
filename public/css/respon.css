@@ -1622,10 +1622,10 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;color:#b5b9bd; ;}
 	
 	/*** CONTENT ***/
 	#rs-main-content {
-		width:95%;
+		width:97%;
 		padding:0px;
 		overflow: hidden;
-		padding:80px 15px 0 15px;
+		padding:80px 0px 0 0px;
 	}
 	#rs-content-left {
 		width:100%;

@@ -11,6 +11,6 @@ class Video_tag_relations extends Modeli
 
      //關聯videoTag
      public function tagName() {
-        return $this->hasOne('App\Model\video_tag','id','tag_id');
+        return $this->hasOne('App\Model\Video_tag','id','tag_id');
     }
 }

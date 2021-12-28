@@ -61,7 +61,7 @@
 		</div>
 		@endif
 		@if(Route::currentRouteName()  == 'all')
-		<div class="container__header">test</div>
+		<div class="container__header">{{__('category')}}</div>
 		<div class="ranking">
 			<p class="ranking__title">{{$cate}}</p>
 			<div class="list__wrap week">
