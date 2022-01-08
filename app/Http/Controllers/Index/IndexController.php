@@ -265,21 +265,29 @@ class IndexController extends Controller {
 		$video_with_actress = [];
 	
 		if($video['actress']){ 
+			DB::enableQueryLog(); // Enable query log
+ 
 			$Video_actress = Video_actress_relations::select('*')->with('tagRelations')->where('video_id', $video->id)->get();//找女優 對應表
-		
+			
 			$actress = [];
 			$actressName = [];
 			$actressData= []; 
 			foreach($Video_actress as $data){
+
+				
 				$actress[] = $data->actress_id;
+
+			
 				$actressName[]  = $data->tagRelations->JapaneseName1;
 
 				$actressData[] = ['id' => $data->actress_id , 'name' =>  $data->tagRelations->JapaneseName1];
 			}
+		
+			$Video_actress_relations = Video_actress_relations::select('*')->whereIn('actress_id', $actress)->pluck('video_id')->toArray();;//找女優相關
 
-			$Video_actress_relations = Video_actress_relations::select('*')->whereIn('actress_id', $actress)->pluck('id')->toArray();;//找女優相關
+
 			$video_with_actress = Video::whereIn('id', $Video_actress_relations)->where('video_lang',$webLangIndex)->limit(20)->get();
-		 
+			 
 			if(count($actressName)>0){
 				$video['actress'] =  implode("&", $actressName); 
 			}
@@ -289,41 +297,41 @@ class IndexController extends Controller {
 		
 	
 		//預覽圖片
-		if($video['thumbnail_img']){
-			$video['thumbnail_img'] = explode("@",$video['thumbnail_img']);
-			$path = 'thumbnail_img/'.$video['video_id'].'/';
-			$video['thumbnail_img_router'] = $video['thumbnail_img'];
-			if(!is_dir($path)){
-				$flag = mkdir($path,0777,true);
-			}
-			$img_path = [];
-			foreach ($video['thumbnail_img']  as $key => $url) {
-				//判斷是否存在 不存在則寫入
-				$filename = $video['video_id'].'$'.$video['actress'].'$'.($key+1).'.jpg';
+		// if($video['thumbnail_img']){
+		// 	$video['thumbnail_img'] = explode("@",$video['thumbnail_img']);
+		// 	$path = 'thumbnail_img/'.$video['video_id'].'/';
+		// 	$video['thumbnail_img_router'] = $video['thumbnail_img'];
+		// 	if(!is_dir($path)){
+		// 		$flag = mkdir($path,0777,true);
+		// 	}
+		// 	$img_path = [];
+		// 	foreach ($video['thumbnail_img']  as $key => $url) {
+		// 		//判斷是否存在 不存在則寫入
+		// 		$filename = $video['video_id'].'$'.$video['actress'].'$'.($key+1).'.jpg';
 			
-				$isExists = \Storage::disk('public')->exists($path.$filename);	
+		// 		$isExists = \Storage::disk('public')->exists($path.$filename);	
 
 			
-				$img_path[] = $filename;
-				if($isExists){
-					continue;
-				} else {
-					$ch = curl_init();
-					curl_setopt($ch, CURLOPT_URL, $url);
-					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-					curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
-					$html = curl_exec($ch);
-					$data = curl_exec($ch);
-					curl_close($ch);
+		// 		$img_path[] = $filename;
+		// 		if($isExists){
+		// 			continue;
+		// 		} else {
+		// 			$ch = curl_init();
+		// 			curl_setopt($ch, CURLOPT_URL, $url);
+		// 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		// 			curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
+		// 			$html = curl_exec($ch);
+		// 			$data = curl_exec($ch);
+		// 			curl_close($ch);
 					 
-					//$contents = file_get_contents($url);
-					\Storage::disk('public')->put($path.$filename,$data);
-					//file_put_contents('../storage/'.$path.$filename,	$contents);   
-				}
-			}
+		// 			//$contents = file_get_contents($url);
+		// 			\Storage::disk('public')->put($path.$filename,$data);
+		// 			//file_put_contents('../storage/'.$path.$filename,	$contents);   
+		// 		}
+		// 	}
 		 
-			$video['thumbnail_img_router'] = 	$img_path;
-		}
+		// 	$video['thumbnail_img_router'] = 	$img_path;
+		// }
 	
 		$footer =footer::all();;	
 

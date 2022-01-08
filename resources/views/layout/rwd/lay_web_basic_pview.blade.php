@@ -51,8 +51,6 @@ import videojsPreviewThumbnails from 'https://cdn.skypack.dev/videojs-preview-th
 <!-- <script src="/js/popper.min.js"></script> -->
 <!-- <script src="/js/main.js"></script>
 <script src="/js/select.js"></script> -->
-
-<script src="/js/lib/dmm.js"></script>
 <script>
 	$(function() {
 		$.ajaxSetup({

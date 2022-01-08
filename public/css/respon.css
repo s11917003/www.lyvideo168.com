@@ -137,7 +137,7 @@ a,a:hover {
 	margin: 0 auto;
   }
   .form-signin label,.form-register label,.form-signin h1,.form-register h1,.form-register h7,#rs-main-content h1{
-	color: #ccc;
+	/* color: #ccc; */
   }
   
   .form-signin .checkbox {
@@ -566,6 +566,11 @@ transform: translateX(0rem);
 	min-height:500px;*/
 	
 }
+.table-responsive h1 {
+	font-size: 18px;
+	font-weight: 600;
+	color: crimson;
+}
 #navbar-expand-md {
 	position: absolute;
 	height: 48px;
@@ -626,7 +631,7 @@ transform: translateX(0rem);
 }
 #rs-content-left-box .title{
 	margin-bottom: 1rem;
-    font-size: 1.25rem;
+    font-size: 2rem;
     font-weight: bold;
     line-height: 1.5;
 	color: black;
@@ -1888,6 +1893,7 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;color:#b5b9bd; ;}
 }
 /* Mobile view */
 @media screen and (max-width:480px) {
+
 	/* #rs-article-box {
 		width: 230px; height: 240px;
 	}
@@ -1994,8 +2000,8 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;color:#b5b9bd; ;}
 	/*** CONTENT ***/
 	#rs-main-content {
 		width: 97%;
-    	/* padding-left: 1.5%; */
-		/* padding-top: 5px; */
+    	padding-left: 1.5%;
+		padding-top: 5px; 
 		margin: 0px 0px 0px 0px;
 		overflow: hidden;
 	}
@@ -2694,12 +2700,12 @@ label {
     /* margin-bottom: 1rem; */
     display: block;
     color: #fff;
-    width: 10.5rem;
+    width:180px;
     font-size: 1.25rem;
     font-weight: bold;
-    line-height: 2rem;
+    line-height: 30px;
     text-align: center;
-    letter-spacing: 4px;
+    letter-spacing: 0.5px;
     border-radius: 1.25rem;
     background-color: var(--button-background);
     box-shadow: 2px 2px 0px var(--button-shadow);
@@ -2797,4 +2803,30 @@ label {
 
 .av-video_hide_play .vjs-big-play-button {
     display: none;
+}
+
+@media screen and (max-width:480px) {
+	.movie-gallery-wrapper a {
+		 
+		/* max-height: 180px; */
+		margin-bottom: 10px;
+		display: inline-block;
+		background-size: cover!important;
+		/* overflow: hidden; */
+		width: 30%;
+		margin-right: 2px;
+
+	}
+	.playBtn {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+	}
+	#rs-digg-box2 {
+		display: grid;
+    	justify-content: center;
+	}
+	#rs-digg-box2 p {
+		line-height: 1.5rem;
+	}
 }

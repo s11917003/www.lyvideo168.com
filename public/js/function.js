@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+	return;
 	var tagsCookie = getCookie('tags');
 	var allVideoCookie = getCookie('allVideoCount');
 	var todayVideoCookie = getCookie('todayVideoCount');
