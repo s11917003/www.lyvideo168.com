@@ -315,7 +315,7 @@
 								</tr>
 								<tr>
 								<td><h1>{{__('ui.video_view.Studio')}}</h1></td>
-								<td>{{ $video->studio }}</td>
+								<td><img src="{{ asset('/storage/thumbnail_img/1havd00998/1havd00998$二宮和香&黒崎さく$1.jpg') }}" ></td>
 								</tr>
 								
 <!-- 								
@@ -407,9 +407,9 @@
 						<div class="movie-gallery">
 							<div class="movie-gallery-wrapper">
 								@foreach ($video->thumbnail_img_router as $thumbnail_img)
-								<a class="example-image-link" href="{{ url($thumbnail_img) }}" data-lightbox="100TV-404-gallery" data-title="Click the right half of the image to move forward.">
-									<img class="example-image" src="{{  asset($thumbnail_img)}}" alt="">
-								</a>
+								<!-- <a class="example-image-link" href="{{ url($thumbnail_img) }}" data-lightbox="100TV-404-gallery" data-title="Click the right half of the image to move forward."> -->
+									<img class="example-image" src="{{  asset('/storage/'.$thumbnail_img)}}" alt="">
+								<!-- </a> -->
 								@endforeach			
 								
 							</div>
@@ -437,13 +437,18 @@
 		 
 			
 			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px; height: auto;">
-				<h5 class="recommend" >{{__('ui.video_view.STARRING')</h5>
+				
 				@if (count($video_with_actress) >0 )
-			
+				<h3 class="recommend p-1" >{{__('ui.video_view.STARRING')}}</h3>
 				@foreach ($video_with_actress as $video_actress)
+				<!-- @if ($device == 'ios' || $device == 'android')
+				<div style="padding: 10px; width: 70%; height: 200px; margin: 5px;  overflow: hidden; text-align: center;margin: 0px auto;">
+					<div poster="" data-id='{{$video_actress->id}}' class="adClick video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:70%;    padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
+				@else -->
 				<div style="float: left;padding: 10px; width: 230px; height: 230px; margin: 5px; overflow: hidden">
 					<div poster=""   class="adClick video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	
 					style="height:70%;   padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
+				<!-- @endif -->
 						<a href="/{{$lang}}/testview/{{$video_actress->video_id}}${{ $video_actress->actress}}"  target="_blank">
 							<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
 														vertical-align: middle;
@@ -476,13 +481,21 @@
 				@endforeach
 				<div style="clear: both"></div>
 				@endif
-				<h5 class="recommend" >{{__('ui.video_view.LIKE')}}</h5>
+				
 				@if(count($video_relation) > 0) 
+				<h5 class="recommend p-1" >{{__('ui.video_view.LIKE')}}</h5>
 				@foreach ($video_relation as $video_tag)
+			
+				@if ($device == 'ios' || $device == 'android')
+				<div style="padding: 10px; width: 70%; height: 200px; margin: 5px;  overflow: hidden; text-align: center;margin: 0px auto;">
+					<div poster=""   class="adClick video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:70%;    padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
+				@else
 				<div style="float: left;padding: 10px; width: 230px; height: 230px; margin: 5px; overflow: hidden">
 					<div poster=""   class="adClick video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	
 					style="height:70%;   padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
-						<a href="/{{$lang}}/testview/{{$video_tag->video_id}}${{ $video_tag->actress}}"  target="_blank">
+				@endif
+		
+					<a href="/{{$lang}}/testview/{{$video_tag->video_id}}${{ $video_tag->actress}}"  target="_blank">
 							<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
 														vertical-align: middle;
 														background-repeat: no-repeat;

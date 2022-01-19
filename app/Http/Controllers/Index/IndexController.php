@@ -272,22 +272,15 @@ class IndexController extends Controller {
 			$actress = [];
 			$actressName = [];
 			$actressData= []; 
+		
 			foreach($Video_actress as $data){
-
-				
 				$actress[] = $data->actress_id;
-
-			
 				$actressName[]  = $data->tagRelations->JapaneseName1;
-
 				$actressData[] = ['id' => $data->actress_id , 'name' =>  $data->tagRelations->JapaneseName1];
 			}
 		
-			$Video_actress_relations = Video_actress_relations::select('*')->whereIn('actress_id', $actress)->pluck('video_id')->toArray();;//找女優相關
-
-
+			$Video_actress_relations = Video_actress_relations::select('*')->whereIn('actress_id', $actress)->limit(50)->pluck('video_id')->toArray();;//找女優相關
 			$video_with_actress = Video::whereIn('id', $Video_actress_relations)->where('video_lang',$webLangIndex)->limit(20)->get();
-			 
 			if(count($actressName)>0){
 				$video['actress'] =  implode("&", $actressName); 
 			}
@@ -297,42 +290,43 @@ class IndexController extends Controller {
 		
 	
 		//預覽圖片
-		// if($video['thumbnail_img']){
-		// 	$video['thumbnail_img'] = explode("@",$video['thumbnail_img']);
-		// 	$path = 'thumbnail_img/'.$video['video_id'].'/';
-		// 	$video['thumbnail_img_router'] = $video['thumbnail_img'];
-		// 	if(!is_dir($path)){
-		// 		$flag = mkdir($path,0777,true);
-		// 	}
-		// 	$img_path = [];
-		// 	foreach ($video['thumbnail_img']  as $key => $url) {
-		// 		//判斷是否存在 不存在則寫入
-		// 		$filename = $video['video_id'].'$'.$video['actress'].'$'.($key+1).'.jpg';
+		if($video['thumbnail_img']){
+			$video['thumbnail_img'] = explode("@",$video['thumbnail_img']);
+			$path = 'thumbnail_img/'.$video['video_id'].'/';
+			$video['thumbnail_img_router'] = $video['thumbnail_img'];
+			if(!is_dir($path)){
+				$flag = mkdir($path,0777,true);
+			}
+			$img_path = [];
+			foreach ($video['thumbnail_img']  as $key => $url) {
+				//判斷是否存在 不存在則寫入
+				$filename = $video['video_id'].'$'.$video['actress'].'$'.($key+1).'.jpg';
 			
-		// 		$isExists = \Storage::disk('public')->exists($path.$filename);	
+				$isExists = \Storage::disk('public')->exists($path.$filename);	
 
 			
-		// 		$img_path[] = $filename;
-		// 		if($isExists){
-		// 			continue;
-		// 		} else {
-		// 			$ch = curl_init();
-		// 			curl_setopt($ch, CURLOPT_URL, $url);
-		// 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		// 			curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
-		// 			$html = curl_exec($ch);
-		// 			$data = curl_exec($ch);
-		// 			curl_close($ch);
+				$img_path[] =$path.'/'.$filename;
+				if($isExists){
+					continue;
+				} else {
+					$ch = curl_init();
+					curl_setopt($ch, CURLOPT_URL, $url);
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+					curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
+					$html = curl_exec($ch);
+					$data = curl_exec($ch);
+					curl_close($ch);
 					 
-		// 			//$contents = file_get_contents($url);
-		// 			\Storage::disk('public')->put($path.$filename,$data);
-		// 			//file_put_contents('../storage/'.$path.$filename,	$contents);   
-		// 		}
-		// 	}
+					//$contents = file_get_contents($url);
+					\Storage::disk('public')->put($path.$filename,$data);
+					//file_put_contents('../storage/'.$path.$filename,	$contents);   
+				}
+			}
 		 
-		// 	$video['thumbnail_img_router'] = 	$img_path;
-		// }
-	
+			$video['thumbnail_img_router'] = 	$img_path;
+ 
+		}
+		
 		$footer =footer::all();;	
 
 		// 英	<title>{影片ID} | {女優英文名}：Watch Free Video【JavDic  censored, uncensored and amateur japanese porn】</title>
@@ -350,13 +344,17 @@ class IndexController extends Controller {
 		DB::enableQueryLog();
 		////相關標籤影片
 	 	$randTag = Video_tag_relations::where('video_id',$video->id)->inRandomOrder()->first();
-		 
+		
 		$video_relation = [];
 		if($randTag){
-			$video_relation = Video::where('video_lang',$webLangIndex)->with(['tagRelations'])->whereHas('tagRelations', function($q) use ($randTag) { $q->where('tag_id', '=', $randTag->tag_id); })->limit(10)->get();		
+			$same_tag_video = Video_tag_relations::where('tag_id',$randTag->tag_id)->inRandomOrder()->limit(50)->pluck('video_id')->toArray();
+		
+			//$video_relation = Video::where('video_lang',$webLangIndex)->with(['tagRelations'])->whereHas('tagRelations', function($q) use ($randTag) { $q->where('tag_id', '=', $randTag->tag_id); })->limit(10)->get();
+			$video_relation = Video::where('video_lang',$webLangIndex)->whereIn('id', $same_tag_video)->with(['tagRelations'])->limit(10)->get();
+			
+	 
 		}
 	 
-
 		
 		$title  = $video['video_id'].'|'.$video['actress'].'無料エロ動画【JavDic  '. implode(",", $tagName).'】';
 		$video_status = false;
@@ -382,6 +380,8 @@ class IndexController extends Controller {
 		} else if ($video['cate_id'] == 4){
 			$url =  'https://adult.contents.fc2.com/aff.php?aid='.$video['video_id'].'&affuid=TXpjMU5qTTFPREU9';
 		}
+
+		// return $video_with_actress;
 		if($video) {
 			$device = Utils::chkdevice();
 			return view('app_rwd.index.pview',[

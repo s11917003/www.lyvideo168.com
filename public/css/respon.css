@@ -31,9 +31,10 @@ a , div {
 }
 .recommend {
 	font-weight: bold;
-	FONT-SIZE: 18PX;
+	FONT-SIZE: 22PX;
 	/*color: #BBB;*/
 	/* text-align: center; */
+	background-color: var(--primary-color);
 }
 /*div {
 	padding:10px;
@@ -2828,5 +2829,15 @@ label {
 	}
 	#rs-digg-box2 p {
 		line-height: 1.5rem;
+	}
+	.recommend {
+		FONT-SIZE: 18PX;
+	}
+	.movie-gallery-wrapper img {
+		max-width: 100%;
+		margin-top: 0px;
+		margin-right: 01px;
+		margin-bottom: 0px;
+		width: 32%;
 	}
 }
