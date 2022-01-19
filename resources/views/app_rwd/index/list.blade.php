@@ -29,15 +29,22 @@
 		<div class="list__wrap week">
 			<div class="list">
 				@foreach ($video as $post)
-					<a href="/{{$lang}}/testview/{{$post->video->video_id}}${{$post->video->actress}}"  target="_blank" class="list__item">
+				@foreach ($post->video as $video)	
+				@if($video->video_lang == $langIndex)
+					<a href="/{{$lang}}/testview/{{$video->video_id}}${{$video->actress}}"  target="_blank" class="list__item">
 					<p class="list__num">Top {{$post->rank}}.</p>
-					<figure><img src="{{$post->video->cover_img}}"></figure>
+					
+				
+					<figure><img src="{{$video->cover_img}}"></figure>
 					<div class="list__item-info">
-					<h5>{{$post->video->video_id}}</h5>
-					<h6>【{{$post->video->title}}】</h6>
-					<div class="date">2018-05-17</div>
+					<h5>{{$video->video_id}}</h5>
+					<h1>【{{$video->title}}】</h1>
+					@if($post->release_date)<div class="date">{{$video->release_date}}</div> @endif
 					</div>
+					@endif
+					@endforeach
 				</a>
+				
 				@endforeach
 			</div>
 		
@@ -45,15 +52,21 @@
 
 		<div class="list__wrap month" style="display: none;">
 			<div class="list">
-				@foreach ($video1 as $post)
-					<a href="/{{$lang}}/testview/{{$post->video->video_id}}${{$post->video->actress}}"  target="_blank" class="list__item">
+				@foreach ($video1 as $post)	
+				@foreach ($post->video as $video)
+				@if($video->video_lang == $langIndex)
+					<a href="/{{$lang}}/testview/{{$video->video_id}}${{$video->actress}}"  target="_blank" class="list__item">
 					<p class="list__num">Top {{$post->rank}}.</p>
-					<figure><img src="{{$post->video->cover_img}}"></figure>
+				
+					
+					<figure><img src="{{$video->cover_img}}"></figure>
 					<div class="list__item-info">
-					<h5>{{$post->video->video_id}}</h5>
-					<h6>【{{$post->video->title}}】</h6>
-					<div class="date">2018-05-17</div>
+					<h5>{{$video->video_id}}</h5>
+					<h1>【{{$video->title}}】</h1>
+					@if($post->release_date)<div class="date">{{$video->release_date}}</div> @endif
 					</div>
+					@endif
+					@endforeach
 				</a>
 				@endforeach
 			</div>

@@ -1056,7 +1056,8 @@ class IndexController extends Controller {
 		'prestige'=>$prestige,
 		'uncensored'=>$uncensored,
 		'amateur'=>$amateur,
-		'lang'=>$lang
+		'lang'=>$lang,
+		'langIndex'=>$webLangIndex,
 		]);
 	}
 	public function rankListPage(string $lang,string $cate) {
@@ -1067,14 +1068,22 @@ class IndexController extends Controller {
 			abort(404);
 		}
 		$webLangIndex = $this->language[$lang];
+		DB::enableQueryLog(); // Enable query log
+
+  
 		$post = Video_rank::where('video_source',$cate)->where('type',1)->where('video_lang',$webLangIndex)->with('video')->orderBy('rank')->get();
-		$post1 = Video_rank::where('video_source',$cate)->where('type',2)->where('video_lang',$webLangIndex)->with('video')->orderBy('rank')->get();
+
+	 
+		$post1 = Video_rank::where('video_source',$cate)->where('type',2)->where('video_lang',$webLangIndex)->whereHas('video', function ($query)  use ($webLangIndex){
+			$query->where('video_lang', '=', $webLangIndex );
+	   })->orderBy('rank')->get();
 		
 		return view('app_rwd.index.list',[
 		'cate'=>$cate,
 		'video'=>$post,
 		'video1'=>$post1,
-		'lang'=>$lang
+		'lang'=>$lang,
+		'langIndex'=>$webLangIndex,
 		]);
 	}
 	public function all(string $lang,string $cate) {

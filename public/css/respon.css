@@ -2805,6 +2805,21 @@ label {
 .av-video_hide_play .vjs-big-play-button {
     display: none;
 }
+.list__item P ,.list__item h1,.list__item h6{
+	overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    FONT-SIZE: 0.5REM;
+	color: #000;
+}
+
+
+
+.av-video_hide_play .vjs-big-play-button {
+    display: none;
+}
 
 @media screen and (max-width:480px) {
 	.movie-gallery-wrapper a {

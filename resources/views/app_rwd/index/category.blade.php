@@ -169,12 +169,13 @@
 
 					} 
 					result.video.data.forEach(function(item){
-						video = `<a href="/jp/testview/`+item.video_id+`$`+item.actress+`" class="list__item">
+				 
+						video = `<a href="/{{$lang}}/testview/`+item.video_id+`$`+item.actress+`" class="list__item">
 						<figure><img src="`  +item.cover_img+  `"></figure>
 						<div class="list__item-info">
 						<h5>`  +item.video_id+  `</h5>
-						<h6>【`  +item.title+  `】</h6>
-						<div class="date">`  +item.release_date+  `</div>
+						<h1>【`  +item.title+  `】</h1>
+						<div class="date">`  +  ( item.release_date || '' )+  `</div>
 						</div>
 						</a>`
 					
@@ -258,12 +259,12 @@
 
 					} 
 					result.video.data.forEach(function(item){
-						video = `<a href="/jp/testview/`+item.video_id+`$`+item.actress+`" class="list__item">
+						video = `<a href="/{{$lang}}/testview/`+item.video_id+`$`+item.actress+`" class="list__item">
 						<figure><img src="`  +item.cover_img+  `"></figure>
 						<div class="list__item-info">
 						<h5>`  +item.video_id+  `</h5>
 						<h6>【`  +item.title+  `】</h6>
-						<div class="date">`  +item.release_date+  `</div>
+						<div class="date">`  +  ( item.release_date || '' )+   `</div>
 						</div>
 						</a>`
 					

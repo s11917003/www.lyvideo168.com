@@ -1,5 +1,6 @@
 <?php
 namespace App\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 //use Illuminate\Database\Eloquent\Model;
 
 class Video_rank extends Modeli
@@ -10,7 +11,7 @@ class Video_rank extends Modeli
     public $timestamps = false;
 
     public function video()
-    {
-        return $this->hasOne(Video::class, 'video_id', 'video_id');
+    {  
+        return $this->hasMany(Video::class, 'video_id', 'video_id');
     }
 }

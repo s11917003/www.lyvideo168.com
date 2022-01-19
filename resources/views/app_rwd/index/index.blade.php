@@ -16,7 +16,7 @@
 @section('maincontent')
 
 	
-  <div class="container">
+  <div class="container" style="min-height: 500px;">
 	<div class="container__header">{{ __('ui.new')}}</div>
 	<div class="news" data-tab="">
 	  <ul class="news-tab__header">
@@ -26,16 +26,18 @@
 		<li class="news-tab__title">{{__('ui.title.amateur')}}</li>
 	  </ul>
 	  <div class="news-tab__content news-tab__content--active">
+		@if(count($video1) > 0)
 		<div class="news__title">{{__('ui.title.censored')}} FANZE</div>
+		@endif
 		<div class="news__list list">  
 		@foreach ($video1 as $video)
  
 		<a href="/{{$lang}}/testview/{{$video->video_id}}${{ $video->actress}}"  target="_blank" class="list__item">
 			<figure><img src="{{ $video->cover_img }}"></figure>
 			<div class="list__item-info">
-			<h5>{{$video->title}}</h5>
-			<h6>【{{$video->video_id}}】</h6>
-			<div class="date">{{$video->release_date}}</div>
+			<h6>{{__('ui.title.censored')}} FANZE {{$video->video_id}}</h6>
+			<p>{{$video->title}}</p>
+			@if($video->release_date)<div class="date">{{$video->release_date}}</div> @endif
 			</div>
 		</a>
 		@endforeach
@@ -43,7 +45,9 @@
 		</div>
 	  </div>
 	  <div class="news-tab__content">
+		@if(count($video2) > 0)
 		<div class="news__title">{{__('ui.title.censored')}} Prestige</div>
+		@endif
 		<div class="news__list list">
 		  
 			@foreach ($video2 as $video)
@@ -51,25 +55,27 @@
 			<a href="/{{$lang}}/testview/{{$video->video_id}}${{ $video->actress}}"  target="_blank" class="list__item">
 				<figure><img src="{{ $video->cover_img }}"></figure>
 				<div class="list__item-info">
-				<h5>{{$video->title}}</h5>
-				<h6>【{{$video->video_id}}】</h6>
-				<div class="date">{{$video->release_date}}</div>
+					<h6>{{__('ui.title.censored')}} Prestige {{$video->video_id}}</h6>
+					<p>{{$video->title}}</p>
+					@if($video->release_date)<div class="date">{{$video->release_date}}</div> @endif
 				</div>
 			</a>
 			@endforeach
 		</div>
 	  </div>
 	  <div class="news-tab__content">
+		@if(count($video3) > 0)
 		<div class="news__title">{{__('ui.title.uncensored')}}</div>
+		@endif
 		<div class="news__list list">
 			@foreach ($video3 as $video)
  
 			<a href="/{{$lang}}/testview/{{$video->video_id}}${{ $video->actress}}"  target="_blank" class="list__item">
 				<figure><img src="{{ $video->cover_img }}"></figure>
 				<div class="list__item-info">
-				<h5>{{$video->title}}</h5>
-				<h6>【{{$video->video_id}}】</h6>
-				<div class="date">{{$video->release_date}}</div>
+					<h6>{{__('ui.title.uncensored')}} {{$video->video_id}}</h6>
+					<p>{{$video->title}}</p>
+					@if($video->release_date)<div class="date">{{$video->release_date}}</div> @endif
 				</div>
 			</a>
 			@endforeach
@@ -78,7 +84,9 @@
 		</div>
 	  </div>
 	  <div class="news-tab__content">
+		@if(count($video4) > 0)
 		<div class="news__title">{{__('ui.title.amateur')}}</div>
+		@endif
 		<div class="news__list list">
 		  
 			@foreach ($video4 as $video)
@@ -86,9 +94,9 @@
 			<a href="/{{$lang}}/testview/{{$video->video_id}}${{ $video->actress}}"  target="_blank" class="list__item">
 				<figure><img src="{{ $video->cover_img }}"></figure>
 				<div class="list__item-info">
-				<h5>{{$video->title}}</h5>
-				<h6>【{{$video->video_id}}】</h6>
-				<div class="date">{{$video->release_date}}</div>
+					<h6>{{__('ui.title.amateur')}} {{$video->video_id}}</h6>
+					<p>{{$video->title}}</p>
+					@if($video->release_date)<div class="date">{{$video->release_date}}</div> @endif
 				</div>
 			</a>
 			@endforeach
