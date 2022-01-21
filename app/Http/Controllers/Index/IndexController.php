@@ -265,7 +265,6 @@ class IndexController extends Controller {
 		$video_with_actress = [];
 	
 		if($video['actress']){ 
-			DB::enableQueryLog(); // Enable query log
  
 			$Video_actress = Video_actress_relations::select('*')->with('tagRelations')->where('video_id', $video->id)->get();//找女優 對應表
 			
@@ -380,8 +379,6 @@ class IndexController extends Controller {
 		} else if ($video['cate_id'] == 4){
 			$url =  'https://adult.contents.fc2.com/aff.php?aid='.$video['video_id'].'&affuid=TXpjMU5qTTFPREU9';
 		}
-
-		// return $video_with_actress;
 		if($video) {
 			$device = Utils::chkdevice();
 			return view('app_rwd.index.pview',[
@@ -661,8 +658,18 @@ class IndexController extends Controller {
 		if( !in_array($lang,['zh','en','jp'])){
 			abort(404);
 		}
+		
+		// $tag->main_tag =  1;  //主要的分類tag
+		$secondary_tagTemp = \Session::get('secondary_tag');//已自訂的tag
+		$secondary_tag = [];
+		if($secondary_tagTemp){
+			$secondary_tag  = explode(",", $secondary_tagTemp); //已自訂的tag
+		} 
+		$combo_tag = Video_tag::where('main_tag','!=',1)->get();
 		$webLangIndex = $this->language[$lang];
-		return view('app_rwd.index.category',[ 'category'=>[0],'lang' => $lang]);
+
+		 
+		return view('app_rwd.index.category',[ 'category'=>[0],'lang' => $lang,'combo_tag' =>json_decode($combo_tag),'secondary_tag'=>$secondary_tag]);
 	}
 	public function categoryCancel(Request $request,string $lang) {
 
@@ -718,14 +725,42 @@ class IndexController extends Controller {
 				$sourece_array[] = 4;
 			}
 		}
-  
+  	    $combo_tag = Video_tag::where('main_tag','!=',1)->whereNotIn('id',$secondary_tag)->get();	
 		$tag = $request->tag;
 		 $video = Video::select('*')->whereHas('tagRelations', function($q) use ($tag){
    						 $q->whereIn('tag_id',$tag);
 		})->orWhere(function ($query) use ($sourece_array) {
 			$query->whereIn('cate_id',$sourece_array);
 		})->Paginate(36) ;
-		return  response()->json([ 'secondary_tag' => $Video_tag_screen , 'video' =>$video,  'pagination' => (string)$video->links("pagination::bootstrap-4"), ]);
+		return  response()->json([ 'secondary_tag' => $Video_tag_screen , 'video' =>$video,'combo_tag' =>$combo_tag,  'pagination' => (string)$video->links("pagination::bootstrap-4"), ]);
+		
+	}
+	
+	public function categoryAdd(Request $request,string $lang) {
+		if(!isset( $request->tag)){
+			return false;
+		}
+	 	 
+		$secondary_tag = \Session::get('secondary_tag');
+		if($secondary_tag){
+			$secondary_tag  = explode(",", $secondary_tag);
+		} else {
+			$secondary_tag  = [];
+		}
+       
+		$Video_tag = Video_tag::where('id',$request->tag)->first();
+	
+	    if ($Video_tag) {
+			if($Video_tag->main_tag !=1 ){ //自訂
+				 if(!in_array((string)$Video_tag->id,$secondary_tag)){ //未存進SESSIOM
+					array_push($secondary_tag, $tag->id);
+					\Session::put('secondary_tag', '');
+			        \Session::put('secondary_tag', implode(",",$secondary_tag));
+				}
+			}
+	  	} 
+		$combo_tag = Video_tag::where('main_tag','!=',1)->whereNotIn('id',$secondary_tag)->get();	
+		return  response()->json([   'Video_tag' =>$Video_tag,'combo_tag' =>$combo_tag]);
 		
 	}
 	public function categoryPost(Request $request,string $lang) {
@@ -745,10 +780,10 @@ class IndexController extends Controller {
 				$tag['check'] = true;
 				if(!in_array((string)$tag->id,$request->tag)){  
 					$tag['check'] = false;
-				
 				 } 
 			} 
-			return  response()->json([ 'secondary_tag' => $Video_tag_screen ,'video' =>$video,  'pagination' => (string)$video->links("pagination::bootstrap-4"), ]);
+			$combo_tag = Video_tag::where('main_tag','!=',1)->get();	
+			return  response()->json([ 'secondary_tag' => $Video_tag_screen ,'video' =>$video,'combo_tag' =>$combo_tag,  'pagination' => (string)$video->links("pagination::bootstrap-4"), ]);
 		} else {
 			if( in_array('censored_f',$request->tag)){
 				$sourece_array[] =1;
@@ -796,15 +831,14 @@ class IndexController extends Controller {
 			\Session::put('secondary_tag', implode(",",$secondary_tag));
 		}
 			
-	 
-	
+		$combo_tag = Video_tag::where('main_tag','!=',1)->whereNotIn('id',$secondary_tag)->get();	
 		$tag = $request->tag;
 		 $video = Video::select('*')->where('video_lang',$webLangIndex)->whereHas('tagRelations', function($q) use ($tag){
    						 $q->whereIn('tag_id',$tag);
 		})->orWhere(function ($query) use ($sourece_array) {
 			$query->whereIn('cate_id',$sourece_array);
 		})->Paginate(36) ;
-		return  response()->json([ 'secondary_tag' => $Video_tag_screen , 'video' =>$video,  'pagination' => (string)$video->links("pagination::bootstrap-4"), ]);
+		return  response()->json([ 'secondary_tag' => $Video_tag_screen , 'video' =>$video,'combo_tag' =>$combo_tag,  'pagination' => (string)$video->links("pagination::bootstrap-4"), ]);
 		
 	}
 	//分類
@@ -1016,23 +1050,39 @@ class IndexController extends Controller {
 	public function actressPage($lang,Int $id) {
 		if( !in_array($lang,['zh','en','jp'])){
 			abort(404);
-		}
+		}	
 		$webLangIndex = $this->language[$lang];
 		$actress = Video_actress::where('id',$id)->with('wiki')->first();// 女優table;
-		// \Session::put('locale', 'jp');
-		// App::setLocale('jp');
 		if(!$actress) {
 			//abort(404);
 			header("Location:/");
 			return ;
 		}
 		
-		// $count  = Video_actress_relations::where('actress_id',$id)->count();// 女優table;
-		$videoIds  = Video_actress_relations::where('actress_id',$id)->pluck('video_id')->toArray();
-	
-		$videos_relation = Video::where('video_lang',$webLangIndex)->whereIn('id', $videoIds)->inRandomOrder()->limit(20)->get();//  video table;
-		
+		$video  = Video_actress_relations::where('actress_id',$id);
+		$videoIds= $video->pluck('video_id')->toArray();//所有ID
+		$videos_relation = Video::select('id','video_id')->whereIn('id', $videoIds)->with('tagRelations')->get();//video table;
+		$tagObj = [];
+		//計算相關的標籤以及數量
+	    $size = count($videos_relation); 
+        for ($i=0; $i < $size; $i++) {
+		    $data = $videos_relation[$i]['tagRelations'];
+	    	foreach ($data  as $tag) {
+    	    	if( !in_array($tag->tag_id,array_keys((array)$tagObj))){
+    		        $tagObj[$tag->tag_id] = 1;
+    		    } else {
+    		       	$tagObj[$tag->tag_id] +=1;
+    		    }
+	    	}
+		}
+				 
+	    $video_tag	= Video_tag::whereIn('id',array_keys((array)$tagObj))->get();
+	  	foreach ($video_tag  as $tag) {
+		    $tag['count'] = $tagObj[$tag->id];
+		}
+ 
 		return  view('app_rwd.index.actress',[
+		    '$video_tag' => $video_tag,
 			'actress'=>$actress,
 			'count'=>count($videoIds),
 			'videos_relation' => $videos_relation,//相關女優

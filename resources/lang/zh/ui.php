@@ -16,8 +16,8 @@ return [
     'Tag' => '影片標籤',
     'rank' =>[
         'rank_title' => '排行榜一覽',
-        'week' => '週排行',
-        'month' => '月排行'],
+        'week' => '每周排行榜',
+        'month' => '每月排行榜'],
     'search_result' => '搜索結果',
     'Category_Search'  => '類別搜尋',
     'tag' =>[

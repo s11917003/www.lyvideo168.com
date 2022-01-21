@@ -9,6 +9,8 @@
 {{-- <meta itemprop="name" content="@lang('default.description')">
 <meta itemprop="description" content="{{strip_tags($post->title)}}">
 <meta name="csrf-token" content="{{ csrf_token() }}" /> --}}
+<script src="/js/bundle.min.js"></script>
+
 <script>
 	 
 </script>
@@ -110,6 +112,11 @@
 		<div class="category__title">{{__('ui.tag.Custom')}}</div>
 			<ul id="category_clothing" class="category__tags">
 			</ul>
+	  	<div class="category__more category_clothing_more" style="display: none;"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow"></i></a></div>
+	</div>
+	<div id ="customCombo" class="category category--open">
+		<div class="category__title">{{__('ui.tag.Custom')}}</div>
+		  <span class="example" style="width: 300px;"></span>
 	  	<div class="category__more category_clothing_more" style="display: none;"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow"></i></a></div>
 	</div>
 	<div class="list" style=" display: inline;">
@@ -352,6 +359,45 @@
 		 checkMoreBtm() 
 	});
 	window.onload = function() {
+		const a = @json($combo_tag);
+		 
+		console.log(a) 
+		let myOptions = []
+		a.map(function(value){
+			myOptions.push({
+				label: value[`{{$lang}}`],
+				value: ''+value.id,
+			})
+		})
+		console.log(myOptions) 
+		var instance = new SelectPure(".example", {
+		
+			options: myOptions,
+			multiple: true, // default: false
+			autocomplete: true, // default: false
+			icon: "fa fa-times", 
+			classNames: {
+			select: "select-pure__select",
+			dropdownShown: "select-pure__select--opened",
+			multiselect: "select-pure__select--multiple",
+			label: "select-pure__label",
+			placeholder: "select-pure__placeholder",
+			dropdown: "select-pure__options",
+			option: "select-pure__option",
+			autocompleteInput: "select-pure__autocomplete",
+			selectedLabel: "select-pure__selected-label",
+			selectedOption: "select-pure__option--selected",
+			placeholderHidden: "select-pure__placeholder--hidden",
+			optionHidden: "select-pure__option--hidden",
+			},
+			onChange: value => { console.log(value); }
+		});
+     
+		
+		// instance._setValue('NY')
+		// instance._setValue('NC')
+
+		// console.log(console.log(instance.value()) )
 		cate = getSearchParams('cate');
 		findCate = false;
 		arr =[]

@@ -46,10 +46,9 @@ import videojsPreviewThumbnails from 'https://cdn.skypack.dev/videojs-preview-th
 <script src="/js/videojs-thumbnails/videojs.thumbnails.js"></script>
 <!-- <script src="/js/videojs-thumbnails/videojs.thumbnails.js"></script> -->
 <script src="/js/videojs-contrib-hls.js"></script>
-<script src="/js/videojs-contrib-ads.js"></script>
-<script defer src="/js/fontawesome-all.js"></script>
-<script src="js/main.js"></script>
-<script src="js/main.js"></script>
+<!-- <script src="/js/videojs-contrib-ads.js"></script> -->
+<!-- <script defer src="/js/fontawesome-all.js"></script> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="/js/function.js"></script>
 <!-- <script type="text/javascript" src="/js/jquery.lazyload.js"></script> -->
