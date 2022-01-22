@@ -660,16 +660,16 @@ class IndexController extends Controller {
 		}
 		
 		// $tag->main_tag =  1;  //主要的分類tag
-		$secondary_tagTemp = \Session::get('secondary_tag');//已自訂的tag
-		$secondary_tag = [];
-		if($secondary_tagTemp){
-			$secondary_tag  = explode(",", $secondary_tagTemp); //已自訂的tag
-		} 
+		// $secondary_tagTemp = \Session::get('secondary_tag');//已自訂的tag
+		// $secondary_tag = [];
+		// if($secondary_tagTemp){
+		// 	$secondary_tag  = explode(",", $secondary_tagTemp); //已自訂的tag
+		// } 
 		$combo_tag = Video_tag::where('main_tag','!=',1)->get();
 		$webLangIndex = $this->language[$lang];
 
 		 
-		return view('app_rwd.index.category',[ 'category'=>[0],'lang' => $lang,'combo_tag' =>json_decode($combo_tag),'secondary_tag'=>$secondary_tag]);
+		return view('app_rwd.index.category',[ 'category'=>[0],'lang' => $lang,'combo_tag' =>json_decode($combo_tag)]);
 	}
 	public function categoryCancel(Request $request,string $lang) {
 
@@ -709,8 +709,8 @@ class IndexController extends Controller {
 			return  response()->json([ 'secondary_tag' => $Video_tag_screen ,'video' =>[]]);
 		}
 		if(in_array("all", $request->tag)){
-			$video = Video::select('*')->Paginate(36);
-			return  response()->json([ 'secondary_tag' => $Video_tag_screen ,'video' =>$video,  'pagination' => (string)$video->links("pagination::bootstrap-4"), ]);
+			$video = Video::select('*')->where('video_lang',$webLangIndex)->Paginate(36);
+			return  response()->json([ 'secondary_tag' => $Video_tag_screen ,'video' =>$video ]);
 		} else {
 			if( in_array('censored_f',$request->tag)){
 				$sourece_array[] =1;
@@ -727,7 +727,7 @@ class IndexController extends Controller {
 		}
   	    $combo_tag = Video_tag::where('main_tag','!=',1)->whereNotIn('id',$secondary_tag)->get();	
 		$tag = $request->tag;
-		 $video = Video::select('*')->whereHas('tagRelations', function($q) use ($tag){
+		 $video = Video::select('*')->where('video_lang',$webLangIndex)->whereHas('tagRelations', function($q) use ($tag){
    						 $q->whereIn('tag_id',$tag);
 		})->orWhere(function ($query) use ($sourece_array) {
 			$query->whereIn('cate_id',$sourece_array);

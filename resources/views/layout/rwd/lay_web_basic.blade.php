@@ -16,8 +16,7 @@
 <link href="/css/ranking-list.css" rel="stylesheet" type="text/css">
 <link href="/css/female-list.css" rel="stylesheet" type="text/css">
 <link href="/css/female-detail.css" rel="stylesheet" type="text/css">
-<script src="js/main.js"></script>
-<script src="js/select.js"></script>
+
 <link href="/css/list.css" rel="stylesheet" type="text/css">
 <link href="/css/videojs-contrib-ads.css" rel="stylesheet">
 <link rel="stylesheet" href="/css/category-list.css">
@@ -55,7 +54,7 @@ import videojsPreviewThumbnails from 'https://cdn.skypack.dev/videojs-preview-th
 <script type="text/javascript" src="/js/jquery.visible.js"></script>
 <script src="/js/popper.min.js"></script>
 <!-- <script src="/js/bootstrap-4.0.0.js"></script> -->
-<script src="/js/main.js"></script>
+<!-- <script src="/js/main.js"></script> -->
 <script src="/js/select.js"></script>
 <script>
 	$(function(){

@@ -19,7 +19,7 @@
 
 <div class="container">
 	<div class="container__header">{{__('ui.Category_Search')}}</div>
-	<div class="category category--open">
+	<div class="category ">
 	  <div class="category__title">{{__('ui.tag.Source')}}</div>
 	  <ul id='category_source' class="category__tags">
 		<li name="all" class="category__tags-item category__tags-item--active"><a href="#">ALL</a></li>
@@ -28,10 +28,10 @@
 		<li name="uncensored"  class="category__tags-item category__tags-item--active "> <a href="#">{{__('ui.title.uncensored')}}</a> </li>
 		<li name="FC2" class="category__tags-item category__tags-item--active"><a href="#">{{__('ui.title.amateur')}}</a></li>
 	  </ul>
-	  <div class="category__more category_source_more" style="display: none;"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow active"></i></a></div>
+	  <div class=" category_more category_source_more" ><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow"></i></a></div>
 	</div>
 
-	<div class="category category--open">
+	<div class="category">
 	  <div class="category__title">{{__('ui.tag.Form')}}</div>
 	  <ul id="category_form" class="category__tags">
 		<li name="217" class="category__tags-item"><a href="#">{{__('ui.tag.HiDef')}}</a></li>
@@ -39,10 +39,10 @@
 		<li name="112" class="category__tags-item"><a href="#">{{__('ui.tag.Featured_Actress')}}</a></li>
 		<li name="211" class="category__tags-item"><a href="#">{{__('ui.tag.Debut')}}</a></li>
 	  </ul> 
-	  <div class="category__more category_form_more" style="display: none;"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow active"></i></a></div>
+	  <div class="category_more"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow "></i></a></div>
 	</div>
 
-	<div class="category category--open">
+	<div class="category">
 	  <div class="category__title">{{__('ui.tag.Role')}}</div>
 	  <ul  id="category_role"  class="category__tags">
 		<li name="2" class="category__tags-item"><a href="#">{{__('ui.tag.Beautiful_Girl')}}</a></li>
@@ -56,10 +56,10 @@
 		<!-- <li name="vr" class="category__tags-item"><a href="#">OL</a></li> -->
 		<li name="14" class="category__tags-item"><a href="#">{{__('ui.tag.Female_Teacher')}}</a></li>
 	  </ul>
-	  <div class="category__more category_role_more" style="display: none;"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow active"></i></a></div>
+	  <div class=" category_more "><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow "></i></a></div>
 	</div>
 
-	<div class="category category--open">
+	<div class="category">
 	  <div class="category__title">{{__('ui.tag.figure')}}</div>
 	  <ul   id="category_figure" class="category__tags">
 		<li name="51" class="category__tags-item"><a href="#">{{__('ui.tag.Beautiful_Tits')}}</a></li>
@@ -74,10 +74,10 @@
 		<li name="137" class="category__tags-item"><a href="#">{{__('ui.tag.Shaved_Pussy')}}</a></li>
 		<li name="95" class="category__tags-item"><a href="#">{{__('ui.tag.Ass_Lover')}}</a></li>
 	  </ul>
-	  <div class="category__more category_figure_more" style="display: none;"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow active"></i></a></div>
+	  <div class=" category_more"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow "></i></a></div>
 	</div>
 
-	<div class="category category--open">
+	<div class="category">
 	  <div class="category__title">{{__('ui.tag.playing')}}</div>
 	  <ul id="category_play" class="category__tags">
 		<li name="203" class="category__tags-item"><a href="#">{{__('ui.tag.Titty_Fuck')}}</a></li>
@@ -91,10 +91,10 @@
 		<li name="175" class="category__tags-item"><a href="#">{{__('ui.tag.Handjob')}}</a></li>
 		<li name="197" class="category__tags-item"><a href="#">{{__('ui.tag.Squirting')}}</a></li>
 	  </ul>
-	  <div class="category__more category_play_more" style="display: none;"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow"></i></a></div>
+	  <div class=" category_more"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow "></i></a></div>
 	</div>
 
-	<div class="category category--open">
+	<div class="category">
 		<div class="category__title">{{__('ui.tag.Clothing')}}</div>
 	  <ul id="category_clothing" class="category__tags">
 		<li name="103" class="category__tags-item"><a href="#">{{__('ui.tag.Cosplay')}}</a></li>
@@ -106,18 +106,18 @@
 		<li name="88" class="category__tags-item"><a href="#">{{__('ui.tag.Swimsuits')}}</a></li>
 		<li name="59" class="category__tags-item"><a href="javascript:void(0);">{{__('ui.tag.Glasses')}}</a></li>
 	  </ul>
-	  <div class="category__more category_clothing_more" style="display: none;"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow"></i></a></div>
+	  <div class="category_more"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow "></i></a></div>
 	</div>
-	<div id ="custom" class="category category--open" style='display: none;'>
+	<!-- <div id ="custom" class="category category--open" style='display: none;'>
 		<div class="category__title">{{__('ui.tag.Custom')}}</div>
 			<ul id="category_clothing" class="category__tags">
 			</ul>
 	  	<div class="category__more category_clothing_more" style="display: none;"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow"></i></a></div>
-	</div>
+	</div> -->
 	<div id ="customCombo" class="category category--open">
 		<div class="category__title">{{__('ui.tag.Custom')}}</div>
 		  <span class="example" style="width: 300px;"></span>
-	  	<div class="category__more category_clothing_more" style="display: none;"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow"></i></a></div>
+	  	<!-- <div class="category_more"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow"></i></a></div> -->
 	</div>
 	<div class="list" style=" display: inline;">
 		<div class="list__wrap" style="width: 100%;"> 
@@ -139,42 +139,42 @@
 </script>
 <script>
 	var arr =[]
+	var instance ;
+	var page = 1 ;
 	function sendAjax(tag,page){
-
+		this.page = page; 
+		if(page == 1 ){
+			$("#video_list").empty();
+		}
 		$.ajax({
 				type:"POST",
 				url:"/{{$lang}}/category",
 				dataType:"json",
 				data:{tag,page},
 				success:function(result){
-					$("#video_list").empty();
-					console.log(result.secondary_tag)
-					if(result.secondary_tag) {
-						$("#custom").find('ul').empty()
-						$('#custom').hide();
-						if(result.secondary_tag.length !=0){
-							$('#custom').show();
-						}
-						result.secondary_tag.forEach(function(item){
-							$('#custom').find('ul').append(`<li style="display:inline-flex; margin-right: 0px;"  name="`+ item.id+`" class="category__tags-item `+ (item.check && 'category__tags-item--active')   +`">
-								<a style="    border-top-right-radius: 0px;border-bottom-right-radius: 0px; padding-right: 0px;" href="javascript:void(0);">`+ item['{{$lang}}']+`
+					
+					// if(result.secondary_tag) {
+					// 	// $("#custom").find('ul').empty()
+					// 	// $('#custom').hide();
+					// 	// if(result.secondary_tag.length !=0){
+					// 	// 	$('#custom').show();
+					// 	// }
+					// 	result.secondary_tag.forEach(function(item){
+					// 		$('#custom').find('ul').append(`<li style="display:inline-flex; margin-right: 0px;"  name="`+ item.id+`" class="category__tags-item `+ (item.check && 'category__tags-item--active')   +`">
+					// 			<a style="    border-top-right-radius: 0px;border-bottom-right-radius: 0px; padding-right: 0px;" href="javascript:void(0);">`+ item['{{$lang}}']+`
 							
-								</a>
-								<div onclick="cancelCustomCate(`+item.id+`)" class="cancel `+ (item.check && 'category__tags-item--active')  +`"><i class="fas fa-times"></i></div>
-								</li>
-								`)
+					// 			</a>
+					// 			<div onclick="cancelCustomCate(`+item.id+`)" class="cancel `+ (item.check && 'category__tags-item--active')  +`"><i class="fas fa-times"></i></div>
+					// 			</li>
+					// 			`)
 						 
  
-						});
+					// 	});
 
-						$('#custom').find('li').each(function(){
-							cate_cilck(this);
-						});
-
-					 
-
-
-					} 
+					// 	$('#custom').find('li').each(function(){
+					// 		cate_cilck(this);
+					// 	});
+					// } 
 					result.video.data.forEach(function(item){
 				 
 						video = `<a href="/{{$lang}}/testview/`+item.video_id+`$`+item.actress+`" class="list__item">
@@ -188,8 +188,8 @@
 					
 						$("#video_list").append(video)
 						var newString = result['pagination'].replace(/href="(.*?)"/ig, "href=\"javascript:void(0)\" onclick=\"tablePagination\(`$1`\)\"");
-                		$('#pagination').html(newString);
-						window.scrollTo({ top: 0, behavior: 'smooth' });
+                		// $('#pagination').html(newString);
+						//window.scrollTo({ top: 0, behavior: 'smooth' });
 						return;
 					});
 				}
@@ -211,9 +211,26 @@
 				arr.push($(this).attr('name'))
 			}
 		});
+		var custom_tag = instance.value()
+		custom_tag.forEach(function(v){
+			arr.push(v)
+		});
 		 sendAjax(arr,page);
 		
 		
+	}
+	function customTag(page = 1) {
+		var arr = []
+		$('.category__tags').find('li').each(function(){
+			if($(this).hasClass('category__tags-item--active')) {
+				arr.push($(this).attr('name'))
+			}
+		});
+		var custom_tag = instance.value()
+		custom_tag.forEach(function(v){
+			arr.push(v)
+		});
+		sendAjax(arr,page);
 	}
 	function getSearchParams(k){
 		var p={};
@@ -221,7 +238,7 @@
 		return k?p[k]:p;
 	}
 	function cancelCustomCate(id){
-			console.log('cancelCustomCate',id)
+		 
 			arr =[];
 			$("li[name="+id+"]").removeClass('category__tags-item--active')
 		 
@@ -232,39 +249,36 @@
 			
 			});
 
-			console.log('aa'+arr)
-			$("#video_list").empty();
+			 
 			$.ajax({
 				type:"POST",
 				url:"/{{$lang}}/category/cancel",
 				dataType:"json",
 				data:{tag:arr,customTag:id,page:1},
-				success:function(result){
-					$("#video_list").empty();
-					console.log(result.secondary_tag)
-					if(result.secondary_tag) {
-						$("#custom").find('ul').empty()
-						$('#custom').hide();
-						if(result.secondary_tag.length !=0){
-							$('#custom').show();
-						}
+				success:function(result){ 
+					// if(result.secondary_tag) {
+					// 	$("#custom").find('ul').empty()
+					// 	$('#custom').hide();
+					// 	if(result.secondary_tag.length !=0){
+					// 		$('#custom').show();
+					// 	}
 					 
-						result.secondary_tag.forEach(function(item){
-							$('#custom').find('ul').append(`<li style="display:inline-flex; margin-right: 0px;"  name="`+ item.id+`" class="category__tags-item `+ (item.check && 'category__tags-item--active')   +`">
-								<a style="    border-top-right-radius: 0px;border-bottom-right-radius: 0px; padding-right: 0px;" href="javascript:void(0);">`+ item.jp+`
-								</a>
-								<div onclick="cancelCustomCate(`+item.id+`)" class="cancel `+ (item.check && 'category__tags-item--active')  +`"><i class="fas fa-times"></i></div>
-								</li>
-								`)
-						});
+					// 	result.secondary_tag.forEach(function(item){
+					// 		$('#custom').find('ul').append(`<li style="display:inline-flex; margin-right: 0px;"  name="`+ item.id+`" class="category__tags-item `+ (item.check && 'category__tags-item--active')   +`">
+					// 			<a style="    border-top-right-radius: 0px;border-bottom-right-radius: 0px; padding-right: 0px;" href="javascript:void(0);">`+ item.jp+`
+					// 			</a>
+					// 			<div onclick="cancelCustomCate(`+item.id+`)" class="cancel `+ (item.check && 'category__tags-item--active')  +`"><i class="fas fa-times"></i></div>
+					// 			</li>
+					// 			`)
+					// 	});
 
-						$('#custom').find('li').each(function(){
-							cate_cilck(this);
-						});
+					// 	$('#custom').find('li').each(function(){
+					// 		cate_cilck(this);
+					// 	});
 
 					 
 
-					} 
+					// } 
 					result.video.data.forEach(function(item){
 						video = `<a href="/{{$lang}}/testview/`+item.video_id+`$`+item.actress+`" class="list__item">
 						<figure><img src="`  +item.cover_img+  `"></figure>
@@ -334,6 +348,10 @@
 				}
 			
 			});
+			var custom_tag = instance.value()
+			custom_tag.forEach(function(v){
+				arr.push(v)
+			});
 			sendAjax(arr,1);
 		});
 		
@@ -341,37 +359,63 @@
 		
 	} 
 
-	function checkMoreBtm(e){
+	function checkMoreBtn(e){
 		var arr = ["source","form","role","figure","play","clothing"];
+		
 		for (let i=0; i<arr.length; i++) {
- 
-			if ($("#category_"+arr[i]).prop('scrollWidth') <= $("#category_"+arr[i]).width() ) {
-			 
-				$(".category_"+arr[i]+"_more").hide()
-			} else {
-				 
-				$(".category_"+arr[i]+"_more").show()
-			}
+			console.log($(".category_"+arr[i]+"_more i").hasClass('active'))
+			
 		}
 	}
 	 
 	$(window).resize(function() {
-		 checkMoreBtm() 
+		checkMoreBtn() 
+	});
+	var currentscrollHeight = 0;
+	$(window).on("scroll", function () {
+		const scrollHeight = $(document).height();
+		const scrollPos = Math.floor($(window).height() + $(window).scrollTop());
+		const isBottom = scrollHeight - 100 < scrollPos;
+
+		if (isBottom && currentscrollHeight < scrollHeight) {
+		 
+			customTag(this.page +1)
+			currentscrollHeight = scrollHeight;
+		}
 	});
 	window.onload = function() {
+		
+
+
+		checkMoreBtn()
+		$('.category_more').on('click', function(e) {
+		e.preventDefault();
+		const $this = $(this);
+		$this.find('.i-arrow').toggleClass('active');
+		$this.parent('.category').toggleClass('category--open');
+		});
 		const a = @json($combo_tag);
+		cate = getSearchParams('cate');
+		let cateArr = []
+		if(cate){
+			cateArr = cate.split(',');
+		}
 		 
-		console.log(a) 
 		let myOptions = []
+		let Selected = []
+	
 		a.map(function(value){
+			if(cateArr.indexOf(''+value.id)>-1 ) {
+				Selected.push(''+value.id)
+			}
 			myOptions.push({
 				label: value[`{{$lang}}`],
 				value: ''+value.id,
 			})
 		})
-		console.log(myOptions) 
-		var instance = new SelectPure(".example", {
-		
+ 
+		instance = new SelectPure(".example", {
+			value:Selected,
 			options: myOptions,
 			multiple: true, // default: false
 			autocomplete: true, // default: false
@@ -390,15 +434,16 @@
 			placeholderHidden: "select-pure__placeholder--hidden",
 			optionHidden: "select-pure__option--hidden",
 			},
-			onChange: value => { console.log(value); }
+			onChange: value => { 
+				customTag()
+			}
 		});
      
 		
-		// instance._setValue('NY')
-		// instance._setValue('NC')
-
-		// console.log(console.log(instance.value()) )
+	 
 		cate = getSearchParams('cate');
+
+		
 		findCate = false;
 		arr =[]
 		if(cate){
@@ -413,7 +458,7 @@
 				$("li[name=censored_p]").removeClass('category__tags-item--active')
 				$("li[name=uncensored]").removeClass('category__tags-item--active')
 				$("li[name=FC2]").removeClass('category__tags-item--active')
-					arr.push(value)
+				arr.push(value)
 			});
 
 		
@@ -426,8 +471,6 @@
 		});
 
 		sendAjax(arr,1);
-		checkMoreBtm() 
-		
 		$('.category').find('li').each(function(){
 			$(this).find('a').attr("href","javascript:void(0);");
 			cate_cilck(this);
