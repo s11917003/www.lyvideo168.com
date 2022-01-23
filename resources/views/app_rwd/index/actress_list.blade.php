@@ -89,7 +89,7 @@
 		const isBottom = scrollHeight - 100 < scrollPos;
 
 		if (isBottom && currentscrollHeight < scrollHeight) {
-			console.log('isBottom')
+		 
 			sendAjax(this.page +1);	
 			// customTag(this.page +1)
 			currentscrollHeight = scrollHeight;

@@ -130,7 +130,7 @@
 				dataType:"json",
 				data:{category,page},
 				success:function(result){
-						console.log(result)	
+					 
 						if(result.status =true){
 							result.video.data.forEach(function(item){
 								video = `<a href="/{{$lang}}/testview/`+item.video_id+`$`+item.actress+`" class="list__item">
