@@ -299,7 +299,7 @@ main { max-width: 1300px; margin: 0 auto; padding: 8.125rem 1rem 0 1rem; }
 
 @media (max-width: 1024px) { .artist__content figure { width: 390px; } }
 
-.artist__content-info { flex: 1 1 auto; margin-bottom: 24px; margin-left: 1rem; }
+.artist__content-info { flex: 1 1 auto; margin-bottom: 36px; margin-left: 3rem; margin-top: 1rem; }
 
 .artist__content-name { margin-bottom: 8px; font-size: 26px; font-weight: bold; letter-spacing: 2px; }
 

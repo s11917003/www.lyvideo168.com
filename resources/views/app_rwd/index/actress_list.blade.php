@@ -18,7 +18,6 @@
 	<div class="famale">
 		
 		<div class="female-list">	 
-
 		</div>
 	</div>
 </div>
@@ -34,7 +33,9 @@
  
 <script>
 	var arr =[]
+	var page =1
 	function sendAjax(page){
+		this.page = page
 		$.ajax({
 				headers: {'X-CSRF-TOKEN': "{{ csrf_token() }}"},
 				type:"POST",
@@ -42,7 +43,7 @@
 				dataType:"json",
 				data:{page},
 				success:function(result){
-					$(".female-list").empty();
+					// $(".female-list").empty();
 					if(result.video_actress){
 					
 						result.video_actress.data.forEach(function(item){
@@ -52,17 +53,17 @@
 						} else {
 							name = item.JapaneseName1
 						}
-					video =	`<a href="/{{$lang}}/actress/`+item.id+`"   class="female-list__item">
-						<figure><img src="/img/Pictures/`+item.JapaneseName1+`_coverphoto.jpg"></figure>
-						<div class="female-list__item-info-info">
-						<h5>`+name+`</h5>
-						<div class="show">{{__('ui.Starring')}}：`+item.actress_relations_count+`</div>
-						</div>
-						</a>`;
+						video =	`<a href="/{{$lang}}/actress/`+item.id+`"   class="female-list__item">
+							<figure><img src="/img/Pictures/`+item.JapaneseName1+`_coverphoto.jpg"></figure>
+							<div class="female-list__item-info-info">
+							<h5>`+name+`</h5>
+							<div class="show">{{__('ui.Starring')}}：`+item.actress_relations_count+`</div>
+							</div>
+							</a>`;
 						
 							$(".female-list").append(video)
-							var newString = result['pagination'].replace(/href="(.*?)"/ig, "href=\"javascript:void(0)\" onclick=\"tablePagination\(`$1`\)\"");
-							$('#pagination').html(newString);
+							// var newString = result['pagination'].replace(/href="(.*?)"/ig, "href=\"javascript:void(0)\" onclick=\"tablePagination\(`$1`\)\"");
+							// $('#pagination').html(newString);
 							//window.scrollTo({ top: 0, behavior: 'smooth' });
 							return;
 						});
@@ -81,7 +82,19 @@
 		}
 		sendAjax(page);	
 	}
+	var currentscrollHeight = 0;
+	$(window).on("scroll", function () {
+		const scrollHeight = $(document).height();
+		const scrollPos = Math.floor($(window).height() + $(window).scrollTop());
+		const isBottom = scrollHeight - 100 < scrollPos;
 
+		if (isBottom && currentscrollHeight < scrollHeight) {
+			console.log('isBottom')
+			sendAjax(this.page +1);	
+			// customTag(this.page +1)
+			currentscrollHeight = scrollHeight;
+		}
+	});
 	window.onload = function() {	
 		sendAjax(1);
 	}

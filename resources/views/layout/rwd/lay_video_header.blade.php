@@ -43,18 +43,21 @@
 			<li class="lang" data-title="選擇語言">
 			  <!-- bind select.js -->
 			  <div id="lang">
-				<label for=""><img src="/svg/tw.svg" alt="">
+			 
 					@if (App::isLocale('en'))
+					<label for=""><img src="/svg/en.svg" alt="">
 					<span>{{__('ui.en')}}</span>
 					@elseif (App::isLocale('jp'))
+					<label for=""><img src="/svg/jp.svg" alt="">
 					<span>{{__('ui.jp')}}</span>
 					@elseif (App::isLocale('zh'))
+					<label for=""><img src="/svg/tw.svg" alt="">
 					<span>{{__('ui.tw')}}</span>
 					@endif
 				 
 				</span></label>
 				<ul>
-				  <li data-val="tw">
+				  <li data-val="zh">
 					<img src="/svg/tw.svg" alt=""><span>{{__('ui.tw')}}</span>
 				  </li>
 				  <li data-val="en">
@@ -196,21 +199,20 @@
 	$('#lang ul li').click(function(){
 		$('#lang label span').text($(this).find('span').text())
 		$('#lang label img').attr('src',  $(this).find('img').attr('src')   )
-
-		console.log($(this).attr('data-val'))
-		// return;
 		$.ajax({
 			headers: {'X-CSRF-TOKEN': "{{ csrf_token() }}"},
 			data : {
 				_token: "{{ csrf_token() }}",
 				lang:$(this).attr('data-val'),
-
 			},
 			type:"POST",
 			url:"/language",
 			dataType:"json",
 			success:function(result){
-				if(result){
+				if(result.status){
+					address = location.href
+					location.assign(address.replace(`/{{$lang}}/`, `/`+result.lang+`/`));
+					return
 					location.reload();
 				}
 			}

@@ -2941,6 +2941,16 @@ label {
     display: inline-block;
     margin-right: 8px;
 }
+.artist__content-about {
+	padding-top: 10px;
+}
+@media screen and (min-width:480px) {
+	.artist {
+		padding-left: 20px;
+	}
+
+
+}
 
 @media screen and (max-width:480px) {
 	.movie-gallery-wrapper a {

@@ -1043,7 +1043,7 @@ class IndexController extends Controller {
     }
 	public function actressList(Request $request) {
 	 
-		$video_actress = Video_actress::withCount(['actressRelations','wiki'])->Paginate(96);// 女優table;
+		$video_actress = Video_actress::withCount(['actressRelations','wiki'])->Paginate(24);// 女優table;
 	 
 		return  response()->json(['video_actress' =>$video_actress,  'pagination' => (string)$video_actress->links("pagination::bootstrap-4") ]);
     }
@@ -1059,11 +1059,10 @@ class IndexController extends Controller {
 			return ;
 		}
 		
-		$video  = Video_actress_relations::where('actress_id',$id);
-		$videoIds= $video->pluck('video_id')->toArray();//所有ID
-		$videos_relation = Video::select('id','video_id')->whereIn('id', $videoIds)->with('tagRelations')->get();//video table;
+		$videoIds  = Video_actress_relations::where('actress_id',$id)->pluck('video_id')->toArray();
+		$videos_relation = Video::where('video_lang',$webLangIndex)->whereIn('id', $videoIds)->with('tagRelations')->get();//video table;
 		$tagObj = [];
-		//計算相關的標籤以及數量
+	  	//計算相關的標籤以及數量
 	    $size = count($videos_relation); 
         for ($i=0; $i < $size; $i++) {
 		    $data = $videos_relation[$i]['tagRelations'];
@@ -1080,9 +1079,8 @@ class IndexController extends Controller {
 	  	foreach ($video_tag  as $tag) {
 		    $tag['count'] = $tagObj[$tag->id];
 		}
- 
 		return  view('app_rwd.index.actress',[
-		    '$video_tag' => $video_tag,
+		    'video_tag' => $video_tag,
 			'actress'=>$actress,
 			'count'=>count($videoIds),
 			'videos_relation' => $videos_relation,//相關女優
@@ -1453,12 +1451,12 @@ class IndexController extends Controller {
 
 	public function lang(Request $request)
     {
-        if($request->lang == 'en' || $request->lang == 'tw'|| $request->lang == 'jp'){
+        if($request->lang == 'en' || $request->lang == 'zh'|| $request->lang == 'jp'){
             Session::put('locale', $request->lang);
             App::setLocale($request->lang);
-            return json_encode(true);
+            return response()->json(['status' => true, 'lang' => $request->lang]);
         }
-		return json_encode(false);
+		return  response()->json(['status' => false]);
     }
 	
 }
