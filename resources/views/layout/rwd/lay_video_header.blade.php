@@ -148,7 +148,7 @@
 	  </div>
 	  
 	  </nav>
-	  <div class="search" >
+	  <div class="search" id="search">
 		<div class="search__content">
 		@if(Route::currentRouteName()  == 'search')
 		<input type="search" value='{{$search}}'>
@@ -180,7 +180,7 @@
 	});
 
 	$('.search__btn').click(function(){
-		window.location = '/{{$lang}}/search/'+	$('.search__content input').val()+'/1';
+		window.location = '/{{$lang}}/search/'+	$('.search__content input').val();
 	});
 
 	$('#search').click(function(){
@@ -190,7 +190,18 @@
 	$('#setting').click(function(){
 		$('.setting ').toggleClass('active')
 	});
+	$('.hamburger').on('click', function () {
+		$('html,body,.hamburger, nav').toggleClass('active');
 
+		if ($('.setting, .search').hasClass('active')) {
+		$('.setting, .search').removeClass('active');
+		}
+	}); // toggle setting in mobile
+
+	$('#setting').on('click', function () {
+		$('.setting').toggleClass('active');
+		$('.search').removeClass('active');
+	}); // toggle search in mobile
 	$('#lang').click(function(){
 		$('#lang label').toggleClass('active')
 		$('#lang ul').toggle() 
@@ -238,7 +249,10 @@
 		}
 	}
 	});
-
+	$('#search').on('click', function () {
+		$('.search').toggleClass('active');
+		$('.setting').removeClass('active');
+  	});
 	// more
 	const $topicCont = $('.topic__about p');
 	const $topicContMore = $('.topic__about-more');

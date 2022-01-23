@@ -1426,10 +1426,13 @@ ul.pagination li a {
 }
 	
 
-
+.pagination ul > li  {
+	border: none;
+}
 .page-link {
 	color:#b5b9bd; ;
 	background-color: #b5b9bd;
+	font-size: 12px;
 }
 ul.pagination li a.active {
     background-color:#F8730C;
@@ -2936,10 +2939,18 @@ label {
     background: var(--tags-background);
     border-radius: 4px;
 }
-
+.container {
+	min-height: 500px;
+}
 .category_more span {
     display: inline-block;
     margin-right: 8px;
+}
+ 
+.ranking__title a {
+	position: absolute;
+	right: 40px;
+	font-size: 1.5rem;
 }
 .artist__content-about {
 	padding-top: 10px;

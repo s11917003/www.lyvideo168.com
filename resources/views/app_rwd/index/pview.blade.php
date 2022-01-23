@@ -280,7 +280,7 @@
 									<td class="" colspan>
 										@if(!is_null($video->actressData))
 										@foreach ($video->actressData as $data )
-												<a href='/actress/{{ $data["id"]}}'  >{{ $data['name'] }}</a>
+												<a href='/{{$lang}}/actress/{{ $data["id"]}}'  >{{ $data['name'] }}</a>
 										@endforeach	
 										@endif
 									
@@ -311,14 +311,20 @@
 								</tr>
 								<tr>
 								<td><h1>{{__('ui.video_view.Director')}}</h1></td>
-								<td>{{ $video->director }}</td>
+								<td>
+									@if ( $video->director)
+									 <a href="/{{$lang}}/director/{{$video->director}}" class="  m-2 pl-2 ml-1" >{{ $video->director }} </a>
+								 	@endif 
+								</td>
 								</tr>
 								<tr>
 								<td><h1>{{__('ui.video_view.Studio')}}</h1></td>
-								<td><img src="{{ asset('/storage/thumbnail_img/1havd00998/1havd00998$二宮和香&黒崎さく$1.jpg') }}" ></td>
+								<td>@if ( $video->studio)
+									<a href="/{{$lang}}/studio/{{$video->studio}}" class="  m-2 pl-2 ml-1" >{{ $video->studio }} </a>
+									@endif </td>
 								</tr>
 								
-<!-- 								
+<!-- 								<img src="{{ asset('/storage/thumbnail_img/1havd00998/1havd00998$二宮和香&黒崎さく$1.jpg') }}" >
 								<tr>
 								<td>Genre</td>
 								<td class="list-genre">
@@ -345,10 +351,10 @@
 									</td>
 								</tr>
 								@endif
-								<tr >
+								<tr>
 									<td colspan =2>
 										<div class='playBtn' >
-											<a id = 'goToURL'  href="{{ url($url) }}">
+											<a  href="javascript:void(0)" onClick="gotoURL()">
 												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.98 31.98">
 												<g>
 													<circle class="i_played1" cx="15.99" cy="15.99" r="15.99"></circle>
@@ -394,13 +400,7 @@
 		
 			<div class="col-md-12 layout-left-big">
 				<div class="row">
-				 
-				 
 				@if ($video->thumbnail_img_router)	
-
-		 
-
-
 				<div class="col-md-12">
 					<div class="detail-wrapper player-detail">
 						<div class="clearfix"></div>
@@ -471,7 +471,6 @@
 													>
 							
 								<div class='videoTitle'>{{$video_actress->title}}</div>
-							
 								<p class='videoInfo'>【{{$video_actress->dvd_id}}】</p>
 								<p class='videoInfo'>{{$video_actress->release_date}}</p> 
 						</div>
@@ -549,6 +548,11 @@
 		$('#videocoverad').hide()
 		
 	})
+
+	function gotoURL() {
+		location.assign(`{{$url}}`);
+ 
+	}
 	$.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

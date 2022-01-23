@@ -64,13 +64,15 @@ Route::get('rd/genacc', 'Rd\RdController@genacc');
 	Route::post('/{lang}/actress_list', 'Index\IndexController@actressList');  //女優清單
 	Route::get('/{lang}/actress/{id}', 'Index\IndexController@actressPage');  //女優主頁面
 
-	Route::get('/{lang}/search/{search}/{page?}/', 'Index\IndexController@search')->where('page', '[0-9]+')->name('search');   //搜尋
+	Route::get('/{lang}/search/{search}/', 'Index\IndexController@search')->where('page', '[0-9]+')->name('search');   //搜尋
 	Route::post('/{lang}/search', 'Index\IndexController@searchVideo');  //搜尋
 	Route::get('/{lang}/rank/{type}', 'Index\IndexController@rankPage');
 	Route::get('/{lang}/rank-list/{cate}', 'Index\IndexController@rankListPage')->name('rank-list');
 	Route::get('/{lang}/all/{cate}', 'Index\IndexController@all')->name('all');    //分類大項
 	Route::post('/{lang}/all', 'Index\IndexController@allList');    //分類大項
 
+	Route::get('/{lang}/director/{search}/', 'Index\IndexController@searchDirector');  //搜尋
+	Route::get('/{lang}/studio/{search}/', 'Index\IndexController@searchStudio');  //搜尋
 	// Route::get('/tag/{id}/{page?}', 'Index\IndexController@tag')->where('id', '[0-9]+');
 
 	Route::post('/language', 'Index\IndexController@lang')->name('lang');//切換語系

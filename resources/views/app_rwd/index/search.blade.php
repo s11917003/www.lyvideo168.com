@@ -22,7 +22,7 @@
 		  <li class="search-result__board-item"><a href="#">照相關度排列</a></li>
 		  <li class="search-result__board-item search-result__board-item--active"> <a href="#">照發行日期排列</a> </li>
 		</ul> -->
-		<div class="list">
+		<div class="list" style="width: 100%;">
 			<div class="list__wrap" style="width: 100%;"> 
 			  <div  id="video_list"  class="list">
 				 

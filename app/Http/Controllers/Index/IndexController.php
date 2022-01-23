@@ -996,13 +996,45 @@ class IndexController extends Controller {
 
     }
 
-	public function search( $lang,$search ='',$page = 1){
+	public function search( $lang,$search =''){
 		if( !in_array($lang,['zh','en','jp'])){
+			abort(404);
+		}
+		if($search ==''){
 			abort(404);
 		}
 		$webLangIndex = $this->language[$lang];
 		return view('app_rwd.index.search',['search'=>$search,'lang'=>$lang]);
 	}
+	public function searchDirector( $lang,$search =''){
+	
+		if( !in_array($lang,['zh','en','jp'])){
+			abort(404);
+		}
+		if($search ==''){
+			abort(404);
+		}
+		$webLangIndex = $this->language[$lang];
+		$videos = Video::where('video_lang',$webLangIndex)->where('director', $search)->get();//video table;
+		return view('app_rwd.index.search_director',['videos' => $videos,'search'=>$search,'lang'=>$lang]);
+	}
+	public function searchStudio( $lang,$search =''){
+	
+		if( !in_array($lang,['zh','en','jp'])){
+			abort(404);
+		}
+		if($search ==''){
+			abort(404);
+		}
+
+		$webLangIndex = $this->language[$lang];
+		DB::enableQueryLog();
+		$videos = Video::where('video_lang',$webLangIndex)->where('studio', $search)->get();//video table;
+		var_dump( DB::getQueryLog());
+		 
+		return view('app_rwd.index.search_director',['videos' => $videos,'search'=>$search,'lang'=>$lang]);
+	}
+	
 
     public function searchVideo(Request $request, $lang){  //修改
 		if( !in_array($lang,['zh','en','jp'])){
@@ -1023,14 +1055,16 @@ class IndexController extends Controller {
 		->orWhere('JapaneseName7', 'like', '%'.strtoupper($search).'%')
 		->orWhere('JapaneseName8', 'like', '%'.strtoupper($search).'%')
 		->pluck('id')->toArray();//找女優 對應表
-		// var_dump( DB::getQueryLog());
-		$videoIDs =Video_actress_relations::whereIn('actress_id',$Video_actress_id)->limit(10000)->pluck('id')->toArray();// 女優table;
 
+	
+		// var_dump( DB::getQueryLog());
+		$videoIDs =Video_actress_relations::whereIn('actress_id',$Video_actress_id)->limit(5000)->pluck('id')->toArray();// 女優table;
+		
 		$videos = Video::where('video_lang',$webLangIndex)->where(function($query) use ($videoIDs,$search) {
 			$query->whereIn('id', $videoIDs)
 				  ->orWhere('title', 'like', '%'.strtoupper($search).'%');
 		})->Paginate(48);//  video table;
-		
+		 
 	 	return  response()->json(['video' =>$videos,  'pagination' => (string)$videos->links("pagination::bootstrap-4"), ]);
     }
 	public function actress($lang) {
@@ -1053,12 +1087,13 @@ class IndexController extends Controller {
 		}	
 		$webLangIndex = $this->language[$lang];
 		$actress = Video_actress::where('id',$id)->with('wiki')->first();// 女優table;
-		if(!$actress) {
+		return redirect('/'.$lang.'/home'); 
+		if(!$actress || !$actress->wiki) {
 			//abort(404);
 			header("Location:/");
 			return ;
 		}
-		
+		return 1;
 		$videoIds  = Video_actress_relations::where('actress_id',$id)->pluck('video_id')->toArray();
 		$videos_relation = Video::where('video_lang',$webLangIndex)->whereIn('id', $videoIds)->with('tagRelations')->get();//video table;
 		$tagObj = [];
@@ -1094,11 +1129,13 @@ class IndexController extends Controller {
 			abort(404);
 		}
 		$webLangIndex = $this->language[$lang];
-		$fanza = Video_rank::where('video_source','fanza')->where('type',$type)->where('video_lang',$webLangIndex)->with('video')->orderBy('rank')->limit(9)->get();
+		$fanza = Video_rank::where('video_source','fanza')->where('type',$type)->where('video_lang',$webLangIndex)->whereHas('video', function ($query)  use ($webLangIndex){
+			$query->where('video_lang', '=', $webLangIndex );
+	   })->orderBy('rank')->limit(9)->get();
 		$prestige = Video_rank::where('video_source','mgstage')->where('type',$type)->where('video_lang',$webLangIndex)->with('video')->orderBy('rank')->limit(9)->get();
 		$uncensored = Video_rank::where('video_source','uncensored')->where('type',$type)->where('video_lang',$webLangIndex)->with('video')->orderBy('rank')->limit(9)->get();
 		$amateur = Video_rank::where('video_source','amateur')->where('type',$type)->where('video_lang',$webLangIndex)->with('video')->orderBy('rank')->limit(9)->get();
-		
+		 
 		return view('app_rwd.index.rank',['type'=> $type ,
 		'fanza'=>$fanza,
 		'prestige'=>$prestige,

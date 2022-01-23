@@ -123,7 +123,7 @@
 					alert("请输入搜寻内容");
 					return;
 				}
-				location.replace("/search/"+encodeURI(text)+"/1");
+				location.replace("/search/"+encodeURI(text));
 			})	
 
 		 
