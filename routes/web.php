@@ -53,7 +53,7 @@ Route::get('rd/genacc', 'Rd\RdController@genacc');
 	// Route::post('thumbsdown', 'Index\IndexController@thumbsdown');
 	Route::post('/{lang}/popular', 'Index\IndexController@popular');  //取消自定分類
 	Route::get('/{img}.jpg', 'Index\IndexController@image');    //圖片
-	Route::get('{lang}/testview/{id}', 'Index\IndexController@postview1');  //文章
+	Route::get('{lang}/video/{id}', 'Index\IndexController@postview1');  //文章
 	Route::get('/', 'Index\IndexController@home_index');  //HOME
 	Route::get('/{lang}/home', 'Index\IndexController@index');  //HOME
 	Route::get('/{lang}/category', 'Index\IndexController@category');  //文章
@@ -71,10 +71,10 @@ Route::get('rd/genacc', 'Rd\RdController@genacc');
 	Route::get('/{lang}/all/{cate}', 'Index\IndexController@all')->name('all');    //分類大項
 	Route::post('/{lang}/all', 'Index\IndexController@allList');    //分類大項
 
-	Route::get('/{lang}/director/{search}/', 'Index\IndexController@searchDirector');  //搜尋
-	Route::get('/{lang}/studio/{search}/', 'Index\IndexController@searchStudio');  //搜尋
-	// Route::get('/tag/{id}/{page?}', 'Index\IndexController@tag')->where('id', '[0-9]+');
-
+	Route::get('/{lang}/director', 'Index\IndexController@searchDirector');  //搜尋
+	Route::get('/{lang}/studio', 'Index\IndexController@searchStudio');  //搜尋
+	Route::get('/{lang}/label', 'Index\IndexController@searchLabel');  //搜尋
+	Route::get('/{lang}/series', 'Index\IndexController@searchSeries');  //搜尋
 	Route::post('/language', 'Index\IndexController@lang')->name('lang');//切換語系
 });
 //發文頁面

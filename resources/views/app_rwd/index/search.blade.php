@@ -52,7 +52,7 @@
 				success:function(result){
 					$("#video_list").empty();
 					result.video.data.forEach(function(item){
-						video = `<a href="/{{$lang}}/testview/`+item.video_id+`$`+item.actress+`" class="list__item">
+						video = `<a href="/{{$lang}}/video/`+item.video_id+`$`+item.actress+`" class="list__item">
 						<figure><img src="`  +item.cover_img+  `"></figure>
 						<div class="list__item-info">
 						<h5>`  +item.video_id+  `</h5>

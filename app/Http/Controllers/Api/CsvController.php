@@ -25,51 +25,52 @@ class CsvController extends Controller {
 		$fileName = "main.xlsx";
 		$rankfileName = "rank.xlsx";
 		$filePath = "../storage/";
-
+        $updateDataCount = [];
 		//分類 1 中文 2英文 3日本
 		//分類  1有碼(FANZA) 2 有碼(Prestige) 3無碼  4素人
 		//tag欄位  
 		//路徑
 		//rank => video_source
 		$pathArray = [
-			// '1' => ['2','1','en','en/censored/fanza/','fanza'],
-			// '2' => ['1','1','zh','zh/censored/fanza/','fanza'],
-			// '3' => ['3','1','jp@jp2@jp3','jp/censored/fanza/','fanza'],
+			'1' => ['2','1','en','en/censored/fanza/','fanza'],
+			'2' => ['1','1','zh','zh/censored/fanza/','fanza'],
+			'3' => ['3','1','jp@jp2@jp3','jp/censored/fanza/','fanza'],
 
-			// '4' => ['3','3','jp@jp2@jp3','jp/uncensored/1/','uncensored'],
-			// '5' => ['3','3','jp@jp2@jp3','jp/uncensored/2/','uncensored'],
-			// '6' => ['3','3','jp@jp2@jp3','jp/uncensored/3/','uncensored'],
-			// '7' => ['3','3','jp@jp2@jp3','jp/uncensored/4/','uncensored'],
-			// '8' => ['3','3','jp@jp2@jp3','jp/uncensored/5/','uncensored'],
+			'4' => ['3','3','jp@jp2@jp3','jp/uncensored/1/','uncensored'],
+			'5' => ['3','3','jp@jp2@jp3','jp/uncensored/2/','uncensored'],
+			'6' => ['3','3','jp@jp2@jp3','jp/uncensored/3/','uncensored'],
+			'7' => ['3','3','jp@jp2@jp3','jp/uncensored/4/','uncensored'],
+			'8' => ['3','3','jp@jp2@jp3','jp/uncensored/5/','uncensored'],
 
-			// '9' => ['2','3','en','en/uncensored/1/','uncensored'],
-			// '10' => ['2','3','en','en/uncensored/2/','uncensored'],
-			// '11' => ['2','3','en','en/uncensored/3/','uncensored'],
-			// '12' => ['2','3','en','en/uncensored/4/','uncensored'],
-			// '13' => ['2','3','en','en/uncensored/5/','uncensored'],
-		 	// '14' => ['3','2','jp@jp2@jp3','jp/censored/mgstage/','mgstage'],
-			'15' => ['3','4','jp@jp2@jp3','jp/amateur/','amateur'],
+			'9' => ['2','3','en','en/uncensored/1/','uncensored'],
+			'10' => ['2','3','en','en/uncensored/2/','uncensored'],
+			'11' => ['2','3','en','en/uncensored/3/','uncensored'],
+			'12' => ['2','3','en','en/uncensored/4/','uncensored'],
+			'13' => ['2','3','en','en/uncensored/5/','uncensored'],
+		 	'14' => ['3','2','jp@jp2@jp3','jp/censored/mgstage/','mgstage'],
+ 			'15' => ['3','4','jp@jp2@jp3','jp/amateur/','amateur'],
 		];
 	
 		$uncensored_code_arr = [290,6,18,292,320];
 	
 		$data = [];	
 		$tagData = [];
-		foreach ($pathArray as $pathIdx => $_item) {
+		foreach ($pathArray as $pathIdx => $_item) { //開啟資料夾
 			$fp = @fopen($filePath.$_item[3].$fileName, "r");
 		
 		//有找到檔案
 		if($fp) {
 			$collection = (new FastExcel)->import($filePath.$_item[3].$fileName);
+			//處理未碼的檔案 JP EN
 			$uncensored_code = 0;
 			$pathindex =  intval($pathIdx);
 			if($pathindex>=4 && $pathindex<=13){
 				$uncensored_code  = $uncensored_code_arr[($pathindex - 4) % 5];
 			}
- 
-			foreach ($collection as $index => $item) {
+			//處理未碼的檔案 JP EN
+			foreach ($collection as $index => $item) {  //逐筆跑資料
 				if( $index <= 2000000000) {
-					$data[] =  [ 
+					$data =  [ 
 								// 'id' => $video_id + ($index+1),
 								'video_id'=> $item['影片ID'],
 								'video_source'=>  $_item[4],
@@ -90,9 +91,10 @@ class CsvController extends Controller {
 								'series'=>  $item['系列'], 
 								'uncensored_code'=>  $uncensored_code, 
 							];
-						
+							
 						try{
-							$videoExists = Video::where(['video_id'=> $item['影片ID'],'video_lang'=>$_item[0]])->first();
+						    $videoRecord = Video::where(['video_id'=> $item['影片ID'],'video_lang'=>$_item[0]]);
+							$videoExists = $videoRecord->first();
 
 							//該筆不在資料庫了
 							if(!$videoExists) {
@@ -135,8 +137,7 @@ class CsvController extends Controller {
 								}
 								if($newVideoId){ 
 									$actressData = [];
-								
-									$video = Video::where(['video_id'=> $item['影片ID'],'video_lang'=>$_item[0]])->first();
+									$video = $videoRecord;
 									$id = $video->id;
 									$actress = $video->actress;
 									if($video->actress){ 
@@ -165,15 +166,22 @@ class CsvController extends Controller {
 									}
 								}
 									
-							} else { //已存在
-								Video::where(['video_id'=> $item['影片ID'],'video_lang'=>$_item[0]])->update(['uncensored_code'=>  $uncensored_code]);
-
-								
+							} else { //已存在 檢視資料是否有差異 有差異UPDATE
+							    $updateData =[];
+							    foreach ($data as $key => $val) {
+							        if($videoExists[$key] != $val){								
+							            $updateData[$key] = $val;
+							        }
+ 							    }
+ 							    if(count($updateData)>0){ //更新video
+									$updateDataCount[] =$updateData;
+									Video::where(['video_id'=> $item['影片ID'],'video_lang'=>$_item[0]])->update($updateData);
+ 							    }
 							}
 							
 						} catch (\Illuminate\Database\QueryException $ex) {
 							dd($item['影片標題']); 
-							 dd($ex->getMessage()); 
+							dd($ex->getMessage()); 
 						}
 
 				} else {
@@ -182,33 +190,33 @@ class CsvController extends Controller {
 				}
 			}
 			
-			}
-			$fp =null;
-			$randSource = @fopen($filePath.$_item[3].$rankfileName, "r");
-			$data1 =[];
-			if($randSource) {
+		}		
+			// $fp =null;
+			// $randSource = @fopen($filePath.$_item[3].$rankfileName, "r");
+			// $data1 =[];
+			// if($randSource) {
 
-				//$QQsource[] = $filePath.$_item[3].$rankfileName;
-				$collection = (new FastExcel)->import($filePath.$_item[3].$rankfileName);
+			// 	//$QQsource[] = $filePath.$_item[3].$rankfileName;
+			// 	$collection = (new FastExcel)->import($filePath.$_item[3].$rankfileName);
 
 			
-				foreach ($collection as $index => $item) {
-					$data1[] =  [ 
-						// 'id' => $video_id + ($index+1),
-						'video_id'=> $item['影片ID'],
-						'rank'=>$item['名次'],
-						'type'=> $item['排名方式'], 
-						'video_lang'=> $_item[0],
-						'video_source'=> $_item[4],
-					];
+			// 	foreach ($collection as $index => $item) {
+			// 		$data1[] =  [ 
+			// 			// 'id' => $video_id + ($index+1),
+			// 			'video_id'=> $item['影片ID'],
+			// 			'rank'=>$item['名次'],
+			// 			'type'=> $item['排名方式'], 
+			// 			'video_lang'=> $_item[0],
+			// 			'video_source'=> $_item[4],
+			// 		];
 				
 
-				}
-				$QQsource[] = count($data1);
-				if(count($data1)>0)
-					Video_rank::insert($data1);
-			}
-			$randSource =null;
+			// 	}
+			// 	$QQsource[] = count($data1);
+			// 	if(count($data1)>0)
+			// 		Video_rank::insert($data1);
+			// }
+			// $randSource =null;
 
 
 		}
@@ -226,16 +234,14 @@ class CsvController extends Controller {
 				} catch (\Exception $e) {
 					dd($e->getMessage()); 
 				}
-				
-			
 			}
 			
 		}
 		return response()->json([
+		    'updateDataCount' => count($updateDataCount),
 			// '$QQsource' =>$QQsource,
 			'data'=> count($data),
-			'data1'=> count($data1),
-			'tagData'=> count($tagData)
+			//'data1'=> count($data1),		 
 		]);
 	
 	}

@@ -26,7 +26,7 @@
 			<div class="list__wrap" style="width: 100%;"> 
 			  <div  id="video_list"  class="list">
 				@foreach ($videos as $post)
-					<a href="/{{$lang}}/testview/{{$post->video_id}}${{$post->actress}}" class="list__item">
+					<a href="/{{$lang}}/video/{{$post->video_id}}${{$post->actress}}" class="list__item">
 						<figure><img src="{{$post->cover_img}}"></figure>
 						<div class="list__item-info">
 							<h5>{{$post->video_id}}</h5>

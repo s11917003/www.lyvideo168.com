@@ -772,6 +772,8 @@ class IndexController extends Controller {
 		}
 		$webLangIndex = $this->language[$lang];
 		$sourece_array = [];
+		
+	
 		if(in_array("all", $request->tag)){
 			$video = Video::select('*')->where('video_lang',$webLangIndex)->Paginate(36) ;
 			$secondary_tag = \Session::get('secondary_tag');
@@ -798,47 +800,14 @@ class IndexController extends Controller {
 				$sourece_array[] = 4;
 			}
 		}
- 
-		$secondary_tag = \Session::get('secondary_tag');
-	 
-		if($secondary_tag){
-			$secondary_tag  = explode(",", $secondary_tag);
-		} else {
-			$secondary_tag  = [];
-		 
-		}
-       
-		$Video_tag = Video_tag::whereIn('id',$request->tag)->get();
-	
-		foreach ($Video_tag as $tag) {
-			if($tag->main_tag !=1 ){ //自訂
-				 if(!in_array((string)$tag->id,$secondary_tag)){ //未存進SESSIOM
-					array_push($secondary_tag, $tag->id);
-				}
-			}
-	  	}
-
-		$Video_tag_screen = Video_tag::whereIn('id',$secondary_tag)->get();
-		foreach ($Video_tag_screen as $tag) {
-			$tag['check'] = true;
-			if(!in_array((string)$tag->id,$request->tag)){  
-				$tag['check'] = false;
-			 } 
-			 
-	  	}
-		if(count($secondary_tag)>0){
-			\Session::put('secondary_tag', '');
-			\Session::put('secondary_tag', implode(",",$secondary_tag));
-		}
-			
-		$combo_tag = Video_tag::where('main_tag','!=',1)->whereNotIn('id',$secondary_tag)->get();	
 		$tag = $request->tag;
-		 $video = Video::select('*')->where('video_lang',$webLangIndex)->whereHas('tagRelations', function($q) use ($tag){
-   						 $q->whereIn('tag_id',$tag);
-		})->orWhere(function ($query) use ($sourece_array) {
-			$query->whereIn('cate_id',$sourece_array);
+	    $videoIntag =  Video_tag_relations::where('tag_id',$tag)->with('tagName')->limit(7000)->pluck('video_id')->toArray();
+
+		$video = Video::select('*')->where('video_lang',$webLangIndex)->whereIn('id',$videoIntag)->orWhere(function ($query) use ($sourece_array) {
+		$query->whereIn('cate_id',$sourece_array);
 		})->Paginate(36) ;
-		return  response()->json([ 'secondary_tag' => $Video_tag_screen , 'video' =>$video,'combo_tag' =>$combo_tag,  'pagination' => (string)$video->links("pagination::bootstrap-4"), ]);
+	 
+		return  response()->json([ 'video' =>$video,  'pagination' => (string)$video->links("pagination::bootstrap-4"), ]);
 		
 	}
 	//分類
@@ -1006,8 +975,8 @@ class IndexController extends Controller {
 		$webLangIndex = $this->language[$lang];
 		return view('app_rwd.index.search',['search'=>$search,'lang'=>$lang]);
 	}
-	public function searchDirector( $lang,$search =''){
-	
+	public function searchDirector($lang){
+		$search = request()->query('search');
 		if( !in_array($lang,['zh','en','jp'])){
 			abort(404);
 		}
@@ -1018,8 +987,24 @@ class IndexController extends Controller {
 		$videos = Video::where('video_lang',$webLangIndex)->where('director', $search)->get();//video table;
 		return view('app_rwd.index.search_director',['videos' => $videos,'search'=>$search,'lang'=>$lang]);
 	}
-	public function searchStudio( $lang,$search =''){
-	
+	public function searchStudio( $lang){
+		
+		$search = request()->query('search');
+		if( !in_array($lang,['zh','en','jp'])){
+			abort(404);
+		}
+		if($search ==''){
+			abort(404);
+		}
+
+		$webLangIndex = $this->language[$lang];
+		$videos = Video::where('video_lang',$webLangIndex)->where('studio', $search)->get();//video table;
+		var_dump( DB::getQueryLog());
+		 
+		return view('app_rwd.index.search_director',['videos' => $videos,'search'=>$search,'lang'=>$lang]);
+	}
+	public function searchLabel( $lang){
+		$search = request()->query('search');
 		if( !in_array($lang,['zh','en','jp'])){
 			abort(404);
 		}
@@ -1029,9 +1014,22 @@ class IndexController extends Controller {
 
 		$webLangIndex = $this->language[$lang];
 		DB::enableQueryLog();
-		$videos = Video::where('video_lang',$webLangIndex)->where('studio', $search)->get();//video table;
-		var_dump( DB::getQueryLog());
-		 
+		$videos = Video::where('video_lang',$webLangIndex)->where('label', $search)->get();//video table;
+		return var_dump( DB::getQueryLog());
+		return view('app_rwd.index.search_director',['videos' => $videos,'search'=>$search,'lang'=>$lang]);
+	}
+
+	public function searchSeries( $lang){	
+		$search = request()->query('search');
+		if( !in_array($lang,['zh','en','jp'])){
+			abort(404);
+		}
+		if($search ==''){
+			abort(404);
+		}
+
+		$webLangIndex = $this->language[$lang];
+		$videos = Video::where('video_lang',$webLangIndex)->where('series', $search)->get();//video table; 
 		return view('app_rwd.index.search_director',['videos' => $videos,'search'=>$search,'lang'=>$lang]);
 	}
 	
@@ -1076,9 +1074,7 @@ class IndexController extends Controller {
 		return view('app_rwd.index.actress_list',['lang'=>$lang]);
     }
 	public function actressList(Request $request) {
-	 
 		$video_actress = Video_actress::withCount(['actressRelations','wiki'])->Paginate(24);// 女優table;
-	 
 		return  response()->json(['video_actress' =>$video_actress,  'pagination' => (string)$video_actress->links("pagination::bootstrap-4") ]);
     }
 	public function actressPage($lang,Int $id) {
@@ -1087,13 +1083,13 @@ class IndexController extends Controller {
 		}	
 		$webLangIndex = $this->language[$lang];
 		$actress = Video_actress::where('id',$id)->with('wiki')->first();// 女優table;
-		return redirect('/'.$lang.'/home'); 
+		 
 		if(!$actress || !$actress->wiki) {
 			//abort(404);
 			header("Location:/");
 			return ;
 		}
-		return 1;
+		 
 		$videoIds  = Video_actress_relations::where('actress_id',$id)->pluck('video_id')->toArray();
 		$videos_relation = Video::where('video_lang',$webLangIndex)->whereIn('id', $videoIds)->with('tagRelations')->get();//video table;
 		$tagObj = [];
@@ -1153,7 +1149,7 @@ class IndexController extends Controller {
 			abort(404);
 		}
 		$webLangIndex = $this->language[$lang];
-		DB::enableQueryLog(); // Enable query log
+		//DB::enableQueryLog(); // Enable query log
 
   
 		$post = Video_rank::where('video_source',$cate)->where('type',1)->where('video_lang',$webLangIndex)->with('video')->orderBy('rank')->get();

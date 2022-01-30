@@ -313,15 +313,31 @@
 								<td><h1>{{__('ui.video_view.Director')}}</h1></td>
 								<td>
 									@if ( $video->director)
-									 <a href="/{{$lang}}/director/{{$video->director}}" class="  m-2 pl-2 ml-1" >{{ $video->director }} </a>
+									 <a href="/{{$lang}}/director?search={{$video->director}}" class="  m-2 pl-2 ml-1" >{{ $video->director }} </a>
 								 	@endif 
 								</td>
 								</tr>
 								<tr>
 								<td><h1>{{__('ui.video_view.Studio')}}</h1></td>
 								<td>@if ( $video->studio)
-									<a href="/{{$lang}}/studio/{{$video->studio}}" class="  m-2 pl-2 ml-1" >{{ $video->studio }} </a>
+									<a href="/{{$lang}}/studio?search={{$video->studio}}" class="  m-2 pl-2 ml-1" >{{ $video->studio }} </a>
 									@endif </td>
+								</tr>
+								<tr>
+									<td><h1>{{__('ui.video_view.Label')}}</h1></td>
+									<td>
+										@if ( $video->label)
+										 <a href="/{{$lang}}/label?search={{$video->label}}" class="  m-2 pl-2 ml-1" >{{ $video->label }} </a>
+										 @endif 
+									</td>
+								</tr>
+								<tr>
+									<td><h1>{{__('ui.video_view.Series')}}</h1></td>
+									<td>
+										@if ( $video->series)
+										 <a href="/{{$lang}}/series?search={{$video->series}}" class="  m-2 pl-2 ml-1" >{{ $video->series }} </a>
+										 @endif 
+									</td>
 								</tr>
 								
 <!-- 								<img src="{{ asset('/storage/thumbnail_img/1havd00998/1havd00998$二宮和香&黒崎さく$1.jpg') }}" >
@@ -449,7 +465,7 @@
 					<div poster=""   class="adClick video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	
 					style="height:70%;   padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
 				<!-- @endif -->
-						<a href="/{{$lang}}/testview/{{$video_actress->video_id}}${{ $video_actress->actress}}"  target="_blank">
+						<a href="/{{$lang}}/video/{{$video_actress->video_id}}${{ $video_actress->actress}}">
 							<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
 														vertical-align: middle;
 														background-repeat: no-repeat;
@@ -494,7 +510,7 @@
 					style="height:70%;   padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
 				@endif
 		
-					<a href="/{{$lang}}/testview/{{$video_tag->video_id}}${{ $video_tag->actress}}"  target="_blank">
+					<a href="/{{$lang}}/video/{{$video_tag->video_id}}${{ $video_tag->actress}}">
 							<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
 														vertical-align: middle;
 														background-repeat: no-repeat;

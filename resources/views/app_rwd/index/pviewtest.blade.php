@@ -78,7 +78,7 @@
 			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px;">
 				@if ($post->tag)
 					@foreach ($post->tag as $tag)
-					<p><a href="/tag/{{$tag->tagname->id}}" target="_blank" class="rs-digg-box2-tag">{{$tag->tagname->name}}</a></p>
+					<p><a href="/tag/{{$tag->tagname->id}}" class="rs-digg-box2-tag">{{$tag->tagname->name}}</a></p>
 					@endforeach
 				@endif
 			</div>

@@ -31,7 +31,7 @@
 				@foreach ($video as $post)
 				@foreach ($post->video as $video)	
 				@if($video->video_lang == $langIndex)
-					<a href="/{{$lang}}/testview/{{$video->video_id}}${{$video->actress}}"  target="_blank" class="list__item">
+					<a href="/{{$lang}}/video/{{$video->video_id}}${{$video->actress}}"  target="_blank" class="list__item">
 					<p class="list__num">Top {{$post->rank}}.</p>
 					
 				
@@ -55,7 +55,7 @@
 				@foreach ($video1 as $post)	
 				@foreach ($post->video as $video)
 				@if($video->video_lang == $langIndex)
-					<a href="/{{$lang}}/testview/{{$video->video_id}}${{$video->actress}}"  target="_blank" class="list__item">
+					<a href="/{{$lang}}/video/{{$video->video_id}}${{$video->actress}}"  target="_blank" class="list__item">
 					<p class="list__num">Top {{$post->rank}}.</p>
 				
 					
@@ -133,7 +133,7 @@
 					 
 						if(result.status =true){
 							result.video.data.forEach(function(item){
-								video = `<a href="/{{$lang}}/testview/`+item.video_id+`$`+item.actress+`" class="list__item">
+								video = `<a href="/{{$lang}}/video/`+item.video_id+`$`+item.actress+`" class="list__item">
 								<figure><img src="`  +item.cover_img+  `"></figure>
 								<div class="list__item-info">
 								<h5>`  +item.video_id+  `</h5>

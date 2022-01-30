@@ -111,7 +111,7 @@
 					<div style="float: left;padding: 10px; width: 230px; height: 230px; margin: 5px; overflow: hidden">
 						<div poster=""   class="adClick video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	
 						style="height:70%;   padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
-							<a href="/jp/testview/{{$video->video_id}}${{ $video->actress}}"  target="_blank">
+							<a href="/jp/video/{{$video->video_id}}${{ $video->actress}}"  target="_blank">
 								<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
 															vertical-align: middle;
 															background-repeat: no-repeat;

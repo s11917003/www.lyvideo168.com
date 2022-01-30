@@ -46,16 +46,15 @@ echo $actress->JapaneseName1.'：線上免費試看【JavDic  有碼・無碼・
 			<span>Twitter</span></a>
 		  <a class="i-instagram" href="{{$actress->Instagram  }}"><img src="svg/instagram-brands.svg" alt=""><span>Instagram</span></a>
 		</div>
-		<div class="artist__content-about" style="height:100%">
-			<textarea style="min-height: 350px;height:auto;width:100%;border: none;">
-				{{ $actress->wiki->Profile }}</textarea>
+		<div class="artist__content-about" style="height:100%;width:100%;">
+			<textarea >{{trim($actress->wiki->Profile)}}</textarea>
 		</div>
 	  </div>
 	</div>
  
 	<div class="artist__about">
-	  <p class="active">
-		{{ $actress->wiki->Contents }}</p>
+	 <textarea class="" style="min-height:150px;height:150px;width:100%;border: none;overflow:hidden">{{trim( $actress->wiki->Contents)}}
+	 </textarea>
 	  <div class="artist__about-more">
 		<i class="i-arrow"></i><span>{{__('ui.actress_page.read_more')}}</span><i class="i-arrow"></i>
 	  </div>
@@ -74,7 +73,7 @@ echo $actress->JapaneseName1.'：線上免費試看【JavDic  有碼・無碼・
 		<div class="list__wrap" style="width: 100%;"> 
 			<div  id="video_list"  class="list" style="width: 100%;">
 				@foreach ($videos_relation as $video_actress)
-				<a href="/{{$lang}}/testview/{{$video_actress->video_id}}${{ $video_actress->actress}}" class="list__item">
+				<a href="/{{$lang}}/video/{{$video_actress->video_id}}${{ $video_actress->actress}}" class="list__item">
 					<figure><img src="{{ $video_actress->cover_img }}"></figure>
 					<div class="list__item-info">
 					<h5>{{ $video_actress->video_id }}</h5>
@@ -123,19 +122,25 @@ echo $actress->JapaneseName1.'：線上免費試看【JavDic  有碼・無碼・
 	width: 90%;
 }
 }
+.artist__about textarea {
+	min-height: 150px;
+	height: 150px;
+}
 textarea {
 	font-weight: bold;
-    
     line-height: 30px;
     border: none;
     overflow: auto;
     outline: none;
-
+    text-indent : 0em;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
 	font-size:15px;
-    resize: none; /*remove the resize handle on the bottom right*/
+	width: 100%;
+    resize: none;  
+    background: none;
+    color: var(--text-color);
 }
 </style>
 <script>
@@ -163,17 +168,20 @@ textarea {
 	$('textarea').each(function() {
         $(this).height($(this).prop('scrollHeight'));
     });
-	const $aboutCont = $('.artist__about p');
+	const $aboutCont = $('.artist__about textArea');
+    $aboutCont.css('max-height','150px')
 	const $aboutContMore = $('.artist__about-more');
 	//   if ($aboutCont.height() > 72) {
 	// 	$aboutCont.addClass('active');
 	$aboutContMore.show().on('click', function () {
 	$aboutCont.toggleClass('active');
 	$aboutContMore.find('.i-arrow').toggleClass('active');
+	if($aboutCont.hasClass('active')){
+	     $aboutCont.css('max-height','3000px')
+	}else {
+	  $aboutCont.css('max-height','150px')
+	}
 		});
-	//   } else {
-	// 	$aboutContMore.hide();
-	//   }
 	function cate_cilck(e){
 	
 	$(e).click(function(){

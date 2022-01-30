@@ -1,9 +1,30 @@
 @extends('layout.rwd.lay_web_basic')
 @section('title')
-{{--  @php echo mb_substr(strip_tags($post->title) , 0 , 25, 'UTF-8'); @endphp --}}
+@php 
+		$locale = App::getLocale(); 
+		if ($locale == 'en') {
+			echo 'Watch Free Video【JavDic  censored, uncensored and amateur japanese porn】';
+		} else if ($locale == 'jp') {
+			echo '線上免費試看【JavDic  有碼・無碼・素人 - 日本A片資料庫】';
+		} else if($locale == 'zh') {
+			echo '無料エロ動画【JavDic  修正あり・無修正・素人 - エロ動画まとめ】'; 
+		}
+		@endphp
 @stop
 @section('des')
- 
+	@php
+	 
+		$locale = App::getLocale(); 
+		if ($locale == 'en') {
+			echo 'Watch and enjoy for free - 【When My Little Stepsister Watched My Wife Cumming Like Crazy, She Decided To... Nao Jinguji
+When My Little Stepsister Watched My Wife Cumming Like Crazy, She Decided To... Nao Jinguji】, a japanese porn by 【Nao Jinguji】on JavDic, covering all censored - uncensored - amateur Japanese porn';
+		} else if ($locale == 'jp') {
+			echo '無料エロ動画視聴 - 【独占】嫁の激しいイキっぷりを目の当たりにした居候中の義妹が欲情して… 神宮寺ナオ,  神宮寺ナオ出演 - JavDic  修正あり・無修正・素人 を網羅し、キーワードとタグを絞り込んで、すぐお気に入りのエロ動画を見れる！';
+		} else if($locale == 'zh') {
+			echo '免費線上看 【独占】嫁の激しいイキっぷりを目の当たりにした居候中の義妹が欲情して… 神宮寺ナオ,  神宮寺ナオ主演 - JavDic橫跨DMM, Prestige, 加勒比海, HEYZO, 一本道, FC2  全面蒐羅日本A片資源  絕對找的到您喜歡的那一片';
+		}
+
+	@endphp
 @stop
 @section('topscript')
 {{-- <meta itemprop="name" content="@lang('default.description')">
@@ -32,7 +53,7 @@
 		<div class="news__list list">  
 		@foreach ($video1 as $video)
  
-		<a href="/{{$lang}}/testview/{{$video->video_id}}${{ $video->actress}}"  target="_blank" class="list__item">
+		<a href="/{{$lang}}/video/{{$video->video_id}}${{ $video->actress}}" class="list__item">
 			<figure><img src="{{ $video->cover_img }}"></figure>
 			<div class="list__item-info">
 			<h6>{{__('ui.title.censored')}} FANZE {{$video->video_id}}</h6>
@@ -52,7 +73,7 @@
 		  
 			@foreach ($video2 as $video)
  
-			<a href="/{{$lang}}/testview/{{$video->video_id}}${{ $video->actress}}"  target="_blank" class="list__item">
+			<a href="/{{$lang}}/video/{{$video->video_id}}${{ $video->actress}}" class="list__item">
 				<figure><img src="{{ $video->cover_img }}"></figure>
 				<div class="list__item-info">
 					<h6>{{__('ui.title.censored')}} Prestige {{$video->video_id}}</h6>
@@ -70,7 +91,7 @@
 		<div class="news__list list">
 			@foreach ($video3 as $video)
  
-			<a href="/{{$lang}}/testview/{{$video->video_id}}${{ $video->actress}}"  target="_blank" class="list__item">
+			<a href="/{{$lang}}/video/{{$video->video_id}}${{ $video->actress}}" class="list__item">
 				<figure><img src="{{ $video->cover_img }}"></figure>
 				<div class="list__item-info">
 					<h6>{{__('ui.title.uncensored')}} {{$video->video_id}}</h6>
@@ -91,7 +112,7 @@
 		  
 			@foreach ($video4 as $video)
  
-			<a href="/{{$lang}}/testview/{{$video->video_id}}${{ $video->actress}}"  target="_blank" class="list__item">
+			<a href="/{{$lang}}/video/{{$video->video_id}}${{ $video->actress}}" class="list__item">
 				<figure><img src="{{ $video->cover_img }}"></figure>
 				<div class="list__item-info">
 					<h6>{{__('ui.title.amateur')}} {{$video->video_id}}</h6>

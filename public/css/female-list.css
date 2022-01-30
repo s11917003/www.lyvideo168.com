@@ -266,13 +266,13 @@ main { display: flex; max-width: 1440px; margin: 0 auto; padding: 8.125rem 1rem 
 
 .famale .female-list__item .show { font-size: 14px; color: var(--list-item-date); }
 
-@media (max-width: 1200px) { .famale .female-list__item { width: 16.6%; } .famale .female-list__item figure img {width: 100%; height: 170px;}} 
+@media (max-width: 1200px) { .famale .female-list__item { width: 16.6%; } .famale .female-list__item figure img {width: 100%; height: 150px;}} 
 
-@media (max-width: 1024px) { .famale .female-list__item { width: 20%; } .famale .female-list__item figure img {width: 100%; height: 180;}}
+@media (max-width: 1024px) { .famale .female-list__item { width: 20%; } .famale .female-list__item figure img {width: 100%; height: 160;}}
 
-@media (max-width: 768px) { .famale .female-list__item { width: 25%; } .famale .female-list__item figure img {width: 100%; height: 170px;}}
+@media (max-width: 768px) { .famale .female-list__item { width: 25%; } .famale .female-list__item figure img {width: 100%; height: 160px;}}
 
-@media (max-width: 640px) { .famale .female-list__item { width: 33.33%; } .famale .female-list__item figure img {width: 100%; height: 170px;}}
+@media (max-width: 640px) { .famale .female-list__item { width: 33.33%; } .famale .female-list__item figure img {width: 100%; height: 160px;}}
 
 .pagination { margin: 0 auto 3.75rem auto; width: 28.75rem; }
 

@@ -31,7 +31,7 @@
 	  <div class="list__wrap">
 		<div class="list">
 			@foreach ($fanza as $post)
-				<a href="/{{$lang}}/testview/{{$post->video_id}}${{$post->video[0]->actress}}"  target="_blank" class="list__item">
+				<a href="/{{$lang}}/video/{{$post->video_id}}${{$post->video[0]->actress}}" class="list__item">
 				<p class="list__num">Top {{$post->rank}}.</p>
 					<figure><img src="{{$post->video[0]->cover_img}}"></figure>
 				<div class="list__item-info">
@@ -55,7 +55,7 @@
 	  <div class="list__wrap">
 		<div class="list">
 			@foreach ($prestige as $post)
-			<a href="/{{$lang}}/testview/{{$post->video_id}}${{$post->video[0]->actress}}"  target="_blank" class="list__item">
+			<a href="/{{$lang}}/video/{{$post->video_id}}${{$post->video[0]->actress}}" class="list__item">
 				<p class="list__num">Top {{$post->rank}}.</p>
 					<figure><img src="{{$post->video[0]->cover_img}}"></figure>
 				<div class="list__item-info">
@@ -79,7 +79,7 @@
 	  <div class="list__wrap">
 		<div class="list">
 			@foreach ($uncensored as $post)
-			<a href="/{{$lang}}/testview/{{$post->video_id}}${{$post->video[0]->actress}}"  target="_blank" class="list__item">
+			<a href="/{{$lang}}/video/{{$post->video_id}}${{$post->video[0]->actress}}" class="list__item">
 				<p class="list__num">Top {{$post->rank}}.</p>
 					<figure><img src="{{$post->video[0]->cover_img}}"></figure>
 				<div class="list__item-info">
@@ -103,7 +103,7 @@
 	  <div class="list__wrap">
 		<div class="list">
 			@foreach ($amateur as $post)
-			<a href="/{{$lang}}/testview/{{$post->video_id}}${{$post->video[0]->actress}}"  target="_blank" class="list__item">
+			<a href="/{{$lang}}/video/{{$post->video_id}}${{$post->video[0]->actress}}" class="list__item">
 				<p class="list__num">Top {{$post->rank}}.</p>
 					<figure><img src="{{$post->video[0]->cover_img}}"></figure>
 				<div class="list__item-info">

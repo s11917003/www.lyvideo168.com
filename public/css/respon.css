@@ -2958,6 +2958,7 @@ label {
 @media screen and (min-width:480px) {
 	.artist {
 		padding-left: 20px;
+		width: 100%;
 	}
 
 
