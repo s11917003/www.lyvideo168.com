@@ -191,36 +191,34 @@ class CsvController extends Controller {
 			}
 			
 		}		
-			// $fp =null;
-			// $randSource = @fopen($filePath.$_item[3].$rankfileName, "r");
-			// $data1 =[];
-			// if($randSource) {
+		$fp =null;
 
-			// 	//$QQsource[] = $filePath.$_item[3].$rankfileName;
-			// 	$collection = (new FastExcel)->import($filePath.$_item[3].$rankfileName);
-
-			
-			// 	foreach ($collection as $index => $item) {
-			// 		$data1[] =  [ 
-			// 			// 'id' => $video_id + ($index+1),
-			// 			'video_id'=> $item['影片ID'],
-			// 			'rank'=>$item['名次'],
-			// 			'type'=> $item['排名方式'], 
-			// 			'video_lang'=> $_item[0],
-			// 			'video_source'=> $_item[4],
-			// 		];
-				
-
-			// 	}
-			// 	$QQsource[] = count($data1);
-			// 	if(count($data1)>0)
-			// 		Video_rank::insert($data1);
-			// }
-			// $randSource =null;
 
 
 		}
-		
+		Video_rank::truncate();
+		foreach ($pathArray as $pathIdx => $_item) { 
+			$randSource = @fopen($filePath.$_item[3].$rankfileName, "r");
+			$data1 =[];
+			if($randSource) {
+				$collection = (new FastExcel)->import($filePath.$_item[3].$rankfileName);
+				foreach ($collection as $index => $item) {
+					$data1[] =  [ 
+						// 'id' => $video_id + ($index+1),
+						'video_id'=> $item['影片ID'],
+						'rank'=>$item['名次'],
+						'type'=> $item['排名方式'], 
+						'video_lang'=> $_item[0],
+						'video_source'=> $_item[4],
+					];
+				}
+				if(count($data1)>0){
+					Video_rank::insert($data1);
+				}
+
+			}
+			$randSource =null;
+		}
 		//加入不在資料庫的  影片標籤關聯
 		if($tagData){
 			$_tagData = [];
@@ -241,7 +239,7 @@ class CsvController extends Controller {
 		    'updateDataCount' => count($updateDataCount),
 			// '$QQsource' =>$QQsource,
 			'data'=> count($data),
-			//'data1'=> count($data1),		 
+			 'data1'=> count($data1),		 
 		]);
 	
 	}

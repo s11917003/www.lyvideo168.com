@@ -31,14 +31,18 @@
 	  <div class="list__wrap">
 		<div class="list">
 			@foreach ($fanza as $post)
+				@foreach ($post->video as $video)
+				@if($video->video_lang == $langIndex)
 				<a href="/{{$lang}}/video/{{$post->video_id}}${{$post->video[0]->actress}}" class="list__item">
 				<p class="list__num">Top {{$post->rank}}.</p>
 					<figure><img src="{{$post->video[0]->cover_img}}"></figure>
 				<div class="list__item-info">
-					<h5>{{$post->video[0]->video_id}}</h5>
-					<h6>{{$post->video[0]->title}}</h6>
-					@if($post->video[0]->release_date)<div class="date">{{$post->video[0]->release_date}}</div> @endif
+					<h5>{{$video->video_id}}</h5>
+					<h6>{{$video->title}}</h6>
+					@if($video->release_date)<div class="date">{{$video->release_date}}</div> @endif
 				</div>
+				@endif
+				@endforeach
 			</a>
 			@endforeach
 		</div>
@@ -55,14 +59,18 @@
 	  <div class="list__wrap">
 		<div class="list">
 			@foreach ($prestige as $post)
-			<a href="/{{$lang}}/video/{{$post->video_id}}${{$post->video[0]->actress}}" class="list__item">
-				<p class="list__num">Top {{$post->rank}}.</p>
-					<figure><img src="{{$post->video[0]->cover_img}}"></figure>
-				<div class="list__item-info">
-					<h5>{{$post->video[0]->video_id}}</h5>
-					<h6>{{$post->video[0]->title}}</h6>
-					@if($post->video[0]->release_date)<div class="date">{{$post->video[0]->release_date}}</div> @endif
-				</div>
+				@foreach ($post->video as $video)
+				@if($video->video_lang == $langIndex)
+				<a href="/{{$lang}}/video/{{$post->video_id}}${{$post->video[0]->actress}}" class="list__item">
+					<p class="list__num">Top {{$post->rank}}.</p>
+						<figure><img src="{{$post->video[0]->cover_img}}"></figure>
+					<div class="list__item-info">
+						<h5>{{$video->video_id}}</h5>
+						<h6>{{$video->title}}</h6>
+						@if($video->release_date)<div class="date">{{$video->release_date}}</div> @endif
+					</div>
+				@endif
+				@endforeach
 			</a>
 			@endforeach
 
@@ -79,15 +87,19 @@
 	  <div class="list__wrap">
 		<div class="list">
 			@foreach ($uncensored as $post)
-			<a href="/{{$lang}}/video/{{$post->video_id}}${{$post->video[0]->actress}}" class="list__item">
-				<p class="list__num">Top {{$post->rank}}.</p>
-					<figure><img src="{{$post->video[0]->cover_img}}"></figure>
-				<div class="list__item-info">
-					<h5>{{$post->video[0]->video_id}}</h5>
-					<h6>{{$post->video[0]->title}}</h6>
-					@if($post->video[0]->release_date)<div class="date">{{$post->video[0]->release_date}}</div> @endif
-				</div>
-			</a>
+				@foreach ($post->video as $video)
+				@if($video->video_lang == $langIndex)
+				<a href="/{{$lang}}/video/{{$post->video_id}}${{$post->video[0]->actress}}" class="list__item">
+					<p class="list__num">Top {{$post->rank}}.</p>
+						<figure><img src="{{$post->video[0]->cover_img}}"></figure>
+					<div class="list__item-info">
+						<h5>{{$video->video_id}}</h5>
+						<h6>{{$video->title}}</h6>
+						@if($video->release_date)<div class="date">{{$video->release_date}}</div> @endif
+					</div>
+				</a>
+				@endif
+				@endforeach
 			@endforeach
 
 		</div>
@@ -103,15 +115,19 @@
 	  <div class="list__wrap">
 		<div class="list">
 			@foreach ($amateur as $post)
-			<a href="/{{$lang}}/video/{{$post->video_id}}${{$post->video[0]->actress}}" class="list__item">
-				<p class="list__num">Top {{$post->rank}}.</p>
-					<figure><img src="{{$post->video[0]->cover_img}}"></figure>
-				<div class="list__item-info">
-					<h5>{{$post->video[0]->video_id}}</h5>
-					<h6>{{$post->video[0]->title}}</h6>
-					@if($post->video[0]->release_date)<div class="date">{{$post->video[0]->release_date}}</div> @endif
-				</div>
-			</a>
+				@foreach ($post->video as $video)
+				@if($video->video_lang == $langIndex)
+				<a href="/{{$lang}}/video/{{$post->video_id}}${{$post->video[0]->actress}}" class="list__item">
+					<p class="list__num">Top {{$post->rank}}.</p>
+						<figure><img src="{{$post->video[0]->cover_img}}"></figure>
+					<div class="list__item-info">
+						<h5>{{$video->video_id}}</h5>
+						<h6>{{$video->title}}</h6>
+						@if($video->release_date)<div class="date">{{$video->release_date}}</div> @endif
+					</div>
+				</a>
+				@endif
+				@endforeach
 			@endforeach
 
 		</div>

@@ -39,7 +39,7 @@
 					<div class="list__item-info">
 					<h5>{{$video->video_id}}</h5>
 					<h1>【{{$video->title}}】</h1>
-					@if($post->release_date)<div class="date">{{$video->release_date}}</div> @endif
+					@if($video->release_date)<div class="date">{{$video->release_date}}</div> @endif
 					</div>
 					@endif
 					@endforeach
@@ -63,7 +63,7 @@
 					<div class="list__item-info">
 					<h5>{{$video->video_id}}</h5>
 					<h1>【{{$video->title}}】</h1>
-					@if($post->release_date)<div class="date">{{$video->release_date}}</div> @endif
+					@if($video->release_date)<div class="date">{{$video->release_date}}</div> @endif
 					</div>
 					@endif
 					@endforeach
