@@ -53,6 +53,8 @@
 					$("#video_list").empty();
 					result.video.data.forEach(function(item){
 						var dateText =''
+						item.release_date = item.release_date.replace('日', '') 
+						item.release_date = item.release_date.replace(/[\u4e00-\u9fff\u3400-\u4dff\uf900-\ufaff]/g, '-') 
 						if(item.release_date){
 							var date = new Date(item.release_date)
 							dateText =  date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()

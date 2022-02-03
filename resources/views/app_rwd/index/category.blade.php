@@ -177,6 +177,8 @@
 					// } 
 					result.video.data.forEach(function(item){
 						var dateText =''
+						item.release_date = item.release_date.replace('日', '') 
+						item.release_date = item.release_date.replace(/[\u4e00-\u9fff\u3400-\u4dff\uf900-\ufaff]/g, '-') 
 						if(item.release_date){
 							var date = new Date(item.release_date)
 							dateText =  date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
@@ -188,7 +190,7 @@
 						<figure><img src="`  +item.cover_img+  `"></figure>
 						<div class="list__item-info">
 						<h5>`  +item.video_id+  `</h5>
-						<h1>【`  +item.title+  `】</h1>
+						<h1>`  +item.title+  `</h1>
 						<div class="date">`  +  dateText +  `</div>
 						</div>
 						</a>`
@@ -288,6 +290,8 @@
 					// } 
 					result.video.data.forEach(function(item){
 						var dateText =''
+						item.release_date = item.release_date.replace('日', '') 
+						item.release_date = item.release_date.replace(/[\u4e00-\u9fff\u3400-\u4dff\uf900-\ufaff]/g, '-') 
 						if(item.release_date){
 							var date = new Date(item.release_date)
 							dateText =  date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
@@ -297,7 +301,7 @@
 						<figure><img src="`  +item.cover_img+  `"></figure>
 						<div class="list__item-info">
 						<h5>`  +item.video_id+  `</h5>
-						<h6>【`  +item.title+  `】</h6>
+						<h6>`  +item.title+  `</h6>
 						<div class="date">`  +  dateText +   `</div>
 						</div>
 						</a>`

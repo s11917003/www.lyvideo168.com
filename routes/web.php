@@ -64,7 +64,7 @@ Route::get('rd/genacc', 'Rd\RdController@genacc');
 	Route::get('/{lang}/actress_list', 'Index\IndexController@actress');  //女優清單
 	Route::post('/{lang}/actress_list', 'Index\IndexController@actressList');  //女優清單
 	Route::get('/{lang}/actress/{id}', 'Index\IndexController@actressPage');  //女優主頁面
-
+	Route::post('/{lang}/actress', 'Index\IndexController@actressPageCate');  //女優主頁面
 	Route::get('/{lang}/search/{search}/', 'Index\IndexController@search')->where('page', '[0-9]+')->name('search');   //搜尋
 	Route::post('/{lang}/search', 'Index\IndexController@searchVideo');  //搜尋
 	Route::get('/{lang}/rank/{type}', 'Index\IndexController@rankPage');

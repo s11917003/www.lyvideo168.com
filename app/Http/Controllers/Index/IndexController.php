@@ -1100,6 +1100,38 @@ class IndexController extends Controller {
 		$video_actress = Video_actress::withCount(['actressRelations','wiki'])->Paginate(24);// 女優table;
 		return  response()->json(['video_actress' =>$video_actress,  'pagination' => (string)$video_actress->links("pagination::bootstrap-4") ]);
     }
+	public function actressPageCate(Request $request,string $lang) {
+		if( !in_array($lang,['zh','en','jp'])){
+			abort(404);
+		}	
+		$webLangIndex = $this->language[$lang];
+		$videoIds  = Video_actress_relations::where('actress_id',$request->id)->pluck('video_id')->toArray();
+		$videos_relation = Video::where('video_lang',$webLangIndex)->whereIn('id', $videoIds)->with('tagRelations')->get();//video table;
+		$tagObj = [];
+	  	//計算相關的標籤以及數量
+
+		$videos = [];
+		if( in_array('all',$request->tag)) {
+			$videos = $videos_relation ;
+		}
+	    else {
+			$size = count($videos_relation); 
+			for ($i=0; $i < $size; $i++) {
+				$data = $videos_relation[$i]['tagRelations'];
+				foreach ($data  as $tag) {
+				
+					if( in_array($tag->tag_id,$request->tag)){
+						$videos[] =$videos_relation[$i];
+						break;
+					}
+				}
+			}
+		}
+				 
+		return  response()->json([
+		    'videos' => $videos,
+		]);
+    }
 	public function actressPage($lang,Int $id) {
 		if( !in_array($lang,['zh','en','jp'])){
 			abort(404);
@@ -1138,7 +1170,8 @@ class IndexController extends Controller {
 			'actress'=>$actress,
 			'count'=>count($videoIds),
 			'videos_relation' => $videos_relation,//相關女優
-			'lang'=>$lang
+			'lang'=>$lang,
+			'id'=> $id
 		]);
     }
 	public function rankPage(string $lang,Int $type) {
