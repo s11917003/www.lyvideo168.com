@@ -14,7 +14,7 @@
 @section('maincontent')
 
 <div class="container">
-	<div class="container__header">{{__('ui.actresses_list')}}</div>
+	<div class="container__header"  style="display: block;">{{__('ui.actresses_list')}}</div>
 	<div class="famale">
 		
 		<div class="female-list">	 

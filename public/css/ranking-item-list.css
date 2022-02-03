@@ -54,7 +54,7 @@ nav .keyword { display: none; }
 
 .nav li { line-height: 1.875rem; display: inline-block; }
 
-.nav li a { letter-spacing: 4px; font-weight: bold; color: #fff; }
+.nav li a { letter-spacing: 0px; font-weight: bold; color: #fff; }
 
 .nav li::before { content: '|'; position: relative; top: -1.5px; display: inline-block; color: #fff; padding: 0 1rem; }
 
@@ -153,7 +153,7 @@ nav .keyword { display: none; }
 
 .keyword__title { margin-bottom: 1rem; line-height: 2.25rem; font-weight: bold; text-align: center; color: #fff; background-color: var(--primary-color); }
 
-.keyword__content { padding: 0 0.625rem; }
+.keyword__content { padding: 0 0.225rem; }
 
 .keyword__content-title { line-height: 1.75rem; text-align: center; color: #fff; background: var(--keyword-title-background); }
 
@@ -276,10 +276,10 @@ main { display: flex; max-width: 1440px; margin: 0 auto; padding: 8.125rem 1rem 
 
 .container__header-item--active { color: #fff; background-color: var(--container-title-background); }
 
-@media (max-width: 640px) { .container { margin-top: 1.25rem; margin-left: 0; }
+@media (max-width: 640px) { .container { margin-top: 1.25rem; margin-left: 0; padding-right: 0px;padding-left: 0px;}
   .container__header { display: flex; justify-content: space-between; text-align: center; } }
 
-.ranking__title { width: 100%; padding: 0 1rem; line-height: 40px; font-size: 24px; font-weight: bold; color: #fff; background-color: var(--ranking-title-background); }
+.ranking__title { width: 100%; padding: 0 1rem; line-height: 30px; font-size: 20px; font-weight: bold; color: #fff; background-color: var(--ranking-title-background); }
 
 @media (max-width: 640px) { .ranking__title { display: none; } }
 

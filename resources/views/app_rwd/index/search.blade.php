@@ -52,12 +52,17 @@
 				success:function(result){
 					$("#video_list").empty();
 					result.video.data.forEach(function(item){
+						var dateText =''
+						if(item.release_date){
+							var date = new Date(item.release_date)
+							dateText =  date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+						}
 						video = `<a href="/{{$lang}}/video/`+item.video_id+`$`+item.actress+`" class="list__item">
 						<figure><img src="`  +item.cover_img+  `"></figure>
 						<div class="list__item-info">
 						<h5>`  +item.video_id+  `</h5>
 						<h6>【`  +item.title+  `】</h6>
-						<div class="date">`   +  ( item.release_date || '' )+  `</div>
+						<div class="date">`   +   dateText +  `</div>
 						</div>
 						</a>`
 						$("#video_list").append(video)

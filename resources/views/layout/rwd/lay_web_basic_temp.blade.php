@@ -9,7 +9,6 @@
 <meta name="keywords" content="@yield('keywords')">
 <link href="/css/respon.css" rel="stylesheet" type="text/css">
 <link href="/css/bootstrap-4.0.0.css" rel="stylesheet">
-<link href="/css/video-js.css" rel="stylesheet">
 <link href="/css/index.css" rel="stylesheet" type="text/css">
 <link href="/css/search-list.css" rel="stylesheet" type="text/css">
 <link href="/css/female-list.css" rel="stylesheet" type="text/css">

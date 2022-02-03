@@ -76,7 +76,7 @@
 						@else
 						<div class="col-xs-12 col-sm-8 col-md-8 mdm-big" >
 						@endif
-						<video id="av-video" data-setup="{}" width="600" height="264" class="video-js vjs-default-skin vjs-fluid vjs-show-big-play-button-on-pause vjs-fill vjs-16-9 vjs-big-play-centered " poster="{{$video->cover_img}}" controls>
+						<video id="av-video" data-setup="{}" width="600" height="264" style="background-color: #FFF;" class="video-js vjs-default-skin vjs-fluid vjs-show-big-play-button-on-pause vjs-fill vjs-16-9 vjs-big-play-centered " poster="{{$video->cover_img}}" controls>
 							@if ($video_status)
 							<source  id="av-video-source" 
 							src="{{$video->video_url}}"
@@ -199,7 +199,6 @@
 						</div>
 						<div class="col-xs-12 col-sm-4 col-md-4 mdm-small">
 							<div class="mdm-small">
-								
 								<div class="mdm-info">
 								<!-- <h4 class="m-title">{{ $video->title }}</h4> -->
 								<div class="table-responsive">
@@ -451,97 +450,45 @@
 			</div>
 			
 		 
-			
-			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px; height: auto;">
-				
-				@if (count($video_with_actress) >0 )
-				<h3 class="recommend p-1" >{{__('ui.video_view.STARRING')}}</h3>
-				@foreach ($video_with_actress as $video_actress)
-				<!-- @if ($device == 'ios' || $device == 'android')
-				<div style="padding: 10px; width: 70%; height: 200px; margin: 5px;  overflow: hidden; text-align: center;margin: 0px auto;">
-					<div poster="" data-id='{{$video_actress->id}}' class="adClick video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:70%;    padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
-				@else -->
-				<div style="float: left;padding: 10px; width: 230px; height: 230px; margin: 5px; overflow: hidden">
-					<div poster=""   class="adClick video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	
-					style="height:70%;   padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
-				<!-- @endif -->
-						<a href="/{{$lang}}/video/{{$video_actress->video_id}}${{ $video_actress->actress}}">
-							<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
-														vertical-align: middle;
-														background-repeat: no-repeat;
-														background-position: 50% 50%;
-														background-size: contain;
-														cursor: pointer;
-														margin: 0;
-														padding: 0;
-														position: relative;
-														top: 0PX;
-														right: 0;
-														bottom: 0;
-														left: 0;
-														height: 100%;  
-														 WIDTH: 100%;
-														MARGIN: 0PX 5PX 0 5PX;
-														BACKGROUND-COLOR: #000;
-														background-image: url('{{ $video_actress->cover_img }}');" 
-													>
-							
-								<div class='videoTitle'>{{$video_actress->title}}</div>
-								<p class='videoInfo'>【{{$video_actress->dvd_id}}】</p>
-								<p class='videoInfo'>{{$video_actress->release_date}}</p> 
+			<div class="list__wrap">
+				<div class="list">
+					@if (count($video_with_actress) >0 )
+						<h3 class="recommend p-1" style="width: 100%;    margin: 10px;">{{__('ui.video_view.STARRING')}}</h3>
+					@foreach ($video_with_actress as $video_actress)
+					<a href="/{{$lang}}/video/{{$video_actress->video_id}}${{ $video_actress->actress}}" class="list__item">
+					
+						<figure><img src="{{$video_actress->cover_img}}"></figure>
+						<div class="list__item-info">
+							<h5>{{$video_actress->video_id}}</h5>
+							<h6>{{$video_actress->title}}</h6>
+							@if($video_actress->release_date)<div class="date">{{date('Y-m-d', strtotime($video_actress->release_date)) }}</div> @endif
 						</div>
-						</a>
-					</div>
+					</a>
+					@endforeach
+					@endif
 				</div>
-				@endforeach
-				<div style="clear: both"></div>
-				@endif
-				
-				@if(count($video_relation) > 0) 
-				<h5 class="recommend p-1" >{{__('ui.video_view.LIKE')}}</h5>
-				@foreach ($video_relation as $video_tag)
+			  </div>
+
+			 <div class="list__wrap">
+				<div class="list">
+					@if (count($video_relation) >0 )
+						<h3 class="recommend p-1" style="width: 100%;    margin: 10px;">{{__('ui.video_view.LIKE')}}</h3>
+					@foreach ($video_relation as $video_tag)
+					<a href="/{{$lang}}/video/{{$video_tag->video_id}}${{ $video_tag->actress}}" class="list__item">
+					
+						<figure><img src="{{$video_tag->cover_img}}"></figure>
+						<div class="list__item-info">
+							<h5>{{$video_tag->video_id}}</h5>
+							<h6>{{$video_tag->title}}</h6>
+							@if($video_tag->release_date)<div class="date">{{date('Y-m-d', strtotime($video_tag->release_date)) }}</div> @endif
+						</div>
+					</a>
+					@endforeach
+					@endif
+				</div>
+			  </div>
 			
-				@if ($device == 'ios' || $device == 'android')
-				<div style="padding: 10px; width: 70%; height: 200px; margin: 5px;  overflow: hidden; text-align: center;margin: 0px auto;">
-					<div poster=""   class="adClick video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	style="height:70%;    padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
-				@else
-				<div style="float: left;padding: 10px; width: 230px; height: 230px; margin: 5px; overflow: hidden">
-					<div poster=""   class="adClick video-js vjs-default-skin vjs-16-9 vjs-big-play-centered vjs-paused av-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v6 vjs-user-inactive" 	
-					style="height:70%;   padding-top: 0%;" id="av-video" lang="zh-hant-tw" role="region" aria-label="Video Player">
-				@endif
 		
-					<a href="/{{$lang}}/video/{{$video_tag->video_id}}${{ $video_tag->actress}}">
-							<div class="vjs-poster" tabindex="-1" aria-disabled="false" style="display: inline-block;
-														vertical-align: middle;
-														background-repeat: no-repeat;
-														background-position: 50% 50%;
-														background-size: contain;
-														cursor: pointer; 
-														margin: 0;
-														padding: 0;
-														position: relative;
-														top: 0PX;
-														right: 0;
-														bottom: 0;
-														left: 0;
-														height: 100%;  
-														WIDTH: 100%;
-														MARGIN: 0PX 5PX 0 5PX;
-														BACKGROUND-COLOR: #000;
-														background-image: url('{{ $video_tag->cover_img }}');" 
-													>
-						
-								<div class='videoTitle'>{{$video_tag->title}}</div>
-								<p class='videoInfo'>【{{$video_tag->dvd_id}}】</p>
-								<p class='videoInfo'>{{$video_tag->release_date}}</p>
-							</div>
-						</a>
-					</div>
-				</div>
-				@endforeach
-				@endif
-				<div style="clear: both"></div>
-			</div>
 		 				
 		</div>		
 	</div>

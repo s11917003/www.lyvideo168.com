@@ -19,19 +19,20 @@
 	@if(Route::currentRouteName()  == 'rank-list')
 	<div class="container__header">{{__('ui.rank.rank_title')}}</div>
 	<ul class="ranking__board">
-		<li class="ranking__board-item week  ranking__board-item--active"><a  href="javascript:void(0)">{{__('ui.rank.week')}}</a></li>
 		<li class="ranking__board-item month"><a href="javascript:void(0)">{{__('ui.rank.month')}}</a></li>
+		<li class="ranking__board-item week  ranking__board-item--active"><a  href="javascript:void(0)">{{__('ui.rank.week')}}</a></li>
+
 	</ul>
  
 	<!-- 有碼 FANZA -->
-	<div class="ranking">
-		<p class="ranking__title">{{$cate}}</p>
+	<div class="ranking news">
+		<p class="ranking__title">{{strtoupper($cate)}}</p>
 		<div class="list__wrap week">
 			<div class="list">
 				@foreach ($video as $post)
 				@foreach ($post->video as $video)	
 				@if($video->video_lang == $langIndex)
-					<a href="/{{$lang}}/video/{{$video->video_id}}${{$video->actress}}"  target="_blank" class="list__item">
+					<a href="/{{$lang}}/video/{{$video->video_id}}${{$video->actress}}"  class="list__item">
 					<p class="list__num">Top {{$post->rank}}.</p>
 					
 				
@@ -39,7 +40,7 @@
 					<div class="list__item-info">
 					<h5>{{$video->video_id}}</h5>
 					<h1>【{{$video->title}}】</h1>
-					@if($video->release_date)<div class="date">{{$video->release_date}}</div> @endif
+					@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date))}}</div> @endif
 					</div>
 					@endif
 					@endforeach
@@ -55,7 +56,7 @@
 				@foreach ($video1 as $post)	
 				@foreach ($post->video as $video)
 				@if($video->video_lang == $langIndex)
-					<a href="/{{$lang}}/video/{{$video->video_id}}${{$video->actress}}"  target="_blank" class="list__item">
+					<a href="/{{$lang}}/video/{{$video->video_id}}${{$video->actress}}" class="list__item">
 					<p class="list__num">Top {{$post->rank}}.</p>
 				
 					
@@ -63,7 +64,7 @@
 					<div class="list__item-info">
 					<h5>{{$video->video_id}}</h5>
 					<h1>【{{$video->title}}】</h1>
-					@if($video->release_date)<div class="date">{{$video->release_date}}</div> @endif
+					@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date)) }}</div> @endif
 					</div>
 					@endif
 					@endforeach
@@ -133,12 +134,17 @@
 					 
 						if(result.status =true){
 							result.video.data.forEach(function(item){
+								var dateText =''
+								if(item.release_date){
+									var date = new Date(item.release_date)
+									dateText =  date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+								}
 								video = `<a href="/{{$lang}}/video/`+item.video_id+`$`+item.actress+`" class="list__item">
 								<figure><img src="`  +item.cover_img+  `"></figure>
 								<div class="list__item-info">
 								<h5>`  +item.video_id+  `</h5>
 								<h6>【`  +item.title+  `】</h6>
-								<div class="date">`  +item.release_date+  `</div>
+								<div class="date">`  +dateText+  `</div>
 								</div>
 								</a>`
 							

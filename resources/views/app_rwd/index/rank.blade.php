@@ -18,14 +18,13 @@
 <div class="container">
 	<div class="container__header">{{__('ui.rank.rank_title')}}</div>
 	<ul class="ranking__board">
-		<li class="ranking__board-item  @if($type==1) ranking__board-item--active @endif "><a href="/{{$lang}}/rank/1">{{__('ui.rank.week')}}</a></li>
 		<li class="ranking__board-item 	@if($type==2) ranking__board-item--active @endif"><a href="/{{$lang}}/rank/2">{{__('ui.rank.month')}}</a></li>
-		
-	  </ul>
+		<li class="ranking__board-item  @if($type==1) ranking__board-item--active @endif "><a href="/{{$lang}}/rank/1">{{__('ui.rank.week')}}</a></li>
+	</ul>
 	@if(count($fanza) > 0)
 	<!-- 有碼 FANZA -->
-	<div class="ranking">
-	  <p class="ranking__title">{{__('ui.title.censored')}} FANZA 
+	<div class="ranking news">
+	  <p class="ranking__title title__keyword__more">{{__('ui.title.censored')}} - FANZA 
 	  	<a href="/{{$lang}}/rank-list/fanza">{{__('ui.more')}} &gt;&gt;</a>
 		</p>
 	  <div class="list__wrap">
@@ -38,8 +37,8 @@
 					<figure><img src="{{$post->video[0]->cover_img}}"></figure>
 				<div class="list__item-info">
 					<h5>{{$video->video_id}}</h5>
-					<h6>{{$video->title}}</h6>
-					@if($video->release_date)<div class="date">{{$video->release_date}}</div> @endif
+					<h1>{{$video->title}}</h1>
+					@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date)) }}</div> @endif
 				</div>
 				@endif
 				@endforeach
@@ -52,8 +51,8 @@
 	@endif
 	@if(count($prestige) > 0)
 	<!-- 有碼 Prestige -->
-	<div class="ranking">
-	  <p class="ranking__title">{{__('ui.title.censored')}} Prestige	
+	<div class="ranking news">
+	  <p class="ranking__title title__keyword__more">{{__('ui.title.censored')}} - Prestige	
 		  <a href="/{{$lang}}/rank-list/prestige">{{__('ui.more')}} &gt;&gt;</a>
 	  </p>
 	  <div class="list__wrap">
@@ -66,8 +65,8 @@
 						<figure><img src="{{$post->video[0]->cover_img}}"></figure>
 					<div class="list__item-info">
 						<h5>{{$video->video_id}}</h5>
-						<h6>{{$video->title}}</h6>
-						@if($video->release_date)<div class="date">{{$video->release_date}}</div> @endif
+						<h1>{{$video->title}}</h1>
+						@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date)) }}</div> @endif
 					</div>
 				@endif
 				@endforeach
@@ -80,8 +79,8 @@
 	@endif
 	@if(count($uncensored) > 0)
 	<!-- 無碼 -->
-	<div class="ranking">
-	  <p class="ranking__title">{{__('ui.title.uncensored')}} 
+	<div class="ranking news">
+	  <p class="ranking__title title__keyword__more">{{__('ui.title.uncensored')}} 
 		  <a href="/{{$lang}}/rank-list/uncensored">{{__('ui.more')}} &gt;&gt;</a>
 	  </p>
 	  <div class="list__wrap">
@@ -94,8 +93,8 @@
 						<figure><img src="{{$post->video[0]->cover_img}}"></figure>
 					<div class="list__item-info">
 						<h5>{{$video->video_id}}</h5>
-						<h6>{{$video->title}}</h6>
-						@if($video->release_date)<div class="date">{{$video->release_date}}</div> @endif
+						<h1>{{$video->title}}</h1>
+						@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date)) }}</div> @endif
 					</div>
 				</a>
 				@endif
@@ -108,8 +107,8 @@
 	@endif
 	@if(count($amateur) > 0)
 	<!-- 素人 -->
-	<div class="ranking">
-	  <p class="ranking__title">{{__('ui.title.amateur')}}
+	<div class="ranking news">
+	  <p class="ranking__title title__keyword__more">{{__('ui.title.amateur')}}
 		  <a href="/{{$lang}}/rank-list/amateur"  >{{__('ui.more')}} &gt;&gt;</a>
 	  </p>
 	  <div class="list__wrap">
@@ -122,8 +121,8 @@
 						<figure><img src="{{$post->video[0]->cover_img}}"></figure>
 					<div class="list__item-info">
 						<h5>{{$video->video_id}}</h5>
-						<h6>{{$video->title}}</h6>
-						@if($video->release_date)<div class="date">{{$video->release_date}}</div> @endif
+						<h1>{{$video->title}}</h1>
+						@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date)) }}</div> @endif
 					</div>
 				</a>
 				@endif

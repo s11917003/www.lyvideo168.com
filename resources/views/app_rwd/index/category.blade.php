@@ -18,7 +18,7 @@
 @section('maincontent')
 
 <div class="container">
-	<div class="container__header">{{__('ui.Category_Search')}}</div>
+	<div class="container__header" style="display: block;">{{__('ui.Category_Search')}}</div>
 	<div class="category ">
 	  <div class="category__title">{{__('ui.tag.Source')}}</div>
 	  <ul id='category_source' class="category__tags">
@@ -28,7 +28,7 @@
 		<li name="uncensored"  class="category__tags-item category__tags-item--active "> <a href="#">{{__('ui.title.uncensored')}}</a> </li>
 		<li name="FC2" class="category__tags-item category__tags-item--active"><a href="#">{{__('ui.title.amateur')}}</a></li>
 	  </ul>
-	  <div class=" category_more category_source_more" ><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow"></i></a></div>
+	  <div class=" category_more category_source_more" ><a href="#"  class="{{$lang}}"><span>{{__('ui.tag.more')}}</span> <i class="i-arrow"></i></a></div>
 	</div>
 
 	<div class="category">
@@ -39,7 +39,7 @@
 		<li name="112" class="category__tags-item"><a href="#">{{__('ui.tag.Featured_Actress')}}</a></li>
 		<li name="211" class="category__tags-item"><a href="#">{{__('ui.tag.Debut')}}</a></li>
 	  </ul> 
-	  <div class="category_more"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow "></i></a></div>
+	  <div class="category_more"><a href="#" class="{{$lang}}"><span>{{__('ui.tag.more')}}</span> <i class="i-arrow "></i></a></div>
 	</div>
 
 	<div class="category">
@@ -56,7 +56,7 @@
 		<!-- <li name="vr" class="category__tags-item"><a href="#">OL</a></li> -->
 		<li name="14" class="category__tags-item"><a href="#">{{__('ui.tag.Female_Teacher')}}</a></li>
 	  </ul>
-	  <div class=" category_more "><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow "></i></a></div>
+	  <div class=" category_more "><a href="#"  class="{{$lang}}"><span>{{__('ui.tag.more')}}</span> <i class="i-arrow "></i></a></div>
 	</div>
 
 	<div class="category">
@@ -74,7 +74,7 @@
 		<li name="137" class="category__tags-item"><a href="#">{{__('ui.tag.Shaved_Pussy')}}</a></li>
 		<li name="95" class="category__tags-item"><a href="#">{{__('ui.tag.Ass_Lover')}}</a></li>
 	  </ul>
-	  <div class=" category_more"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow "></i></a></div>
+	  <div class=" category_more"><a href="#"  class="{{$lang}}"><span>{{__('ui.tag.more')}}</span> <i class="i-arrow "></i></a></div>
 	</div>
 
 	<div class="category">
@@ -91,7 +91,7 @@
 		<li name="175" class="category__tags-item"><a href="#">{{__('ui.tag.Handjob')}}</a></li>
 		<li name="197" class="category__tags-item"><a href="#">{{__('ui.tag.Squirting')}}</a></li>
 	  </ul>
-	  <div class=" category_more"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow "></i></a></div>
+	  <div class=" category_more"><a href="#"  class="{{$lang}}"><span>{{__('ui.tag.more')}}</span> <i class="i-arrow "></i></a></div>
 	</div>
 
 	<div class="category">
@@ -106,18 +106,18 @@
 		<li name="88" class="category__tags-item"><a href="#">{{__('ui.tag.Swimsuits')}}</a></li>
 		<li name="59" class="category__tags-item"><a href="javascript:void(0);">{{__('ui.tag.Glasses')}}</a></li>
 	  </ul>
-	  <div class="category_more"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow "></i></a></div>
+	  <div class="category_more"><a href="#"  class="{{$lang}}"><span>{{__('ui.tag.more')}}</span> <i class="i-arrow "></i></a></div>
 	</div>
 	<!-- <div id ="custom" class="category category--open" style='display: none;'>
 		<div class="category__title">{{__('ui.tag.Custom')}}</div>
 			<ul id="category_clothing" class="category__tags">
 			</ul>
-	  	<div class="category__more category_clothing_more" style="display: none;"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow"></i></a></div>
+	  	<div class="category__more category_clothing_more" style="display: none;"><a href="#"><span>{{__('ui.tag.more')}}</span> <i class="i-arrow"></i></a></div>
 	</div> -->
 	<div id ="customCombo" class="category category--open">
 		<div class="category__title">{{__('ui.tag.Custom')}}</div>
 		  <span class="example" style="width: 300px;"></span>
-	  	<!-- <div class="category_more"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow"></i></a></div> -->
+	  	<!-- <div class="category_more"><a href="#"><span>{{__('ui.tag.more')}}</span> <i class="i-arrow"></i></a></div> -->
 	</div>
 	<div class="list" style=" display: inline;">
 		<div class="list__wrap" style="width: 100%;"> 
@@ -176,13 +176,20 @@
 					// 	});
 					// } 
 					result.video.data.forEach(function(item){
-				 
+						var dateText =''
+						if(item.release_date){
+							var date = new Date(item.release_date)
+							dateText =  date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+						}
+						
+						
+						
 						video = `<a href="/{{$lang}}/video/`+item.video_id+`$`+item.actress+`" class="list__item">
 						<figure><img src="`  +item.cover_img+  `"></figure>
 						<div class="list__item-info">
 						<h5>`  +item.video_id+  `</h5>
 						<h1>【`  +item.title+  `】</h1>
-						<div class="date">`  +  ( item.release_date || '' )+  `</div>
+						<div class="date">`  +  dateText +  `</div>
 						</div>
 						</a>`
 					
@@ -280,12 +287,18 @@
 
 					// } 
 					result.video.data.forEach(function(item){
+						var dateText =''
+						if(item.release_date){
+							var date = new Date(item.release_date)
+							dateText =  date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+						}
+						
 						video = `<a href="/{{$lang}}/video/`+item.video_id+`$`+item.actress+`" class="list__item">
 						<figure><img src="`  +item.cover_img+  `"></figure>
 						<div class="list__item-info">
 						<h5>`  +item.video_id+  `</h5>
 						<h6>【`  +item.title+  `】</h6>
-						<div class="date">`  +  ( item.release_date || '' )+   `</div>
+						<div class="date">`  +  dateText +   `</div>
 						</div>
 						</a>`
 					
@@ -362,10 +375,10 @@
 	function checkMoreBtn(e){
 		var arr = ["source","form","role","figure","play","clothing"];
 		
-		for (let i=0; i<arr.length; i++) {
-			console.log($(".category_"+arr[i]+"_more i").hasClass('active'))
+		// for (let i=0; i<arr.length; i++) {
+		// 	console.log($(".category_"+arr[i]+"_more i").hasClass('active'))
 			
-		}
+		// }
 	}
 	 
 	$(window).resize(function() {
@@ -439,11 +452,26 @@
 		
 	 
 		cate = getSearchParams('cate');
-
-		
 		findCate = false;
 		arr =[]
-		if(cate){
+		const category = parseInt(@json($category));
+		if(category > -1){
+			$("li[name=all]").removeClass('category__tags-item--active')	
+			$("li[name=censored_f]").removeClass('category__tags-item--active')
+			$("li[name=censored_p]").removeClass('category__tags-item--active')
+			$("li[name=uncensored]").removeClass('category__tags-item--active')
+			$("li[name=FC2]").removeClass('category__tags-item--active')
+			if(category == 0) {
+				$("li[name=censored_f]").addClass('category__tags-item--active')
+				$("li[name=censored_p]").addClass('category__tags-item--active')
+			} else if(category == 1) {
+				$("li[name=uncensored]").addClass('category__tags-item--active')
+			} else if(category == 2) {
+				$("li[name=FC2]").addClass('category__tags-item--active')
+			}
+		
+		}
+		else if(cate){
 			cateArr = cate.split(',');
 			cateArr.forEach(function(value){
 				if($("li[name="+value+"]").length){

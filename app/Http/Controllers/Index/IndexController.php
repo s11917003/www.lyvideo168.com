@@ -225,9 +225,18 @@ class IndexController extends Controller {
 		}
 		$webLangIndex = $this->language[$lang];
 
-		$video_actress_popular = Video_actress::whereIn('id',[2,3,4,5,10,11,12,13])->get();// 女優table;
+		$video_actress_popular = Video_actress::whereIn('id',[2,3,4,5,6,11,12,13,26,28,30])->get();// 女優table;
 		$tag_actress_popular = Video_tag::whereIn('id',[2,14,22,24,93,38,8,28,17,51,53,87])->get();
-		return  response()->json([ 'video_actress_popular' => $video_actress_popular,'tag_actress_popular' => $tag_actress_popular]);
+
+		$series = [];
+		if($lang == 'zh') {
+			$series = ['顔面崩壊調教','逆痴漢','風俗中出しSEX','縄犯'];
+		}else if($lang == 'en') {
+			$series = ['VR BEST','Venus Therme','Uhar Bitch','Shameful Girl'];
+		} else {
+			$series = ['顔面崩壊調教','誘惑美容室','美熟女ベスト','羞恥！'];
+		}
+		return  response()->json(['video_series_popular' => $series, 'video_actress_popular' => $video_actress_popular,'tag_actress_popular' => $tag_actress_popular]);
 		
 	}
 	public function curl_get_contents($url)
@@ -669,7 +678,21 @@ class IndexController extends Controller {
 		$webLangIndex = $this->language[$lang];
 
 		 
-		return view('app_rwd.index.category',[ 'category'=>[0],'lang' => $lang,'combo_tag' =>json_decode($combo_tag)]);
+		return view('app_rwd.index.category',[ 'category'=>-1,'lang' => $lang,'combo_tag' =>json_decode($combo_tag)]);
+	}
+	public function category_genre(string $lang,string $genre) {
+		if( !in_array($lang,['zh','en','jp'])){
+			abort(404);
+		}
+		if( !in_array($genre,['censored','uncensored','amateur'])){
+			abort(404);
+		}
+		
+		$combo_tag = Video_tag::where('main_tag','!=',1)->get();
+		$webLangIndex = $this->language[$lang];
+
+		return view('app_rwd.index.category',[ 'category'=>array_search($genre,['censored','uncensored','amateur']),'lang' => $lang,'combo_tag' =>json_decode($combo_tag)]);
+ 
 	}
 	public function categoryCancel(Request $request,string $lang) {
 
@@ -1013,9 +1036,9 @@ class IndexController extends Controller {
 		}
 
 		$webLangIndex = $this->language[$lang];
-		DB::enableQueryLog();
+	 
 		$videos = Video::where('video_lang',$webLangIndex)->where('label', $search)->get();//video table;
-		return var_dump( DB::getQueryLog());
+	 
 		return view('app_rwd.index.search_director',['videos' => $videos,'search'=>$search,'lang'=>$lang]);
 	}
 
@@ -1127,10 +1150,10 @@ class IndexController extends Controller {
 		$webLangIndex = $this->language[$lang];
 		$fanza = Video_rank::where('video_source','fanza')->where('type',$type)->where('video_lang',$webLangIndex)->whereHas('video', function ($query)  use ($webLangIndex){
 			$query->where('video_lang', '=', $webLangIndex );
-	   })->orderBy('rank')->limit(9)->get();
-		$prestige = Video_rank::where('video_source','mgstage')->where('type',$type)->where('video_lang',$webLangIndex)->with('video')->orderBy('rank')->limit(9)->get();
-		$uncensored = Video_rank::where('video_source','uncensored')->where('type',$type)->where('video_lang',$webLangIndex)->with('video')->orderBy('rank')->limit(9)->get();
-		$amateur = Video_rank::where('video_source','amateur')->where('type',$type)->where('video_lang',$webLangIndex)->with('video')->orderBy('rank')->limit(9)->get();
+	   })->orderBy('rank')->limit(8)->get();
+		$prestige = Video_rank::where('video_source','mgstage')->where('type',$type)->where('video_lang',$webLangIndex)->with('video')->orderBy('rank')->limit(8)->get();
+		$uncensored = Video_rank::where('video_source','uncensored')->where('type',$type)->where('video_lang',$webLangIndex)->with('video')->orderBy('rank')->limit(8)->get();
+		$amateur = Video_rank::where('video_source','amateur')->where('type',$type)->where('video_lang',$webLangIndex)->with('video')->orderBy('rank')->limit(8)->get();
 		 
 		return view('app_rwd.index.rank',['type'=> $type ,
 		'fanza'=>$fanza,

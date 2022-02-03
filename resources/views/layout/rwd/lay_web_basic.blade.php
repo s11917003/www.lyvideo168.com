@@ -8,7 +8,6 @@
 <meta name="description" content="@yield('des')">
 <link href="/css/respon.css" rel="stylesheet" type="text/css">
 <link href="/css/bootstrap-4.0.0.css" rel="stylesheet">
-<link href="/css/video-js.css" rel="stylesheet">
 
 <link href="/css/index.css" rel="stylesheet" type="text/css">
 <link href="/css/search-list.css" rel="stylesheet" type="text/css">
@@ -90,7 +89,7 @@ import videojsPreviewThumbnails from 'https://cdn.skypack.dev/videojs-preview-th
 	<!-- HEADER 結束 -->
 	<div id="rs-main-content"  style='padding-bottom:5rem;'> 
 		
-		<main style="padding-top: 0rem;"> 
+		<main style="padding-top: 0rem;padding-left: 0px;;padding-right:0px"> 
 			@include('layout.rwd.lay_web_right_video')
 			@yield('maincontent')
 		</main>
@@ -116,6 +115,8 @@ $(function(){
 				success:function(result){
 					$(".actress_popular_list").empty();
 					$(".tag_popular_list").empty();
+					$(".series_popular_list").empty();
+					
 					result.video_actress_popular.forEach(element => {
 						let name = ''
 						if('{{$lang}}' == 'zh' && element.ChineseName1)  {
@@ -137,6 +138,11 @@ $(function(){
 						}
 						actress =	`<li><a href="/{{$lang}}/category?cate=`+element.id+`"   class="female-list__item">`+tag+`</a></li>`;
 						$(".tag_popular_list").append(actress)
+					});
+					result.video_series_popular.forEach(element => {
+					 
+						actress =	`<li><a href="/{{$lang}}/series?search=`+element+`"   class="female-list__item">`+element+`</a></li>`;
+						$(".series_popular_list").append(actress)
 					});
 					$(".actress_popular_list").append(`<li class="keyword__more"><a href="/{{$lang}}/actress_list">{{__('ui.more')}} &gt;&gt;</a></li>`)
 					$(".tag_popular_list").append(`<li class="keyword__more"><a href="/{{$lang}}/category">{{__('ui.more')}} &gt;&gt;</a></li>`)

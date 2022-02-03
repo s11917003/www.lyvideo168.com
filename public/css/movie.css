@@ -156,7 +156,7 @@ nav .keyword { display: none; }
 
 .keyword__title { margin-bottom: 1rem; line-height: 2.25rem; font-weight: bold; text-align: center; color: #fff; background-color: var(--primary-color); }
 
-.keyword__content { padding: 0 0.625rem; }
+.keyword__content { padding: 0 0.225rem; }
 
 .keyword__content-title { line-height: 1.75rem; text-align: center; color: #fff; background: var(--keyword-title-background); }
 

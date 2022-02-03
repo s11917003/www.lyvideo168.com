@@ -40,7 +40,7 @@
 		  </div>
 	  
 		  <ul class="setting">
-			<li class="lang" data-title="選擇語言">
+			<li class="lang" data-title="{{__('ui.language')}}">
 			  <!-- bind select.js -->
 			  <div id="lang">
 			 
@@ -70,7 +70,7 @@
 			  </div>
 			  <!-- bind select.js end -->
 			</li>
-			<li class="theme" data-title="明亮模式">
+			<li class="theme" data-title="{{__('ui.Mode')}}">
 			  <svg class="theme-sun" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.96 21.96">
 				<g>
 				  <path class="cls-1" d="M18.13,11A7.15,7.15,0,1,1,11,3.83,7.15,7.15,0,0,1,18.13,11Z"></path>
@@ -104,9 +104,9 @@
 	  </header>
 	  <nav class=""> 
 		<ul class="nav">
-			<li><a href="/{{$lang}}/all/censored">{{__('ui.title.censored')}}</a></li>
-			<li><a href="/{{$lang}}/all/uncensored">{{__('ui.title.uncensored')}}</a></li>
-			<li><a href="/{{$lang}}/all/amateur">{{__('ui.title.amateur')}}</a></li>
+			<li><a href="/{{$lang}}/category/censored">{{__('ui.title.censored')}}</a></li>
+			<li><a href="/{{$lang}}/category/uncensored">{{__('ui.title.uncensored')}}</a></li>
+			<li><a href="/{{$lang}}/category/amateur">{{__('ui.title.amateur')}}</a></li>
 			<li><a href="/{{$lang}}/category">{{__('ui.title.category')}}</a></li>
 			<li><a href="/{{$lang}}/actress_list">{{__('ui.title.actress')}}</a></li>
 			<li><a href="/{{$lang}}/rank/1">{{__('ui.title.rank')}}</a></li>
@@ -138,7 +138,7 @@
 			<li><a href="#">SOD女子社員</a></li>
 		  </ul>
 		</div> -->
-		<div class="keyword__content">
+		<div class="keyword__content" >
 		  <h4 class="keyword__content-title">{{__('ui.rank.rank_title')}}</h4>
 		  <ul class="keyword__content-list">
 			<li><a href="/{{$lang}}/rank/1">{{__('ui.rank.week')}}</a></li>
@@ -157,7 +157,7 @@
 		@endif
 		</div>
 		<div class="search__btn">
-		<button>搜尋</button>
+		<button>{{__('ui.Search')}}</button>
 		<i class="i_search">
 			<svg class="svg" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 23.84 23.84">
 			<g>

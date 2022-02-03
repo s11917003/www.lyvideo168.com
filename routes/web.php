@@ -57,6 +57,7 @@ Route::get('rd/genacc', 'Rd\RdController@genacc');
 	Route::get('/', 'Index\IndexController@home_index');  //HOME
 	Route::get('/{lang}/home', 'Index\IndexController@index');  //HOME
 	Route::get('/{lang}/category', 'Index\IndexController@category');  //文章
+	Route::get('/{lang}/category/{genre}', 'Index\IndexController@category_genre');  //文章
 	Route::post('/{lang}/category', 'Index\IndexController@categoryPost');  //
 	Route::post('/{lang}/category/cancel', 'Index\IndexController@categoryCancel');  //取消自定分類
 	

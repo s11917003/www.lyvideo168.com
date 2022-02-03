@@ -22,7 +22,7 @@ echo $actress->JapaneseName1.'：線上免費試看【JavDic  有碼・無碼・
 @stop
 
 @section('maincontent')
-<div class="artist">
+<div class="artist" style="width:100%">
 	<div class="artist__content">
 	  <figure><img src="/img/Pictures/{{$actress->JapaneseName1}}_coverphoto.jpg"></figure>
 	  <div class="artist__content-info">
@@ -47,19 +47,31 @@ echo $actress->JapaneseName1.'：線上免費試看【JavDic  有碼・無碼・
 		  <a class="i-instagram" href="{{$actress->Instagram  }}"><img src="svg/instagram-brands.svg" alt=""><span>Instagram</span></a>
 		</div>
 		<div class="artist__content-about" style="height:100%;width:100%;">
-			<textarea >{{trim($actress->wiki->Profile)}}</textarea>
+			<textarea >{{trim($actress->wiki->Profile)}}
+			</textarea>
+			
 		</div>
 	  </div>
 	</div>
  
 	<div class="artist__about">
+		
 	 <textarea class="" style="min-height:150px;height:150px;width:100%;border: none;overflow:hidden">{{trim( $actress->wiki->Contents)}}
 	 </textarea>
 	  <div class="artist__about-more">
 		<i class="i-arrow"></i><span>{{__('ui.actress_page.read_more')}}</span><i class="i-arrow"></i>
 	  </div>
 	</div>
-
+	<div class='actress_footer'style=''>
+		<p style=''>
+		  {{ $actress->wiki->APA }}
+		</p>
+		<p style=''>
+		  This article uses material from the Wikipedia article   <a href="{{ $actress->wiki->Wiki_Link }}">{{ $actress->wiki->wiki_name }}</a>, 
+		  <br>which is released under the Creative Commons Attribution-Share-Alike License 3.0
+		 
+		</p>
+	</div>
 	<div class="category">
 		<ul id="category_form" class="category__tags" style="width:100%">
 			<li name="all" class="category__tags-item category__tags-item--active"><a href="#">ALL</a></li>
@@ -67,7 +79,7 @@ echo $actress->JapaneseName1.'：線上免費試看【JavDic  有碼・無碼・
 			<li name="{{$tag->id}}" class="category__tags-item"><a href="#">{{$tag[$lang]}}({{$tag->count}})</a></li>
 			@endforeach
 		</ul> 
-		<div class="category_more"><a href="#"><span>{{__('ui.more')}}</span> <i class="i-arrow "></i></a></div>
+		<div class="category_more"><a href="#"  class="{{$lang}}"><span>{{__('ui.tag.more')}}</span> <i class="i-arrow "></i></a></div>
 	  </div>
 	<div class="list" style=" display: inline;">
 		<div class="list__wrap" style="width: 100%;"> 
@@ -78,7 +90,7 @@ echo $actress->JapaneseName1.'：線上免費試看【JavDic  有碼・無碼・
 					<div class="list__item-info">
 					<h5>{{ $video_actress->video_id }}</h5>
 					<h1>{{ $video_actress->title }}</h1>
-					@if ($video_actress->release_date)<div class="date">{{$video_actress->release_date}}</div> @endif
+					@if ($video_actress->release_date)<div class="date">{{date('Y-m-d', strtotime($video_actress->release_date)) }}</div> @endif
 					</div>
 				</a> 
 				@endforeach
@@ -89,26 +101,15 @@ echo $actress->JapaneseName1.'：線上免費試看【JavDic  有碼・無碼・
  
 @stop	
 @section('footer')
-<div class='actress_footer'style=''>
-	<p style=''>
-	  {{ $actress->wiki->APA }}
-	</p>
-	<p style=''>
-	  This article uses material from the Wikipedia article   <a href="{{ $actress->wiki->Wiki_Link }}">{{ $actress->wiki->wiki_name }}</a>, 
-	  <br>which is released under the Creative Commons Attribution-Share-Alike License 3.0
-	 
-	</p>
-</div>
 @stop	
 @section('footscript')
 <style>
 .actress_footer {
-	padding: 8rem 3rem 0 3rem;
+	padding: 1rem 3rem 0 3rem;
 	text-align: center;
 	color: #000;
 	background: inherit;
 	font-size: 0.625rem;
-
 }
 .actress_footer p{
 	line-height: 1.5;
@@ -116,6 +117,7 @@ echo $actress->JapaneseName1.'：線上免費試看【JavDic  有碼・無碼・
 	margin: 0 auto;
 	width: 60%;
     word-break: break-all;
+	color: var(--text-color);
 }
 @media screen and (max-width: 480px){
 .actress_footer p{

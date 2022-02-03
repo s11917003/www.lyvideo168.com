@@ -41,14 +41,14 @@ When My Little Stepsister Watched My Wife Cumming Like Crazy, She Decided To... 
 	<div class="container__header">{{ __('ui.new')}}</div>
 	<div class="news" data-tab="">
 	  <ul class="news-tab__header">
-		<li class="news-tab__title news-tab__title--active">{{__('ui.title.censored')}} FANZE</li>
-		<li class="news-tab__title">{{__('ui.title.censored')}} Prestige</li>
+		<li class="news-tab__title news-tab__title--active">{{__('ui.title.censored')}} - FANZA</li>
+		<li class="news-tab__title">{{__('ui.title.censored')}} - Prestige</li>
 		<li class="news-tab__title">{{__('ui.title.uncensored')}}</li>
 		<li class="news-tab__title">{{__('ui.title.amateur')}}</li>
 	  </ul>
 	  <div class="news-tab__content news-tab__content--active">
 		@if(count($video1) > 0)
-		<div class="news__title">{{__('ui.title.censored')}} FANZE</div>
+		<div class="news__title">{{__('ui.title.censored')}} - FANZA</div>
 		@endif
 		<div class="news__list list">  
 		@foreach ($video1 as $video)
@@ -56,9 +56,9 @@ When My Little Stepsister Watched My Wife Cumming Like Crazy, She Decided To... 
 		<a href="/{{$lang}}/video/{{$video->video_id}}${{ $video->actress}}" class="list__item">
 			<figure><img src="{{ $video->cover_img }}"></figure>
 			<div class="list__item-info">
-			<h6>{{__('ui.title.censored')}} FANZE {{$video->video_id}}</h6>
+			<h6>{{__('ui.title.video_censored')}} FANZA {{$video->video_id}}</h6>
 			<p>{{$video->title}}</p>
-			@if($video->release_date)<div class="date">{{$video->release_date}}</div> @endif
+			@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date))}}</div> @endif
 			</div>
 		</a>
 		@endforeach
@@ -67,7 +67,7 @@ When My Little Stepsister Watched My Wife Cumming Like Crazy, She Decided To... 
 	  </div>
 	  <div class="news-tab__content">
 		@if(count($video2) > 0)
-		<div class="news__title">{{__('ui.title.censored')}} Prestige</div>
+		<div class="news__title">{{__('ui.title.censored')}} - Prestige</div>
 		@endif
 		<div class="news__list list">
 		  
@@ -76,9 +76,9 @@ When My Little Stepsister Watched My Wife Cumming Like Crazy, She Decided To... 
 			<a href="/{{$lang}}/video/{{$video->video_id}}${{ $video->actress}}" class="list__item">
 				<figure><img src="{{ $video->cover_img }}"></figure>
 				<div class="list__item-info">
-					<h6>{{__('ui.title.censored')}} Prestige {{$video->video_id}}</h6>
+					<h6>{{__('ui.title.video_censored')}} Prestige {{$video->video_id}}</h6>
 					<p>{{$video->title}}</p>
-					@if($video->release_date)<div class="date">{{$video->release_date}}</div> @endif
+					@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date)) }}</div> @endif
 				</div>
 			</a>
 			@endforeach
@@ -94,9 +94,9 @@ When My Little Stepsister Watched My Wife Cumming Like Crazy, She Decided To... 
 			<a href="/{{$lang}}/video/{{$video->video_id}}${{ $video->actress}}" class="list__item">
 				<figure><img src="{{ $video->cover_img }}"></figure>
 				<div class="list__item-info">
-					<h6>{{__('ui.title.uncensored')}} {{$video->video_id}}</h6>
+					<h6>{{__('ui.title.video_uncensored')}} {{$video->video_id}}</h6>
 					<p>{{$video->title}}</p>
-					@if($video->release_date)<div class="date">{{$video->release_date}}</div> @endif
+					@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date)) }}</div> @endif
 				</div>
 			</a>
 			@endforeach
@@ -115,9 +115,9 @@ When My Little Stepsister Watched My Wife Cumming Like Crazy, She Decided To... 
 			<a href="/{{$lang}}/video/{{$video->video_id}}${{ $video->actress}}" class="list__item">
 				<figure><img src="{{ $video->cover_img }}"></figure>
 				<div class="list__item-info">
-					<h6>{{__('ui.title.amateur')}} {{$video->video_id}}</h6>
+					<h6>{{__('ui.title.video_amateur')}} {{$video->video_id}}</h6>
 					<p>{{$video->title}}</p>
-					@if($video->release_date)<div class="date">{{$video->release_date}}</div> @endif
+					@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date)) }}</div> @endif
 				</div>
 			</a>
 			@endforeach
