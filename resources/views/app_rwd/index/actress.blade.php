@@ -146,6 +146,43 @@ textarea {
 }
 </style>
 <script>
+	function sendAjax(tag){
+		$.ajax({
+				headers: {'X-CSRF-TOKEN': "{{ csrf_token() }}"},
+				type:"POST",
+				url:"/{{$lang}}/actress",
+				dataType:"json",
+				data:{tag,id:'{{$id}}'},
+				success:function(result){
+					if(result.videos){
+						$("#video_list").empty()
+						result.videos.forEach(function(item){
+						var dateText =''
+					 
+						item.release_date = item.release_date.replace('日', '') 
+						item.release_date = item.release_date.replace(/[\u4e00-\u9fff\u3400-\u4dff\uf900-\ufaff]/g, '-') 
+				
+						if(item.release_date){
+							var date = new Date(item.release_date)
+							dateText =  date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+						}
+	
+						video = `<a href="/{{$lang}}/video/`+item.video_id+`$`+item.actress+`" class="list__item">
+						<figure><img src="`  +item.cover_img+  `"></figure>
+						<div class="list__item-info">
+						<h5>`  +item.video_id+  `</h5>
+						<h1>`  +item.title+  `</h1>
+						<div class="date">`  +  dateText +  `</div>
+						</div>
+						</a>`
+
+						$("#video_list").append(video)
+						return;
+					});
+					}
+				}
+			});	
+	}
 	 window.onload = function() {
 		$('.category').find('li').each(function(){
 			$(this).find('a').attr("href","javascript:void(0);");
@@ -212,7 +249,7 @@ textarea {
 		 
 		});
 
-		// sendAjax(arr,1);
+		 sendAjax(arr,1);
 	});
 	
 	return;
