@@ -136,7 +136,7 @@ $(function(){
 						} else  {
 							tag = element.jp
 						}
-						actress =	`<li><a href="/{{$lang}}/category?cate=`+element.id+`"   class="female-list__item">`+tag+`</a></li>`;
+						actress =	`<li><a style='font-size: 15px;' href="/{{$lang}}/category?cate=`+element.id+`"   class="female-list__item">`+tag+`</a></li>`;
 						$(".tag_popular_list").append(actress)
 					});
 					result.video_series_popular.forEach(element => {

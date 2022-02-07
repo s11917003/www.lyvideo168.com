@@ -20,14 +20,23 @@ return [
         'rank' => '排行榜',],
     'Top_Keywords' => '熱門關鍵字',
     'Tag' => '影片標籤',
+    'Series' => 'AV系列',
+    'actress' => 'AV女優',
     'rank' =>[
-        'rank_title' => '排行榜一覽',
+        'rank_title' => '排行榜',
         'week' => '每周排行榜',
         'month' => '每月排行榜'],
     'search_result' => '搜索結果',
     'Category_Search'  => '類別搜尋',
     'tag' =>[
-        'more' => '收起',
+        'all' => '全部',
+        'censored' => '有碼(DMM Group)',
+        'censored1' => '有碼(Prestige Group)',
+        'uncensored' => '無碼',
+        'amateur' => 'FC2',
+        
+        'more' => '更多',
+        'collapse' => '收起',
         'VRExclusive' => 'VR專用',
         'HiDef' => '高畫質',
         'Featured_Actress' => '女優作品',
@@ -75,8 +84,8 @@ return [
         'Swimsuits' => '泳衣',
         'Glasses' => '眼鏡',
 
-        'Source' => '來源',
-        'Form' => '形式',
+        'Source' => '影片來源',
+        'Form' => '影片形式',
         'Role' => '角色',
         'figure' => '身材',
         'playing' => '玩法',
@@ -87,10 +96,10 @@ return [
     'meta' =>[
         'keywords' => '線上看, 日本A片',
     ],
-    'actresses_list' => 'AV女優列表',
+    'actresses_list' => '女優列表',
     'Starring' => '出演影片',
     'actress_page' => [
-        'videos' => '影片',
+        'videos' => '部影片',
         'read_more' => '閱讀更多',
         'source' => '來源',
         'tags' => '類型',
@@ -107,8 +116,8 @@ return [
         'WATCH_FREE_SAMPLE'  => '試播影片',
         'WATCH_FULL_VIDEO'  => '觀看全片',
         'VIDEO_INTRODUCTION'  => '影片介紹',
-        'STARRING' => '同女優出演',
-        'LIKE' => '類似影片',
+        'STARRING' => '同女優(們)還出演了',
+        'LIKE' => '你還可能喜歡',
     ],
 
 ];

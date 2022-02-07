@@ -31,9 +31,39 @@
 			<div class="list">
 				@foreach ($video as $post)
 				@foreach ($post->video as $video)	
-				@if($video->video_lang == $langIndex)
+				@if ( $cate == 'uncensored' )
+					@if($lang == 'zh' && $video->video_lang ==3)	
+						<a href="/{{$lang}}/video/{{$video->video_id}}${{$video->actress}}" class="list__item">
+							@if ($lang == 'jp') <p class="list__num">{{$post->rank}}位</p>
+							@else <p class="list__num">Top {{$post->rank}}.</p>
+							@endif
+						<figure><img src="{{$video->cover_img}}"></figure>
+						<div class="list__item-info">
+						<h5>{{$video->video_id}}</h5>
+						<h1>【{{$video->title}}】</h1>
+						@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date)) }}</div> @endif 
+						</div>
+						</a>
+					@elseif( $lang == 'jp' && $video->video_lang ==3) ||    ($lang == 'en' && $video->video_lang ==2))
+						<a href="/{{$lang}}/video/{{$video->video_id}}${{$video->actress}}" class="list__item">
+							@if ($lang == 'jp') <p class="list__num">{{$post->rank}}位</p>
+							@else <p class="list__num">Top {{$post->rank}}.</p>
+							@endif
+						<figure><img src="{{$video->cover_img}}"></figure>
+						<div class="list__item-info">
+						<h5>{{$video->video_id}}</h5>
+						<h1>【{{$video->title}}】</h1>
+						@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date)) }}</div> @endif 
+						</div>
+						</a>
+					@endif	
+				@else 
+				 
+					@if( $cate == 'fanza' && $video->video_lang == $langIndex)
 					<a href="/{{$lang}}/video/{{$video->video_id}}${{$video->actress}}"  class="list__item">
-					<p class="list__num">Top {{$post->rank}}.</p>
+						@if ($lang == 'jp') <p class="list__num">{{$post->rank}}位</p>
+						@else <p class="list__num">Top {{$post->rank}}.</p>
+						@endif
 					
 				
 					<figure><img src="{{$video->cover_img}}"></figure>
@@ -42,9 +72,25 @@
 					<h1>【{{$video->title}}】</h1>
 					@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date))}}</div> @endif
 					</div>
+					</a>
+					
+					@else( $cate != 'fanza')
+					<a href="/{{$lang}}/video/{{$video->video_id}}${{$video->actress}}"  class="list__item">
+						@if ($lang == 'jp') <p class="list__num">{{$post->rank}}位</p>
+						@else <p class="list__num">Top {{$post->rank}}.</p>
+						@endif
+					
+				
+					<figure><img src="{{$video->cover_img}}"></figure>
+					<div class="list__item-info">
+					<h5>{{$video->video_id}}</h5>
+					<h1>【{{$video->title}}】</h1>
+					@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date))}}</div> @endif
+					</div>
+					</a>
 					@endif
+				@endif
 					@endforeach
-				</a>
 				
 				@endforeach
 			</div>
@@ -53,22 +99,68 @@
 
 		<div class="list__wrap month" style="display: none;">
 			<div class="list">
+			
 				@foreach ($video1 as $post)	
 				@foreach ($post->video as $video)
-				@if($video->video_lang == $langIndex)
+				 
+				@if ( $cate == 'uncensored' )
+					@if($lang == 'zh' && $video->video_lang ==3)	
+						<a href="/{{$lang}}/video/{{$video->video_id}}${{$video->actress}}" class="list__item">
+							@if ($lang == 'jp') <p class="list__num">{{$post->rank}}位</p>
+							@else <p class="list__num">Top {{$post->rank}}.</p>
+							@endif
+						<figure><img src="{{$video->cover_img}}"></figure>
+						<div class="list__item-info">
+						<h5>{{$video->video_id}}</h5>
+						<h1>【{{$video->title}}】</h1>
+						@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date)) }}</div> @endif 
+						</div>
+						</a>
+					@elseif( $lang == 'jp' && $video->video_lang ==3) ||    ($lang == 'en' && $video->video_lang ==2))
+						<a href="/{{$lang}}/video/{{$video->video_id}}${{$video->actress}}" class="list__item">
+							@if ($lang == 'jp') <p class="list__num">{{$post->rank}}位</p>
+							@else <p class="list__num">Top {{$post->rank}}.</p>
+							@endif
+						<figure><img src="{{$video->cover_img}}"></figure>
+						<div class="list__item-info">
+						<h5>{{$video->video_id}}</h5>
+						<h1>【{{$video->title}}】</h1>
+						@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date)) }}</div> @endif 
+						</div>
+						</a>
+					@endif	
+				@else
+					@if( $cate == 'fanza' && $video->video_lang == $langIndex)
 					<a href="/{{$lang}}/video/{{$video->video_id}}${{$video->actress}}" class="list__item">
-					<p class="list__num">Top {{$post->rank}}.</p>
+						@if ($lang == 'jp') <p class="list__num">{{$post->rank}}位</p>
+						@else <p class="list__num">Top {{$post->rank}}.</p>
+						@endif
 				
 					
 					<figure><img src="{{$video->cover_img}}"></figure>
 					<div class="list__item-info">
 					<h5>{{$video->video_id}}</h5>
 					<h1>【{{$video->title}}】</h1>
-					@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date)) }}</div> @endif
+					@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date)) }}</div> @endif 
 					</div>
-					@endif
-					@endforeach
-				</a>
+					</a>
+					@else( $cate != 'fanza')
+					<a href="/{{$lang}}/video/{{$video->video_id}}${{$video->actress}}"  class="list__item">
+						@if ($lang == 'jp') <p class="list__num">{{$post->rank}}位</p>
+						@else <p class="list__num">Top {{$post->rank}}.</p>
+						@endif
+					
+				
+					<figure><img src="{{$video->cover_img}}"></figure>
+					<div class="list__item-info">
+					<h5>{{$video->video_id}}</h5>
+					<h1>【{{$video->title}}】</h1>
+					@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date))}}</div> @endif
+					</div>
+					</a>
+					@endif	
+				@endif
+					@endforeach				
 				@endforeach
 			</div>
 		
@@ -145,7 +237,7 @@
 								<figure><img src="`  +item.cover_img+  `"></figure>
 								<div class="list__item-info">
 								<h5>`  +item.video_id+  `</h5>
-								<h6>【`  +item.title+  `】</h6>
+								<h1>【`  +item.title+  `】</h1>
 								<div class="date">`  +dateText+  `</div>
 								</div>
 								</a>`

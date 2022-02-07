@@ -63,7 +63,7 @@
 						<figure><img src="`  +item.cover_img+  `"></figure>
 						<div class="list__item-info">
 						<h5>`  +item.video_id+  `</h5>
-						<h6>【`  +item.title+  `】</h6>
+						<h1>【`  +item.title+  `】</h1>
 						<div class="date">`   +   dateText +  `</div>
 						</div>
 						</a>`

@@ -42,36 +42,38 @@ echo $actress->JapaneseName1.'：線上免費試看【JavDic  有碼・無碼・
 		</div>
 		<div class="artist__content-link">
 		  <a class="i-twitter" href="{{$actress->Twitter  }}">
-			<img src="svg/twitter-brands.svg" alt="">
+			<img src="/svg/twitter-brands.svg" alt="">
 			<span>Twitter</span></a>
-		  <a class="i-instagram" href="{{$actress->Instagram  }}"><img src="svg/instagram-brands.svg" alt=""><span>Instagram</span></a>
+		  <a class="i-instagram" href="{{$actress->Instagram  }}"><img src="/svg/instagram-brands.svg" alt=""><span>Instagram</span></a>
 		</div>
 		<div class="artist__content-about" style="height:100%;width:100%;">
-			<textarea >{{trim($actress->wiki->Profile)}}
-			</textarea>
-			
+				<textarea >{{trim($actress->wiki->Profile)}}
+				</textarea>
+			 
 		</div>
 	  </div>
 	</div>
  
 	<div class="artist__about">
+	<div  class='actress_wiki'  style="min-height:150px;height:auto;width:100%;border: none;overflow:hidden" style=''>
+	 <textarea style="height:100px">{{trim( $actress->wiki->Contents)}}
+	</textarea>
+	<div class='actress_footer'style=''>
+		<p style=''>
+		{{ $actress->wiki->APA }}
+		</p>
+		<p style=''>
+		This article uses material from the Wikipedia article   <a href="{{ $actress->wiki->Wiki_Link }}">{{ $actress->wiki->wiki_name }}</a>, 
+		<br>which is released under the Creative Commons Attribution-Share-Alike License 3.0
 		
-	 <textarea class="" style="min-height:150px;height:150px;width:100%;border: none;overflow:hidden">{{trim( $actress->wiki->Contents)}}
-	 </textarea>
+		</p>
+	</div>
+	</div>
 	  <div class="artist__about-more">
 		<i class="i-arrow"></i><span>{{__('ui.actress_page.read_more')}}</span><i class="i-arrow"></i>
 	  </div>
 	</div>
-	<div class='actress_footer'style=''>
-		<p style=''>
-		  {{ $actress->wiki->APA }}
-		</p>
-		<p style=''>
-		  This article uses material from the Wikipedia article   <a href="{{ $actress->wiki->Wiki_Link }}">{{ $actress->wiki->wiki_name }}</a>, 
-		  <br>which is released under the Creative Commons Attribution-Share-Alike License 3.0
-		 
-		</p>
-	</div>
+ 
 	<div class="category">
 		<ul id="category_form" class="category__tags" style="width:100%">
 			<li name="all" class="category__tags-item category__tags-item--active"><a href="#">ALL</a></li>
@@ -124,7 +126,7 @@ echo $actress->JapaneseName1.'：線上免費試看【JavDic  有碼・無碼・
 	width: 90%;
 }
 }
-.artist__about textarea {
+.artist__about .actress_wiki {
 	min-height: 150px;
 	height: 150px;
 }
@@ -207,7 +209,7 @@ textarea {
 	$('textarea').each(function() {
         $(this).height($(this).prop('scrollHeight'));
     });
-	const $aboutCont = $('.artist__about textArea');
+	const $aboutCont = $('.artist__about .actress_wiki');
     $aboutCont.css('max-height','150px')
 	const $aboutContMore = $('.artist__about-more');
 	//   if ($aboutCont.height() > 72) {

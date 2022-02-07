@@ -36,9 +36,8 @@ When My Little Stepsister Watched My Wife Cumming Like Crazy, She Decided To... 
 @stop
 @section('maincontent')
 
-	
   <div class="container" style="min-height: 500px;">
-	<div class="container__header">{{ __('ui.new')}}</div>
+	<div class="container__header" style="display: block;">{{ __('ui.new')}}</div>
 	<div class="news" data-tab="">
 	  <ul class="news-tab__header">
 		<li class="news-tab__title news-tab__title--active">{{__('ui.title.censored')}} - FANZA</li>

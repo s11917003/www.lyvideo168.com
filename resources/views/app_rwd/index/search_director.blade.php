@@ -30,7 +30,7 @@
 						<figure><img src="{{$post->cover_img}}"></figure>
 						<div class="list__item-info">
 							<h5>{{$post->video_id}}</h5>
-							<h6>{{$post->title}}</h6>
+							<h1>{{$post->title}}</h1>
 							@if($post->release_date)<div class="date">{{date('Y-m-d', strtotime($post->release_date)) }}</div> @endif
 						</div>
 					</a>

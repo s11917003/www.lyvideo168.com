@@ -22,11 +22,11 @@
 	<div class="category ">
 	  <div class="category__title">{{__('ui.tag.Source')}}</div>
 	  <ul id='category_source' class="category__tags">
-		<li name="all" class="category__tags-item category__tags-item--active"><a href="#">ALL</a></li>
-		<li name="censored_f" class="category__tags-item category__tags-item--active"><a href="#">{{__('ui.title.censored')}} - FANZA</a></li>
-		<li name="censored_p" class="category__tags-item category__tags-item--active "> <a href="#">{{__('ui.title.censored')}} - PRESTIGE</a> </li>
-		<li name="uncensored"  class="category__tags-item category__tags-item--active "> <a href="#">{{__('ui.title.uncensored')}}</a> </li>
-		<li name="FC2" class="category__tags-item category__tags-item--active"><a href="#">{{__('ui.title.amateur')}}</a></li>
+		<li name="all" class="category__tags-item category__tags-item--active"><a href="#">{{__('ui.tag.all')}}</a></li>
+		<li name="censored_f" class="category__tags-item category__tags-item--active"><a href="#">{{__('ui.tag.censored')}}</a></li>
+		<li name="censored_p" class="category__tags-item category__tags-item--active "> <a href="#">{{__('ui.tag.censored1')}}</a> </li>
+		<li name="uncensored"  class="category__tags-item category__tags-item--active "> <a href="#">{{__('ui.tag.uncensored')}}</a> </li>
+		<li name="FC2" class="category__tags-item category__tags-item--active"><a href="#">{{__('ui.tag.amateur')}}</a></li>
 	  </ul>
 	  <div class=" category_more category_source_more" ><a href="#"  class="{{$lang}}"><span>{{__('ui.tag.more')}}</span> <i class="i-arrow"></i></a></div>
 	</div>
@@ -301,7 +301,7 @@
 						<figure><img src="`  +item.cover_img+  `"></figure>
 						<div class="list__item-info">
 						<h5>`  +item.video_id+  `</h5>
-						<h6>`  +item.title+  `</h6>
+						<h1>`  +item.title+  `</h1>
 						<div class="date">`  +  dateText +   `</div>
 						</div>
 						</a>`

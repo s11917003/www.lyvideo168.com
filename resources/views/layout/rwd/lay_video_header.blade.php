@@ -116,7 +116,7 @@
 		<div class="keyword">
 		<div class="keyword__title">{{__('ui.Top_Keywords')}}</div>
 		<div class="keyword__content">
-		  <h4 class="keyword__content-title">{{__('ui.title.actress')}}</h4>
+		  <h4 class="keyword__content-title">{{__('ui.actress')}}</h4>
 		  <ul class="actress_popular_list keyword__content-list">
 		 
 		  </ul>
@@ -127,17 +127,11 @@
  
 		  </ul>
 		</div>
-		<!-- <div class="keyword__content">
-		  <h4 class="keyword__content-title">AV系列</h4>
-		  <ul class="keyword__content-list">
-			<li><a href="#">SOD女子社員</a></li>
-			<li><a href="#">SOD女子社員</a></li>
-			<li><a href="#">SOD女子社員</a></li>
-			<li><a href="#">SOD女子社員</a></li>
-			<li><a href="#">SOD女子社員</a></li>
-			<li><a href="#">SOD女子社員</a></li>
-		  </ul>
-		</div> -->
+    	<div class="keyword__content">
+    	  <h4 class="keyword__content-title">{{__('ui.Series')}}</h4>
+    	  <ul class="series_popular_list keyword__content-list">		 
+    	  </ul>
+    	</div>
 		<div class="keyword__content" >
 		  <h4 class="keyword__content-title">{{__('ui.rank.rank_title')}}</h4>
 		  <ul class="keyword__content-list">

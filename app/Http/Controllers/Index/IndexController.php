@@ -225,8 +225,8 @@ class IndexController extends Controller {
 		}
 		$webLangIndex = $this->language[$lang];
 
-		$video_actress_popular = Video_actress::whereIn('id',[2,3,4,5,6,11,12,13,26,28,30])->get();// 女優table;
-		$tag_actress_popular = Video_tag::whereIn('id',[2,14,22,24,93,38,8,28,17,51,53,87])->get();
+		$video_actress_popular = Video_actress::whereIn('id',[2,3,4,5,11,12,26,28,31,106,171,421,593,641,830])->get();// 女優table;
+		$tag_actress_popular = Video_tag::whereIn('id',[15,22,24,28,38,53,58,65,71,84,88,103,151,154,198])->get();
 
 		$series = [];
 		if($lang == 'zh') {
@@ -1184,9 +1184,9 @@ class IndexController extends Controller {
 		$fanza = Video_rank::where('video_source','fanza')->where('type',$type)->where('video_lang',$webLangIndex)->whereHas('video', function ($query)  use ($webLangIndex){
 			$query->where('video_lang', '=', $webLangIndex );
 	   })->orderBy('rank')->limit(8)->get();
-		$prestige = Video_rank::where('video_source','mgstage')->where('type',$type)->where('video_lang',$webLangIndex)->with('video')->orderBy('rank')->limit(8)->get();
-		$uncensored = Video_rank::where('video_source','uncensored')->where('type',$type)->where('video_lang',$webLangIndex)->with('video')->orderBy('rank')->limit(8)->get();
-		$amateur = Video_rank::where('video_source','amateur')->where('type',$type)->where('video_lang',$webLangIndex)->with('video')->orderBy('rank')->limit(8)->get();
+		$prestige = Video_rank::where('video_source','mgstage')->where('type',$type)->where('video_lang',$this->language['jp'])->with('video')->orderBy('rank')->limit(8)->get();
+		$uncensored = Video_rank::where('video_source','uncensored')->where('type',$type)->where('video_lang',($lang == 'zh') ? $this->language['jp'] : $webLangIndex)->with('video')->orderBy('rank')->limit(8)->get();
+		$amateur = Video_rank::where('video_source','amateur')->where('type',$type)->where('video_lang',$this->language['jp'])->with('video')->orderBy('rank')->limit(8)->get();
 		 
 		return view('app_rwd.index.rank',['type'=> $type ,
 		'fanza'=>$fanza,
@@ -1207,14 +1207,21 @@ class IndexController extends Controller {
 		$webLangIndex = $this->language[$lang];
 		//DB::enableQueryLog(); // Enable query log
 
-  
-		$post = Video_rank::where('video_source',$cate)->where('type',1)->where('video_lang',$webLangIndex)->with('video')->orderBy('rank')->get();
+        $index = $webLangIndex;
+		$source = $cate;
+		if($cate == 'prestige') {
+			$index = 3;
+			$source = 'mgstage';
+		} else if ($cate == 'uncensored') {
+			$index = ($lang == 'zh') ? $this->language['jp'] : $webLangIndex;
+		} else if ($cate == 'amateur') {
+			$index = 3;
+		}
 
-	 
-		$post1 = Video_rank::where('video_source',$cate)->where('type',2)->where('video_lang',$webLangIndex)->whereHas('video', function ($query)  use ($webLangIndex){
-			$query->where('video_lang', '=', $webLangIndex );
-	   })->orderBy('rank')->get();
 		
+		$post = Video_rank::where('video_source',$source)->where('type',1)->where('video_lang',$index)->with('video')->orderBy('rank')->get();
+		$post1 = Video_rank::where('video_source',$source)->where('type',2)->where('video_lang',$index)->with('video')->orderBy('rank')->get();
+		 	
 		return view('app_rwd.index.list',[
 		'cate'=>$cate,
 		'video'=>$post,

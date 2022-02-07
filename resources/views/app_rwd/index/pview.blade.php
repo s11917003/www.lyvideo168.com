@@ -460,7 +460,7 @@
 						<figure><img src="{{$video_actress->cover_img}}"></figure>
 						<div class="list__item-info">
 							<h5>{{$video_actress->video_id}}</h5>
-							<h6>{{$video_actress->title}}</h6>
+							<h16>{{$video_actress->title}}</h1>
 							@if($video_actress->release_date)<div class="date">{{date('Y-m-d', strtotime($video_actress->release_date)) }}</div> @endif
 						</div>
 					</a>
@@ -479,7 +479,7 @@
 						<figure><img src="{{$video_tag->cover_img}}"></figure>
 						<div class="list__item-info">
 							<h5>{{$video_tag->video_id}}</h5>
-							<h6>{{$video_tag->title}}</h6>
+							<h1>{{$video_tag->title}}</h1>
 							@if($video_tag->release_date)<div class="date">{{date('Y-m-d', strtotime($video_tag->release_date)) }}</div> @endif
 						</div>
 					</a>
