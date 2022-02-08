@@ -1022,7 +1022,7 @@ class IndexController extends Controller {
 
 		$webLangIndex = $this->language[$lang];
 		$videos = Video::where('video_lang',$webLangIndex)->where('studio', $search)->get();//video table;
-		var_dump( DB::getQueryLog());
+		//var_dump( DB::getQueryLog());
 		 
 		return view('app_rwd.index.search_director',['videos' => $videos,'search'=>$search,'lang'=>$lang]);
 	}

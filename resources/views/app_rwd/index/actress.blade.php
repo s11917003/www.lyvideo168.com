@@ -47,7 +47,7 @@ echo $actress->JapaneseName1.'：線上免費試看【JavDic  有碼・無碼・
 		  <a class="i-instagram" href="{{$actress->Instagram  }}"><img src="/svg/instagram-brands.svg" alt=""><span>Instagram</span></a>
 		</div>
 		<div class="artist__content-about" style="height:100%;width:100%;">
-				<textarea >{{trim($actress->wiki->Profile)}}
+				<textarea disabled>{{trim($actress->wiki->Profile)}}
 				</textarea>
 			 
 		</div>
@@ -56,7 +56,7 @@ echo $actress->JapaneseName1.'：線上免費試看【JavDic  有碼・無碼・
  
 	<div class="artist__about">
 	<div  class='actress_wiki'  style="min-height:150px;height:auto;width:100%;border: none;overflow:hidden" style=''>
-	 <textarea style="height:100px">{{trim( $actress->wiki->Contents)}}
+	 <textarea disabled style="height:100px">{{trim( $actress->wiki->Contents)}}
 	</textarea>
 	<div class='actress_footer'style=''>
 		<p style=''>
@@ -198,6 +198,11 @@ textarea {
 		const $this = $(this);
 		$this.find('.i-arrow').toggleClass('active');
 		$this.parent('.category').toggleClass('category--open');
+		if($this.parent('.category').hasClass('category--open')){
+		    $this.find('span').html(`{{__('ui.tag.collapse')}}`)
+		} else {
+		    $this.find('span').html(`{{__('ui.tag.more')}}`)
+		}
 	});
 	 
 	//   $('.category__more').on('click', function (e) {

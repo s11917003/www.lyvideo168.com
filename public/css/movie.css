@@ -281,7 +281,7 @@ main { max-width: 1300px; margin: 0 auto; padding: 8.125rem 1rem 0 1rem; }
 
 .topic__content-stars { color: var(--primary-color); }
 
-.topic__content-name { font-size: 1.5rem; font-weight: bold; line-height: 2; }
+.topic__content-name {  font-size: 1rem; font-weight: bold; line-height: 1.5; }
 
 .topic__content-keyword { margin-bottom: 0.5rem; color: var(--movie-text); }
 

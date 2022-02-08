@@ -2930,14 +2930,19 @@ label {
 	width: 100%;
   }
   .category__title {
-	width:100px;
+	min-width: 100px;
+	font-size: 12px;
   }	
+  .category__title::after {
+    position: absolute;
+    right: 0px;
+  }
   .category_more .zh {
 	width: 70px;
   }
   .category_more a {
     display: block;
-	width: 90px;
+	width: 85px;
     padding: 0 8px;
     line-height: 1.8;
     font-weight: bold;
@@ -2974,6 +2979,18 @@ label {
 
 .vjs-poster {
 	background-color: #FFF;
+}
+.category_more span {
+    min-width: 40px;
+    text-align: center;
+}
+.topic__content-name a{
+	margin-bottom: 0.5rem;
+	color: var(--text-color);
+}
+.topic__content-keyword a {
+    margin-bottom: 0.5rem;
+    color: var(--movie-text);
 }
 @media screen and (min-width:480px) {
 	.artist {

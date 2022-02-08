@@ -10,6 +10,7 @@
 <link href="/css/respon.css" rel="stylesheet" type="text/css">
 <link href="/css/bootstrap-4.0.0.css" rel="stylesheet">
 <link href="/css/index.css" rel="stylesheet" type="text/css">
+<link href="/css/movie.css" rel="stylesheet" type="text/css">
 <link href="/css/search-list.css" rel="stylesheet" type="text/css">
 <link href="/css/list.css" rel="stylesheet" type="text/css">
 <link href="/css/videojs-contrib-ads.css" rel="stylesheet">

@@ -256,13 +256,14 @@ main { display: flex; max-width: 1440px; margin: 0 auto; padding: 8.125rem 1rem 
 
 .category__title { position: relative; font-weight: bold; color: var(--tags-title); line-height: 1.8; }
 
-.category__title::after { content: '|'; position: relative; top: -1.5px; display: inline-block; color: var(--tags-title); margin: 0 8px; }
+.category__title::after { content: '|';   top: -1.5px; display: inline-block; color: var(--tags-title); margin: 0 8px; }
 
 .category__tags { width: calc(100% - 122px); height: 36px; overflow: hidden; }
 
 .category__tags-item { display: inline-block; margin-bottom: 8px; }
 
-.category__tags-item a { display: block; padding: 0 8px; line-height: 1.8; font-weight: bold; color: var(--tags-text); background: var(--tags-background); border-radius: 4px; }
+.category__tags-item a { display: block; font-size: 14px;
+  padding: 2px 4px; line-height: 1.8; font-weight: bold; color: var(--tags-text); background: var(--tags-background); border-radius: 4px; }
 
 .category__tags-item a:hover { text-decoration: none; color: #fff; background: var(--primary-color); }
 

@@ -276,63 +276,61 @@
 									</td>		
 								</tr>
 								<tr>
-									<td class="" colspan>
+									<td class="" colspan=2>
 										@if(!is_null($video->actressData))
+										<div class="topic__content-name">
 										@foreach ($video->actressData as $data )
-												<a href='/{{$lang}}/actress/{{ $data["id"]}}'  >{{ $data['name'] }}</a>
+											<a href='/{{$lang}}/actress/{{ $data["id"]}}'  >{{ $data['name'] }}</a>
 										@endforeach	
+										</div>
 										@endif
 									
 									</td>
 								</tr>
 								<tr>
-								 
+							 
 									<td colspan =2 style="padding-bottom:10px">
 										<!-- <a href="" title="HyakkinTV">{{ $video->label }}</a> -->
 										@if ($video_tag)
+										<ul class="topic__content-keyword"> 
 											@foreach ($video_tag as $tag )
-											<a href="/{{$lang}}/category?cate={{  $tag->tag_id   }}" class="  m-2 pl-2 ml-1" >{{$tag->tagName }} </a>
+											<li> <a href="/{{$lang}}/category?cate={{  $tag->tag_id   }}" class="  " >{{$tag->tagName }} </a></li>
 											@endforeach	
+										</ul>
 										@endif
 									</td>
 								</tr>					 
 								<tr>
-								<td><h1>{{__('ui.video_view.DVD_ID')}}</h1></td>
-								<td>{{ $video->dvd_id }}</td>
+								<td  colspan =2>{{__('ui.video_view.DVD_ID')}}:{{ $video->dvd_id }}</td>
 								</tr>
 								<tr>
-								<td><h1>{{__('ui.video_view.Release_Date')}}</h1></td>
-								<td>{{ $video->release_date }}</td>
+								<td  colspan =2>{{__('ui.video_view.Release_Date')}}:{{ $video->release_date }}</td>
 								</tr>
 								<tr>
-								<td><h1>{{__('ui.video_view.Runtime')}}</h1></td>
-								<td id='Runtime' ></td>
+								<td colspan =2>{{__('ui.video_view.Runtime')}}: </td>
 								</tr>
 								<tr>
-								<td><h1>{{__('ui.video_view.Director')}}</h1></td>
-								<td>
+								<td colspan =2>{{__('ui.video_view.Director')}}: 
 									@if ( $video->director)
 									 <a href="/{{$lang}}/director?search={{$video->director}}" class="  m-2 pl-2 ml-1" >{{ $video->director }} </a>
 								 	@endif 
 								</td>
 								</tr>
 								<tr>
-								<td><h1>{{__('ui.video_view.Studio')}}</h1></td>
-								<td>@if ( $video->studio)
+									<td  colspan =2>{{__('ui.video_view.Studio')}}:
+									 @if ( $video->studio)
 									<a href="/{{$lang}}/studio?search={{$video->studio}}" class="  m-2 pl-2 ml-1" >{{ $video->studio }} </a>
 									@endif </td>
 								</tr>
 								<tr>
-									<td><h1>{{__('ui.video_view.Label')}}</h1></td>
-									<td>
+									<td colspan =2>{{__('ui.video_view.Label')}}:
 										@if ( $video->label)
 										 <a href="/{{$lang}}/label?search={{$video->label}}" class="  m-2 pl-2 ml-1" >{{ $video->label }} </a>
 										 @endif 
 									</td>
 								</tr>
 								<tr>
-									<td><h1>{{__('ui.video_view.Series')}}</h1></td>
-									<td>
+									<td colspan =2>{{__('ui.video_view.Series')}}
 										@if ( $video->series)
 										 <a href="/{{$lang}}/series?search={{$video->series}}" class="  m-2 pl-2 ml-1" >{{ $video->series }} </a>
 										 @endif 
@@ -349,8 +347,8 @@
 								</td>
 								</tr> -->
 								@if ($video_status)
-								<tr>
-									<td colspan =2>
+								<tr class="pt-1">
+									<td colspan =2 class="pt-3">
 										<div class='playBtn' >
 											<a  href="javascript:void(0)" onClick="playToggle()">
 												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.98 31.98">
@@ -367,7 +365,7 @@
 								</tr>
 								@endif
 								<tr>
-									<td colspan =2>
+									<td colspan =2 class="pt-2">
 										<div class='playBtn' >
 											<a  href="javascript:void(0)" onClick="gotoURL()">
 												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.98 31.98">
@@ -436,7 +434,7 @@
 			</div>
 
 
-			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:10px;">
+			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:3px;">
 				<h5   style="overflow: hidden;overflow: hidden;text-overflow: ellipsis;margin: 0.5rem 0;line-height: 1.8;">
 					<b>{{__('ui.video_view.VIDEO_INTRODUCTION')}}：</b>
 				</h5>
@@ -460,7 +458,7 @@
 						<figure><img src="{{$video_actress->cover_img}}"></figure>
 						<div class="list__item-info">
 							<h5>{{$video_actress->video_id}}</h5>
-							<h16>{{$video_actress->title}}</h1>
+							<h1>{{$video_actress->title}}</h1>
 							@if($video_actress->release_date)<div class="date">{{date('Y-m-d', strtotime($video_actress->release_date)) }}</div> @endif
 						</div>
 					</a>
