@@ -53,8 +53,27 @@
 		<li name="49" class="category__tags-item"><a href="#">{{__('ui.tag.Young_Wife')}}</a></li>
 		<li name="24" class="category__tags-item"><a href="#">{{__('ui.tag.Mature_Woman')}}</a></li>
 		<li name="93" class="category__tags-item"><a href="#">{{__('ui.tag.Amateur')}}</a></li>
-		<!-- <li name="vr" class="category__tags-item"><a href="#">OL</a></li> -->
-		<li name="14" class="category__tags-item"><a href="#">{{__('ui.tag.Female_Teacher')}}</a></li>
+		<li name="14" class="category__tags-item"><a href="#">{{__('ui.tag.Female_Teacher')}}</a></li>	
+		<li name="28" class="category__tags-item"><a href="#">{{__('ui.tag.Office_Lady')}}</a></li>
+		<li name="17" class="category__tags-item"><a href="#">{{__('ui.tag.Housewife')}}</a></li>
+		<li name="21" class="category__tags-item"><a href="#">{{__('ui.tag.Maid')}}</a></li>
+		<li name="62" class="category__tags-item"><a href="#">{{__('ui.tag.Idol_Celebrity')}}</a></li>
+		<li name="30" class="category__tags-item"><a href="#">{{__('ui.tag.Older_Sister')}}</a></li>
+		<li name="35" class="category__tags-item"><a href="#">{{__('ui.tag.Private_Tutor')}}</a></li>
+		<li name="26" class="category__tags-item"><a href="#">{{__('ui.tag.Model')}}</a></li>
+		<li name="27" class="category__tags-item"><a href="#">{{__('ui.tag.Nurse')}}</a></li>
+		<li name="31" class="category__tags-item"><a href="#">{{__('ui.tag.Pregnant')}}</a></li>
+		<li name="47" class="category__tags-item"><a href="#">{{__('ui.tag.Widow')}}</a></li>
+		<li name="45" class="category__tags-item"><a href="#">{{__('ui.tag.Virgin')}}</a></li>
+		<li name="40" class="category__tags-item"><a href="#">{{__('ui.tag.Slut')}}</a></li>
+		<li name="37" class="category__tags-item"><a href="#">{{__('ui.tag.School')}}</a></li>
+		<li name="120" class="category__tags-item"><a href="#">{{__('ui.tag.Lesbian')}}</a></li>
+		<li name="44" class="category__tags-item"><a href="#">{{__('ui.tag.Various_Worker')}}</a></li>
+		<li name="138" class="category__tags-item"><a href="#">{{__('ui.tag.Shemale')}}</a></li>
+		<li name="56" class="category__tags-item"><a href="#">{{__('ui.tag.Caucasian_Actress')}}</a></li>
+		<li name="114" class="category__tags-item"><a href="#">{{__('ui.tag.Foreign_Imports')}}</a></li>
+		
+		
 	  </ul>
 	  <div class=" category_more "><a href="#"  class="{{$lang}}"><span>{{__('ui.tag.more')}}</span> <i class="i-arrow "></i></a></div>
 	</div>
@@ -73,6 +92,8 @@
 		<li name="69" class="category__tags-item"><a href="#">{{__('ui.tag.Youthful')}}</a></li>
 		<li name="137" class="category__tags-item"><a href="#">{{__('ui.tag.Shaved_Pussy')}}</a></li>
 		<li name="95" class="category__tags-item"><a href="#">{{__('ui.tag.Ass_Lover')}}</a></li>
+		<li name="97" class="category__tags-item"><a href="#">{{__('ui.tag.Big_Tits_Lover')}}</a></li>
+		<li name="113" class="category__tags-item"><a href="#">{{__('ui.tag.Foot_Fetish')}}</a></li>
 	  </ul>
 	  <div class=" category_more"><a href="#"  class="{{$lang}}"><span>{{__('ui.tag.more')}}</span> <i class="i-arrow "></i></a></div>
 	</div>
@@ -89,7 +110,27 @@
 		<li name="160" class="category__tags-item"><a href="#">{{__('ui.tag.Cum_Swallowing')}}</a></li>
 		<li name="159" class="category__tags-item"><a href="#">{{__('ui.tag.Creampie')}}</a></li>
 		<li name="175" class="category__tags-item"><a href="#">{{__('ui.tag.Handjob')}}</a></li>
-		<li name="197" class="category__tags-item"><a href="#">{{__('ui.tag.Squirting')}}</a></li>
+		<li name="197" class="category__tags-item"><a href="#">{{__('ui.tag.Squirting')}}</a></li>		
+		<li name="163" class="category__tags-item"><a href="#">{{__('ui.tag.Dirty_Talk')}}</a></li>
+		<li name="151" class="category__tags-item"><a href="#">{{__('ui.tag.Anal_Play')}}</a></li>
+		<li name="119" class="category__tags-item"><a href="#">{{__('ui.tag.Hot_Spring')}}</a></li>
+		<li name="156" class="category__tags-item"><a href="#">{{__('ui.tag.BUKKAKE')}}</a></li>
+		<li name="216" class="category__tags-item"><a href="#">{{__('ui.tag.Gonzo')}}</a></li>
+		<li name="108" class="category__tags-item"><a href="#">{{__('ui.tag.Documentary')}}</a></li>
+		<li name="129" class="category__tags-item"><a href="#">{{__('ui.tag.Outdoor')}}</a></li>
+		<li name="184" class="category__tags-item"><a href="#">{{__('ui.tag.Masturbation')}}</a></li>
+		<li name="205" class="category__tags-item"><a href="#">{{__('ui.tag.Vibrator')}}</a></li>
+		<li name="153" class="category__tags-item"><a href="#">{{__('ui.tag.Big_Vibrator')}}</a></li>		
+		<li name="125" class="category__tags-item"><a href="#">{{__('ui.tag.Nymphomaniac')}}</a></li>
+		<li name="126" class="category__tags-item"><a href="#">{{__('ui.tag.Orgy')}}</a></li>
+		<li name="131" class="category__tags-item"><a href="#">{{__('ui.tag.Picking_Up_Girls')}}</a></li>
+		<li name="191" class="category__tags-item"><a href="#">{{__('ui.tag.Ropes_Ties')}}</a></li>
+		<li name="71" class="category__tags-item"><a href="#">{{__('ui.tag.Bondage')}}</a></li>
+		<li name="96" class="category__tags-item"><a href="#">{{__('ui.tag.BDSM')}}</a></li>
+		<li name="204" class="category__tags-item"><a href="#">{{__('ui.tag.Urination')}}</a></li>
+		<li name="148" class="category__tags-item"><a href="#">{{__('ui.tag.Voyeur')}}</a></li>
+		<li name="99" class="category__tags-item"><a href="#">{{__('ui.tag.Car_Sex')}}</a></li>
+		<li name="128" class="category__tags-item"><a href="#">{{__('ui.tag.Other_Fetishes')}}</a></li>		
 	  </ul>
 	  <div class=" category_more"><a href="#"  class="{{$lang}}"><span>{{__('ui.tag.more')}}</span> <i class="i-arrow "></i></a></div>
 	</div>
@@ -407,6 +448,12 @@
 		const $this = $(this);
 		$this.find('.i-arrow').toggleClass('active');
 		$this.parent('.category').toggleClass('category--open');
+		if($this.parent('.category').hasClass('category--open')){
+		    $this.find('span').html(`{{__('ui.tag.collapse')}}`)
+		} else {
+		    $this.find('span').html(`{{__('ui.tag.more')}}`)
+		}
+	 
 		});
 		const a = @json($combo_tag);
 		cate = getSearchParams('cate');
