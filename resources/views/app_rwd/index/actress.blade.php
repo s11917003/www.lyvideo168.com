@@ -26,7 +26,10 @@ echo $actress->JapaneseName1.'：線上免費試看【JavDic  有碼・無碼・
 	<div class="artist__content">
 	  <figure><img src="/img/Pictures/{{$actress->JapaneseName1}}_coverphoto.jpg"></figure>
 	  <div class="artist__content-info">
-		<div class="artist__content-name">{{ $actress->JapaneseName1 }}</div>
+		@if($lang == 'en')<div class="artist__content-name">{{ $actress->EnglishName1 ?  $actress->EnglishName1  : $actress->JapaneseName1 }}</div>
+		@elseif($lang == 'zh')<div class="artist__content-name">{{ $actress->ChineseName1 ? $actress->ChineseName1 : $actress->JapaneseName1 }}</div>
+		@else <div class="artist__content-name">{{ $actress->JapaneseName1 }}</div>
+		@endif
 		<div class="artist__content-moveie">
 		  <ul>
 			<li>{{ $actress->ChineseName1 }}</li>
@@ -76,7 +79,7 @@ echo $actress->JapaneseName1.'：線上免費試看【JavDic  有碼・無碼・
  
 	<div class="category">
 		<ul id="category_form" class="category__tags" style="width:100%">
-			<li name="all" class="category__tags-item category__tags-item--active"><a href="#">ALL</a></li>
+			<li name="all" class="category__tags-item category__tags-item--active"><a href="#">{{__('ui.tag.all')}}</a></li>
 			@foreach ($video_tag as $tag)
 			<li name="{{$tag->id}}" class="category__tags-item"><a href="#">{{$tag[$lang]}}({{$tag->count}})</a></li>
 			@endforeach

@@ -121,7 +121,9 @@ $(function(){
 						let name = ''
 						if('{{$lang}}' == 'zh' && element.ChineseName1)  {
 							name = element.ChineseName1
-						} else {
+						} else if('{{$lang}}' == 'en' && element.EnglishName1)  {
+							name = element.EnglishName1
+						}else {
 							name = element.JapaneseName1
 						}
 						actress =	`<li><a href="/{{$lang}}/actress/`+element.id+`"   class="female-list__item">`+name+`</a></li>`;

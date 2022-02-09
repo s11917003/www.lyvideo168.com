@@ -50,7 +50,9 @@
 						let name = ''
 						if('{{$lang}}' == 'zh' && item.ChineseName1)  {
 							name = item.ChineseName1
-						} else {
+						} else if('{{$lang}}' == 'en' && item.EnglishName1)  {
+							name = item.EnglishName1
+						}else {
 							name = item.JapaneseName1
 						}
 						video =	`<a href="/{{$lang}}/actress/`+item.id+`"   class="female-list__item">

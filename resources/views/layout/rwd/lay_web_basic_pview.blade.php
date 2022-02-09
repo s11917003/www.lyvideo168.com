@@ -53,11 +53,54 @@ import videojsPreviewThumbnails from 'https://cdn.skypack.dev/videojs-preview-th
 <script src="/js/select.js"></script> -->
 <script>
 	$(function() {
-		$.ajaxSetup({
-		headers: {
-			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		}
-		});
+		$.ajax({
+				type:"POST",
+				url:"/{{$lang}}/popular",
+				dataType:"json",
+				success:function(result){
+					$(".actress_popular_list").empty();
+					$(".tag_popular_list").empty();
+					$(".series_popular_list").empty();
+					
+					result.video_actress_popular.forEach(element => {
+						let name = ''
+						if('{{$lang}}' == 'zh' && element.ChineseName1)  {
+							name = element.ChineseName1
+						} else if('{{$lang}}' == 'en' && element.EnglishName1)  {
+							name = element.EnglishName1
+						}else {
+							name = element.JapaneseName1
+						}
+						actress =	`<li><a href="/{{$lang}}/actress/`+element.id+`"   class="female-list__item">`+name+`</a></li>`;
+						$(".actress_popular_list").append(actress)
+					});
+					result.tag_actress_popular.forEach(element => {
+						let tag = ''
+						if('{{$lang}}' == 'zh')  {
+							tag = element.zh
+						} else if('{{$lang}}' == 'en')  {
+							tag = element.en
+						} else  {
+							tag = element.jp
+						}
+						actress =	`<li><a style='font-size: 15px;' href="/{{$lang}}/category?cate=`+element.id+`"   class="female-list__item">`+tag+`</a></li>`;
+						$(".tag_popular_list").append(actress)
+					});
+					result.video_series_popular.forEach(element => {
+					 
+						actress =	`<li><a href="/{{$lang}}/series?search=`+element+`"   class="female-list__item">`+element+`</a></li>`;
+						$(".series_popular_list").append(actress)
+					});
+					$(".actress_popular_list").append(`<li class="keyword__more"><a href="/{{$lang}}/actress_list">{{__('ui.more')}} &gt;&gt;</a></li>`)
+					$(".tag_popular_list").append(`<li class="keyword__more"><a href="/{{$lang}}/category">{{__('ui.more')}} &gt;&gt;</a></li>`)
+					 
+				}
+			});	
+		// $.ajaxSetup({
+		// headers: {
+		// 	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		// }
+		// });
 	});
 </script>
 @yield('topscript')

@@ -30,7 +30,7 @@ return [
     'search_result' => '検索結果',
     'Category_Search'  => 'ジャンル検索',
     'tag' =>[
-        'all' => '全部',
+        'all' => '全て',
         'censored' => '修正あり(FANZA)',
         'censored1' => '修正あり(プレステージ)',
         'uncensored' => '無修正',

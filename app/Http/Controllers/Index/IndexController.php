@@ -1000,60 +1000,81 @@ class IndexController extends Controller {
 	}
 	public function searchDirector($lang){
 		$search = request()->query('search');
-		if( !in_array($lang,['zh','en','jp'])){
-			abort(404);
-		}
-		if($search ==''){
-			abort(404);
-		}
-		$webLangIndex = $this->language[$lang];
-		$videos = Video::where('video_lang',$webLangIndex)->where('director', $search)->get();//video table;
-		return view('app_rwd.index.search_director',['videos' => $videos,'search'=>$search,'lang'=>$lang]);
+		return $this->searchContent($lang,'director',$search);
 	}
 	public function searchStudio( $lang){
-		
 		$search = request()->query('search');
-		if( !in_array($lang,['zh','en','jp'])){
-			abort(404);
-		}
-		if($search ==''){
-			abort(404);
-		}
-
-		$webLangIndex = $this->language[$lang];
-		$videos = Video::where('video_lang',$webLangIndex)->where('studio', $search)->get();//video table;
-		//var_dump( DB::getQueryLog());
-		 
-		return view('app_rwd.index.search_director',['videos' => $videos,'search'=>$search,'lang'=>$lang]);
+		return $this->searchContent($lang,'studio',$search);
 	}
 	public function searchLabel( $lang){
 		$search = request()->query('search');
-		if( !in_array($lang,['zh','en','jp'])){
-			abort(404);
-		}
-		if($search ==''){
-			abort(404);
-		}
-
-		$webLangIndex = $this->language[$lang];
-	 
-		$videos = Video::where('video_lang',$webLangIndex)->where('label', $search)->get();//video table;
-	 
-		return view('app_rwd.index.search_director',['videos' => $videos,'search'=>$search,'lang'=>$lang]);
+		return $this->searchContent($lang,'label',$search);
 	}
 
-	public function searchSeries( $lang){	
+	public function searchSeries($lang){	
 		$search = request()->query('search');
+		return $this->searchContent($lang,'series',$search);
+	}
+	public function searchContentPost(Request $request,string $lang) {
+		if( !in_array($lang,['zh','en','jp'])){
+			abort(404);
+		}	
+		$webLangIndex = $this->language[$lang];
+		$videos_relation = Video::where('video_lang',$webLangIndex)->where($request->type, $request->search)->with('tagRelations')->get();//video table;
+	  	//計算相關的標籤以及數量
+		$videos = [];
+		 
+		if( in_array('all',$request->tag)) {
+			$videos = $videos_relation ;
+		}
+	    else {
+			$size = count($videos_relation); 
+		 
+			for ($i=0; $i < $size; $i++) {
+				$data = $videos_relation[$i]['tagRelations'];
+				foreach ($data  as $tag) {
+				
+					if( in_array($tag->tag_id,$request->tag)){
+						$videos[] =$videos_relation[$i];
+						break;
+					}
+				}
+			}
+		}		 
+		return  response()->json([
+		    'videos' => $videos,
+		]);
+	}
+	public function searchContent($lang,$type,$search){
 		if( !in_array($lang,['zh','en','jp'])){
 			abort(404);
 		}
 		if($search ==''){
 			abort(404);
 		}
-
 		$webLangIndex = $this->language[$lang];
-		$videos = Video::where('video_lang',$webLangIndex)->where('series', $search)->get();//video table; 
-		return view('app_rwd.index.search_director',['videos' => $videos,'search'=>$search,'lang'=>$lang]);
+		$videos = Video::where('video_lang',$webLangIndex)->where($type, $search)->get();//video table; 
+	 	$tagObj = [];
+	  	//計算相關的標籤以及數量
+	    $size = count($videos); 
+        for ($i=0; $i < $size; $i++) {
+		    $data = $videos[$i]['tagRelations'];
+	    	foreach ($data  as $tag) {
+    	    	if( !in_array($tag->tag_id,array_keys((array)$tagObj))){
+    		        $tagObj[$tag->tag_id] = 1;
+    		    } else {
+    		       	$tagObj[$tag->tag_id] +=1;
+    		    }
+	    	}
+		}
+				 
+	    $video_tag	= Video_tag::whereIn('id',array_keys((array)$tagObj))->get();
+	  	foreach ($video_tag  as $tag) {
+		    $tag['count'] = $tagObj[$tag->id];
+		}
+	 
+		return view('app_rwd.index.search_director',['videos' => $videos,'search'=>$search,'type'=>$type ,'count'=>$size ,'lang'=>$lang,'video_tag'=>$video_tag]);
+		
 	}
 	
 
@@ -1107,9 +1128,7 @@ class IndexController extends Controller {
 		$webLangIndex = $this->language[$lang];
 		$videoIds  = Video_actress_relations::where('actress_id',$request->id)->pluck('video_id')->toArray();
 		$videos_relation = Video::where('video_lang',$webLangIndex)->whereIn('id', $videoIds)->with('tagRelations')->get();//video table;
-		$tagObj = [];
 	  	//計算相關的標籤以及數量
-
 		$videos = [];
 		if( in_array('all',$request->tag)) {
 			$videos = $videos_relation ;

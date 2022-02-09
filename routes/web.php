@@ -17,10 +17,10 @@
 // });
 
 
-//line bot
-Route::get('rd/test', 'Rd\RdController@index');
-Route::get('/rd/gentbimg', 'Rd\GenTbImgController@index');
-Route::get('rd/genacc', 'Rd\RdController@genacc');
+// //line bot
+// Route::get('rd/test', 'Rd\RdController@index');
+// Route::get('/rd/gentbimg', 'Rd\GenTbImgController@index');
+// Route::get('rd/genacc', 'Rd\RdController@genacc');
 
 //首頁member
 // Route::group(['prefix' => ''], function($router) {
@@ -72,28 +72,29 @@ Route::get('rd/genacc', 'Rd\RdController@genacc');
 	Route::get('/{lang}/all/{cate}', 'Index\IndexController@all')->name('all');    //分類大項
 	Route::post('/{lang}/all', 'Index\IndexController@allList');    //分類大項
 
-	Route::get('/{lang}/director', 'Index\IndexController@searchDirector');  //搜尋
-	Route::get('/{lang}/studio', 'Index\IndexController@searchStudio');  //搜尋
-	Route::get('/{lang}/label', 'Index\IndexController@searchLabel');  //搜尋
-	Route::get('/{lang}/series', 'Index\IndexController@searchSeries');  //搜尋
+	Route::get('/{lang}/director', 'Index\IndexController@searchDirector');  //導演
+	Route::get('/{lang}/studio', 'Index\IndexController@searchStudio');  //片商
+	Route::get('/{lang}/label', 'Index\IndexController@searchLabel');  //??
+	Route::get('/{lang}/series', 'Index\IndexController@searchSeries');  //系列
+	Route::post('/{lang}/content', 'Index\IndexController@searchContentPost');  //搜尋4大類
 	Route::post('/language', 'Index\IndexController@lang')->name('lang');//切換語系
 });
-//發文頁面
-Route::group(['middleware' => ['auth:web']], function () {
-	Route::get('/userInfo', 'Index\IndexController@userInfo');
-	Route::get('/article/post', 'Index\IndexController@postpage');
-	Route::post('/updateUser', 'Index\IndexController@updateUser');
-});
-//發文
-Route::post('/upload/request', 'Article\UploadController@store');
+// //發文頁面
+// Route::group(['middleware' => ['auth:web']], function () {
+// 	Route::get('/userInfo', 'Index\IndexController@userInfo');
+// 	Route::get('/article/post', 'Index\IndexController@postpage');
+// 	Route::post('/updateUser', 'Index\IndexController@updateUser');
+// });
+// //發文
+// Route::post('/upload/request', 'Article\UploadController@store');
 
-// //getvideo
-Route::get('/getvideo/{id}', 'Index\GetVideoController@index');
-// Route::get('/getvideoapp/{id}', 'Index\GetVideoAppController@index');
+// // //getvideo
+// Route::get('/getvideo/{id}', 'Index\GetVideoController@index');
+// // Route::get('/getvideoapp/{id}', 'Index\GetVideoAppController@index');
 
-// //getvideo
-Route::get('/clickAd/{id}', 'Index\IndexController@clickAd')->where('id', '[0-9]+');
-Route::get('/videoinfo', 'Index\IndexController@videoinfo');
+// // //getvideo
+// Route::get('/clickAd/{id}', 'Index\IndexController@clickAd')->where('id', '[0-9]+');
+// Route::get('/videoinfo', 'Index\IndexController@videoinfo');
 
 Route::get('/csv', 'Api\CsvController@geCsv');
 
@@ -145,9 +146,9 @@ Route::get('/comm/reply/loadmore', 'Article\CmtController@loadreply');
 
 //service
 Route::group(['prefix' => 'service'], function ($router) {
-	Route::get('/dmca', 'Service\PageController@dmca');
-	Route::get('/privacy', 'Service\PageController@privacy');
-	Route::get('/important', 'Service\PageController@important');
+	// Route::get('/dmca', 'Service\PageController@dmca');
+	// Route::get('/privacy', 'Service\PageController@privacy');
+	// Route::get('/important', 'Service\PageController@important');
 	// Route::get('/report/{id}', 'Service\PageController@report')->where('id', '[0-9]+');
 });
 

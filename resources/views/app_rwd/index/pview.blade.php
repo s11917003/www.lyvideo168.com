@@ -300,36 +300,36 @@
 										@endif
 									</td>
 								</tr>					 
-								<tr>
+								<tr  class="des">
 								<td  colspan =2>{{__('ui.video_view.DVD_ID')}}:{{ $video->dvd_id }}</td>
 								</tr>
-								<tr>
+								<tr class="des"  >
 								<td  colspan =2>{{__('ui.video_view.Release_Date')}}:{{ $video->release_date }}</td>
 								</tr>
-								<tr>
-								<td colspan =2>{{__('ui.video_view.Runtime')}}: </td>
+								<tr  class="des">
+								<td  colspan =2>{{__('ui.video_view.Runtime')}}: </td>
 								</tr>
-								<tr>
-								<td colspan =2>{{__('ui.video_view.Director')}}: 
+								<tr class="des" >
+								<td  colspan =2>{{__('ui.video_view.Director')}}: 
 									@if ( $video->director)
 									 <a href="/{{$lang}}/director?search={{$video->director}}" class="  m-2 pl-2 ml-1" >{{ $video->director }} </a>
 								 	@endif 
 								</td>
 								</tr>
-								<tr>
+								<tr class="des" >
 									<td  colspan =2>{{__('ui.video_view.Studio')}}:
 									 @if ( $video->studio)
 									<a href="/{{$lang}}/studio?search={{$video->studio}}" class="  m-2 pl-2 ml-1" >{{ $video->studio }} </a>
 									@endif </td>
 								</tr>
-								<tr>
+								<tr class="des" >
 									<td colspan =2>{{__('ui.video_view.Label')}}:
 										@if ( $video->label)
 										 <a href="/{{$lang}}/label?search={{$video->label}}" class="  m-2 pl-2 ml-1" >{{ $video->label }} </a>
 										 @endif 
 									</td>
 								</tr>
-								<tr>
+								<tr class="des" >
 									<td colspan =2>{{__('ui.video_view.Series')}}
 										@if ( $video->series)
 										 <a href="/{{$lang}}/series?search={{$video->series}}" class="  m-2 pl-2 ml-1" >{{ $video->series }} </a>

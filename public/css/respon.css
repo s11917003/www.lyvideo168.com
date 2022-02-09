@@ -2992,10 +2992,22 @@ label {
     margin-bottom: 0.5rem;
     color: var(--movie-text);
 }
+
+
 @media screen and (min-width:480px) {
 	.artist {
 		padding-left: 20px;
 		width: 100%;
+	}
+
+
+}
+@media screen and (max-width:575px) {
+	.table-responsive .des {
+		font-weight: bold;
+    border-bottom: 1px solid #c0c1c1;
+	
+    line-height: 1.5;
 	}
 
 
