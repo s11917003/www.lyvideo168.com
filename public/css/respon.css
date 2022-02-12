@@ -2992,8 +2992,32 @@ label {
     margin-bottom: 0.5rem;
     color: var(--movie-text);
 }
-
-
+.big-bg{
+	width:100%;
+	height:100%;
+    position: absolute;
+	background-color:black;
+	opacity: 0.5;
+}
+.big img {max-width: 500px; height: auto;
+	width: 90%;
+    display:block;   
+    vertical-align: middle;
+	z-index: 999;
+    margin:auto;}
+.big {  
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+	height:110vh;
+	width:100%;
+	margin-bottom: 10px;
+	position:fixed;   
+	
+	z-index: 999;
+	top: -50px;
+  }
 @media screen and (min-width:480px) {
 	.artist {
 		padding-left: 20px;

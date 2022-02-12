@@ -53,6 +53,9 @@ import videojsPreviewThumbnails from 'https://cdn.skypack.dev/videojs-preview-th
 <script src="/js/select.js"></script> -->
 <script>
 	$(function() {
+		$('.big').click(function() {
+			$(this).hide()
+		});
 		$.ajax({
 				type:"POST",
 				url:"/{{$lang}}/popular",
@@ -105,12 +108,17 @@ import videojsPreviewThumbnails from 'https://cdn.skypack.dev/videojs-preview-th
 </script>
 @yield('topscript')
 </head>
+<div class="big" style=" display:none">
+	<div class="big-bg"></div>
+	<img src="https://exfast.me/wp-content/uploads/2019/04/1554182762-cddf42691119d44059a16a4095047a33-1140x600.jpg" class="bigimg">
+
+</div>
 @if (config('app.web_type') == 1)
 	<body id="rs-body">
 @else 
 	<body id="rs-body" class="rs-body1" >
 @endif
- 
+
 	<!-- HEADER 開始 -->
 	@include('layout.rwd.lay_video_header')
 	<!-- HEADER 結束 -->

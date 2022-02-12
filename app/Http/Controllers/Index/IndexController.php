@@ -266,28 +266,34 @@ class IndexController extends Controller {
 	
 	
 		if(!$video) {
-			return redirect()->to('/')->send();
+		    $video = Video::where(['video_id'=>$video_id,'video_lang'=>$this->language['jp']])->first();
+	    	if(!$video) {
+	    	    return redirect()->to('/')->send();
+	    	}
 		} 
  
  		$video_tag =  Video_tag_relations::where('video_id',$video->id)->with('tagName')->get();
-	
 		$video_with_actress = [];
 	
 		if($video['actress']){ 
- 
 			$Video_actress = Video_actress_relations::select('*')->with('tagRelations')->where('video_id', $video->id)->get();//找女優 對應表
-			
 			$actress = [];
 			$actressName = [];
 			$actressData= []; 
 		
-			foreach($Video_actress as $data){
+			foreach($Video_actress as $data){ //這部影片裏 的女優
 				$actress[] = $data->actress_id;
-				$actressName[]  = $data->tagRelations->JapaneseName1;
-				$actressData[] = ['id' => $data->actress_id , 'name' =>  $data->tagRelations->JapaneseName1];
+				$name = $data->tagRelations->JapaneseName1;
+				if($lang=='zh'){
+        		    $name  = $data->tagRelations->ChineseName1 ?$data->tagRelations->ChineseName1 : $data->tagRelations->JapaneseName1;
+        		} else if($lang=='en'){
+        		    $name=  $data->tagRelations->EnglishName1 ?$data->tagRelations->EnglishName1 : $data->tagRelations->JapaneseName1;
+        		} 
+			 	$actressName[] = $name;
+				$actressData[] = ['id' => $data->actress_id , 'name' =>  $name];
 			}
 		
-			$Video_actress_relations = Video_actress_relations::select('*')->whereIn('actress_id', $actress)->limit(50)->pluck('video_id')->toArray();;//找女優相關
+			$Video_actress_relations = Video_actress_relations::select('*')->whereIn('actress_id', $actress)->limit(60)->pluck('video_id')->toArray();;//找女優相關
 			$video_with_actress = Video::whereIn('id', $Video_actress_relations)->where('video_lang',$webLangIndex)->limit(20)->get();
 			if(count($actressName)>0){
 				$video['actress'] =  implode("&", $actressName); 
@@ -334,9 +340,7 @@ class IndexController extends Controller {
 			$video['thumbnail_img_router'] = 	$img_path;
  
 		}
-		
-		$footer =footer::all();;	
-
+	
 		// 英	<title>{影片ID} | {女優英文名}：Watch Free Video【JavDic  censored, uncensored and amateur japanese porn】</title>
 		// 中	<title>{日文影片名稱} | {女優日文名}：線上免費試看【JavDic  有碼・無碼・素人 - 日本A片資料庫】</title>
 		// 日	<title>{日文影片名稱} | {女優日文名}：無料エロ動画【JavDic  修正あり・無修正・素人 - エロ動画まとめ】</title>
@@ -349,22 +353,28 @@ class IndexController extends Controller {
 			$tag->tagName = $tag->tagName[$lang];
 		 
 		}
-		DB::enableQueryLog();
+		//DB::enableQueryLog();
 		////相關標籤影片
-	 	$randTag = Video_tag_relations::where('video_id',$video->id)->inRandomOrder()->first();
+	 	$randTag = Video_tag_relations::where('video_id',$video->id)->inRandomOrder()->limit(2)->pluck('tag_id')->toArray();
 		
 		$video_relation = [];
 		if($randTag){
-			$same_tag_video = Video_tag_relations::where('tag_id',$randTag->tag_id)->inRandomOrder()->limit(50)->pluck('video_id')->toArray();
+			$same_tag_video = Video_tag_relations::whereIn('tag_id',$randTag)->inRandomOrder()->limit(60)->pluck('video_id')->toArray();
 		
 			//$video_relation = Video::where('video_lang',$webLangIndex)->with(['tagRelations'])->whereHas('tagRelations', function($q) use ($randTag) { $q->where('tag_id', '=', $randTag->tag_id); })->limit(10)->get();
-			$video_relation = Video::where('video_lang',$webLangIndex)->whereIn('id', $same_tag_video)->with(['tagRelations'])->limit(10)->get();
+			$video_relation = Video::where('video_lang',$webLangIndex)->whereIn('id', $same_tag_video)->with(['tagRelations'])->limit(20)->get();
 			
 	 
 		}
-	 
+        
+		if($lang=='jp'){
+		    $title  = $video['video_id'].'|'.$video['actress'].'：無料エロ動画【JavDic  修正あり・無修正・素人 - エロ動画まとめ】';
+		} else if($lang=='zh'){
+		    $title  = $video['video_id'].'|'.$video['actress'].'：線上免費試看【JavDic  有碼・無碼・素人 - 日本A片資料庫】';
+		} else {
+		    $title  = $video['video_id'].'|'.$video['actress'].'：Watch Free Video【JavDic  censored, uncensored and amateur japanese porn】';
+		}
 		
-		$title  = $video['video_id'].'|'.$video['actress'].'無料エロ動画【JavDic  '. implode(",", $tagName).'】';
 		$video_status = false;
 		$url = $video['video_url'];
 		$array = @get_headers($url);
@@ -392,7 +402,6 @@ class IndexController extends Controller {
 			$device = Utils::chkdevice();
 			return view('app_rwd.index.pview',[
 				'url' => $url,
-				'footer'=>$footer,
 				'device' => $device,
 				'video' => $video, 							//主影片
 				'video_status' => $video_status, 			//影片狀態

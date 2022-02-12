@@ -88,6 +88,7 @@
 		  <a href="/{{$lang}}/rank-list/uncensored">{{__('ui.more')}} &gt;&gt;</a>
 	  </p>
 	  <div class="list__wrap">
+	
 		<div class="list">
 			@foreach ($uncensored as $post)
 				@foreach ($post->video as $video)

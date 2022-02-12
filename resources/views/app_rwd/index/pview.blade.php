@@ -1,21 +1,8 @@
 @extends('layout.rwd.lay_web_basic_pview')
 @section('title')
 @php
-		$actress = '';
-		if(!is_null($video->actressData)){
-		foreach ($video->actressData as $data ) {
-			$actress .=  $data['name'].',';
-		}  
-		}
-		$locale = App::getLocale(); 
-		if ($locale == 'en') {
-			echo $video->video_id.' | '.$actress.'：Watch Free Video【JavDic  censored, uncensored and amateur japanese porn】';
-		} else if ($locale == 'jp') {
-			echo $video->title.' | '.$actress.'：線上免費試看【JavDic  有碼・無碼・素人 - 日本A片資料庫】';
-		} else if($locale == 'zh') {
-			echo $video->title.' | '.$actress.'：無料エロ動画【JavDic  修正あり・無修正・素人 - エロ動画まとめ】'; 
-		}
-		@endphp
+	echo $title;
+@endphp
 @stop
 @section('des')
 	@php
@@ -504,12 +491,17 @@
 <script src="https://apis.google.com/js/platform.js" async defer> -->
 </script>
 <script>
+	$('.movie-gallery-wrapper .example-image').on('click',function(){
+ 	 
+		 $('.big img').attr('src', $(this).attr('src')); 
+		 $('.big').show()
+ 
+	})
 	$('#closead').on('click',function(){
 		//alert('close')
 		$('#videocoverad').hide()
 		
 	})
-
 	function gotoURL() {
 		location.assign(`{{$url}}`);
  
