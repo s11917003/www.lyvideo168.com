@@ -226,7 +226,7 @@ textarea {
 	$aboutCont.toggleClass('active');
 	$aboutContMore.find('.i-arrow').toggleClass('active');
 	if($aboutCont.hasClass('active')){
-	     $aboutCont.css('max-height','3000px')
+	     $aboutCont.css('max-height','30000px')
 	}else {
 	  $aboutCont.css('max-height','150px')
 	}

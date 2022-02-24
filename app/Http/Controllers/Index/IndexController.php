@@ -302,7 +302,7 @@ class IndexController extends Controller {
 			$video['actressData'] = $actressData;
 		}
 		
-	
+		 
 		//預覽圖片
 		if($video['thumbnail_img']){
 			$video['thumbnail_img'] = explode("@",$video['thumbnail_img']);
@@ -319,7 +319,7 @@ class IndexController extends Controller {
 				$isExists = \Storage::disk('public')->exists($path.$filename);	
 
 			
-				$img_path[] =$path.'/'.$filename;
+				$img_path[] =$path.$filename;
 				if($isExists){
 					continue;
 				} else {
@@ -336,7 +336,7 @@ class IndexController extends Controller {
 					//file_put_contents('../storage/'.$path.$filename,	$contents);   
 				}
 			}
-		 
+		
 			$video['thumbnail_img_router'] = 	$img_path;
  
 		}

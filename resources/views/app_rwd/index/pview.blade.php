@@ -50,7 +50,7 @@
 	<div id="">  
 	
 		<div id="rs-content-left-box" class="rs-content-left-box1">
-			<h2 class="title is-4">
+			<h2 class="title is-4 p-title">
 				 <strong> {{$video->title}}</strong>
 			  </h2>
 		</div>
@@ -287,36 +287,36 @@
 										@endif
 									</td>
 								</tr>					 
-								<tr  class="des">
+								<tr  class="des desktopTable">
 								<td  colspan =2>{{__('ui.video_view.DVD_ID')}}:{{ $video->dvd_id }}</td>
 								</tr>
-								<tr class="des"  >
+								<tr class="des desktopTable"  >
 								<td  colspan =2>{{__('ui.video_view.Release_Date')}}:{{ $video->release_date }}</td>
 								</tr>
-								<tr  class="des">
+								<tr  class="des desktopTable">
 								<td  colspan =2>{{__('ui.video_view.Runtime')}}: </td>
 								</tr>
-								<tr class="des" >
+								<tr class="des desktopTable" >
 								<td  colspan =2>{{__('ui.video_view.Director')}}: 
 									@if ( $video->director)
 									 <a href="/{{$lang}}/director?search={{$video->director}}" class="  m-2 pl-2 ml-1" >{{ $video->director }} </a>
 								 	@endif 
 								</td>
 								</tr>
-								<tr class="des" >
+								<tr class="des desktopTable" >
 									<td  colspan =2>{{__('ui.video_view.Studio')}}:
 									 @if ( $video->studio)
 									<a href="/{{$lang}}/studio?search={{$video->studio}}" class="  m-2 pl-2 ml-1" >{{ $video->studio }} </a>
 									@endif </td>
 								</tr>
-								<tr class="des" >
+								<tr class="des desktopTable" >
 									<td colspan =2>{{__('ui.video_view.Label')}}:
 										@if ( $video->label)
 										 <a href="/{{$lang}}/label?search={{$video->label}}" class="  m-2 pl-2 ml-1" >{{ $video->label }} </a>
 										 @endif 
 									</td>
 								</tr>
-								<tr class="des" >
+								<tr class="des desktopTable" >
 									<td colspan =2>{{__('ui.video_view.Series')}}
 										@if ( $video->series)
 										 <a href="/{{$lang}}/series?search={{$video->series}}" class="  m-2 pl-2 ml-1" >{{ $video->series }} </a>
@@ -334,7 +334,7 @@
 								</td>
 								</tr> -->
 								@if ($video_status)
-								<tr class="pt-1">
+								<tr class="pt-1 desktopTable">
 									<td colspan =2 class="pt-3">
 										<div class='playBtn' >
 											<a  href="javascript:void(0)" onClick="playToggle()">
@@ -352,7 +352,7 @@
 								</tr>
 								@endif
 								<tr>
-									<td colspan =2 class="pt-2">
+									<td colspan =2 class="pt-2 desktopTable">
 										<div class='playBtn' >
 											<a  href="javascript:void(0)" onClick="gotoURL()">
 												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.98 31.98">
@@ -367,6 +367,41 @@
 										</div>
 									</td>
 								</tr>
+
+								<tr class="pt-1 mobileTable">
+									@if ($video_status)
+									<td  class="pt-2">
+										<div class='playBtn' >
+											<a  href="javascript:void(0)" onClick="playToggle()">
+												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.98 31.98">
+												<g>
+													<circle class="i_played1" cx="15.99" cy="15.99" r="15.99"></circle>
+													<circle class="i_played2" cx="15.99" cy="15.99" r="9.2"></circle>
+													<path class="i_played3" d="M20.45,15.92l-7-4.06a.09.09,0,0,0-.13.07v8.12a.09.09,0,0,0,.13.07l7-4.06A.08.08,0,0,0,20.45,15.92Z"></path>
+												</g>
+												</svg>
+												<span>{{__('ui.video_view.WATCH_FREE_SAMPLE')}}</span>
+											</a>
+										</div>
+									</td>
+									@endif
+									<td class="pt-2">
+										<div class='playBtn' >
+											<a  href="javascript:void(0)" onClick="gotoURL()">
+												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.98 31.98">
+												<g>
+													<circle class="i_played1" cx="15.99" cy="15.99" r="15.99"></circle>
+													<circle class="i_played2" cx="15.99" cy="15.99" r="9.2"></circle>
+													<path class="i_played3" d="M20.45,15.92l-7-4.06a.09.09,0,0,0-.13.07v8.12a.09.09,0,0,0,.13.07l7-4.06A.08.08,0,0,0,20.45,15.92Z"></path>
+												</g>
+												</svg>
+												<span>{{__('ui.video_view.WATCH_FULL_VIDEO')}}</span>
+											</a>
+										</div>
+									</td>
+								</tr>
+
+
 								</tbody>
 								</table>
 								</div>
@@ -375,30 +410,9 @@
 						</div>
 			        </div>					
 			</div>
-			
-	
-			<div id="rs-digg-box2">
-				<!-- <div class="rs-digg-left"     style="float: left; width: auto; padding: 0px 3px;">
-					<div class="" id='post-digg-1' data-id='post-digg-1'><i class=""></i><span> test views</span></span></div>
-				</div> -->
-				<!-- <div class="rs-digg-right orange5"   style="margin:0;">
-					{{-- @if ($status == 1)
-						<div class="rs-digg like rs-digg-click" id='post-digg-thumbs-up' data-id='{{$post->id}}'><i class="fas fa-thumbs-up fa-w-16"></i><span> {{$postsDetail->count_digg}} </span></span></div>
-						<div class="rs-digg like " id='post-digg-thumbs-down' data-id='{{$post->id}}'><i class="fas fa-thumbs-down"></i><span> {{$postsDetail->count_bury}} </span></div>
-					@elseif ($status == 2)
-						<div class="rs-digg like" id='post-digg-thumbs-up' data-id='{{$post->id}}'><i class="fas fa-thumbs-up fa-w-16"></i><span> {{$postsDetail->count_digg}} </span></span></div>
-						<div class="rs-digg like rs-digg-click" id='post-digg-thumbs-down' data-id='{{$post->id}}'><i class="fas fa-thumbs-down"></i><span> {{$postsDetail->count_bury}} </span></div>
-					@else  
-						<div class="rs-digg like" id='post-digg-thumbs-up' data-id='{{$post->id}}'><i class="fas fa-thumbs-up fa-w-16"></i><span> {{$postsDetail->count_digg}} </span></span></div>
-						<div class="rs-digg like" id='post-digg-thumbs-down' data-id='{{$post->id}}'><i class="fas fa-thumbs-down"></i><span> {{$postsDetail->count_bury}} </span></div>
-					@endif --}}
-					<a href="#commentList" class="load_modal_login btn btn-download"><i class="fa fa-download"></i>Download</a>
-					<a class="load_modal_login btn btn-bookmark" action="http://www.javmovie.com/favorite/390057"><i class="fa fa-plus"></i> <span>Favorite</span></a>
-					<a class="load_modal_login btn btn-report">Correction</a>
-				</div> -->
-			</div>
 		
-			<div class="col-md-12 layout-left-big">
+
+			<div class="rs-digg-box2">
 				<div class="row">
 				@if ($video->thumbnail_img_router)	
 				<div class="col-md-12">
@@ -420,16 +434,69 @@
 				</div>
 			</div>
 
-
+			<div class="row mobileTable">
+				<div class="container-fluid" style="DISPLAY: contents;"> 
+		 
+				<div class="col-xs-12 col-sm-4 col-md-4 mdm-small">
+					<div class=" ">
+						<div class="mdm-info">
+				<div class="table-responsive">
+					<table class="table">
+					<tbody>				 
+					<tr  class="des">
+					<td  colspan =2>{{__('ui.video_view.DVD_ID')}}:{{ $video->dvd_id }}</td>
+					</tr>
+					<tr class="des"  >
+					<td  colspan =2>{{__('ui.video_view.Release_Date')}}:{{ $video->release_date }}</td>
+					</tr>
+					<tr  class="des">
+					<td  colspan =2>{{__('ui.video_view.Runtime')}}: </td>
+					</tr>
+					<tr class="des" >
+					<td  colspan =2>{{__('ui.video_view.Director')}}: 
+						@if ( $video->director)
+						 <a href="/{{$lang}}/director?search={{$video->director}}" class="  m-2 pl-2 ml-1" >{{ $video->director }} </a>
+						 @endif 
+					</td>
+					</tr>
+					<tr class="des" >
+						<td  colspan =2>{{__('ui.video_view.Studio')}}:
+						 @if ( $video->studio)
+						<a href="/{{$lang}}/studio?search={{$video->studio}}" class="  m-2 pl-2 ml-1" >{{ $video->studio }} </a>
+						@endif </td>
+					</tr>
+					<tr class="des" >
+						<td colspan =2>{{__('ui.video_view.Label')}}:
+							@if ( $video->label)
+							 <a href="/{{$lang}}/label?search={{$video->label}}" class="  m-2 pl-2 ml-1" >{{ $video->label }} </a>
+							 @endif 
+						</td>
+					</tr>
+					<tr class="des" >
+						<td colspan =2>{{__('ui.video_view.Series')}}
+							@if ( $video->series)
+							 <a href="/{{$lang}}/series?search={{$video->series}}" class="  m-2 pl-2 ml-1" >{{ $video->series }} </a>
+							 @endif 
+						</td>
+					</tr>
+					</tbody>
+					</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	 
+</div>
+	</div>
 			<div id="rs-digg-box2" style="float: left; width: 100%; padding-top:3px;">
-				<h5   style="overflow: hidden;overflow: hidden;text-overflow: ellipsis;margin: 0.5rem 0;line-height: 1.8;">
+				<h5   style="overflow: hidden;overflow: hidden;text-overflow: ellipsis;margin: 0.5rem 0;line-height: 1.8;margin-left: 3px;">
 					<b>{{__('ui.video_view.VIDEO_INTRODUCTION')}}：</b>
 				</h5>
-				<p style="margin: 0.5rem 1rem; line-height: 1.8;">
+				<p style="margin: 0.5rem 1rem; line-height: 1.8; " class="des">
 					@if ($video->description)		
-					{{$video->description}}
+						{{$video->description}}
 					@else
-					{{$video->title}}
+						{{$video->title}}
 					@endif
 				</p>
 			</div>

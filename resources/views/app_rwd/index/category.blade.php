@@ -17,7 +17,7 @@
 @stop
 @section('maincontent')
 
-<div class="container">
+<div class="container {{$lang}}">
 	<div class="container__header" style="display: block;">{{__('ui.Category_Search')}}</div>
 	<div class="category ">
 	  <div class="category__title">{{__('ui.tag.Source')}}</div>

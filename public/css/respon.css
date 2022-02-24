@@ -2933,6 +2933,11 @@ label {
 	min-width: 100px;
 	font-size: 12px;
   }	
+  .zh .category__title {
+	min-width: 60px;
+	font-size: 12px;
+  }	
+
   .category__title::after {
     position: absolute;
     right: 0px;
@@ -3018,6 +3023,23 @@ label {
 	z-index: 999;
 	top: -50px;
   }
+  .movie-gallery-wrapper img {
+	max-width: 100%;
+	margin-top: 0px;
+	margin-right: 01px;
+	margin-bottom: 0px;
+	width: 10%;
+}
+@media screen and (min-width:1080px) {
+	.movie-gallery-wrapper img {
+		max-width: 100%;
+		margin-top: 0px;
+		margin-right: 01px;
+		margin-bottom: 0px;
+		width: 6.25%;
+	}
+
+}
 @media screen and (min-width:480px) {
 	.artist {
 		padding-left: 20px;
@@ -3029,14 +3051,30 @@ label {
 @media screen and (max-width:575px) {
 	.table-responsive .des {
 		font-weight: bold;
-    border-bottom: 1px solid #c0c1c1;
-	
-    line-height: 1.5;
+        border-bottom: 1px solid #c0c1c1;	
+        line-height: 1.5;
 	}
-
+    p.des {
+        font-size: 12px !important;
+    }
+    .p-title {
+        font-size: 14px !important;
+    }
+    .desktopTable {
+        display: none;
+    }
+    .mobileTable {
+        display: inline;
+    }
+}
+@media screen and (min-width:576px) {
+	 
+    
+    .mobileTable {
+        display: none !important;
+    }
 
 }
-
 @media screen and (max-width:480px) {
 	.list__item P ,.list__item h1,.list__item h6{
 	 

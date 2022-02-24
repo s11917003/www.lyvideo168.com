@@ -46,9 +46,9 @@ When My Little Stepsister Watched My Wife Cumming Like Crazy, She Decided To... 
 		<li class="news-tab__title">{{__('ui.title.amateur')}}</li>
 	  </ul>
 	  <div class="news-tab__content news-tab__content--active">
-		@if(count($video1) > 0)
+	 
 		<div class="news__title">{{__('ui.title.censored')}} - FANZA</div>
-		@endif
+	 
 		<div class="news__list list">  
 		@foreach ($video1 as $video)
  
@@ -65,9 +65,9 @@ When My Little Stepsister Watched My Wife Cumming Like Crazy, She Decided To... 
 		</div>
 	  </div>
 	  <div class="news-tab__content">
-		@if(count($video2) > 0)
+	 
 		<div class="news__title">{{__('ui.title.censored')}} - Prestige</div>
-		@endif
+	 
 		<div class="news__list list">
 		  
 			@foreach ($video2 as $video)
@@ -84,9 +84,9 @@ When My Little Stepsister Watched My Wife Cumming Like Crazy, She Decided To... 
 		</div>
 	  </div>
 	  <div class="news-tab__content">
-		@if(count($video3) > 0)
+		 
 		<div class="news__title">{{__('ui.title.uncensored')}}</div>
-		@endif
+	 
 		<div class="news__list list">
 			@foreach ($video3 as $video)
  
@@ -104,9 +104,9 @@ When My Little Stepsister Watched My Wife Cumming Like Crazy, She Decided To... 
 		</div>
 	  </div>
 	  <div class="news-tab__content">
-		@if(count($video4) > 0)
+	 
 		<div class="news__title">{{__('ui.title.amateur')}}</div>
-		@endif
+		 
 		<div class="news__list list">
 		  
 			@foreach ($video4 as $video)
