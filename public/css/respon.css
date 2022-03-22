@@ -2943,7 +2943,7 @@ label {
     right: 0px;
   }
   .category_more .zh {
-	width: 70px;
+	width: 77px;
   }
   .category_more a {
     display: block;
@@ -2989,7 +2989,7 @@ label {
     min-width: 40px;
     text-align: center;
 }
-.topic__content-name a{
+.topic__content-name a,.topic__content-name span {
 	margin-bottom: 0.5rem;
 	color: var(--text-color);
 }
@@ -3004,7 +3004,7 @@ label {
 	background-color:black;
 	opacity: 0.5;
 }
-.big img {max-width: 500px; height: auto;
+.big img {max-width: 700px; height: auto;
 	width: 90%;
     display:block;   
     vertical-align: middle;
@@ -3029,15 +3029,46 @@ label {
 	margin-right: 01px;
 	margin-bottom: 0px;
 	width: 10%;
+	cursor: pointer;
 }
+.p-title {
+	font-size: 1.3rem !important;
+}
+#video_frame {
+	max-width: 720px;
+}
+.topic__content-name a,  .topic__content-name span {
+	font-size: 1.5rem;
+}
+
+.news .list__item h6 {
+	color: var(--list-item-title) !important;
+}
+ 
+  
 @media screen and (min-width:1080px) {
 	.movie-gallery-wrapper img {
 		max-width: 100%;
 		margin-top: 0px;
 		margin-right: 01px;
 		margin-bottom: 0px;
-		width: 6.25%;
+		width: 11%;
 	}
+
+}
+
+@media screen and (max-width:1080px) {
+	.movie-gallery-wrapper img {
+		width: 19%;
+	}
+
+}
+
+@media (max-width: 768px) {
+	.movie-gallery-wrapper img {
+		width: 24%;
+	}
+
 
 }
 @media screen and (min-width:480px) {
@@ -3048,7 +3079,7 @@ label {
 
 
 }
-@media screen and (max-width:575px) {
+@media screen and (max-width:639px) {
 	.table-responsive .des {
 		font-weight: bold;
         border-bottom: 1px solid #c0c1c1;	
@@ -3063,13 +3094,24 @@ label {
     .desktopTable {
         display: none;
     }
+	#video_frame {
+		height: 280px;
+	}
     .mobileTable {
         display: inline;
     }
+	#rs-main-content {
+		padding: 10px 0px 0 0px;
+	}
 }
-@media screen and (min-width:576px) {
+@media screen and (min-width:640px) {
 	 
+    .desktopTable {
+        font-size: 16px;
+    }
     
+   
+	
     .mobileTable {
         display: none !important;
     }
@@ -3112,6 +3154,6 @@ label {
 		margin-top: 0px;
 		margin-right: 01px;
 		margin-bottom: 0px;
-		width: 32%;
+		width: 24%;
 	}
 }

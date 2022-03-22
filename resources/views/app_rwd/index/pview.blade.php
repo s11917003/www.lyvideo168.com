@@ -57,19 +57,31 @@
 	
 		<div id="rs-content-left-box" class="rs-content-left-box1">
 			<div class="row">
-					<div class="container-fluid" style="DISPLAY: contents;">
-						@if ($device == 'ios' || $device == 'android')
-						<div class="col-xs-12 col-sm-8 col-md-8 mdm-big" >
+					<div id="video_box" class="container-fluid" style="DISPLAY: contents;">
+
+						
+						@if( $video->video_source  == 'amateur')
+						<div id="video_frame" class="_box col-xs-12 col-sm-8 col-md-8 mdm-big" style="margin-bottom: 1rem;" >
 						@else
-						<div class="col-xs-12 col-sm-8 col-md-8 mdm-big" >
+						<div   class="_box col-xs-12 col-sm-8 col-md-8 mdm-big" style="margin-bottom: 1rem;">
 						@endif
-						<video id="av-video" data-setup="{}" width="600" height="264" style="background-color: #FFF;" class="video-js vjs-default-skin vjs-fluid vjs-show-big-play-button-on-pause vjs-fill vjs-16-9 vjs-big-play-centered " poster="{{$video->cover_img}}" controls>
-							@if ($video_status)
-							<source  id="av-video-source" 
-							src="{{$video->video_url}}"
-							type="video/mp4">
-							@endif
-						</video>
+						@if ($video_status)
+
+						@if( $video->video_source  == 'amateur')
+						<iframe  style=" position:absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://adult.contents.fc2.com/embed/{{$video->video_id}}?i=TXpjMU5EWTVNREE9" frameborder="0" allowfullscreen scrolling="no"></iframe>
+						@else 
+							<video id="av-video" data-setup="{}" width="600" height="2000" style="background-color: #FFF;" class="video-js vjs-default-skin vjs-fluid vjs-show-big-play-button-on-pause vjs-fill vjs-16-9 vjs-big-play-centered " poster="{{$video->cover_img}}" controls>
+								<source  id="av-video-source" 
+								src="{{$video->video_url}}"
+								type="video/mp4">						 
+							</video>
+						@endif
+					
+						@else 
+					 
+						<img style="height: 100%; width: 100%;   display: block;
+						margin: auto;"  src="{{$video->cover_img}}">  
+						@endif
 						<!-- /video id="samplevideo_html5_api" class="vjs-tech" preload="auto" tabindex="-1" autoplay="" src="https://awscc3001.r18.com/litevideo/freepv/d/dva/dvaj518/dvaj518_dmb_w.mp4"><source src="https://awscc3001.r18.com/litevideo/freepv/d/dva/dvaj518/dvaj518_sm_w.mp4" type="video/mp4" res="240" label="300 Kbps"><source src="https://awscc3001.r18.com/litevideo/freepv/d/dva/dvaj518/dvaj518_dm_w.mp4" type="video/mp4" res="480" label="1000 Kbps"><source src="https://awscc3001.r18.com/litevideo/freepv/d/dva/dvaj518/dvaj518_dmb_w.mp4" type="video/mp4" res="720" label="1500 Kbps"><p class="vjs-no-js">Your browser does not support the video tag.</p></video> -->
 						<script>
 							// var player = videojs('my-player',{
@@ -89,6 +101,7 @@
                 	hls: {
 								          overrideNative: true  
 								    },
+									aspectRatio: '4:3',
 									nativeVideoTracks: false,
 									nativeAudioTracks: false,
 									
@@ -201,60 +214,60 @@
 										<ul id="star-rank" class="star" data-star="3.4">
 											<li class="star__item star__item--active">
 											  <div class="star__item-back">
-												<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="star" aria-hidden="true">
+												<svg viewBox="64 64 896 896" style="height:1.3rem;width:1.3rem" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="star" aria-hidden="true">
 												  <path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"></path>
 												</svg>
 											  </div>
 											  <div class="star__item-front">
-												<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="star" aria-hidden="true">
+												<svg viewBox="64 64 896 896" style="height:1.3rem;width:1.3rem" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="star" aria-hidden="true">
 												  <path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"></path>
 												</svg>
 											  </div>
 											</li>
 											<li class="star__item star__item--active">
 											  <div class="star__item-back">
-												<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="star" aria-hidden="true">
+												<svg viewBox="64 64 896 896" style="height:1.3rem;width:1.3rem" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="star" aria-hidden="true">
 												  <path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"></path>
 												</svg>
 											  </div>
 											  <div class="star__item-front">
-												<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="star" aria-hidden="true">
+												<svg viewBox="64 64 896 896" style="height:1.3rem;width:1.3rem" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="star" aria-hidden="true">
 												  <path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"></path>
 												</svg>
 											  </div>
 											</li>
 											<li class="star__item star__item--active">
 											  <div class="star__item-back">
-												<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="star" aria-hidden="true">
+												<svg viewBox="64 64 896 896" style="height:1.3rem;width:1.3rem" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="star" aria-hidden="true">
 												  <path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"></path>
 												</svg>
 											  </div>
 											  <div class="star__item-front">
-												<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="star" aria-hidden="true">
+												<svg viewBox="64 64 896 896" style="height:1.3rem;width:1.3rem"  focusable="false" fill="currentColor" width="1em" height="1em" data-icon="star" aria-hidden="true">
 												  <path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"></path>
 												</svg>
 											  </div>
 											</li>
 											<li class="star__item star__item--active star__item--half">
 											  <div class="star__item-back">
-												<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="star" aria-hidden="true">
+												<svg viewBox="64 64 896 896" style="height:1.3rem;width:1.3rem" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="star" aria-hidden="true">
 												  <path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"></path>
 												</svg>
 											  </div>
 											  <div class="star__item-front">
-												<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="star" aria-hidden="true">
+												<svg viewBox="64 64 896 896" style="height:1.3rem;width:1.3rem" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="star" aria-hidden="true">
 												  <path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"></path>
 												</svg>
 											  </div>
 											</li>
 											<li class="star__item">
 											  <div class="star__item-back">
-												<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="star" aria-hidden="true">
+												<svg viewBox="64 64 896 896" style="height:1.3rem;width:1.3rem" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="star" aria-hidden="true">
 												  <path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"></path>
 												</svg>
 											  </div>
 											  <div class="star__item-front">
-												<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="star" aria-hidden="true">
+												<svg viewBox="64 64 896 896" style="height:1.3rem;width:1.3rem" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="star" aria-hidden="true">
 												  <path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"></path>
 												</svg>
 											  </div>
@@ -262,31 +275,36 @@
 										  </ul>
 									</td>		
 								</tr>
-								<tr>
+								<tr class="">
 									<td class="" colspan=2>
 										@if(!is_null($video->actressData))
 										<div class="topic__content-name">
 										@foreach ($video->actressData as $data )
+											@if($data["id"] == 999999) 
+												<span>{{ $data['name'] }} </span>
+											@else
 											<a href='/{{$lang}}/actress/{{ $data["id"]}}'  >{{ $data['name'] }}</a>
+											@endif
 										@endforeach	
 										</div>
 										@endif
 									
 									</td>
 								</tr>
+								@if ($video_tag && count($video_tag) > 0 )
 								<tr>
 							 
 									<td colspan =2 style="padding-bottom:10px">
 										<!-- <a href="" title="HyakkinTV">{{ $video->label }}</a> -->
-										@if ($video_tag)
 										<ul class="topic__content-keyword"> 
 											@foreach ($video_tag as $tag )
 											<li> <a href="/{{$lang}}/category?cate={{  $tag->tag_id   }}" class="  " >{{$tag->tagName }} </a></li>
 											@endforeach	
 										</ul>
-										@endif
+									
 									</td>
-								</tr>					 
+								</tr>		
+								@endif				 
 								<tr  class="des desktopTable">
 								<td  colspan =2>{{__('ui.video_view.DVD_ID')}}:{{ $video->dvd_id }}</td>
 								</tr>
@@ -353,7 +371,7 @@
 								@endif
 								<tr>
 									<td colspan =2 class="pt-2 desktopTable">
-										<div class='playBtn' >
+										<div class='playBtn affiliateURL' >
 											<a  href="javascript:void(0)" onClick="gotoURL()">
 												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.98 31.98">
 												<g>
@@ -369,34 +387,34 @@
 								</tr>
 
 								<tr class="pt-1 mobileTable">
-									@if ($video_status)
-									<td  class="pt-2">
-										<div class='playBtn' >
-											<a  href="javascript:void(0)" onClick="playToggle()">
-												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.98 31.98">
-												<g>
-													<circle class="i_played1" cx="15.99" cy="15.99" r="15.99"></circle>
-													<circle class="i_played2" cx="15.99" cy="15.99" r="9.2"></circle>
-													<path class="i_played3" d="M20.45,15.92l-7-4.06a.09.09,0,0,0-.13.07v8.12a.09.09,0,0,0,.13.07l7-4.06A.08.08,0,0,0,20.45,15.92Z"></path>
-												</g>
-												</svg>
-												<span>{{__('ui.video_view.WATCH_FREE_SAMPLE')}}</span>
-											</a>
-										</div>
-									</td>
-									@endif
-									<td class="pt-2">
-										<div class='playBtn' >
-											<a  href="javascript:void(0)" onClick="gotoURL()">
-												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.98 31.98">
-												<g>
-													<circle class="i_played1" cx="15.99" cy="15.99" r="15.99"></circle>
-													<circle class="i_played2" cx="15.99" cy="15.99" r="9.2"></circle>
-													<path class="i_played3" d="M20.45,15.92l-7-4.06a.09.09,0,0,0-.13.07v8.12a.09.09,0,0,0,.13.07l7-4.06A.08.08,0,0,0,20.45,15.92Z"></path>
-												</g>
-												</svg>
-												<span>{{__('ui.video_view.WATCH_FULL_VIDEO')}}</span>
-											</a>
+									<td  class="pt-2"  style="width:100vw">
+									   <div  style="width:98%;display: flex;justify-content: center;">
+									   @if ($video_status)
+    										<div class='playBtn' style="justify-content: center; margin: 0 auto; position: relative;">
+    											<a  href="javascript:void(0)" onClick="playToggle()">
+    												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.98 31.98">
+    												<g>
+    													<circle class="i_played1" cx="15.99" cy="15.99" r="15.99"></circle>
+    													<circle class="i_played2" cx="15.99" cy="15.99" r="9.2"></circle>
+    													<path class="i_played3" d="M20.45,15.92l-7-4.06a.09.09,0,0,0-.13.07v8.12a.09.09,0,0,0,.13.07l7-4.06A.08.08,0,0,0,20.45,15.92Z"></path>
+    												</g>
+    												</svg>
+    												<span>{{__('ui.video_view.WATCH_FREE_SAMPLE')}}</span>
+    											</a>
+    										</div>
+    									    @endif
+    										<div class='playBtn'  style="justify-content: center; margin: 0 auto; position: relative;">
+    											<a  href="javascript:void(0)" onClick="gotoURL()">
+    												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.98 31.98">
+    												<g>
+    													<circle class="i_played1" cx="15.99" cy="15.99" r="15.99"></circle>
+    													<circle class="i_played2" cx="15.99" cy="15.99" r="9.2"></circle>
+    													<path class="i_played3" d="M20.45,15.92l-7-4.06a.09.09,0,0,0-.13.07v8.12a.09.09,0,0,0,.13.07l7-4.06A.08.08,0,0,0,20.45,15.92Z"></path>
+    												</g>
+    												</svg>
+    												<span>{{__('ui.video_view.WATCH_FULL_VIDEO')}}</span>
+    											</a>
+    										</div>
 										</div>
 									</td>
 								</tr>
@@ -420,9 +438,9 @@
 						<div class="clearfix"></div>
 						<div class="movie-gallery">
 							<div class="movie-gallery-wrapper">
-								@foreach ($video->thumbnail_img_router as $thumbnail_img)
+								@foreach ($video->thumbnail_img_router as $key =>  $thumbnail_img)
 								<!-- <a class="example-image-link" href="{{ url($thumbnail_img) }}" data-lightbox="100TV-404-gallery" data-title="Click the right half of the image to move forward."> -->
-									<img class="example-image" src="{{  asset('/storage/'.$thumbnail_img)}}" alt="">
+									<img class="example-image" src="{{  asset('/storage/'.$thumbnail_img)}}" onClick="gotothumbnail({{$key}})" alt="">
 								<!-- </a> -->
 								@endforeach			
 								
@@ -557,19 +575,32 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer> -->
 </script>
-<script>
-	$('.movie-gallery-wrapper .example-image').on('click',function(){
- 	 
-		 $('.big img').attr('src', $(this).attr('src')); 
-		 $('.big').show()
  
-	})
+<script>
+	var affiliateURL =''
 	$('#closead').on('click',function(){
 		//alert('close')
 		$('#videocoverad').hide()
 		
 	})
+	$('.closeBtn').on('click',function(){
+		$('.big').hide()
+	})
+	function gotothumbnail(page) {
+		$('.big').show()
+		var splide = new Splide( '.splide', {
+				start  : page,
+				perPage: 1,
+		} );
+		splide.mount();
+		$('.splide__pagination__page').hide()
+		
+	}
 	function gotoURL() {
+		if(affiliateURL != ''){
+			location.assign(affiliateURL);
+			return;
+		}
 		location.assign(`{{$url}}`);
  
 	}
@@ -580,56 +611,75 @@
     });
 
 	window.onload = function() {	
-		 
+		const a = @json($video->thumbnail_img_router);
+
+		const lang = @json($video->video_lang);
+		const video_source = @json($video->video_source);
+		const video_id = @json($video->video_id);
+	
+		if(lang== 3 && video_source=='fanza'){
+			$('.affiliateURL').hide()
+			var client = new dmm.Client({
+				api_id: "hW63FdKybRxHq5tmA2Zk",
+				affiliate_id: "Javdic-990"
+			});
+			client.product({
+				site: "DMM.R18",
+				service: "digital",
+				floor: "videoa",
+				keyword: video_id,
+				hits: 20,
+				offset: 1,
+			}, function(err, data){
+			 
+
+				if(data.status == 200) {
+					if(data.items[0].affiliateURL) {
+						affiliateURL = data.items[0].affiliateURL
+					}
+					$('.affiliateURL').show()
+					console.log(data.items[0] )
+					if(data.items[0].sampleMovieURL) {
+						sampleMovieURL = ''
+						if(data.items[0].sampleMovieURL.size_720_480) {
+							sampleMovieURL = data.items[0].sampleMovieURL.size_720_480
+						} else if(data.items[0].sampleMovieURL.size_644_414) {
+							sampleMovieURL = data.items[0].sampleMovieURL.size_644_414
+						} else if(data.items[0].sampleMovieURL.size_560_360) {
+							sampleMovieURL = data.items[0].sampleMovieURL.size_560_360
+						} else if(data.items[0].sampleMovieURL.size_476_306) {
+							sampleMovieURL = data.items[0].sampleMovieURL.size_476_306
+						}  
+					
+
+						if(sampleMovieURL!=''){
+							console.log(sampleMovieURL )
+							
+							console.log(	$('#video_box ._box ').html( ) )
+							$('#video_box ._box ').html('')
+
+							videoFrame = `<iframe  style=" position:absolute; top: 0; left: 0; width: 100%; height: 100%;" src="`+sampleMovieURL+`" frameborder="0" allowfullscreen scrolling="no"></iframe>`
+							$('#video_box ._box ').html(videoFrame)
+							$('#video_box ._box ').attr('id','video_frame');
+						}
+					}
+				}
+			});
+		}
 		
-		// videoId = '{{$video->video_id}}';
-	
-		// 		// client新規作成
-	
-		// var client = new dmm.Client({
-		// 	api_id: "hW63FdKybRxHq5tmA2Zk",
-		// 	affiliate_id: "Javdic-990"
-		// });
-		// var options = {site: "DMM.R18",keyword:videoId}
-
-		// client.product(options, function (err, data) {
-		// 	console.log(data);
-		// 	if(data.items.length > 0){
-		// 		volume  = data.items[0].volume
-		// 		URL  = data.items[0].URL
-
-		// 		console.log(volume);
-
-		// 		console.log(URL);
-
-		// 		$('#Runtime').html(volume+ ' min')
-		// 		$("#goToURL").attr("href",URL);
-		// 	}
-
-		// 	// if(data.items.length > 0){
-		// 	// 	for (const [key, value] of Object.entries(data.items[0].sampleMovieURL)) {
- 
-		// 	// 		if(key.indexOf('size_')  >=0){
-		// 	// 			console.log(value);
-		// 	// 			var videoSourceElm = $('#av-video-source')
-		// 	// 			videoSourceElm.src = value;
-		// 	// 			var player = videojs( 'av-video')
-		// 	// 			console.log(player.src);
-		// 	// 			player.src({
-		// 	// 				src:value,
-		// 	// 				type: 'video/mp4'/*video type*/
-		// 	// 			});
-		// 	// 			player.load();
-		// 	// 			break;
-		// 	// 		}
-   
-		// 	// }
+	 
 			
-		// 	// }
-		
-		// });
-		 
-	}
+			
+		if(a) {
+			a.map(function(value){
+				video = `<li style="display: flex; align-items: center;"  class="splide__slide"><img style="align-items: center;" src="/storage/`+value+`" /></li>`
+				$("ul.splide__list").append(video)
+			})
+
+			var splide = new Splide( '.splide' );
+				splide.mount();
+			}
+		}
 </script>
 
 @stop

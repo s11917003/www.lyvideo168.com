@@ -225,7 +225,7 @@
 							dateText =  date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
 						}
 						
-						
+						currentscrollHeight = 0;
 						
 						video = `<a href="/{{$lang}}/video/`+item.video_id+`$`+item.actress+`" class="list__item">
 						<figure><img src="`  +item.cover_img+  `"></figure>
@@ -434,9 +434,11 @@
 		const scrollHeight = $(document).height();
 		const scrollPos = Math.floor($(window).height() + $(window).scrollTop());
 		const isBottom = scrollHeight - 100 < scrollPos;
-
+		console.log('scrollHeight',scrollHeight)
+		console.log('scrollPos',scrollPos)
+		console.log('isBottom',isBottom)
 		if (isBottom && currentscrollHeight < scrollHeight) {
-		 
+			console.log('?????????????????????')
 			customTag(this.page +1)
 			currentscrollHeight = scrollHeight;
 		}
@@ -506,6 +508,10 @@
 		findCate = false;
 		arr =[]
 		const category = parseInt(@json($category));
+
+
+		console.log(cate)
+		console.log(category)
 		if(category > -1){
 			$("li[name=all]").removeClass('category__tags-item--active')	
 			$("li[name=censored_f]").removeClass('category__tags-item--active')
@@ -529,11 +535,11 @@
 					findCate = true 
 				}
 				$("li[name="+value+"]").addClass('category__tags-item--active')
-				$("li[name=all]").removeClass('category__tags-item--active')
-				$("li[name=censored_f]").removeClass('category__tags-item--active')
-				$("li[name=censored_p]").removeClass('category__tags-item--active')
-				$("li[name=uncensored]").removeClass('category__tags-item--active')
-				$("li[name=FC2]").removeClass('category__tags-item--active')
+				$("li[name=all]").addClass('category__tags-item--active')
+				$("li[name=censored_f]").addClass('category__tags-item--active')
+				$("li[name=censored_p]").addClass('category__tags-item--active')
+				$("li[name=uncensored]").addClass('category__tags-item--active')
+				$("li[name=FC2]").addClass('category__tags-item--active')
 				arr.push(value)
 			});
 
@@ -545,7 +551,7 @@
 				arr.push($(this).attr('name'))
 			}
 		});
-
+		console.log(arr)
 		sendAjax(arr,1);
 		$('.category').find('li').each(function(){
 			$(this).find('a').attr("href","javascript:void(0);");

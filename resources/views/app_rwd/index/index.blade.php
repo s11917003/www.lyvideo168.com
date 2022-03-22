@@ -40,7 +40,7 @@ When My Little Stepsister Watched My Wife Cumming Like Crazy, She Decided To... 
 	<div class="container__header" style="display: block;">{{ __('ui.new')}}</div>
 	<div class="news" data-tab="">
 	  <ul class="news-tab__header">
-		<li class="news-tab__title news-tab__title--active">{{__('ui.title.censored')}} - FANZA</li>
+		<li class="news-tab__title news-tab__title--active">{{__('ui.title.censored')}} -<br> FANZA</li>
 		<li class="news-tab__title">{{__('ui.title.censored')}} - Prestige</li>
 		<li class="news-tab__title">{{__('ui.title.uncensored')}}</li>
 		<li class="news-tab__title">{{__('ui.title.amateur')}}</li>
@@ -55,7 +55,7 @@ When My Little Stepsister Watched My Wife Cumming Like Crazy, She Decided To... 
 		<a href="/{{$lang}}/video/{{$video->video_id}}${{ $video->actress}}" class="list__item">
 			<figure><img src="{{ $video->cover_img }}"></figure>
 			<div class="list__item-info">
-			<h6>{{__('ui.title.video_censored')}} FANZA {{$video->video_id}}</h6>
+			<h6>{{$video->video_id}}</h6>
 			<p>{{$video->title}}</p>
 			@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date))}}</div> @endif
 			</div>
@@ -75,7 +75,7 @@ When My Little Stepsister Watched My Wife Cumming Like Crazy, She Decided To... 
 			<a href="/{{$lang}}/video/{{$video->video_id}}${{ $video->actress}}" class="list__item">
 				<figure><img src="{{ $video->cover_img }}"></figure>
 				<div class="list__item-info">
-					<h6>{{__('ui.title.video_censored')}} Prestige {{$video->video_id}}</h6>
+					<h6>{{$video->video_id}}</h6>
 					<p>{{$video->title}}</p>
 					@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date)) }}</div> @endif
 				</div>
@@ -93,7 +93,7 @@ When My Little Stepsister Watched My Wife Cumming Like Crazy, She Decided To... 
 			<a href="/{{$lang}}/video/{{$video->video_id}}${{ $video->actress}}" class="list__item">
 				<figure><img src="{{ $video->cover_img }}"></figure>
 				<div class="list__item-info">
-					<h6>{{__('ui.title.video_uncensored')}} {{$video->video_id}}</h6>
+					<h6>{{$video->video_id}}</h6>
 					<p>{{$video->title}}</p>
 					@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date)) }}</div> @endif
 				</div>
@@ -114,7 +114,7 @@ When My Little Stepsister Watched My Wife Cumming Like Crazy, She Decided To... 
 			<a href="/{{$lang}}/video/{{$video->video_id}}${{ $video->actress}}" class="list__item">
 				<figure><img src="{{ $video->cover_img }}"></figure>
 				<div class="list__item-info">
-					<h6>{{__('ui.title.video_amateur')}} {{$video->video_id}}</h6>
+					<h6>{{$video->video_id}}</h6>
 					<p>{{$video->title}}</p>
 					@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date)) }}</div> @endif
 				</div>

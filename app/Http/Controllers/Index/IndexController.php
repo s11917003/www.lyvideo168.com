@@ -22,6 +22,7 @@ use App\Model\PostsTagRelationships;
 use App\Model\Video;
 use App\Model\Video_actress_name;
 use App\Model\Video_actress;
+use App\Model\Video_actress_data;
 use App\Model\Video_actress_relations;
 use App\Model\Video_tag_relations;
 use App\Model\Video_tag;
@@ -226,7 +227,7 @@ class IndexController extends Controller {
 		$webLangIndex = $this->language[$lang];
 
 		$video_actress_popular = Video_actress::whereIn('id',[2,3,4,5,11,12,26,28,31,106,171,421,593,641,830])->get();// 女優table;
-		$tag_actress_popular = Video_tag::whereIn('id',[15,22,24,28,38,53,58,65,71,84,88,103,151,154,198])->get();
+		$tag_actress_popular = Video_tag::whereIn('id',[15,22,24,28,38,52,53,65,71,84,88,103,152,154,159])->get();
 
 		$series = [];
 		if($lang == 'zh') {
@@ -277,29 +278,54 @@ class IndexController extends Controller {
 	
 		if($video['actress']){ 
 			$Video_actress = Video_actress_relations::select('*')->with('tagRelations')->where('video_id', $video->id)->get();//找女優 對應表
+			 
 			$actress = [];
 			$actressName = [];
 			$actressData= []; 
-		
-			foreach($Video_actress as $data){ //這部影片裏 的女優
-				$actress[] = $data->actress_id;
-				$name = $data->tagRelations->JapaneseName1;
-				if($lang=='zh'){
-        		    $name  = $data->tagRelations->ChineseName1 ?$data->tagRelations->ChineseName1 : $data->tagRelations->JapaneseName1;
-        		} else if($lang=='en'){
-        		    $name=  $data->tagRelations->EnglishName1 ?$data->tagRelations->EnglishName1 : $data->tagRelations->JapaneseName1;
-        		} 
-			 	$actressName[] = $name;
-				$actressData[] = ['id' => $data->actress_id , 'name' =>  $name];
-			}
-		
-			$Video_actress_relations = Video_actress_relations::select('*')->whereIn('actress_id', $actress)->limit(60)->pluck('video_id')->toArray();;//找女優相關
-			$video_with_actress = Video::whereIn('id', $Video_actress_relations)->where('video_lang',$webLangIndex)->limit(20)->get();
-			if(count($actressName)>0){
-				$video['actress'] =  implode("&", $actressName); 
-			}
+			if(count($Video_actress) == 0){ //不在資料庫裏
+				$actressArr = explode('@',$video['actress']);
+				foreach ($actressArr as $actressItme) {
+					if($actressItme){ 
+						$actressData[] = ['id' =>999999 , 'name' =>  $actressItme];
+					}	
+				}
+				$video['actressData'] =$actressData;
+			} else {
+				foreach($Video_actress as $data){ //這部影片裏 的女優
+					$actress[] = $data->actress_id;
+					$name = $data->tagRelations->JapaneseName1;
+					if($lang=='zh'){
+						$name  = $data->tagRelations->ChineseName1 ?$data->tagRelations->ChineseName1 : $data->tagRelations->JapaneseName1;
+					} else if($lang=='en'){
+						$name=  $data->tagRelations->EnglishName1 ?$data->tagRelations->EnglishName1 : $data->tagRelations->JapaneseName1;
+					} 
 
-			$video['actressData'] = $actressData;
+					$actressName[] = $name;
+					if(!$data->tagRelations->JapaneseName1){
+						$actressData[] = ['id' => 999999 , 'name' =>  $name];
+					} else {
+						$actress_data = Video_actress_data::where('JapaneseName',$data->tagRelations->JapaneseName1)->first();// 女優table;
+
+						if($actress_data ) {//有找到女友wiki
+							$actressData[] = ['id' => $data->actress_id , 'name' =>  $name];
+						} else {
+							$actressData[] = ['id' => 999999 , 'name' =>  $name];
+						}
+					}
+				 
+					
+					
+				}
+		
+				$Video_actress_relations = Video_actress_relations::select('*')->whereIn('actress_id', $actress)->limit(60)->pluck('video_id')->toArray();;//找女優相關
+				$video_with_actress = Video::whereIn('id', $Video_actress_relations)->where('video_lang',$webLangIndex)->limit(20)->get();
+				if(count($actressName)>0){
+					$video['actress'] =  implode("&", $actressName); 
+				}
+
+				$video['actressData'] = $actressData;
+			}
+			
 		}
 		
 		 
@@ -807,7 +833,20 @@ class IndexController extends Controller {
 		
 	
 		if(in_array("all", $request->tag)){
-			$video = Video::select('*')->where('video_lang',$webLangIndex)->Paginate(36) ;
+			$check = false; 
+			foreach ($request->tag as $element) {
+				if (is_numeric($element)) {
+					$check = true; 	
+				} 
+			}
+			if($check) {
+				$tag = $request->tag;
+				$videoIntag =  Video_tag_relations::whereIn('tag_id',$tag)->with('tagName')->inRandomOrder()->limit(7000)->pluck('video_id')->toArray();
+				$video = Video::select('*')->where('video_lang',$webLangIndex)->whereIn('id',$videoIntag)->Paginate(36) ;
+ 
+			} else {
+				$video = Video::select('*')->where('video_lang',$webLangIndex)->Paginate(36) ;
+			}		 
 			$secondary_tag = \Session::get('secondary_tag');
 			$Video_tag_screen = Video_tag::whereIn('id',  explode(",", $secondary_tag))->get();
 			foreach ($Video_tag_screen as $tag) {
@@ -831,15 +870,21 @@ class IndexController extends Controller {
 			if( in_array('FC2',$request->tag)){
 				$sourece_array[] = 4;
 			}
-		}
+		}	 
 		$tag = $request->tag;
-	    $videoIntag =  Video_tag_relations::where('tag_id',$tag)->with('tagName')->limit(7000)->pluck('video_id')->toArray();
+	    $videoIntag =  Video_tag_relations::whereIn('tag_id',$tag)->limit(15000)->pluck('video_id')->toArray();
+	    $video = Video::select('*')->where('video_lang',$webLangIndex);
+	    if(count($videoIntag) >0) { 
+	         $video->whereIn('id',$videoIntag);
+	    } 
+	    if(count($sourece_array) >0) {
+	         $video->whereIn('cate_id',$sourece_array);
+	    }
 
-		$video = Video::select('*')->where('video_lang',$webLangIndex)->whereIn('id',$videoIntag)->orWhere(function ($query) use ($sourece_array) {
-		$query->whereIn('cate_id',$sourece_array);
-		})->Paginate(36) ;
+	    $_video = $video->Paginate(36);
+
 	 
-		return  response()->json([ 'video' =>$video,  'pagination' => (string)$video->links("pagination::bootstrap-4"), ]);
+		return  response()->json([ 'video' =>$_video,  'pagination' => (string)$_video->links("pagination::bootstrap-4"), ]);
 		
 	}
 	//分類
@@ -1060,23 +1105,23 @@ class IndexController extends Controller {
 		}
 		if($search ==''){
 			abort(404);
-		}
+		}	
 		$webLangIndex = $this->language[$lang];
-		$videos = Video::where('video_lang',$webLangIndex)->where($type, $search)->get();//video table; 
+		$videos = Video::where('video_lang',$webLangIndex)->where($type, $search)->with('tagRelations')->get();//video table; 
 	 	$tagObj = [];
 	  	//計算相關的標籤以及數量
-	    $size = count($videos); 
-        for ($i=0; $i < $size; $i++) {
-		    $data = $videos[$i]['tagRelations'];
-	    	foreach ($data  as $tag) {
-    	    	if( !in_array($tag->tag_id,array_keys((array)$tagObj))){
-    		        $tagObj[$tag->tag_id] = 1;
-    		    } else {
-    		       	$tagObj[$tag->tag_id] +=1;
-    		    }
+	    $size = count($videos);      
+        foreach ( $videos as $key=>$video) {
+		     $data = $video['tagRelations'];
+	    	foreach ($data as $tag) {
+	    	    if(empty($tagObj[$tag->tag_id])){
+	    	         $tagObj[$tag->tag_id] = 1;
+	    	    } else {
+	                 $tagObj[$tag->tag_id] += 1;
+	           }
 	    	}
 		}
-				 
+        
 	    $video_tag	= Video_tag::whereIn('id',array_keys((array)$tagObj))->get();
 	  	foreach ($video_tag  as $tag) {
 		    $tag['count'] = $tagObj[$tag->id];

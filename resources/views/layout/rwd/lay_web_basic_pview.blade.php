@@ -14,6 +14,7 @@
 <link href="/css/search-list.css" rel="stylesheet" type="text/css">
 <link href="/css/list.css" rel="stylesheet" type="text/css">
 <link href="/css/videojs-contrib-ads.css" rel="stylesheet">
+<link href="/css/splide.min.css" rel="stylesheet">
 <link rel="stylesheet" href="/css/category-list.css">
 <link rel="icon" href="/img/logo.png" type="image/x-icon" />
 <!-- Google Tag Manager -->
@@ -43,9 +44,10 @@ import videojsPreviewThumbnails from 'https://cdn.skypack.dev/videojs-preview-th
 <script src="/js/videojs-contrib-hls.js"></script>
 <script src="/js/videojs-contrib-ads.js"></script>
 <script defer src="/js/fontawesome-all.js"></script>
-
+<script defer src="/js/splide.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="/js/function.js"></script>
+<script src="/js/lib/dmm.js"></script>
 <!-- <script type="text/javascript" src="/js/jquery.lazyload.js"></script> -->
 <script type="text/javascript" src="/js/jquery.visible.js"></script>
 <!-- <script src="/js/popper.min.js"></script> -->
@@ -53,8 +55,8 @@ import videojsPreviewThumbnails from 'https://cdn.skypack.dev/videojs-preview-th
 <script src="/js/select.js"></script> -->
 <script>
 	$(function() {
-		$('.big').click(function() {
-			$(this).hide()
+		$('.big-bg ').click(function() {
+			$('.big').hide()
 		});
 		$.ajax({
 				type:"POST",
@@ -110,8 +112,13 @@ import videojsPreviewThumbnails from 'https://cdn.skypack.dev/videojs-preview-th
 </head>
 <div class="big" style=" display:none">
 	<div class="big-bg"></div>
-	<img src="" class="bigimg">
-
+	<img class="closeBtn" src="/img/close.png" style="position: absolute; top:55px;right:20px;height:30px;width:30px;z-index: 1000;" > 
+	<div class="splide">
+		<div class="splide__track">
+			  <ul class="splide__list">
+			  </ul>
+		</div>
+	  </div>
 </div>
 @if (config('app.web_type') == 1)
 	<body id="rs-body">
