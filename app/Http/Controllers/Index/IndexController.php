@@ -273,9 +273,9 @@ class IndexController extends Controller {
 	    	}
 		} 
  
- 		$video_tag =  Video_tag_relations::where('video_id',$video->id)->with('tagName')->get();
+ 		$video_tag =  Video_tag_relations::where('video_id',$video->id)->with('tagName')->groupby('tag_id')->distinct()->get();
 		$video_with_actress = [];
-	
+	 
 		if($video['actress']){ 
 			$Video_actress = Video_actress_relations::select('*')->with('tagRelations')->where('video_id', $video->id)->get();//找女優 對應表
 			 
@@ -294,35 +294,38 @@ class IndexController extends Controller {
 				foreach($Video_actress as $data){ //這部影片裏 的女優
 					$actress[] = $data->actress_id;
 					$name = $data->tagRelations->JapaneseName1;
+					
+				 
 					if($lang=='zh'){
 						$name  = $data->tagRelations->ChineseName1 ?$data->tagRelations->ChineseName1 : $data->tagRelations->JapaneseName1;
 					} else if($lang=='en'){
 						$name=  $data->tagRelations->EnglishName1 ?$data->tagRelations->EnglishName1 : $data->tagRelations->JapaneseName1;
 					} 
+				
 
 					$actressName[] = $name;
 					if(!$data->tagRelations->JapaneseName1){
 						$actressData[] = ['id' => 999999 , 'name' =>  $name];
 					} else {
 						$actress_data = Video_actress_data::where('JapaneseName',$data->tagRelations->JapaneseName1)->first();// 女優table;
-
+	                    
 						if($actress_data ) {//有找到女友wiki
 							$actressData[] = ['id' => $data->actress_id , 'name' =>  $name];
 						} else {
 							$actressData[] = ['id' => 999999 , 'name' =>  $name];
 						}
 					}
-				 
-					
-					
+	
 				}
 		
-				$Video_actress_relations = Video_actress_relations::select('*')->whereIn('actress_id', $actress)->limit(60)->pluck('video_id')->toArray();;//找女優相關
-				$video_with_actress = Video::whereIn('id', $Video_actress_relations)->where('video_lang',$webLangIndex)->limit(20)->get();
+				$Video_actress_relations = Video_actress_relations::select('*')->whereIn('actress_id', $actress)->limit(2000)->pluck('video_id')->toArray();;//找女優相關
+				
+							
+				$video_with_actress = Video::whereIn('id', $Video_actress_relations)->where('video_lang',$webLangIndex)->limit(20)->get();			
 				if(count($actressName)>0){
 					$video['actress'] =  implode("&", $actressName); 
 				}
-
+				
 				$video['actressData'] = $actressData;
 			}
 			
@@ -379,6 +382,8 @@ class IndexController extends Controller {
 			$tag->tagName = $tag->tagName[$lang];
 		 
 		}
+	
+	 
 		//DB::enableQueryLog();
 		////相關標籤影片
 	 	$randTag = Video_tag_relations::where('video_id',$video->id)->inRandomOrder()->limit(2)->pluck('tag_id')->toArray();
@@ -420,7 +425,7 @@ class IndexController extends Controller {
 		} else if ($video['cate_id'] == 2){
 			$url =  'https://www.mgstage.com/product/product_detail/'.$video['video_id'].'/?aff=JAQD55TL3ANYC8C2Y3CZZHBAZY';
 		} else if ($video['cate_id'] == 3){
-			$url =  'https://click.dtiserv2.com/Direct/900'.str_pad(intval($video['uncensored_code']),3,"0",STR_PAD_LEFT).'999-'.$video['uncensored_code'].'-198346/moviepages/'.$video['video_id'].'/index.html';
+			$url =  'https://click.dtiserv2.com/'.$webLangIndex == 2 ? 'eDirect' :'Direct'.'/900'.str_pad(intval($video['uncensored_code']),3,"0",STR_PAD_LEFT).'999-'.$video['uncensored_code'].'-198346/moviepages/'.$video['video_id'].'/index.html';
 		} else if ($video['cate_id'] == 4){
 			$url =  'https://adult.contents.fc2.com/aff.php?aid='.$video['video_id'].'&affuid=TXpjMU5qTTFPREU9';
 		}
@@ -837,7 +842,7 @@ class IndexController extends Controller {
 			foreach ($request->tag as $element) {
 				if (is_numeric($element)) {
 					$check = true; 	
-				} 
+				} 				
 			}
 			if($check) {
 				$tag = $request->tag;
@@ -872,17 +877,17 @@ class IndexController extends Controller {
 			}
 		}	 
 		$tag = $request->tag;
-	    $videoIntag =  Video_tag_relations::whereIn('tag_id',$tag)->limit(15000)->pluck('video_id')->toArray();
-	    $video = Video::select('*')->where('video_lang',$webLangIndex);
-	    if(count($videoIntag) >0) { 
+	    $videoIntag =  Video_tag_relations::whereIn('tag_id',$tag)->limit(40000)->pluck('video_id')->toArray();
+	    $video = Video::select('*')->where('video_lang',$webLangIndex);	    
+	    if(count($videoIntag) >0) {         
 	         $video->whereIn('id',$videoIntag);
 	    } 
 	    if(count($sourece_array) >0) {
 	         $video->whereIn('cate_id',$sourece_array);
 	    }
-
+	  
 	    $_video = $video->Paginate(36);
-
+	    
 	 
 		return  response()->json([ 'video' =>$_video,  'pagination' => (string)$_video->links("pagination::bootstrap-4"), ]);
 		
@@ -1106,11 +1111,11 @@ class IndexController extends Controller {
 		if($search ==''){
 			abort(404);
 		}	
-		$webLangIndex = $this->language[$lang];
-		$videos = Video::where('video_lang',$webLangIndex)->where($type, $search)->with('tagRelations')->get();//video table; 
+		$webLangIndex = $this->language[$lang]; 
+		$videos = Video::where('video_lang',$webLangIndex)->where($type, $search)->with('tagRelations')->get();//video table; 	
 	 	$tagObj = [];
 	  	//計算相關的標籤以及數量
-	    $size = count($videos);      
+	    $size = count($videos); 
         foreach ( $videos as $key=>$video) {
 		     $data = $video['tagRelations'];
 	    	foreach ($data as $tag) {
@@ -1254,13 +1259,12 @@ class IndexController extends Controller {
 			abort(404);
 		}
 		$webLangIndex = $this->language[$lang];
-		$fanza = Video_rank::where('video_source','fanza')->where('type',$type)->where('video_lang',$webLangIndex)->whereHas('video', function ($query)  use ($webLangIndex){
-			$query->where('video_lang', '=', $webLangIndex );
-	   })->orderBy('rank')->limit(8)->get();
-		$prestige = Video_rank::where('video_source','mgstage')->where('type',$type)->where('video_lang',$this->language['jp'])->with('video')->orderBy('rank')->limit(8)->get();
-		$uncensored = Video_rank::where('video_source','uncensored')->where('type',$type)->where('video_lang',($lang == 'zh') ? $this->language['jp'] : $webLangIndex)->with('video')->orderBy('rank')->limit(8)->get();
-		$amateur = Video_rank::where('video_source','amateur')->where('type',$type)->where('video_lang',$this->language['jp'])->with('video')->orderBy('rank')->limit(8)->get();
-		 
+		$fanza = Video_rank::where('video_source','fanza')->where('type',$type)->where('video_lang',$webLangIndex)->with('video')->orderBy('rank')->limit(8)->get();
+		$prestige = Video_rank::where('video_source','mgstage')->where('type',$type)->where('video_lang',$webLangIndex)->with('video')->orderBy('rank')->limit(8)->get();
+		$uncensored = Video_rank::where('video_source','uncensored')->where('type',$type)->where('video_lang',$webLangIndex)->with('video')->orderBy('rank')->limit(8)->get();
+		$amateur = Video_rank::where('video_source','amateur')->where('type',$type)->where('video_lang',$webLangIndex)->with('video')->orderBy('rank')->limit(8)->get();
+	 
+		   
 		return view('app_rwd.index.rank',['type'=> $type ,
 		'fanza'=>$fanza,
 		'prestige'=>$prestige,
@@ -1283,13 +1287,14 @@ class IndexController extends Controller {
         $index = $webLangIndex;
 		$source = $cate;
 		if($cate == 'prestige') {
-			$index = 3;
+// 			$index = 3;
 			$source = 'mgstage';
-		} else if ($cate == 'uncensored') {
-			$index = ($lang == 'zh') ? $this->language['jp'] : $webLangIndex;
-		} else if ($cate == 'amateur') {
-			$index = 3;
-		}
+	    } 
+// 	else if ($cate == 'uncensored') {
+// 			$index = ($lang == 'zh') ? $this->language['jp'] : $webLangIndex;
+// 		} else if ($cate == 'amateur') {
+// 			$index = 3;
+// 		}
 
 		
 		$post = Video_rank::where('video_source',$source)->where('type',1)->where('video_lang',$index)->with('video')->orderBy('rank')->get();

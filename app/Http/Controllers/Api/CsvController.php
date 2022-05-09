@@ -120,7 +120,7 @@ class CsvController extends Controller {
         $updateDataCount = [];  
         	$pathArray = [
 			'1' => ['2','1','en','en/censored/fanza/','fanza'],
-			'2' => ['1','1','zh','zh/censored/fanza/','fanza'],
+			'2' => ['1','1','zh@jp','zh/censored/fanza/','fanza'],
 			'3' => ['3','1','jp@jp2@jp3','jp/censored/fanza/','fanza'],
 
 			'4' => ['3','3','uncoded-jp@無碼 - 日2@無碼 - 日3@無碼 - 日4@無碼 - 日5','jp/uncensored/1/','uncensored'],
@@ -136,6 +136,21 @@ class CsvController extends Controller {
 			'13' => ['2','3','無碼 - 英@無碼 - 英2@無碼 - 英3@無碼 - 英4@無碼 - 英5','en/uncensored/5/','uncensored'],
 		 	'14' => ['3','2','MGS - 日@MGS - 日2@MGS - 日3@MGS - 日4','jp/censored/mgstage/','mgstage'],
  			'15' => ['3','4','素人 - 日@素人 - 日2@素人 - 日3','jp/amatuer/','amatuer'],
+ 			
+ 			//補中文@MGS
+			'16' => ['1','2','MGS - 日@MGS - 日2@MGS - 日3@MGS - 日4','jp/censored/mgstage/','mgstage'],
+			//補中文素人
+ 			'17' => ['1','4','素人 - 日@素人 - 日2@素人 - 日3','jp/amatuer/','amatuer'],
+ 			//補英文@MGS
+			'18' => ['2','2','MGS - 日@MGS - 日2@MGS - 日3@MGS - 日4','jp/censored/mgstage/','mgstage'],
+ 			//補中文無碼
+ 			'19' => ['1','3','uncoded-jp@無碼 - 日2@無碼 - 日3@無碼 - 日4@無碼 - 日5','jp/uncensored/1/','uncensored'],
+			'20' => ['1','3','uncoded-jp@無碼 - 日2@無碼 - 日3@無碼 - 日4@無碼 - 日5','jp/uncensored/2/','uncensored'],
+			'21' => ['1','3','uncoded-jp@無碼 - 日2@無碼 - 日3@無碼 - 日4@無碼 - 日5','jp/uncensored/3/','uncensored'],
+			'22' => ['1','3','uncoded-jp@無碼 - 日2@無碼 - 日3@無碼 - 日4@無碼 - 日5','jp/uncensored/4/','uncensored'],
+			'23' => ['1','3','uncoded-jp@無碼 - 日2@無碼 - 日3@無碼 - 日4@無碼 - 日5','jp/uncensored/5/','uncensored'],
+			//補英文素人
+ 			'24' => ['2','4','素人 - 日@素人 - 日2@素人 - 日3','jp/amatuer/','amatuer'],
 		];
 		$_lang = [1=>'zh',2=>'en',3=>'Jp'];
 			foreach ($pathArray as $pathIdx => $_item) { //開啟資料夾
@@ -164,7 +179,8 @@ class CsvController extends Controller {
 								'director'=> $item['導演'], 
 								'studio'=> $item['片商'], 
 								'label'=>   $item['廠牌'],  
-								'series'=>  $item['系列']
+								'series'=>  $item['系列'],
+								'video_time'=>  isset($item['時長']) ?  $item['時長'] : ''
 							];
 							
 							try{
@@ -221,9 +237,9 @@ class CsvController extends Controller {
 									}	 
 								} 
 			
-								if($excelIdx==15 && $findAmateurTag ==false) { // 素人(FC2)類別 裡所有影片加入 "Amateur" / "素人" / "素人"  標籤  93 
+								if(($excelIdx==15 || $excelIdx==17 || $excelIdx== 24) && $findAmateurTag ==false) { // 素人(FC2)類別 裡所有影片加入 "Amateur" / "素人" / "素人"  標籤  93 
 								  	Video_tag_relations::insert(['video_id'=>  $videoExists['id'], 'tag_id' =>93]);  
-								} else if($excelIdx>=4 && $excelIdx <=13) {  // 無碼類別裡 所有影片加入 "Uncensored" / "無修正" / "無碼"  標籤  280
+								}else if($excelIdx>=4 && $excelIdx <=13 || ($pathindex>=19 && $pathindex<=23)) {   // 無碼類別裡 所有影片加入 "Uncensored" / "無修正" / "無碼"  標籤  280
 									Video_tag_relations::insert(['video_id'=>  $videoExists['id'], 'tag_id' =>280]);  
 								}
 							
@@ -256,29 +272,45 @@ class CsvController extends Controller {
 		//路徑
 		//rank => video_source
 		$pathArray = [
-			'1' => ['2','1','en','en/censored/fanza/','fanza'],
-			'2' => ['1','1','zh','zh/censored/fanza/','fanza'],
-			'3' => ['3','1','jp@jp2@jp3','jp/censored/fanza/','fanza'],
+			// '1' => ['2','1','en','en/censored/fanza/','fanza'],
+			// '2' => ['1','1','zh@jp','zh/censored/fanza/','fanza'],
+			// '3' => ['3','1','jp@jp2@jp3','jp/censored/fanza/','fanza'],
 
-			'4' => ['3','3','uncoded-jp@無碼 - 日2@無碼 - 日3@無碼 - 日4@無碼 - 日5','jp/uncensored/1/','uncensored'],
-			'5' => ['3','3','uncoded-jp@無碼 - 日2@無碼 - 日3@無碼 - 日4@無碼 - 日5','jp/uncensored/2/','uncensored'],
-			'6' => ['3','3','uncoded-jp@無碼 - 日2@無碼 - 日3@無碼 - 日4@無碼 - 日5','jp/uncensored/3/','uncensored'],
-			'7' => ['3','3','uncoded-jp@無碼 - 日2@無碼 - 日3@無碼 - 日4@無碼 - 日5','jp/uncensored/4/','uncensored'],
-			'8' => ['3','3','uncoded-jp@無碼 - 日2@無碼 - 日3@無碼 - 日4@無碼 - 日5','jp/uncensored/5/','uncensored'],
+			// '4' => ['3','3','uncoded-jp@無碼 - 日2@無碼 - 日3@無碼 - 日4@無碼 - 日5','jp/uncensored/1/','uncensored'],
+			// '5' => ['3','3','uncoded-jp@無碼 - 日2@無碼 - 日3@無碼 - 日4@無碼 - 日5','jp/uncensored/2/','uncensored'],
+			// '6' => ['3','3','uncoded-jp@無碼 - 日2@無碼 - 日3@無碼 - 日4@無碼 - 日5','jp/uncensored/3/','uncensored'],
+			// '7' => ['3','3','uncoded-jp@無碼 - 日2@無碼 - 日3@無碼 - 日4@無碼 - 日5','jp/uncensored/4/','uncensored'],
+			// '8' => ['3','3','uncoded-jp@無碼 - 日2@無碼 - 日3@無碼 - 日4@無碼 - 日5','jp/uncensored/5/','uncensored'],
 
-			'9' => ['2','3','無碼 - 英@無碼 - 英2@無碼 - 英3@無碼 - 英4@無碼 - 英5','en/uncensored/1/','uncensored'],
-			'10' => ['2','3','無碼 - 英@無碼 - 英2@無碼 - 英3@無碼 - 英4@無碼 - 英5','en/uncensored/2/','uncensored'],
-			'11' => ['2','3','無碼 - 英@無碼 - 英2@無碼 - 英3@無碼 - 英4@無碼 - 英5','en/uncensored/3/','uncensored'],
-			'12' => ['2','3','無碼 - 英@無碼 - 英2@無碼 - 英3@無碼 - 英4@無碼 - 英5','en/uncensored/4/','uncensored'],
-			'13' => ['2','3','無碼 - 英@無碼 - 英2@無碼 - 英3@無碼 - 英4@無碼 - 英5','en/uncensored/5/','uncensored'],
-		 	'14' => ['3','2','MGS - 日@MGS - 日2@MGS - 日3@MGS - 日4','jp/censored/mgstage/','mgstage'],
- 			'15' => ['3','4','素人 - 日@素人 - 日2@素人 - 日3','jp/amatuer/','amatuer'],
+			// '9' => ['2','3','無碼 - 英@無碼 - 英2@無碼 - 英3@無碼 - 英4@無碼 - 英5','en/uncensored/1/','uncensored'],
+			// '10' => ['2','3','無碼 - 英@無碼 - 英2@無碼 - 英3@無碼 - 英4@無碼 - 英5','en/uncensored/2/','uncensored'],
+			// '11' => ['2','3','無碼 - 英@無碼 - 英2@無碼 - 英3@無碼 - 英4@無碼 - 英5','en/uncensored/3/','uncensored'],
+			// '12' => ['2','3','無碼 - 英@無碼 - 英2@無碼 - 英3@無碼 - 英4@無碼 - 英5','en/uncensored/4/','uncensored'],
+			// '13' => ['2','3','無碼 - 英@無碼 - 英2@無碼 - 英3@無碼 - 英4@無碼 - 英5','en/uncensored/5/','uncensored'],
+		 	// '14' => ['3','2','MGS - 日@MGS - 日2@MGS - 日3@MGS - 日4','jp/censored/mgstage/','mgstage'],
+ 			// '15' => ['3','4','素人 - 日@素人 - 日2@素人 - 日3','jp/amatuer/','amatuer'],
+ 			
+ 			//補中文@MGS
+			'16' => ['1','2','MGS - 日@MGS - 日2@MGS - 日3@MGS - 日4','jp/censored/mgstage/','mgstage'],
+			//補中文素人
+ 			'17' => ['1','4','素人 - 日@素人 - 日2@素人 - 日3','jp/amatuer/','amatuer'],
+ 			//補英文@MGS
+			'18' => ['2','2','MGS - 日@MGS - 日2@MGS - 日3@MGS - 日4','jp/censored/mgstage/','mgstage'],
+ 			//補中文無碼
+ 			'19' => ['1','3','uncoded-jp@無碼 - 日2@無碼 - 日3@無碼 - 日4@無碼 - 日5','jp/uncensored/1/','uncensored'],
+			'20' => ['1','3','uncoded-jp@無碼 - 日2@無碼 - 日3@無碼 - 日4@無碼 - 日5','jp/uncensored/2/','uncensored'],
+			'21' => ['1','3','uncoded-jp@無碼 - 日2@無碼 - 日3@無碼 - 日4@無碼 - 日5','jp/uncensored/3/','uncensored'],
+			'22' => ['1','3','uncoded-jp@無碼 - 日2@無碼 - 日3@無碼 - 日4@無碼 - 日5','jp/uncensored/4/','uncensored'],
+			'23' => ['1','3','uncoded-jp@無碼 - 日2@無碼 - 日3@無碼 - 日4@無碼 - 日5','jp/uncensored/5/','uncensored'],
+			//補英文素人
+ 			'24' => ['2','4','素人 - 日@素人 - 日2@素人 - 日3','jp/amatuer/','amatuer'],
 		];
 		$_lang = [1=>'zh',2=>'en',3=>'Jp'];
 		$uncensored_code_arr = [290,6,18,292,320];
 	
 		$data = [];	
 		$tagData = [];
+		$tag_list = Video_tag::pluck('id')->toArray();
 		foreach ($pathArray as $pathIdx => $_item) { //開啟資料夾
 			$fp = @fopen($filePath.$_item[3].$fileName, "r");
 	
@@ -288,11 +320,12 @@ class CsvController extends Controller {
 			//處理未碼的檔案 JP EN				 
 			$uncensored_code = 0;
 			$pathindex =  intval($pathIdx);		
-			if($pathindex>=4 && $pathindex<=13){
+		 
+			if(($pathindex>=4 && $pathindex<=13)  || ($pathindex>=19 && $pathindex<=23)){
 				$uncensored_code  = $uncensored_code_arr[($pathindex - 4) % 5];
 			}		
 			//處理未碼的檔案 JP EN
-			$contents = \Storage::disk('public')->get('tag.txt');
+			// $contents = \Storage::disk('public')->get('tag.txt');
 			foreach ($collection as $index => $item) {  //逐筆跑資料
 				if( $index <= 2000000000) {
 					$data =  [ 
@@ -315,6 +348,7 @@ class CsvController extends Controller {
 								'label'=>   $item['廠牌'],  
 								'series'=>  $item['系列'], 
 								'uncensored_code'=>  $uncensored_code, 
+								'video_time'=>  isset($item['時長']) ? $item['時長'] : ''
 							];
 							
 						try{
@@ -350,6 +384,7 @@ class CsvController extends Controller {
 									'label'=>   $item['廠牌'],  
 									'series'=>  $item['系列'], 
 									'uncensored_code'=>  $uncensored_code, 
+									'video_time'=>  isset($item['時長']) ? $item['時長'] : ''
 								]);
 
 								$findAmateurTag = false;
@@ -370,7 +405,7 @@ class CsvController extends Controller {
 										if(count($tags) > 0 ){
 											$__tagData =[];
 											foreach ($tags as $tag) {
-												$__tagData[]  = ['video_id'=>  $videoExists['id'], 'tag_id' => $tag->id];
+												$__tagData[]  = ['video_id'=>  $newVideoId, 'tag_id' => $tag->id];
 												if( $tag->id == 93) {
 													$findAmateurTag = true;
 												}
@@ -389,19 +424,19 @@ class CsvController extends Controller {
 											} else if($excelIdx==15) {
 												$recordTag = $_lang[$langInx] .' amatuer '.$tagItme;
 											}
-										    if(strpos($contents, $recordTag) === false ){
-										      \Storage::disk('public')->put('tag.txt', $contents."\r\n".$recordTag);
-										       $contents = \Storage::disk('public')->get('tag.txt');
-										    }
+										    // if(strpos($contents, $recordTag) === false ){
+										    //   \Storage::disk('public')->put('tag.txt', $contents."\r\n".$recordTag);
+										    //    $contents = \Storage::disk('public')->get('tag.txt');
+										    // }
 										    
 										}
 										
 									}	 
 								} 
 			
-								if($excelIdx==15 && $findAmateurTag ==false) { // 素人(FC2)類別 裡所有影片加入 "Amateur" / "素人" / "素人"  標籤  93 
+								if(($excelIdx==15 || $excelIdx==17 || $excelIdx== 24) && $findAmateurTag ==false) { // 素人(FC2)類別 裡所有影片加入 "Amateur" / "素人" / "素人"  標籤  93 
 								  	Video_tag_relations::insert(['video_id'=>  $videoExists['id'], 'tag_id' =>93]);  
-								} else if($excelIdx>=4 && $excelIdx <=13) {  // 無碼類別裡 所有影片加入 "Uncensored" / "無修正" / "無碼"  標籤  280
+								} else if($excelIdx>=4 && $excelIdx <=13 || ($pathindex>=19 && $pathindex<=23)) {  // 無碼類別裡 所有影片加入 "Uncensored" / "無修正" / "無碼"  標籤  280
 									Video_tag_relations::insert(['video_id'=>  $videoExists['id'], 'tag_id' =>280]);  
 								} 
 
@@ -454,9 +489,9 @@ class CsvController extends Controller {
 								}
 									
 							} else { //已存在 檢視資料是否有差異 有差異UPDATE
+							continue;
 							    $updateData =[];					  
 							    // $cover = $this->geCover($item['影片封面'],$item['影片ID'],$_item[0]);
-							
 							    foreach ($data as $key => $val) {
 							        if($videoExists[$key] != $val && $key != 'cover_img'){								
 							            $updateData[$key] = $val;
@@ -491,10 +526,10 @@ class CsvController extends Controller {
     											$insertGetId = Video_tag_relations::insertGetId($__tagData);  
         										}
     										} else {
-    										    if(strpos($contents, $tagItme)  === false){
-    										      \Storage::disk('public')->put('tag.txt', $contents."\r\n".$tagItme);
-    										       $contents = \Storage::disk('public')->get('tag.txt');
-    										    }
+    										    // if(strpos($contents, $tagItme)  === false){
+    										    //   \Storage::disk('public')->put('tag.txt', $contents."\r\n".$tagItme);
+    										    //    $contents = \Storage::disk('public')->get('tag.txt');
+    										    // }
     										    
     										}
 								// 			if($tag){

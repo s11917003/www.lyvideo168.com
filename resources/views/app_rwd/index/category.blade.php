@@ -161,7 +161,7 @@
 	  	<!-- <div class="category_more"><a href="#"><span>{{__('ui.tag.more')}}</span> <i class="i-arrow"></i></a></div> -->
 	</div>
 	<div class="list" style=" display: inline;">
-		<div class="list__wrap" style="width: 100%;"> 
+		<div class="list__wrap" style="width: 100%; overflow-x: hidden;"> 
 		  <div  id="video_list"  class="list">
 		  </div>
 		</div>
@@ -193,7 +193,7 @@
 				dataType:"json",
 				data:{tag,page},
 				success:function(result){
-					
+					  load = false;
 					// if(result.secondary_tag) {
 					// 	// $("#custom").find('ul').empty()
 					// 	// $('#custom').hide();
@@ -216,6 +216,11 @@
 					// 		cate_cilck(this);
 					// 	});
 					// } 
+				   
+					if(	result.video.data.length == 0){
+					    $("#video_list").empty();
+					    $("#video_list").append('<div class="list__item-info" style="padding-left:40px">NO DATA</div>');
+					}
 					result.video.data.forEach(function(item){
 						var dateText =''
 						item.release_date = item.release_date.replace('日', '') 
@@ -306,6 +311,7 @@
 				dataType:"json",
 				data:{tag:arr,customTag:id,page:1},
 				success:function(result){ 
+				  
 					// if(result.secondary_tag) {
 					// 	$("#custom").find('ul').empty()
 					// 	$('#custom').hide();
@@ -430,6 +436,7 @@
 		checkMoreBtn() 
 	});
 	var currentscrollHeight = 0;
+		var load = false;
 	$(window).on("scroll", function () {
 		const scrollHeight = $(document).height();
 		const scrollPos = Math.floor($(window).height() + $(window).scrollTop());
@@ -437,7 +444,9 @@
 		console.log('scrollHeight',scrollHeight)
 		console.log('scrollPos',scrollPos)
 		console.log('isBottom',isBottom)
-		if (isBottom && currentscrollHeight < scrollHeight) {
+			console.log('load',load)
+		if (isBottom && currentscrollHeight < scrollHeight ) {
+		    load =true
 			console.log('?????????????????????')
 			customTag(this.page +1)
 			currentscrollHeight = scrollHeight;

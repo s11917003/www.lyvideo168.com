@@ -79,7 +79,7 @@
 					
 						@else 
 					 
-						<img style="height: 100%; width: 100%;   display: block;
+						<img style="height: 100%; display: block;
 						margin: auto;"  src="{{$video->cover_img}}">  
 						@endif
 						<!-- /video id="samplevideo_html5_api" class="vjs-tech" preload="auto" tabindex="-1" autoplay="" src="https://awscc3001.r18.com/litevideo/freepv/d/dva/dvaj518/dvaj518_dmb_w.mp4"><source src="https://awscc3001.r18.com/litevideo/freepv/d/dva/dvaj518/dvaj518_sm_w.mp4" type="video/mp4" res="240" label="300 Kbps"><source src="https://awscc3001.r18.com/litevideo/freepv/d/dva/dvaj518/dvaj518_dm_w.mp4" type="video/mp4" res="480" label="1000 Kbps"><source src="https://awscc3001.r18.com/litevideo/freepv/d/dva/dvaj518/dvaj518_dmb_w.mp4" type="video/mp4" res="720" label="1500 Kbps"><p class="vjs-no-js">Your browser does not support the video tag.</p></video> -->
@@ -312,7 +312,7 @@
 								<td  colspan =2>{{__('ui.video_view.Release_Date')}}:{{ $video->release_date }}</td>
 								</tr>
 								<tr  class="des desktopTable">
-								<td  colspan =2>{{__('ui.video_view.Runtime')}}: </td>
+								<td  colspan =2>{{__('ui.video_view.Runtime')}}:{{ $video->video_time }}</td>
 								</tr>
 								<tr class="des desktopTable" >
 								<td  colspan =2>{{__('ui.video_view.Director')}}: 
