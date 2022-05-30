@@ -12,9 +12,10 @@
 <link href="/css/index.css" rel="stylesheet" type="text/css">
 <link href="/css/movie.css" rel="stylesheet" type="text/css">
 <link href="/css/search-list.css" rel="stylesheet" type="text/css">
-<link href="/css/list.css" rel="stylesheet" type="text/css">
+<!--<link href="/css/list.css" rel="stylesheet" type="text/css">-->
 <link href="/css/videojs-contrib-ads.css" rel="stylesheet">
 <link href="/css/splide.min.css" rel="stylesheet">
+<script src="/js/lib/dmm.js"></script>
 <link rel="stylesheet" href="/css/category-list.css">
 <link rel="icon" href="/img/logo.png" type="image/x-icon" />
 <!-- Google Tag Manager -->
@@ -41,20 +42,32 @@ import videojsPreviewThumbnails from 'https://cdn.skypack.dev/videojs-preview-th
 </script>
 <script src="/js/videojs-thumbnails/videojs.thumbnails.js"></script>
 <!-- <script src="/js/videojs-thumbnails/videojs.thumbnails.js"></script> -->
-<script src="/js/videojs-contrib-hls.js"></script>
-<script src="/js/videojs-contrib-ads.js"></script>
+<!--<script src="/js/videojs-contrib-hls.js"></script>-->
+<!--<script src="/js/videojs-contrib-ads.js"></script>-->
 <script defer src="/js/fontawesome-all.js"></script>
 <script defer src="/js/splide.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="/js/function.js"></script>
-<script src="/js/lib/dmm.js"></script>
 <!-- <script type="text/javascript" src="/js/jquery.lazyload.js"></script> -->
 <script type="text/javascript" src="/js/jquery.visible.js"></script>
 <!-- <script src="/js/popper.min.js"></script> -->
 <!-- <script src="/js/main.js"></script>
 <script src="/js/select.js"></script> -->
 <script>
+
 	$(function() {
+	    
+	   // setTimeout(() => {
+	   //     console.log('dddd')
+    //         $('#rs-main-content img').each(function(){
+        
+    //               if(this.naturalWidth ==0 && this.naturalHeight ==0){
+    //                         this.src='/img/now_printing.jpg'
+    //               }
+    //         });
+
+    //     },5000);
+
 		$('.big-bg ').click(function() {
 			$('.big').hide()
 		});

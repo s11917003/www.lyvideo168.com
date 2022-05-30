@@ -60,17 +60,17 @@
 					<div id="video_box" class="container-fluid" style="DISPLAY: contents;">
 
 						
-						@if( $video->video_source  == 'amateur')
+						@if( $video->video_source  == 'amatuer')
 						<div id="video_frame" class="_box col-xs-12 col-sm-8 col-md-8 mdm-big" style="margin-bottom: 1rem;" >
 						@else
 						<div   class="_box col-xs-12 col-sm-8 col-md-8 mdm-big" style="margin-bottom: 1rem;">
 						@endif
 						@if ($video_status)
 
-						@if( $video->video_source  == 'amateur')
-						<iframe  style=" position:absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://adult.contents.fc2.com/embed/{{$video->video_id}}?i=TXpjMU5EWTVNREE9" frameborder="0" allowfullscreen scrolling="no"></iframe>
+						@if( $video->video_source  == 'amatuer')
+						<iframe  style=" position:absolute; top: 0; left: 0;  height: 100%;" src="https://adult.contents.fc2.com/embed/{{$video->video_id}}?i=TXpjMU5EWTVNREE9" frameborder="0" allowfullscreen scrolling="no"></iframe>
 						@else 
-							<video id="av-video" data-setup="{}" width="600" height="2000" style="background-color: #FFF;" class="video-js vjs-default-skin vjs-fluid vjs-show-big-play-button-on-pause vjs-fill vjs-16-9 vjs-big-play-centered " poster="{{$video->cover_img}}" controls>
+							<video id="av-video" data-setup="{}" width="600" height="2000" style="background-color: #FFF;" class="video-js vjs-default-skin vjs-fluid vjs-show-big-play-button-on-pause vjs-fill vjs-16-9 vjs-big-play-centered " poster="{{$video->cover_img}}"  onerror="this.src='/img/now_printing.jpg'" controls>
 								<source  id="av-video-source" 
 								src="{{$video->video_url}}"
 								type="video/mp4">						 
@@ -79,8 +79,8 @@
 					
 						@else 
 					 
-						<img style="height: 100%; display: block;
-						margin: auto;"  src="{{$video->cover_img}}">  
+						<img style="height: 100%;  width:auto;   display: block;
+						margin: auto;"  src="{{$video->cover_img}}"  onerror="this.src='/img/now_printing.jpg'">  
 						@endif
 						<!-- /video id="samplevideo_html5_api" class="vjs-tech" preload="auto" tabindex="-1" autoplay="" src="https://awscc3001.r18.com/litevideo/freepv/d/dva/dvaj518/dvaj518_dmb_w.mp4"><source src="https://awscc3001.r18.com/litevideo/freepv/d/dva/dvaj518/dvaj518_sm_w.mp4" type="video/mp4" res="240" label="300 Kbps"><source src="https://awscc3001.r18.com/litevideo/freepv/d/dva/dvaj518/dvaj518_dm_w.mp4" type="video/mp4" res="480" label="1000 Kbps"><source src="https://awscc3001.r18.com/litevideo/freepv/d/dva/dvaj518/dvaj518_dmb_w.mp4" type="video/mp4" res="720" label="1500 Kbps"><p class="vjs-no-js">Your browser does not support the video tag.</p></video> -->
 						<script>
@@ -306,29 +306,29 @@
 								</tr>		
 								@endif				 
 								<tr  class="des desktopTable">
-								<td  colspan =2>{{__('ui.video_view.DVD_ID')}}:{{ $video->dvd_id }}</td>
+								<td  colspan =2>{{__('ui.video_view.DVD_ID')}}:&ensp;{{ $video->dvd_id }}</td>
 								</tr>
 								<tr class="des desktopTable"  >
-								<td  colspan =2>{{__('ui.video_view.Release_Date')}}:{{ $video->release_date }}</td>
+								<td  colspan =2>{{__('ui.video_view.Release_Date')}}:&ensp;{{ $video->release_date }}</td>
 								</tr>
 								<tr  class="des desktopTable">
-								<td  colspan =2>{{__('ui.video_view.Runtime')}}:{{ $video->video_time }}</td>
+								<td  colspan =2>{{__('ui.video_view.Runtime')}}:&ensp;{{ $video->video_time }}</td>
 								</tr>
 								<tr class="des desktopTable" >
-								<td  colspan =2>{{__('ui.video_view.Director')}}: 
+								<td  colspan =2>{{__('ui.video_view.Director')}}:&ensp; 
 									@if ( $video->director)
 									 <a href="/{{$lang}}/director?search={{$video->director}}" class="  m-2 pl-2 ml-1" >{{ $video->director }} </a>
 								 	@endif 
 								</td>
 								</tr>
 								<tr class="des desktopTable" >
-									<td  colspan =2>{{__('ui.video_view.Studio')}}:
+									<td  colspan =2>{{__('ui.video_view.Studio')}}:&ensp;
 									 @if ( $video->studio)
 									<a href="/{{$lang}}/studio?search={{$video->studio}}" class="  m-2 pl-2 ml-1" >{{ $video->studio }} </a>
 									@endif </td>
 								</tr>
 								<tr class="des desktopTable" >
-									<td colspan =2>{{__('ui.video_view.Label')}}:
+									<td colspan =2>{{__('ui.video_view.Label')}}:&ensp;
 										@if ( $video->label)
 										 <a href="/{{$lang}}/label?search={{$video->label}}" class="  m-2 pl-2 ml-1" >{{ $video->label }} </a>
 										 @endif 
@@ -438,11 +438,19 @@
 						<div class="clearfix"></div>
 						<div class="movie-gallery">
 							<div class="movie-gallery-wrapper">
-								@foreach ($video->thumbnail_img_router as $key =>  $thumbnail_img)
-								<!-- <a class="example-image-link" href="{{ url($thumbnail_img) }}" data-lightbox="100TV-404-gallery" data-title="Click the right half of the image to move forward."> -->
-									<img class="example-image" src="{{  asset('/storage/'.$thumbnail_img)}}" onClick="gotothumbnail({{$key}})" alt="">
-								<!-- </a> -->
-								@endforeach			
+							 
+							        @foreach ($video->thumbnail_img_router as $key =>  $thumbnail_img)
+    								<!-- <a class="example-image-link" href="{{ url($thumbnail_img) }}" data-lightbox="100TV-404-gallery" data-title="Click the right half of the image to move forward."> -->
+    								   @if($video->video_source == 'uncensored')
+							    
+							            	<img class="example-image" src="{{ $thumbnail_img}}" onClick="gotothumbnail({{$key}})" >
+							            @else
+    									    <img class="example-image" src="{{  asset('/storage/'.$thumbnail_img)}}" onClick="gotothumbnail({{$key}})"  onerror="this.src='/img/now_printing.jpg'">
+    								<!-- </a> -->
+    								 @endif
+    								@endforeach	
+							   
+										
 								
 							</div>
 						</div>
@@ -527,11 +535,11 @@
 					@foreach ($video_with_actress as $video_actress)
 					<a href="/{{$lang}}/video/{{$video_actress->video_id}}${{ $video_actress->actress}}" class="list__item">
 					
-						<figure><img src="{{$video_actress->cover_img}}"></figure>
+						<figure><img src="{{$video_actress->cover_img}}"  onerror="this.src='/img/now_printing.jpg'"></figure>
 						<div class="list__item-info">
 							<h5>{{$video_actress->video_id}}</h5>
 							<h1>{{$video_actress->title}}</h1>
-							@if($video_actress->release_date)<div class="date">{{date('Y-m-d', strtotime($video_actress->release_date)) }}</div> @endif
+							@if($video_actress->release_date)<div class="date">{{date('Y-m-d', strtotime(str_replace(['年','日','月'], "/", $video->release_date))) }}</div> @endif
 						</div>
 					</a>
 					@endforeach
@@ -550,7 +558,7 @@
 						<div class="list__item-info">
 							<h5>{{$video_tag->video_id}}</h5>
 							<h1>{{$video_tag->title}}</h1>
-							@if($video_tag->release_date)<div class="date">{{date('Y-m-d', strtotime($video_tag->release_date)) }}</div> @endif
+							@if($video_tag->release_date)<div class="date">{{date('Y-m-d', strtotime(str_replace(['年','日','月'], "/", $video->release_date))) }}</div> @endif
 						</div>
 					</a>
 					@endforeach
@@ -597,11 +605,14 @@
 		
 	}
 	function gotoURL() {
+	     
 		if(affiliateURL != ''){
-			location.assign(affiliateURL);
+		    window.open(affiliateURL);
+			//location.assign(affiliateURL);
 			return;
 		}
-		location.assign(`{{$url}}`);
+		 window.open(`{{$url}}`);
+// 		location.assign(`{{$url}}`);
  
 	}
 	$.ajaxSetup({
@@ -632,13 +643,33 @@
 				offset: 1,
 			}, function(err, data){
 			 
-
+               
 				if(data.status == 200) {
 					if(data.items[0].affiliateURL) {
 						affiliateURL = data.items[0].affiliateURL
 					}
 					$('.affiliateURL').show()
-					console.log(data.items[0] )
+				 
+					if(data.items[0].sampleImageURL) {
+					    
+					    if(data.items[0].sampleImageURL.sample_s) {
+					         
+					    	const sampleImage = data.items[0].sampleImageURL.sample_s.image
+					    	
+							if(sampleImage){
+							    	$('.movie-gallery-wrapper').html('')
+							    sampleImage.forEach(function(item,i){
+                                  
+                                   const img =  `<img class="example-image" src="${item}" onClick="gotothumbnail(${i})" >`
+                                   	$('.movie-gallery-wrapper').append(img)
+                                });
+							    
+							}
+					    	
+					        
+					    }
+					    
+					}
 					if(data.items[0].sampleMovieURL) {
 						sampleMovieURL = ''
 						if(data.items[0].sampleMovieURL.size_720_480) {
@@ -653,9 +684,7 @@
 					
 
 						if(sampleMovieURL!=''){
-							console.log(sampleMovieURL )
-							
-							console.log(	$('#video_box ._box ').html( ) )
+						 
 							$('#video_box ._box ').html('')
 
 							videoFrame = `<iframe  style=" position:absolute; top: 0; left: 0; width: 100%; height: 100%;" src="`+sampleMovieURL+`" frameborder="0" allowfullscreen scrolling="no"></iframe>`
@@ -672,7 +701,7 @@
 			
 		if(a) {
 			a.map(function(value){
-				video = `<li style="display: flex; align-items: center;"  class="splide__slide"><img style="align-items: center;" src="/storage/`+value+`" /></li>`
+				video = `<li style="display: flex; align-items: center;"  class="splide__slide"><img style="align-items: center;" src="/storage/`+value+`" / onerror="this.src='/img/now_printing.jpg'"></li>`
 				$("ul.splide__list").append(video)
 			})
 

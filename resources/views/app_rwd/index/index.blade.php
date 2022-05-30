@@ -57,7 +57,7 @@ When My Little Stepsister Watched My Wife Cumming Like Crazy, She Decided To... 
 			<div class="list__item-info">
 			<h6>{{$video->video_id}}</h6>
 			<p>{{$video->title}}</p>
-			@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date))}}</div> @endif
+		    @if($video->release_date)<div class="date">{{date('Y-m-d', strtotime(str_replace(['年','日','月'], "/", $video->release_date))) }}</div> @endif
 			</div>
 		</a>
 		@endforeach
@@ -77,7 +77,8 @@ When My Little Stepsister Watched My Wife Cumming Like Crazy, She Decided To... 
 				<div class="list__item-info">
 					<h6>{{$video->video_id}}</h6>
 					<p>{{$video->title}}</p>
-					@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date)) }}</div> @endif
+					@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime(str_replace(['年','日','月'], "/", $video->release_date))) }}</div> @endif
+ 
 				</div>
 			</a>
 			@endforeach
@@ -95,7 +96,7 @@ When My Little Stepsister Watched My Wife Cumming Like Crazy, She Decided To... 
 				<div class="list__item-info">
 					<h6>{{$video->video_id}}</h6>
 					<p>{{$video->title}}</p>
-					@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date)) }}</div> @endif
+					@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime(str_replace(['年','日','月'], "/", $video->release_date))) }}</div> @endif
 				</div>
 			</a>
 			@endforeach
@@ -116,7 +117,7 @@ When My Little Stepsister Watched My Wife Cumming Like Crazy, She Decided To... 
 				<div class="list__item-info">
 					<h6>{{$video->video_id}}</h6>
 					<p>{{$video->title}}</p>
-					@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date)) }}</div> @endif
+					@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime(str_replace(['年','日','月'], "/", $video->release_date)))}}</div> @endif
 				</div>
 			</a>
 			@endforeach

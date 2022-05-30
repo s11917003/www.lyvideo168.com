@@ -50,8 +50,11 @@ echo $actress->JapaneseName1.'：線上免費試看【JavDic  有碼・無碼・
 		  <a class="i-instagram" href="{{$actress->Instagram  }}"><img src="/svg/instagram-brands.svg" alt=""><span>Instagram</span></a>
 		</div>
 		<div class="artist__content-about" style="height:100%;width:100%;">
-				<textarea disabled>{{trim($actress->wiki->Profile)}}
+		    @if($actress->wiki)
+		    	<textarea disabled>{{trim($actress->wiki->Profile)}}
 				</textarea>
+		    @endif
+			
 			 
 		</div>
 	  </div>
@@ -59,8 +62,10 @@ echo $actress->JapaneseName1.'：線上免費試看【JavDic  有碼・無碼・
  
 	<div class="artist__about">
 	<div  class='actress_wiki'  style="min-height:150px;height:auto;width:100%;border: none;overflow:hidden" style=''>
-	 <textarea disabled style="height:100px">{{trim( $actress->wiki->Contents)}}
-	</textarea>
+	     @if($actress->wiki)
+        	 <textarea disabled style="height:100px">{{trim( $actress->wiki->Contents)}}
+        	</textarea>
+    	@endif
 	<div class='actress_footer'style=''>
 		<p style=''>
 		{{ $actress->wiki->APA }}
@@ -95,7 +100,7 @@ echo $actress->JapaneseName1.'：線上免費試看【JavDic  有碼・無碼・
 					<div class="list__item-info">
 					<h5>{{ $video_actress->video_id }}</h5>
 					<h1>{{ $video_actress->title }}</h1>
-					@if ($video_actress->release_date)<div class="date">{{date('Y-m-d', strtotime($video_actress->release_date)) }}</div> @endif
+					@if ($video_actress->release_date)<div class="date">{{ date('Y-m-d', strtotime(str_replace(['年','日','月'], "/", $video_actress->release_date)))  }}</div> @endif
 					</div>
 				</a> 
 				@endforeach

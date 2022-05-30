@@ -89,7 +89,7 @@ import videojsPreviewThumbnails from 'https://cdn.skypack.dev/videojs-preview-th
 	<!-- HEADER 結束 -->
 	<div id="rs-main-content"  style='padding-bottom:5rem;'> 
 		
-		<main style="padding-top: 0rem;padding-left: 0px;;padding-right:0px"> 
+		<main style="width:100%;padding-top: 0rem;padding-left: 0px;;padding-right:0px;display: inline-flex;"> 
 			@include('layout.rwd.lay_web_right_video')
 			@yield('maincontent')
 		</main>
@@ -108,6 +108,15 @@ import videojsPreviewThumbnails from 'https://cdn.skypack.dev/videojs-preview-th
 </html>
 <script>
 $(function(){
+    //   setTimeout(() => {
+    //         $('#rs-main-content img').each(function(){
+    //           if(this.naturalWidth ==0 && this.naturalHeight ==0){
+    //                     this.src='/img/now_printing.jpg'
+    //           }
+    //         });
+
+    //     },5000);
+
 		$.ajax({
 				type:"POST",
 				url:"/{{$lang}}/popular",

@@ -14,8 +14,6 @@ class VerifyCsrfToken extends BaseVerifier
     protected $except = [
         //
         '/api/*',
-        '/event/app/payment/paypal/ipn',
-        'https://api.dmm.com',
-        'https://api.dmm.com/*',
+        '/event/app/payment/paypal/ipn'
     ];
 }

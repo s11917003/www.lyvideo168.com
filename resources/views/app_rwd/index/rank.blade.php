@@ -40,7 +40,7 @@
 				<div class="list__item-info">
 					<h5>{{$video->video_id}}</h5>
 					<h1>{{$video->title}}</h1>
-					@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date)) }}</div> @endif
+					@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime(str_replace(['年','日','月'], "/", $video->release_date))) }}</div> @endif
 				</div>
 				@endif
 				@endforeach
@@ -70,7 +70,7 @@
 					<div class="list__item-info">
 						<h5>{{$video->video_id}}</h5>
 						<h1>{{$video->title}}</h1>
-						@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date)) }}</div> @endif
+						@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime(str_replace(['年','日','月'], "/", $video->release_date))) }}</div> @endif
 					</div>
 			 	@endif
 				@endforeach
@@ -90,7 +90,7 @@
 	  <div class="list__wrap">
 	
 		<div class="list">
-			@foreach ($prestige as $post)
+			@foreach ($uncensored as $post)
 				@foreach ($post->video as $video)
 				 @if($video->video_lang == $langIndex)
 				<a href="/{{$lang}}/video/{{$post->video_id}}${{$post->video[0]->actress}}" class="list__item">
@@ -101,7 +101,7 @@
 					<div class="list__item-info">
 						<h5>{{$video->video_id}}</h5>
 						<h1>{{$video->title}}</h1>
-						@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date)) }}</div> @endif
+						@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime(str_replace(['年','日','月'], "/", $video->release_date))) }}</div> @endif
 					</div>
 			 	@endif
 				@endforeach
@@ -116,11 +116,11 @@
 	<!-- 素人 -->
 	<div class="ranking news">
 	  <p class="ranking__title title__keyword__more">{{__('ui.title.amateur')}}
-		  <a href="/{{$lang}}/rank-list/amateur"  >{{__('ui.more')}} &gt;&gt;</a>
+		  <a href="/{{$lang}}/rank-list/amatuer"  >{{__('ui.more')}} &gt;&gt;</a>
 	  </p>
 	  <div class="list__wrap">
 		<div class="list">
-			@foreach ($prestige as $post)
+			@foreach ($amateur as $post)
 				@foreach ($post->video as $video)
 				 @if($video->video_lang == $langIndex)
 				<a href="/{{$lang}}/video/{{$post->video_id}}${{$post->video[0]->actress}}" class="list__item">
@@ -131,7 +131,7 @@
 					<div class="list__item-info">
 						<h5>{{$video->video_id}}</h5>
 						<h1>{{$video->title}}</h1>
-						@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime($video->release_date)) }}</div> @endif
+						@if($video->release_date)<div class="date">{{date('Y-m-d', strtotime(str_replace(['年','日','月'], "/", $video->release_date))) }}</div> @endif
 					</div>
 			 	@endif
 				@endforeach

@@ -97,7 +97,7 @@
 // Route::get('/videoinfo', 'Index\IndexController@videoinfo');
 
 Route::get('/csv', 'Api\CsvController@geCsv');
-Route::get('/updateAtressData', 'Api\CsvController@updateAtressData');
+// Route::get('/updateAtressData', 'Api\CsvController@updateAtressData');
 //交換連結
 // Route::get('/linkex', 'Service\PageController@linkexchange');
 

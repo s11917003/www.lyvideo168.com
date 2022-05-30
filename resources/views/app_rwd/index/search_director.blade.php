@@ -40,7 +40,7 @@
 						<div class="list__item-info">
 							<h5>{{$post->video_id}}</h5>
 							<h1>{{$post->title}}</h1>
-							@if($post->release_date)<div class="date">{{date('Y-m-d', strtotime($post->release_date)) }}</div> @endif
+							@if($post->release_date)<div class="date">{{date('Y-m-d', strtotime(str_replace(['年','日','月'], "/", $post->release_date))) }}</div> @endif
 						</div>
 					</a>
 				@endforeach

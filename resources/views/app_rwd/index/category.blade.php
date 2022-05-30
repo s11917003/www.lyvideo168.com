@@ -182,7 +182,11 @@
 	var arr =[]
 	var instance ;
 	var page = 1 ;
+	var nowTag = [] ;
 	function sendAjax(tag,page){
+	    
+	    console.log(tag)
+	    nowTag = tag
 		this.page = page; 
 		if(page == 1 ){
 			$("#video_list").empty();
@@ -193,6 +197,9 @@
 				dataType:"json",
 				data:{tag,page},
 				success:function(result){
+		     	     if(nowTag!=tag){
+		     	         return
+		     	     }
 					  load = false;
 					// if(result.secondary_tag) {
 					// 	// $("#custom").find('ul').empty()
@@ -242,7 +249,7 @@
 						</a>`
 					
 						$("#video_list").append(video)
-						var newString = result['pagination'].replace(/href="(.*?)"/ig, "href=\"javascript:void(0)\" onclick=\"tablePagination\(`$1`\)\"");
+				// 		var newString = result['pagination'].replace(/href="(.*?)"/ig, "href=\"javascript:void(0)\" onclick=\"tablePagination\(`$1`\)\"");
                 		// $('#pagination').html(newString);
 						//window.scrollTo({ top: 0, behavior: 'smooth' });
 						return;
@@ -250,30 +257,30 @@
 				}
 			});	
 	}
-	function tablePagination(link) {
+// 	function tablePagination(link) {
 
-		postlink = link.split('?')[0]
-		para = link.split('?')[1].split('&')
-		var page =1;
-		for(var i=0;i<para.length;i++){
-			var match = para[i].match(/page=(.*?)/);
-			page = para[i].replace(/page=(.*?)/,'$1')
-		}
-		arr =[]
-		$('.category__tags').find('li').each(function(){
-			if($(this).hasClass('category__tags-item--active')) {
+// 		postlink = link.split('?')[0]
+// 		para = link.split('?')[1].split('&')
+// 		var page =1;
+// 		for(var i=0;i<para.length;i++){
+// 			var match = para[i].match(/page=(.*?)/);
+// 			page = para[i].replace(/page=(.*?)/,'$1')
+// 		}
+// 		arr =[]
+// 		$('.category__tags').find('li').each(function(){
+// 			if($(this).hasClass('category__tags-item--active')) {
 				
-				arr.push($(this).attr('name'))
-			}
-		});
-		var custom_tag = instance.value()
-		custom_tag.forEach(function(v){
-			arr.push(v)
-		});
-		 sendAjax(arr,page);
+// 				arr.push($(this).attr('name'))
+// 			}
+// 		});
+// 		var custom_tag = instance.value()
+// 		custom_tag.forEach(function(v){
+// 			arr.push(v)
+// 		});
+// 		 sendAjax(arr,page);
 		
 		
-	}
+// 	}
 	function customTag(page = 1) {
 		var arr = []
 		$('.category__tags').find('li').each(function(){
@@ -292,25 +299,25 @@
 		location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(s,k,v){p[k]=v})
 		return k?p[k]:p;
 	}
-	function cancelCustomCate(id){
+// 	function cancelCustomCate(id){
 		 
-			arr =[];
-			$("li[name="+id+"]").removeClass('category__tags-item--active')
+// 			arr =[];
+// 			$("li[name="+id+"]").removeClass('category__tags-item--active')
 		 
-			$('.category__tags').find('li').each(function(){
-				if($(this).hasClass('category__tags-item--active')) {
-					arr.push($(this).attr('name'))
-				}
+// 			$('.category__tags').find('li').each(function(){
+// 				if($(this).hasClass('category__tags-item--active')) {
+// 					arr.push($(this).attr('name'))
+// 				}
 			
-			});
+// 			});
 
 			 
-			$.ajax({
-				type:"POST",
-				url:"/{{$lang}}/category/cancel",
-				dataType:"json",
-				data:{tag:arr,customTag:id,page:1},
-				success:function(result){ 
+// 			$.ajax({
+// 				type:"POST",
+// 				url:"/{{$lang}}/category/cancel",
+// 				dataType:"json",
+// 				data:{tag:arr,customTag:id,page:1},
+// 				success:function(result){ 
 				  
 					// if(result.secondary_tag) {
 					// 	$("#custom").find('ul').empty()
@@ -335,34 +342,34 @@
 					 
 
 					// } 
-					result.video.data.forEach(function(item){
-						var dateText =''
-						item.release_date = item.release_date.replace('日', '') 
-						item.release_date = item.release_date.replace(/[\u4e00-\u9fff\u3400-\u4dff\uf900-\ufaff]/g, '-') 
-						if(item.release_date){
-							var date = new Date(item.release_date)
-							dateText =  date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
-						}
+// 					result.video.data.forEach(function(item){
+// 						var dateText =''
+// 						item.release_date = item.release_date.replace('日', '') 
+// 						item.release_date = item.release_date.replace(/[\u4e00-\u9fff\u3400-\u4dff\uf900-\ufaff]/g, '-') 
+// 						if(item.release_date){
+// 							var date = new Date(item.release_date)
+// 							dateText =  date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+// 						}
 						
-						video = `<a href="/{{$lang}}/video/`+item.video_id+`$`+item.actress+`" class="list__item">
-						<figure><img src="`  +item.cover_img+  `"></figure>
-						<div class="list__item-info">
-						<h5>`  +item.video_id+  `</h5>
-						<h1>`  +item.title+  `</h1>
-						<div class="date">`  +  dateText +   `</div>
-						</div>
-						</a>`
+// 						video = `<a href="/{{$lang}}/video/`+item.video_id+`$`+item.actress+`" class="list__item">
+// 						<figure><img src="`  +item.cover_img+  `"></figure>
+// 						<div class="list__item-info">
+// 						<h5>`  +item.video_id+  `</h5>
+// 						<h1>`  +item.title+  `</h1>
+// 						<div class="date">`  +  dateText +   `</div>
+// 						</div>
+// 						</a>`
 					
-						$("#video_list").append(video)
-						var newString = result['pagination'].replace(/href="(.*?)"/ig, "href=\"javascript:void(0)\" onclick=\"tablePagination\(`$1`\)\"");
-                		$('#pagination').html(newString);
-						window.scrollTo({ top: 0, behavior: 'smooth' });
-						return;
-					});
-				}
-			});	
-			event.stopPropagation()
-	}
+// 						$("#video_list").append(video)
+// 						var newString = result['pagination'].replace(/href="(.*?)"/ig, "href=\"javascript:void(0)\" onclick=\"tablePagination\(`$1`\)\"");
+//                 		$('#pagination').html(newString);
+// 						window.scrollTo({ top: 0, behavior: 'smooth' });
+// 						return;
+// 					});
+// 				}
+// 			});	
+// 			event.stopPropagation()
+// 	}
 	function cate_cilck(e){
 	
 		$(e).click(function(){
@@ -437,17 +444,14 @@
 	});
 	var currentscrollHeight = 0;
 		var load = false;
-	$(window).on("scroll", function () {
+    $(window).on("scroll", function () {
 		const scrollHeight = $(document).height();
 		const scrollPos = Math.floor($(window).height() + $(window).scrollTop());
 		const isBottom = scrollHeight - 100 < scrollPos;
-		console.log('scrollHeight',scrollHeight)
-		console.log('scrollPos',scrollPos)
-		console.log('isBottom',isBottom)
-			console.log('load',load)
+	 
 		if (isBottom && currentscrollHeight < scrollHeight ) {
 		    load =true
-			console.log('?????????????????????')
+	
 			customTag(this.page +1)
 			currentscrollHeight = scrollHeight;
 		}
